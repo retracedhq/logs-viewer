@@ -1,0 +1,78 @@
+.TableHeader {
+  font-size: 24px;
+  color: #323232;
+  font-weight: 500;
+}
+
+.TableRow-wrapper {
+  width: 100%;
+  border-bottom: 1px solid #C4C8CA;
+}
+.TableRow-wrapper.selected {
+  background-color: #F8F8F8; 
+}
+.TableRow.mobile-row {
+  padding: 10px 0;
+  overflow: hidden;
+}
+.TableRow.mobile-row .TableRow-content {
+  overflow: hidden;
+}
+.TableRow-content .content-section {
+  padding: 10px;
+  position: relative;
+}
+.TableRow-content .content-section p {
+  font-size: 14px;
+}
+.TableRow-content .content-section.has-border::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 1px;
+  height: 30px;
+  right: 0;
+  top: 16px;
+  background-color: #C4C8CA;
+}
+.TableRow-content .content-section.status-section {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.TableRow-content .content-section.actions-section .icon-wrapper {
+  margin-right: 10px;
+}
+.TableRow-content .content-section.actions-section .icon-wrapper:last-child {
+  margin-right: 0;
+}
+
+.TableRow-content .dropdownWrapper .u-dropdownArrowIcon {
+  transition: transform .2s ease-in-out;
+}
+.TableRow-content .dropdownWrapper.is-active .u-dropdownArrowIcon {
+  transform: rotate(180deg); 
+}
+
+.ellipsis-overflow {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+@media screen and (min-width: 48em) {
+  .TableRow-content .content-section {
+    padding: 20px;
+  }
+  .TableRow-content .content-section p {
+    font-size: 16px;
+    transition: color .2s ease;
+  }
+  .TableRow-content .content-section.linked:hover p {
+    color: #337AB7;
+  }
+  .TableRow-content .content-section.button-section {
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+}

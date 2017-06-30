@@ -1,0 +1,110 @@
+.EventItem {
+  color: #4A4A4A;
+}
+.EventItem strong {
+  color: #323232;
+  font-weight: 600;
+}
+.EventItem a strong {
+  color: #2A98CB;
+  font-weight: 500;
+}
+.EventItem p {
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.FilterApplied-tag {
+  padding: 4px 10px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1;
+  background-color: #EBB55C;
+  position: relative;
+  top: -3px;
+  border-radius: 15px;
+  cursor: default;
+}
+
+/* Search bar stuff */
+
+.Input.SearchEvents {
+  min-width: 320px;
+  position: relative;
+  z-index: 100;
+}
+
+.FilterDropdown-trigger {
+  position: absolute;
+  padding: 0 10px;
+  top: 1px;
+  right: 2px;
+  border-radius: 0 4px 4px 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 38px;
+  color: #2A98CB;
+  background-color: #ffffff;
+  z-index: 410;
+}
+
+.searchButton {
+  position: relative;
+  z-index: 410;
+}
+
+/* Filters stuff */
+
+.FilterDropdown {
+  position: absolute;
+  top: 100%;
+  margin-top: 10px;
+  background-color: #ffffff;
+  border: 1px solid #C4C8CA;
+  border-radius: 4px;
+  padding: 20px 15px 12px;
+  left: 0;
+  right: 0;
+  z-index: 410;
+}
+.FilterDropdown::after {
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  right: 22px;
+  top: -5px;
+  background: #ffffff;
+  box-shadow: -1px -1px 0 #C4C8CA;
+  transform: rotate(45deg); 
+}
+
+.mobile-row .EventItem {
+  vertical-align: -4px;
+}
+
+.EventPager {
+  padding: 20px 0;
+  &.has-shadow {
+    box-shadow: 0 -5px 5px -5px rgba(0,0,0,.16);
+  }
+}
+
+.icon.previous {
+  transform: rotate(90deg) translateY(0);
+  transition: transform .2s ease-in-out;
+}
+.icon.next {
+  transform: rotate(-90deg) translateY(0);
+  transition: transform .2s ease-in-out;
+}
+
+.arrow-wrapper p:hover .icon.next {
+  transform: rotate(-90deg) translateY(3px);
+}
+.arrow-wrapper p:hover .icon.icon.previous {
+  transform: rotate(90deg) translateY(3px);
+}

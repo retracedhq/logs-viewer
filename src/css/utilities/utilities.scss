@@ -8,10 +8,10 @@
 .u-overflow--auto { overflow: auto; }
 .u-cursor--pointer { cursor: pointer; }
 .u-cursor--default { cursor: default; }
-.u-minHeight--full { min-height: 100%; }
-.u-minWidth--full { min-width: 100%; }
-.u-height--full { height: 100%; }
-.u-width--full { width: 100%; }
+.u-minHeight--full { min-height: 100vh; }
+.u-minWidth--full { min-width: 100vw; }
+.u-height--full { height: 100vh; }
+.u-width--full { width: 100vw; }
 
 /* Spacing utility classes */
 

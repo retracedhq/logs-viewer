@@ -4,7 +4,6 @@ var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var HtmlWebpackTemplate = require("html-webpack-template");
-var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 var distPath = path.join(__dirname, "dist");
 var srcPath = path.join(__dirname, "src");
 var modulePath = path.join(__dirname, "node_modules");
@@ -78,7 +77,6 @@ var common = {
         env: appEnv,
       },
     }),
-    new FaviconsWebpackPlugin("./src/favicon-64.png"),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),

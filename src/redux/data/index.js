@@ -1,6 +1,6 @@
 import { combineReducers } from "redux";
-import events from "./events/reducer";
+import eventsData from "./events/reducer";
 
 export default combineReducers({
-  events,
+  eventsData,
 });
