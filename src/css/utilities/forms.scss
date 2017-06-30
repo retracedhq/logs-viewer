@@ -1,0 +1,88 @@
+@import "../components/forms/input.scss";
+@import "../components/forms/textarea.scss";
+@import "../components/forms/select.scss";
+
+
+.FormRow-wrapper { margin-top: 14px; }
+.FormElm {
+  padding: 0 10px;
+
+  &:first-child {
+    padding-left: 0;
+  }
+  &:last-child {
+    padding-right: 0;
+  }
+}
+
+.ErrorBlock {
+  display: block;
+  width: 100%;
+  padding: 11px;
+  background-color: #FFDADA;
+  box-sizing: border-box;
+  border-radius: 3px;
+}
+.ErrorBlock p {
+  font-size: 12px;
+  font-weight: normal;
+  margin: 0;
+  color: #863333;
+}
+
+.CustomCheckbox {
+  position: relative;
+  margin-right: 10px;
+}
+.CustomCheckbox.no-margin { margin: 0; }
+.CustomCheckbox:last-child { margin-right: 0; }
+
+.CustomCheckbox input[type="checkbox"],
+.CustomCheckbox input[type="radio"] {
+  position: absolute;
+  margin: 0;
+  top: 14px;
+  left: 10px;
+  z-index: 2;
+  outline: none;
+  cursor: pointer;
+}
+.CustomCheckbox label {
+  z-index: 1;
+  font-size: 14px;
+  font-weight: 700;
+  color: #323232;
+  line-height: normal;
+  padding: 10px 10px 10px 28px;
+  border-radius: 4px;
+  background-color: #ffffff;
+  border: 1px solid #DFDFDF;
+  cursor: pointer;
+  transition: border .2s;
+  user-select: none;
+}
+.CustomCheckbox label:hover,
+.CustomCheckbox input[type="checkbox"]:hover + label,
+.CustomCheckbox input[type="radio"]:hover + label {
+  border-color: #C4C8CA;
+}
+.CustomCheckbox.is-checked label,
+.CustomCheckbox.is-checked:hover label,
+.CustomCheckbox.is-checked input[type="checkbox"]:hover + label,
+.CustomCheckbox.is-checked input[type="radio"]:hover + label {
+  background-color: #F5F8FC;
+  border-color: #4990E2; 
+}
+.CustomCheckbox.is-disabled label,
+.CustomCheckbox.is-disabled input[type="checkbox"],
+.CustomCheckbox.is-disabled input[type="radio"] {
+  cursor: not-allowed;
+}
+.CustomCheckbox.is-disabled label,
+.CustomCheckbox.is-disabled:hover label,
+.CustomCheckbox.is-disabled input[type="checkbox"]:hover + label,
+.CustomCheckbox.is-disabled input[type="radio"]:hover + label {
+  background-color: #F8F8F8;
+  border-color: #DFDFDF;
+  color: #717171;
+}

@@ -1,0 +1,40 @@
+.Input {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  border: 1px solid #C4C8CA;
+  border-radius: 4px;
+  outline: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: normal;
+  color: #323232;
+  padding: 10px 11px 11px;
+  transition: border .2s;
+}
+.Input:active,
+.Input:focus {
+  border-color: #248BBB;
+}
+.Input.has-error,
+.Input.has-error:focus,
+.Input.has-error:active {
+  border-color: #EE5042;
+}
+.Input.is-disabled {
+  user-select: none;
+  cursor: not-allowed;
+  background-color: #F8F8F8;
+  border-color: #DFDFDF;
+  color: #717171;
+}
+.Input.small {
+  font-size: 12px;
+  padding: 4px 12px 5px;
+}
+.hidden-input {
+  position: absolute;
+  left: -1000px;
+  top: -1000px;
+  opacity: 0;
+}

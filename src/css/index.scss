@@ -1,0 +1,14 @@
+/*
+ * Import any global CSS, file specific CSS should be included
+ * at the top of the top level parent for each app i.e.
+ * // CSS
+ * import './[path_to_file]/[file_name.css]';
+ */
+
+@import "./utilities/reset.scss";
+@import "./utilities/base.scss";
+@import "./utilities/typography.scss";
+@import "./utilities/buttons.scss";
+@import "./utilities/utilities.scss";
+@import "./utilities/flexbox.scss";
+@import "./utilities/forms.scss";

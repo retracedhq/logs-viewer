@@ -1,0 +1,24 @@
+/* Utilities */
+
+.u-position--relative { position: relative; }
+.u-position--absolute { position: absolute; }
+.u-userSelect--none { user-select: none; }
+.u-overflow--hidden { overflow: hidden; }
+.u-overflow--visible { overflow: visible; }
+.u-overflow--auto { overflow: auto; }
+.u-cursor--pointer { cursor: pointer; }
+.u-cursor--default { cursor: default; }
+.u-minHeight--full { min-height: 100%; }
+.u-minWidth--full { min-width: 100%; }
+.u-height--full { height: 100%; }
+.u-width--full { width: 100%; }
+
+/* Spacing utility classes */
+
+.u-margin-none { margin: 0; }
+.u-padding-none { padding: 0; }
+
+/* Display utilities */
+
+.u-display--block { display: block; }
+.u-display--inlineBlock { display: inline-block; }

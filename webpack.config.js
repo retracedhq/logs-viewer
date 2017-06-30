@@ -19,7 +19,7 @@ var common = {
   },
 
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".png", ".jpg", ".svg", ".ico"],
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".png", ".jpg", ".svg", ".ico"],
   },
 
   devtool: "eval-source-map",
@@ -27,11 +27,21 @@ var common = {
   module: {
     rules: [
       {
+        test: /\.scss$/,
+        include: srcPath,
+        use: [
+          { loader: "style-loader" },
+          { loader: "css-loader?importLoaders=2" },
+          { loader: "sass-loader" },
+          { loader: "postcss-loader" }
+        ]
+      },
+      {
         test: /\.css$/,
         include: srcPath,
         use: [
           "style-loader",
-          "css-loader?importLoaders=1",
+          "css-loader",
           "postcss-loader"
         ]
       },
