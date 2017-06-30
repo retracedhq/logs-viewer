@@ -1,0 +1,26 @@
+{
+    "compilerOptions": {
+      "allowJs": true,
+      "module": "commonjs",
+      "target": "es5",
+      "sourceMap": true,
+      "experimentalDecorators": true,
+      "strictNullChecks": true,
+      "outDir": "dist",
+      "pretty": true,
+      "jsx": "react",
+      "lib": [
+        "dom",
+        "es5",
+        "scripthost",
+        "es2015.promise"
+      ]
+    },
+    "include": [
+      "src/**/*.ts",
+      "src/**/*.js"
+    ],
+    "exclude": [
+      "node_modules"
+    ]
+}

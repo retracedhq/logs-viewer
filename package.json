@@ -1,0 +1,47 @@
+{
+  "name": "logs-viewer",
+  "version": "1.0.0",
+  "description": "Logs viewer widget",
+  "main": "webpack.config.js",
+  "repository": {
+    "url": "git@github.com:retracedhq/logs-viewer.git",
+    "type": "git"
+  },
+  "author": "Replicated Inc",
+  "private": true,
+  "contributors": [
+    "Grayson Null <grayson@replicated.com>"
+  ],
+  "license": "MIT",
+  "browserslist": [
+    "> 1%",
+    "last 4 versions"
+  ],
+  "dependencies": {
+    "autoprefixer": "^7.1.1",
+    "awesome-typescript-loader": "^3.2.1",
+    "babel-generator": "^6.25.0",
+    "copy-webpack-plugin": "^4.0.1",
+    "css-loader": "^0.28.4",
+    "favicons-webpack-plugin": "^0.0.7",
+    "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "html-webpack-template": "^6.0.1",
+    "less-loader": "^4.0.4",
+    "lodash": "^4.17.4",
+    "moment": "^2.18.1",
+    "postcss-loader": "^2.0.6",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-hot-loader": "next",
+    "style-loader": "^0.18.2",
+    "typescript": "^2.4.1",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.0.0",
+    "webpack-dev-server": "^2.5.0",
+    "webpack-merge": "^4.1.0"
+  },
+  "scripts": {
+    "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
+  }
+}
