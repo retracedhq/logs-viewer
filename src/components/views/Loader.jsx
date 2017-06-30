@@ -1,19 +1,22 @@
 import * as React from "react";
 import * as autoBind from "react-autobind";
+import * as PropTypes from 'prop-types';
 
-const propTypes = {
-  className: React.PropTypes.string,
-  color: React.PropTypes.string,
-  displayBlock: React.PropTypes.bool,
-  size: React.PropTypes.string,
-};
-const defaultProps = {
-  color: "#337AB7",
-  displayBlock: false,
-  size: "40",
-};
 
 export default class Loader extends React.Component {
+  static propTypes = {
+    className: PropTypes.string,
+    color: PropTypes.string,
+    displayBlock: PropTypes.bool,
+    size: PropTypes.string,
+  };
+
+  static defaultProps = {
+    color: "#337AB7",
+    displayBlock: false,
+    size: "40",
+  };
+
   constructor() {
     super();
     autoBind(this);
@@ -49,6 +52,3 @@ export default class Loader extends React.Component {
     );
   }
 }
-
-Loader.propTypes = propTypes;
-Loader.defaultProps = defaultProps;
