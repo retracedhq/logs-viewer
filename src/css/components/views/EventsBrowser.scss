@@ -1,3 +1,6 @@
+.EventsTable-header {
+  padding: 20px 20px 18px;
+}
 .EventItem {
   color: #4A4A4A;
 }
@@ -94,11 +97,11 @@
 }
 
 .icon.previous {
-  transform: rotate(90deg) translateY(0);
+  transform: rotate(90deg) translate(-1px, 0);
   transition: transform .2s ease-in-out;
 }
 .icon.next {
-  transform: rotate(-90deg) translateY(0);
+  transform: rotate(-90deg) translate(0, 0);
   transition: transform .2s ease-in-out;
 }
 
@@ -106,5 +109,5 @@
   transform: rotate(-90deg) translateY(3px);
 }
 .arrow-wrapper p:hover .icon.icon.previous {
-  transform: rotate(90deg) translateY(3px);
+  transform: rotate(90deg) translate(-1px, 3px);
 }

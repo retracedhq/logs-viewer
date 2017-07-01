@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  font-family: inherit;
+  font-family: "Helvetica Neue", "Helvetica", sans-serif;
   font-weight: 400;
   display: flex;
   flex-direction: column;
@@ -15,12 +15,45 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-body a { text-decoration: none; }
+body a {
+  font-weight: 500;
+}
 
 #app {
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.LogsViewer-wrapper {
+  &.light {
+    background-color: #ffffff;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #323232;
+    }
+    p, span {
+      color: #4A4A4A;
+    }
+    a {
+      color: #2A98CB;
+      text-decoration: none;
+    }
+  }
+  &.dark {
+    background-color: #323232;
+
+    h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong {
+      color: #ffffff;
+    }
+    a {
+     text-decoration: underline;
+    }
+
+    .FixedTableHeader-wrapper {
+      background-color: #4A4A4A;
+    }
+  }
 }
 
 .container {

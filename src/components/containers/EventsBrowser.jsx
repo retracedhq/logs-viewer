@@ -116,13 +116,13 @@ class EventsBrowser extends React.Component {
       "Link": InlineLink,
     };
     return (
-      <div className="u-minHeight--full u-width--full flex-column flex1">
+      <div className={`LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1 ${this.props.theme}`}>
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column">
-            <div className="flex flex-auto">
-              <p className="flex1 u-fontSize--jumbo u-color--tuna u-fontWeight--medium u-marginBottom--more u-lineHeight--normal">Events</p>
-              <span className="flex flex1 justifyContent--flexEnd">
-                <input type="text" />
+            <div className="EventsTable-header flex flex-auto">
+              <h3 className="flex-1-auto u-lineHeight--more u-fontSize--header3">Events</h3>
+              <span className="flex flex-auto justifyContent--flexEnd">
+                <input type="text" className="Input" />
               </span>
             </div>
             <div className="flex flex-auto">
@@ -132,7 +132,7 @@ class EventsBrowser extends React.Component {
             </div>
             {this.props.dataLoading.eventFetchLoading ?
               <div className="flex-column flex1 justifyContent--center alignItems--center">
-                <Loader size="70" />
+                <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
               </div>
               :
               <div className="flex-column flex-1-auto u-overflow--auto">

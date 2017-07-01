@@ -1,0 +1,54 @@
+/* Icon classes */
+
+.icon {
+  background-image: url("../../assets/logs_spritesheet.svg");
+  background-repeat: no-repeat;
+  background-size: initial;
+  display: inline-block;
+  cursor: default;
+  position: relative;
+}
+.icon.clickable {
+  cursor: pointer;
+}
+
+.icon.u-closeIcon {
+  background-position: 0 0;
+  width: 14px;
+  height: 14px;
+}
+.icon.u-closeIcon:hover {
+  background-position: 0 -16px;
+}
+.icon.u-dropdownArrowIcon {
+  background-position: 0 -32px;
+  width: 16px;
+  height: 9px;
+}
+.icon.u-dropdownArrowIcon:hover {
+  background-position: 0 -43px;
+}
+.icon.u-gearIcon {
+  background-position: 0 -192px;
+  width: 16px;
+  height: 16px;
+}
+.icon.u-gearIcon:hover {
+  background-position: 0 -210px;
+}
+.icon.u-codeIcon {
+  background-position: 0 -132px;
+  width: 18px;
+  height: 12px;
+}
+.icon.u-codeIcon:hover {
+  background-position: 0 -146px;
+}
+.icon.u-infoIcon {
+  background-position: 0 -102px;
+  width: 18px;
+  height: 18px;
+}
+.icon.u-infoIcon:hover {
+  background-position: 0 -122px;
+}

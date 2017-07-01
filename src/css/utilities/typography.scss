@@ -1,9 +1,14 @@
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 500;
+}
+
 /* Font sizes */
 
 .u-fontSize--small   { font-size: 12px; }
 .u-fontSize--normal  { font-size: 14px; }
 .u-fontSize--large   { font-size: 16px; }
 .u-fontSize--larger  { font-size: 18px; }
+.u-fontSize--header3 { font-size: 24px; }
 
 /* Line height */
 
