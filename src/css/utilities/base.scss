@@ -1,31 +1,8 @@
-body,
-html {
-  margin: 0;
-  padding: 0;
-  width: 100vw;
-  height: 100vh;
-}
-
-body {
-  font-family: "Helvetica Neue", "Helvetica", sans-serif;
-  font-weight: 400;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  -webkit-font-smoothing: antialiased;
-}
-
-body a {
-  font-weight: 500;
-}
-
-#app {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
 .LogsViewer-wrapper {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
   &.light {
     background-color: #ffffff;
 

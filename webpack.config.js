@@ -65,7 +65,7 @@ var common = {
     new HtmlWebpackPlugin({
       template: HtmlWebpackTemplate,
       title: "Retraced - Logs",
-      appMountId: "app",
+      appMountId: "retracedLogsViewerApp",
       mobile: true,
       externals: {
         "react": "React",

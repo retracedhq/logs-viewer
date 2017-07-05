@@ -7,8 +7,6 @@ import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
 import EventRow from "../views/EventRow";
 
-import "../../css/components/views/EventsBrowser.scss";
-
 class EventsBrowser extends React.Component {
   constructor(props) {
     super(props);

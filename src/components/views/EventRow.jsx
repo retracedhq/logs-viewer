@@ -4,8 +4,6 @@ import * as autobind from "react-autobind";
 import * as ReactMarkdown from "react-markdown";
 import * as moment from "moment";
 
-import "../../css/components/tables/TableRow.scss";
-
 export default class EventRow extends React.Component {
   render() {
     return (

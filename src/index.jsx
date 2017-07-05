@@ -7,7 +7,7 @@ render((
   <AppContainer>
     <Root />
   </AppContainer>
-), document.getElementById("app"));
+), document.getElementById("retracedLogsViewerApp"));
 
 if (module.hot) {
   module.hot.accept("./Root", () => {
@@ -16,6 +16,6 @@ if (module.hot) {
       <AppContainer>
         <NextRoot />
       </AppContainer>
-    ), document.getElementById("app"));
+    ), document.getElementById("retracedLogsViewerApp"));
   });
 }
