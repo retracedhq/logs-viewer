@@ -8,10 +8,19 @@ const initialState = {
     totalResultCount: 0,
     resultIds: [],
   },
+  session: "",
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case actions.RECEIVE_SESSION_INFO: {
+      debugger;
+      const result = {
+        ...state,
+        session: action.payload.session,
+      };
+      return result;
+    }
     case actions.RECEIVE_EVENT_LIST: {
       // To save on RAM, we only store the latest page received
       const result = {

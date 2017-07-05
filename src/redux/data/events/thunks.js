@@ -1,11 +1,35 @@
 import "isomorphic-fetch";
 
-import { receiveEventList } from "./actions";
+import { receiveEventList, receiveSessionId } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
 // const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = window.env.RETRACED_API_ENDPOINT;
+const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
+
+export function createSession(token) {
+  return async (dispatch) => {
+    //dispatch(loadingData("signup", true));
+    let response;
+    const url = `${retracedEndpoint}/viewersession`;
+    const payload = { token };
+    response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify(payload),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+    });
+    if (response.status > 400) {
+      return
+    }
+    const body = await response.json();
+    debugger;
+    console.log(body);
+    dispatch(receiveSessionId(body));
+  };
+}
 
 export function requestEventSearch(projectId, environmentId, query) {
   return async (dispatch, getState) => {
@@ -20,14 +44,13 @@ export function requestEventSearch(projectId, environmentId, query) {
     // const state = getState();
     // const url = `${apiEndpoint}/project/${projectId}/environment/${environmentId}/graphql`;
     // TEMP ONLY (Requires retraced composer to be running);
-    const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI4ZGFiOWJiNjM3OTg0MDFlYWExNGIxMzBkNGNlMTRiOCIsImlhdCI6MTQ5ODY3NjI0MSwiZXhwIjoxNTAwNDkwNjQxfQ.B69zR6JS4l23pXiMnnoLlRizxldpdTJtI9juBoc9frY";
     const url = `${retracedEndpoint}/project/${projectId}/environment/${environmentId}/graphql`;
     // END TEMP DATA
     const response = await fetch(url, {
       method: "post",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": token,
+        "Authorization": getState().data.eventsData.session.token,
       },
       body: JSON.stringify({
         variables: {

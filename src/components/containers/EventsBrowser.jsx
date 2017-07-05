@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as autobind from "react-autobind";
-import { requestEventSearch } from "../../redux/data/events/thunks";
+import { requestEventSearch, createSession } from "../../redux/data/events/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -60,6 +60,11 @@ class EventsBrowser extends React.Component {
     return this.currentPage() * this.state.resultsPerPage;
   }
 
+  componentWillMount() {
+    const token = "14ed8d13f4ce48cc9c776160c1586e8b";
+    this.props.createSession(token);
+  }
+
   componentDidMount() {
     this.submitQuery("", "");
   }
@@ -67,6 +72,7 @@ class EventsBrowser extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
+      this.props.submitQuery("", "");
     }
   }
 
@@ -77,8 +83,8 @@ class EventsBrowser extends React.Component {
   submitQuery(query, cursor) {
     // const projId = this.props.match.params.projectId;
     // const envId = this.props.match.params.environmentId;
-    const projId = "df34f3aa23d84afebbe86cba806f34fa";
-    const envId = "b6c633691c6449eb93abd995d8536c17";
+    const projId = "54373ad936174428a4b3395741772000";
+    const envId = "da032c74fa4346be98c29d0a121423f6";
     const queryObj = {
       search_text: query,
       cursor,
@@ -213,6 +219,9 @@ export default connect(
   dispatch => ({
     requestEventSearch(projectId, environmentId, query) {
       return dispatch(requestEventSearch(projectId, environmentId, query));
+    },
+    createSession(token) {
+      return dispatch(createSession(token));
     },
   }),
 )(EventsBrowser);
