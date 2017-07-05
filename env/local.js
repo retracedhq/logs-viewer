@@ -1,6 +1,6 @@
 module.exports = {
   RETRACED_ENV: "local",
-  RETRACED_API_ENDPOINT: "http://localhost:3000/v1",
+  RETRACED_ENDPOINT: "https://api.retraced.io/viewer/v1",
   BUILD_VERSION: (function() {
     return String(Date.now());
   }()),
