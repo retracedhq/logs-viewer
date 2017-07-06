@@ -11,6 +11,10 @@ accepts@~1.3.3:
     mime-types "~2.1.11"
     negotiator "0.6.1"
 
+accounting:
+  version "0.4.1"
+  resolved "https://registry.yarnpkg.com/accounting/-/accounting-0.4.1.tgz#87dd4103eff7f4460f1e186f5c677ed6cf566883"
+
 acorn-dynamic-import@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/acorn-dynamic-import/-/acorn-dynamic-import-2.0.2.tgz#c752bd210bef679501b6c6cb7fc84f8f47158cc4"
@@ -645,6 +649,10 @@ class-utils@^0.3.4:
     isobject "^3.0.0"
     lazy-cache "^2.0.2"
     static-extend "^0.1.1"
+
+classnames@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
 clean-css@4.1.x:
   version "4.1.5"
@@ -1914,7 +1922,7 @@ html-minifier@^3.2.3:
     relateurl "0.2.x"
     uglify-js "3.0.x"
 
-html-webpack-plugin@^2.29.0:
+html-webpack-plugin:
   version "2.29.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.29.0.tgz#e987f421853d3b6938c8c4c8171842e5fd17af23"
   dependencies:
@@ -2673,7 +2681,7 @@ mkdirp@^0.5.0, mkdirp@^0.5.1, "mkdirp@>=0.5 0", mkdirp@~0.5.0, mkdirp@~0.5.1, mk
   dependencies:
     minimist "0.0.8"
 
-moment@^2.18.1:
+moment@^2.17.1, moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -3428,7 +3436,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types, prop-types@^15.5.1, prop-types@^15.5.10, prop-types@^15.5.4:
+prop-types, prop-types@^15.5.1, prop-types@^15.5.10, prop-types@^15.5.4, prop-types@^15.5.8:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -3529,6 +3537,16 @@ react-autobind:
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/react-autobind/-/react-autobind-1.0.6.tgz#936bb58edf6b89b619c50f82f0e617159fdfd4f1"
 
+react-datepicker:
+  version "0.48.0"
+  resolved "https://registry.yarnpkg.com/react-datepicker/-/react-datepicker-0.48.0.tgz#bf8ea4283e3f8e0737be3ceb808a94a8d4231d49"
+  dependencies:
+    classnames "^2.2.5"
+    moment "^2.17.1"
+    prop-types "^15.5.8"
+    react-onclickoutside "^6.1.1"
+    tether "^1.4.0"
+
 react-deep-force-update@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/react-deep-force-update/-/react-deep-force-update-2.0.1.tgz#4f7f6c12c3e7de42f345992a3c518236fa1ecad3"
@@ -3561,6 +3579,10 @@ react-markdown:
     commonmark-react-renderer "^4.2.4"
     in-publish "^2.0.0"
     prop-types "^15.5.1"
+
+react-onclickoutside@^6.1.1:
+  version "6.1.1"
+  resolved "https://registry.yarnpkg.com/react-onclickoutside/-/react-onclickoutside-6.1.1.tgz#9e680cdebd6c21878204e8a9f19ff413f8078397"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
@@ -3896,6 +3918,10 @@ scss-tokenizer@^0.2.3:
   dependencies:
     js-base64 "^2.1.8"
     source-map "^0.4.2"
+
+search-query-parser:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/search-query-parser/-/search-query-parser-1.3.0.tgz#120e0619f3ab68e088a9d2bfdd0af73b4bb54cb5"
 
 select-hose@^2.0.0:
   version "2.0.0"
@@ -4314,6 +4340,10 @@ tar@^2.0.0, tar@^2.2.1:
     block-stream "*"
     fstream "^1.0.2"
     inherits "2"
+
+tether@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.0.tgz#0f9fa171f75bf58485d8149e94799d7ae74d1c1a"
 
 thunky@^0.1.0:
   version "0.1.0"

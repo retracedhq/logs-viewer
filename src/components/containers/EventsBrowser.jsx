@@ -1,11 +1,13 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as autobind from "react-autobind";
+import * as accounting from "accounting";
 import { requestEventSearch, createSession } from "../../redux/data/events/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
 import EventRow from "../views/EventRow";
+import SearchForm from "../views/SearchForm";
 
 import "../../css/components/views/EventsBrowser.scss";
 
@@ -68,7 +70,7 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-    const token = "b578e0510b7d441d8c9f0de11083dfec";
+    const token = "e6ed800731d64b11ba5e0a5e6a4a9049";
     this.props.createSession(token);
   }
 
@@ -117,13 +119,35 @@ class EventsBrowser extends React.Component {
     );
   }
 
+  determineIfFilters(filters) {
+    if (!filters) { return false; }
+    if (filters.receivedStartDate || filters.receivedEndDate) { return true; };
+    if (filters.searchQuery.length > 0 || filters.crudFilters.length > 0) { return true; };
+    if (filters.cChecked || filters.rChecked || filters.uChecked || filters.dChecked) { return true; };
+    return false;
+  }
+
+  hasFilters(filters) {
+    this.setState({
+      hasFilters: this.determineIfFilters(filters),
+    });
+  }
+
+  toggleFitlerDropdown() {
+    this.setState({
+      filtersOpen: !this.state.filtersOpen,
+    });
+  }
+
   render() {
     const {
       events,
       currentResults,
       tableHeaderItems
     } = this.props;
-
+    const searchText = currentResults
+      && currentResults.sourceQuery
+      && currentResults.sourceQuery.search_text;
     const isMobile = false;
     const renderers = {
       "Link": InlineLink,
@@ -135,7 +159,7 @@ class EventsBrowser extends React.Component {
             <div className="EventsTable-header flex flex-auto">
               <h3 className="flex-1-auto u-lineHeight--more u-fontSize--header3">Events</h3>
               <span className="flex flex-auto justifyContent--flexEnd">
-                <input type="text" className="Input" />
+                <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
               </span>
             </div>
             <div className="flex flex-auto">
@@ -192,11 +216,11 @@ class EventsBrowser extends React.Component {
               </div>
               <div className="flex1">
                 {currentResults.resultIds.length
-                  ? <p className="u-fontSize--normal u-fontWeight--medium u-lineHeight--normal u-textAlign--center">
+                  ? <p className="u-fontSize--normal u-lineHeight--normal u-textAlign--center">
                     <span className="u-color--dustyGray">Showing events </span>
-                    <span className="u-color-tuna">{`${this.offset() + 1} - ${this.offset() + currentResults.resultIds.length}`}</span>
+                    <span className="u-color-tuna u-fontWeight--medium">{`${this.offset() + 1} - ${this.offset() + currentResults.resultIds.length}`}</span>
                     <span className="u-color--dustyGray"> of </span>
-                    <span className="u-color-tuna">{currentResults.totalResultCount}</span>
+                    <span className="u-color-tuna u-fontWeight--medium">{accounting.formatNumber(currentResults.totalResultCount)}</span>
                   </p>
                   : null}
               </div>

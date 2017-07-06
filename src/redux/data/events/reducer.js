@@ -8,7 +8,7 @@ const initialState = {
     totalResultCount: 0,
     resultIds: [],
   },
-  session: "",
+  session: {},
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +23,7 @@ export default (state = initialState, action) => {
     case actions.RECEIVE_EVENT_LIST: {
       // To save on RAM, we only store the latest page received
       const result = {
+        ...state,
         byId: _.keyBy(action.payload.list, "id"),
         latestServerResults: {
           sourceQuery: action.payload.sourceQuery,
