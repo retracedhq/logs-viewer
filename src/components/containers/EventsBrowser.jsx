@@ -61,18 +61,21 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-    const token = "14ed8d13f4ce48cc9c776160c1586e8b";
+    const token = "748050d2fef544b7babfbb92c5d58662";
     this.props.createSession(token);
   }
 
-  componentDidMount() {
-    this.submitQuery("", "");
-  }
+  // componentDidMount() {
+  //   this.submitQuery("", "");
+  // }
 
   componentWillReceiveProps(nextProps) {
+    if (nextProps.session && this.props.session !== nextProps.session) {
+      this.submitQuery("", "");
+    }
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
-      this.props.submitQuery("", "");
+      this.submitQuery("", "");
     }
   }
 
@@ -211,6 +214,7 @@ class EventsBrowser extends React.Component {
 
 export default connect(
   state => ({
+    session: state.data.eventsData.session,
     events: state.data.eventsData.byId,
     currentResults: state.data.eventsData.latestServerResults,
     dataLoading: state.ui.loadingData,
