@@ -11,7 +11,7 @@ import "../../css/components/views/EventsBrowser.scss";
 
 // For testing purposes
 const defaultProps = {
-  auditLogToken: "0711e5f3861743cb830068ad02f14290",
+  auditLogToken: "2c8716f583cb4581b40b33be9d5dc9a2",
 };
 
 class EventsBrowser extends React.Component {
@@ -68,12 +68,8 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-<<<<<<< HEAD
-    this.props.createSession(this.props.auditLogToken);
-=======
-    const token = "748050d2fef544b7babfbb92c5d58662";
+    const token = "b578e0510b7d441d8c9f0de11083dfec";
     this.props.createSession(token);
->>>>>>> 28478854be4ba9f1335e00de02cdb006d54c7610
   }
 
   // componentDidMount() {
@@ -86,7 +82,6 @@ class EventsBrowser extends React.Component {
     }
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
-      this.submitQuery("", "");
     }
   }
 
