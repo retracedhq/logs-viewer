@@ -9,6 +9,11 @@ import EventRow from "../views/EventRow";
 
 import "../../css/components/views/EventsBrowser.scss";
 
+// For testing purposes
+const defaultProps = {
+  auditLogToken: "0711e5f3861743cb830068ad02f14290",
+};
+
 class EventsBrowser extends React.Component {
   constructor(props) {
     super(props);
@@ -63,8 +68,7 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-    const token = "14ed8d13f4ce48cc9c776160c1586e8b";
-    this.props.createSession(token);
+    this.props.createSession(this.props.auditLogToken);
   }
 
   componentDidMount() {
@@ -227,3 +231,5 @@ export default connect(
     },
   }),
 )(EventsBrowser);
+
+EventsBrowser.defaultProps = defaultProps;
