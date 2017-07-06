@@ -1,5 +1,4 @@
 import * as React from "react";
-import "../../css/components/tables/FixedTableHeader.scss";
 
 export default class FixedTableHeader extends React.Component {
 
