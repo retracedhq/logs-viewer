@@ -14,7 +14,6 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case actions.RECEIVE_SESSION_INFO: {
-      debugger;
       const result = {
         ...state,
         session: action.payload.session,

@@ -4,7 +4,7 @@ import { receiveEventList, receiveSessionId } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
 // const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
+const retracedEndpoint = "https://api.staging.retraced.io/v1";
 let last = null;
 
 export function createSession(token) {
@@ -25,8 +25,6 @@ export function createSession(token) {
       return
     }
     const body = await response.json();
-    debugger;
-    console.log(body);
     dispatch(receiveSessionId(body));
   };
 }
@@ -41,16 +39,18 @@ export function requestEventSearch(projectId, environmentId, query) {
     }
     last = q;
 
-    // const state = getState();
+    const state = getState();
+    // if (!_.isEmpty(state.data.eventsData.session)) { return; };
     // const url = `${apiEndpoint}/project/${projectId}/environment/${environmentId}/graphql`;
     // TEMP ONLY (Requires retraced composer to be running);
-    const url = `${retracedEndpoint}/project/${projectId}/environment/${environmentId}/graphql`;
+    const url = `${retracedEndpoint}/graphql`;
     // END TEMP DATA
     const response = await fetch(url, {
       method: "post",
       headers: {
+        Accept: "application/json",
         "Content-Type": "application/json",
-        "Authorization": getState().data.eventsData.session.token,
+        "Authorization": state.data.eventsData.session.token,
       },
       body: JSON.stringify({
         variables: {
