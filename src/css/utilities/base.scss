@@ -1,3 +1,9 @@
+code {
+  padding: 2px 4px;
+  font-size: 90%;
+  font-family: "Monaco", "Helvetica Neue", "Helvetica", sans-serif;
+  border-radius: 4px;
+}
 .LogsViewer-wrapper {
   display: flex;
   flex-direction: column;
@@ -15,6 +21,13 @@
     a {
       color: #2A98CB;
       text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    code {
+      color: #c7254e;
+      background-color: #f9f2f4;
     }
   }
   &.dark {
@@ -25,6 +38,10 @@
     }
     a {
      text-decoration: underline;
+    }
+    code {
+      color: #323232;
+      background-color: rgba(255,255,255,.8);
     }
 
     .FixedTableHeader-wrapper {

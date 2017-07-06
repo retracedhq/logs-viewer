@@ -2,8 +2,6 @@ var path = require("path");
 var webpackMerge = require("webpack-merge");
 var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
-var HtmlWebpackTemplate = require("html-webpack-template");
 var distPath = path.join(__dirname, "dist");
 var srcPath = path.join(__dirname, "src");
 var modulePath = path.join(__dirname, "node_modules");
@@ -14,7 +12,9 @@ var common = {
   output: {
     path: distPath,
     publicPath: "/",
-    filename: "embeded-viewer.js",
+    filename: "index.js",
+    libraryTarget: 'umd',
+    library: 'RetracedEventsBrowser'
   },
 
   resolve: {
@@ -62,21 +62,6 @@ var common = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: HtmlWebpackTemplate,
-      title: "Retraced - Logs",
-      appMountId: "retracedLogsViewerApp",
-      mobile: true,
-      externals: {
-        "react": "React",
-        "react-dom": "ReactDOM",
-      },
-      scripts: appEnv.WEBPACK_SCRIPTS,
-      inject: false,
-      window: {
-        env: appEnv,
-      },
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),

@@ -25,7 +25,6 @@ export function createSession(token) {
       return
     }
     const body = await response.json();
-    console.log(body);
     dispatch(receiveSessionId(body));
   };
 }

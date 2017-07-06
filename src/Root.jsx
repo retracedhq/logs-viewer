@@ -10,7 +10,7 @@ export default class Root extends React.Component {
   render() {
     return (
       <Provider store={createStore()}>
-        <EventsBrowser theme="light" />
+        <EventsBrowser theme="light" auditLogToken={this.props.auditLogToken} theme={this.props.theme}/>
       </Provider>
     );
   }
