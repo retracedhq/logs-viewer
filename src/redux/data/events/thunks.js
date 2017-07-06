@@ -4,7 +4,7 @@ import { receiveEventList, receiveSessionId } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
 // const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = "https://api.staging.retraced.io/v1";
+const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
 export function createSession(token) {
@@ -25,6 +25,7 @@ export function createSession(token) {
       return
     }
     const body = await response.json();
+    console.log(body);
     dispatch(receiveSessionId(body));
   };
 }

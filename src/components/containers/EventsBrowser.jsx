@@ -7,6 +7,13 @@ import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
 import EventRow from "../views/EventRow";
 
+import "../../css/components/views/EventsBrowser.scss";
+
+// For testing purposes
+const defaultProps = {
+  auditLogToken: "2c8716f583cb4581b40b33be9d5dc9a2",
+};
+
 class EventsBrowser extends React.Component {
   constructor(props) {
     super(props);
@@ -61,7 +68,7 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-    const token = "748050d2fef544b7babfbb92c5d58662";
+    const token = "b578e0510b7d441d8c9f0de11083dfec";
     this.props.createSession(token);
   }
 
@@ -75,7 +82,6 @@ class EventsBrowser extends React.Component {
     }
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
-      this.submitQuery("", "");
     }
   }
 
@@ -229,3 +235,5 @@ export default connect(
     },
   }),
 )(EventsBrowser);
+
+EventsBrowser.defaultProps = defaultProps;
