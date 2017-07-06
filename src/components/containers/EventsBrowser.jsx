@@ -11,11 +11,6 @@ import SearchForm from "../views/SearchForm";
 
 import "../../css/components/views/EventsBrowser.scss";
 
-// For testing purposes
-const defaultProps = {
-  auditLogToken: "2c8716f583cb4581b40b33be9d5dc9a2",
-};
-
 class EventsBrowser extends React.Component {
   constructor(props) {
     super(props);
@@ -70,8 +65,7 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-    const token = "e6ed800731d64b11ba5e0a5e6a4a9049";
-    this.props.createSession(token);
+    this.props.createSession(this.props.auditLogToken);
   }
 
   // componentDidMount() {
@@ -259,5 +253,3 @@ export default connect(
     },
   }),
 )(EventsBrowser);
-
-EventsBrowser.defaultProps = defaultProps;
