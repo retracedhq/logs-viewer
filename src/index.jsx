@@ -1,21 +1,14 @@
 import * as React from "react";
-import { render } from "react-dom";
 import { AppContainer } from "react-hot-loader";
 import Root from "./Root";
 
-render((
-  <AppContainer>
-    <Root />
-  </AppContainer>
-), document.getElementById("retracedLogsViewerApp"));
 
-if (module.hot) {
-  module.hot.accept("./Root", () => {
-    const NextRoot = require("./Root").default;
-    render((
+export default class RetracedEventsBrowser extends React.Component {
+  render() {
+    return (
       <AppContainer>
-        <NextRoot />
+        <Root />
       </AppContainer>
-    ), document.getElementById("retracedLogsViewerApp"));
-  });
-}
+    );
+  }
+};
