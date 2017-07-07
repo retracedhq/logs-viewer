@@ -12,7 +12,7 @@ export default class ModalPortal extends React.Component {
 
   generateClassNames() {
     return {
-        base: this.props.name,
+        base: "modal " + this.props.name,
         afterOpen: this.props.name + "_after-open",
         beforeClose: this.props.name + "_before-close"
     }
@@ -21,9 +21,14 @@ export default class ModalPortal extends React.Component {
   render() {
     return (
       <div>
-        <Modal isOpen={this.props.isOpen} className={this.generateClassNames()} contentLabel={this.props.name}>   
+        <Modal 
+            isOpen={this.props.isOpen} 
+            className={this.generateClassNames()} 
+            contentLabel={this.props.name} 
+            onRequestClose={this.props.closeModal}
+        >   
             {this.props.content}
-            <button onClick={this.props.closeModal}>Close</button>
+            <button className="icon u-closeIcon" onClick={this.props.closeModal}>Close</button>
         </Modal>
       </div>
     );

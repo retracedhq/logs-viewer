@@ -14,14 +14,17 @@ export default class ExportEventsModal extends React.Component {
     return (
       <div>
           <h1>Export Events</h1>
-          <div>
+          <div className="modal-content">
               <h3>Export your events to CSV</h3>
               <p>Export your current search query to CSV. You can select presets from previous exports you’ve made or export and save your current query so that you can easily export any new events in the future. This export will only contain the events that have occured since your last export with the same query.</p>
-              <div>
-                  <select>
+              <div className="query-select">
+                  <div className="select-menu">
+                    <select className="">
                       <option value="current">Use current search query</option>
-                  </select>
-                  <button>Export</button>
+                    </select>
+                    <span className="icon clickable u-dropdownArrowIcon"></span>
+                  </div>
+                  <button className="Button primary">Export</button>
               </div>
           </div>
       </div>
