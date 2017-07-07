@@ -1,6 +1,6 @@
 import * as React from "react";
 import { AppContainer } from "react-hot-loader";
-import Root from "./Root.jsx";
+import Root from "./Root";
 import * as PropTypes from "prop-types";
 
 
