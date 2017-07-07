@@ -17,6 +17,25 @@ var common = {
     library: 'RetracedEventsBrowser'
   },
 
+  externals: [
+    {
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom'
+      }
+    },
+    {
+      'react': {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
+      }
+    }
+  ],
+
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".png", ".jpg", ".svg", ".ico"],
   },
@@ -52,7 +71,7 @@ var common = {
       {
         test: /\.(png|jpg|svg|ico)$/,
         include: srcPath,
-        use:["file-loader"],
+        use: ["file-loader"],
       },
       {
         test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,

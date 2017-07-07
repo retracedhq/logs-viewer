@@ -25,8 +25,6 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
-    "html-webpack-plugin": "^2.29.0",
-    "html-webpack-template": "^6.0.1",
     "isomorphic-fetch": "^2.2.1",
     "less-loader": "^4.0.4",
     "lodash": "^4.17.4",
@@ -34,10 +32,8 @@
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
     "react-autobind": "^1.0.6",
     "react-datepicker": "^0.48.0",
-    "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-markdown": "^2.5.0",
     "react-redux": "^5.0.5",
@@ -56,5 +52,13 @@
   },
   "scripts": {
     "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
+  },
+  "devDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "peerDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
