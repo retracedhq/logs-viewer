@@ -68,10 +68,6 @@ class EventsBrowser extends React.Component {
     this.props.createSession(this.props.auditLogToken);
   }
 
-  // componentDidMount() {
-  //   this.submitQuery("", "");
-  // }
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.session && this.props.session !== nextProps.session) {
       this.submitQuery("", "");
@@ -86,17 +82,13 @@ class EventsBrowser extends React.Component {
   }
 
   submitQuery(query, cursor) {
-    // const projId = this.props.match.params.projectId;
-    // const envId = this.props.match.params.environmentId;
-    const projId = "54373ad936174428a4b3395741772000";
-    const envId = "da032c74fa4346be98c29d0a121423f6";
     const queryObj = {
       search_text: query,
       cursor,
       length: this.state.resultsPerPage,
     };
 
-    this.props.requestEventSearch(projId, envId, queryObj);
+    this.props.requestEventSearch(queryObj);
   }
 
   nextPage() {
@@ -170,7 +162,7 @@ class EventsBrowser extends React.Component {
                 {currentResults.resultIds.length ?
                   currentResults.resultIds.map((eid, i) => (
                     <EventRow
-                      key={eid}
+                      key={`${eid}-${i}`}
                       event={events[eid]}
                       renderers={renderers}
                       isMobile={isMobile}
@@ -245,8 +237,8 @@ export default connect(
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
   dispatch => ({
-    requestEventSearch(projectId, environmentId, query) {
-      return dispatch(requestEventSearch(projectId, environmentId, query));
+    requestEventSearch(query) {
+      return dispatch(requestEventSearch(query));
     },
     createSession(token) {
       return dispatch(createSession(token));

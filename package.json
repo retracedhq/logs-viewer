@@ -25,6 +25,8 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^2.29.0",
+    "html-webpack-template": "^6.0.1",
     "isomorphic-fetch": "^2.2.1",
     "less-loader": "^4.0.4",
     "lodash": "^4.17.4",

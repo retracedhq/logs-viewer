@@ -12,19 +12,23 @@ const rootReducer = combineReducers({
 
 // Global store instance
 let globalStore;
-export function createStore() {
+export function configStore() {
   if (globalStore) { return };
-  const hasExtension = window.devToolsExtension;
-
-  globalStore = createStore(
-    rootReducer,
-    compose(
-      applyMiddleware(thunk),
-      hasExtension ? window.devToolsExtension() : f => f,
-    ),
-  );
-  
-  return globalStore;
+  return new Promise((resolve, reject) => {
+    try {
+      const hasExtension = window.devToolsExtension;
+      globalStore = createStore(
+        rootReducer,
+        compose(
+          applyMiddleware(thunk),
+          hasExtension ? window.devToolsExtension() : f => f,
+        ),
+      );
+      resolve(globalStore);
+    } catch (e) {
+      reject(e);
+    }
+  });
 }
 
 export function getStore() {
