@@ -260,7 +260,7 @@ class EventsBrowser extends React.Component {
             </div>
           </div>
         </div>
-        <ModalPortal isOpen={this.state.isModalOpen} name={this.state.activeModal.name} closeModal={() => {this.closeModal()}} contentLabel="This is a modal!" content={this.state.activeModal.modal} />
+        <ModalPortal isOpen={this.state.isModalOpen} name={this.state.activeModal.name} closeModal={() => {this.closeModal()}} content={this.state.activeModal.modal} />
       </div>
     );
   }
