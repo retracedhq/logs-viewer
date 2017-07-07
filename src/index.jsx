@@ -1,7 +1,6 @@
 import * as React from "react";
 import { AppContainer } from "react-hot-loader";
 import { render } from "react-dom";
-import Root from "./Root";
 import * as PropTypes from "prop-types";
 import { Provider } from "react-redux";
 import { configStore, getStore } from "./redux";

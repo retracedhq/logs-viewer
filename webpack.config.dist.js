@@ -7,13 +7,11 @@ var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js"
 var webpackPlugins;
 if (appEnv.ENVIRONMENT === "production") {
   webpackPlugins = [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.NamedModulesPlugin(),
   ];
 } else {
   webpackPlugins = [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ];
 }
@@ -29,7 +27,7 @@ module.exports = {
       {
         test: /\.[tj]sx?$/,
         include: srcPath,
-        loaders: ["react-hot-loader/webpack", "awesome-typescript-loader"],
+        loaders: ["awesome-typescript-loader"],
       },
     ],
   },
