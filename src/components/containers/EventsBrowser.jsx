@@ -8,6 +8,9 @@ import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
 import EventRow from "../views/EventRow";
 import SearchForm from "../views/SearchForm";
+import ModalPortal from "../modals/ModalPortal";
+import ExportEventsModal from "../modals/ExportEventsModal";
+import AccessTokensModal from "../modals/AccessTokensModal";
 
 import "../../css/components/views/EventsBrowser.scss";
 
@@ -23,6 +26,11 @@ class EventsBrowser extends React.Component {
       // If there are already results to show either it's page 1 or they will
       // be replaced by the componentDidMount empty query results.
       pageCursors: props.currentResults.totalResultCount ? [""] : [],
+      activeModal: {
+        modal: null,
+        name: "",
+      },
+      isModalOpen: false,
     };
   }
 
@@ -133,6 +141,26 @@ class EventsBrowser extends React.Component {
     });
   }
 
+ renderModal(modal) {
+   this.setState({
+    isModalOpen: true,
+    activeModal: {
+      modal,
+      name: modal.type.name,
+    },
+   });
+ }
+
+ closeModal() {
+   this.setState({
+     isModalOpen: false,
+     activeModal: {
+       modal: null,
+       name: "",
+     },
+   })
+ }
+
   render() {
     const {
       events,
@@ -155,6 +183,7 @@ class EventsBrowser extends React.Component {
               <span className="flex flex-auto justifyContent--flexEnd">
                 <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
               </span>
+              <button onClick={() => {this.renderModal(<ExportEventsModal />)}}>Export</button>
             </div>
             <div className="flex flex-auto">
               <FixedTableHeader
@@ -231,6 +260,7 @@ class EventsBrowser extends React.Component {
             </div>
           </div>
         </div>
+        <ModalPortal isOpen={this.state.isModalOpen} name={this.state.activeModal.name} closeModal={() => {this.closeModal()}} content={this.state.activeModal.modal} />
       </div>
     );
   }

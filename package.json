@@ -1,6 +1,6 @@
 {
   "name": "logs-viewer",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Logs viewer widget",
   "main": "dist/index.js",
   "repository": {
@@ -8,7 +8,6 @@
     "type": "git"
   },
   "author": "Replicated Inc",
-  "private": true,
   "contributors": [
     "Grayson Null <grayson@replicated.com>"
   ],
@@ -17,6 +16,10 @@
     "> 1%",
     "last 4 versions"
   ],
+  "peerDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
   "dependencies": {
     "accounting": "^0.4.1",
     "autoprefixer": "^7.1.1",
@@ -40,6 +43,7 @@
     "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-markdown": "^2.5.0",
+    "react-modal": "^2.2.1",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",
