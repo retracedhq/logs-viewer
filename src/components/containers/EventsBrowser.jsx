@@ -199,7 +199,7 @@ class EventsBrowser extends React.Component {
                 {currentResults.resultIds.length ?
                   currentResults.resultIds.map((eid, i) => (
                     <EventRow
-                      key={eid}
+                      key={i}
                       event={events[eid]}
                       renderers={renderers}
                       isMobile={isMobile}
