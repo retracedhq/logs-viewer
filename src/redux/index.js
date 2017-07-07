@@ -3,7 +3,6 @@ import thunk from "redux-thunk";
 
 import data from "./data";
 import ui from "./ui";
-//import session from "./session";
 
 const rootReducer = combineReducers({
   data,
@@ -11,22 +10,14 @@ const rootReducer = combineReducers({
 });
 
 // Global store instance
-let globalStore;
-export function createStore() {
-  if (globalStore) { return };
+export function configStore() {
   const hasExtension = window.devToolsExtension;
 
-  globalStore = createStore(
+  return createStore(
     rootReducer,
     compose(
       applyMiddleware(thunk),
       hasExtension ? window.devToolsExtension() : f => f,
     ),
   );
-  
-  return globalStore;
-}
-
-export function getStore() {
-  return globalStore;
 }

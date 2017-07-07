@@ -1,9 +1,13 @@
 import * as React from "react";
 import { AppContainer } from "react-hot-loader";
-import Root from "./Root";
 import * as PropTypes from "prop-types";
+import { Provider } from "react-redux";
+import { configStore } from "./redux";
+import EventsBrowser from "./components/containers/EventsBrowser";
 
+import "./css/index.scss";
 
+const store = configStore();
 export default class RetracedEventsBrowser extends React.Component {
   static propTypes = {
     auditLogToken: PropTypes.string,
@@ -12,12 +16,13 @@ export default class RetracedEventsBrowser extends React.Component {
   static defaultProps = {
     theme: "light",
   }
-
   render() {
     return (
       <div id="retracedLogsViewerApp">
         <AppContainer>
-          <Root auditLogToken={this.props.auditLogToken} theme={this.props.theme}/>
+          <Provider store={store}>
+            <EventsBrowser auditLogToken={this.props.auditLogToken} theme={this.props.theme} />
+          </Provider>
         </AppContainer>
       </div>
     );

@@ -37,10 +37,8 @@
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "prop-types": "^15.5.10",
-    "react": "^15.6.1",
     "react-autobind": "^1.0.6",
     "react-datepicker": "^0.48.0",
-    "react-dom": "^15.6.1",
     "react-hot-loader": "next",
     "react-markdown": "^2.5.0",
     "react-modal": "^2.2.1",
@@ -60,5 +58,9 @@
   },
   "scripts": {
     "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
+  },
+  "devDependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
   }
 }
