@@ -29,10 +29,10 @@ export function createSession(token) {
   };
 }
 
-export function requestEventSearch(projectId, environmentId, query) {
+export function requestEventSearch(query) {
   return async (dispatch, getState) => {
     dispatch(loadingData("eventFetch", true));
-    const q = { projectId, environmentId, query };
+    const q = { query };
     if (_.isEqual(last, q)) {
       dispatch(loadingData("eventFetch", false));
       return;
@@ -40,11 +40,7 @@ export function requestEventSearch(projectId, environmentId, query) {
     last = q;
 
     const state = getState();
-    // if (!_.isEmpty(state.data.eventsData.session)) { return; };
-    // const url = `${apiEndpoint}/project/${projectId}/environment/${environmentId}/graphql`;
-    // TEMP ONLY (Requires retraced composer to be running);
     const url = `${retracedEndpoint}/graphql`;
-    // END TEMP DATA
     const response = await fetch(url, {
       method: "post",
       headers: {

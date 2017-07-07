@@ -2,6 +2,8 @@ var path = require("path");
 var webpackMerge = require("webpack-merge");
 var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
+var HtmlWebpackPlugin = require("html-webpack-plugin");
+var HtmlWebpackTemplate = require("html-webpack-template");
 var distPath = path.join(__dirname, "dist");
 var srcPath = path.join(__dirname, "src");
 var modulePath = path.join(__dirname, "node_modules");
@@ -16,6 +18,25 @@ var common = {
     libraryTarget: 'umd',
     library: 'RetracedEventsBrowser'
   },
+
+  externals: [
+    {
+      'react-dom': {
+        root: 'ReactDOM',
+        commonjs2: 'react-dom',
+        commonjs: 'react-dom',
+        amd: 'react-dom'
+      }
+    },
+    {
+      'react': {
+        root: 'React',
+        commonjs2: 'react',
+        commonjs: 'react',
+        amd: 'react'
+      }
+    }
+  ],
 
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".png", ".jpg", ".svg", ".ico"],
@@ -52,7 +73,7 @@ var common = {
       {
         test: /\.(png|jpg|svg|ico)$/,
         include: srcPath,
-        use:["file-loader"],
+        use: ["file-loader"],
       },
       {
         test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
@@ -62,6 +83,12 @@ var common = {
   },
 
   plugins: [
+    new HtmlWebpackPlugin({
+      template: HtmlWebpackTemplate,
+      title: "Retraced Logs Viewer",
+      appMountId: "retracedLogsViewerApp",
+      inject: false,
+    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),
