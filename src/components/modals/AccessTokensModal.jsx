@@ -14,14 +14,12 @@ export default class AccessTokensModal extends React.Component {
     return (
       <div>
           <h1>Access Tokens</h1>
-          <div>
-              <h3>Export your events to CSV</h3>
-              <p>Export your current search query to CSV. You can select presets from previous exports you’ve made or export and save your current query so that you can easily export any new events in the future. This export will only contain the events that have occured since your last export with the same query.</p>
-              <div>
-                  <select>
-                      <option value="current">Use current search query</option>
-                  </select>
-                  <button>Export</button>
+          <div className="modal-content">
+              <h3>Create a new token</h3>
+              <p>Create a new API token for your team to access and stream your audit logs.</p>
+              <div className="name-input">
+                <input type="text" placeholder="Release 1.0.0" onChange={(e) => { this.setState({ newSavedExportName: e.target.value }) }}  />
+                <button className="Button primary" onClick={() => { this.handleExportCSV(searchQuery, newSavedExportName) }}></button>
               </div>
           </div>
       </div>

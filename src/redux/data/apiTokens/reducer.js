@@ -2,15 +2,15 @@ import * as _ from "lodash";
 import actions from "./actions";
 
 const initialState = {
-  savedSearchQueries: [],
+    apiTokens: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actions.RECEIVE_SAVED_EXPORTS: {
+    case actions.RECEIVE_EITAPI_TOKENS: {
       const result = {
         ...state,
-        savedSearchQueries: action.payload.queries,
+        apiTokens: action.payload.tokens,
       };
       return result;
     }

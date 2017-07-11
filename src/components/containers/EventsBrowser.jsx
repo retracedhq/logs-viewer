@@ -2,7 +2,10 @@ import * as React from "react";
 import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as accounting from "accounting";
-import { requestEventSearch, createSession, createSavedExport, fetchSavedExports } from "../../redux/data/events/thunks";
+import { requestEventSearch } from "../../redux/data/events/thunks";
+import { createSession } from "../../redux/data/session/thunks";
+import { createSavedExport, fetchSavedExports } from "../../redux/data/exports/thunks";
+import { fetchEitapiTokensList } from "../../redux/data/apiTokens/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -75,12 +78,13 @@ class EventsBrowser extends React.Component {
 
   componentWillMount() {
     this.props.createSession(this.props.auditLogToken);
-    this.props.fetchSavedExports();
   }
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.session && this.props.session !== nextProps.session) {
       this.submitQuery("", "");
+      this.props.fetchSavedExports();
+      this.props.fetchEitapiTokensList();
     }
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
@@ -184,6 +188,7 @@ getSavedExports() {
     const {
       events,
       currentResults,
+      exportResults,
       tableHeaderItems
     } = this.props;
     const searchText = currentResults
@@ -209,11 +214,23 @@ getSavedExports() {
                       exportCSV={this.exportCSV}
                       nameCSVExport={this.nameCSVExport}
                       saveExportQuery={this.saveExportQuery} 
-                      savedExports={currentResults.savedSearchQueries}
+                      savedExports={exportResults}
                       exporting={this.props.dataLoading.exportCSVLoading}
                     />
                 )}}
               >Export</button>
+              <button 
+                onClick={() => {
+                  this.renderModal(
+                    <AccessTokensModal 
+                      exportCSV={this.exportCSV}
+                      nameCSVExport={this.nameCSVExport}
+                      saveExportQuery={this.saveExportQuery} 
+                      savedExports={exportResults}
+                      exporting={this.props.dataLoading.exportCSVLoading}
+                    />
+                )}}
+              >API Tokens</button>
             </div>
             <div className="flex flex-auto">
               <FixedTableHeader
@@ -303,9 +320,11 @@ getSavedExports() {
 
 export default connect(
   state => ({
-    session: state.data.eventsData.session,
+    session: state.data.sessionData.session,
     events: state.data.eventsData.byId,
     currentResults: state.data.eventsData.latestServerResults,
+    exportResults: state.data.exportsData.savedSearchQueries,
+    apiTokens: state.data.apiTokenData.apiTokens,
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
@@ -321,6 +340,9 @@ export default connect(
     },
     fetchSavedExports() {
       return dispatch(fetchSavedExports());
+    },
+    fetchEitapiTokensList() {
+      return dispatch(fetchEitapiTokensList());
     },
   }),
 )(EventsBrowser);

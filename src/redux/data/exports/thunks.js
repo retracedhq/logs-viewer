@@ -56,8 +56,8 @@ export function createSavedExport(query, name) {
     //dispatch(setError(null));
 
     const state = getState();
-    const projectId = state.data.eventsData.session.project_id;
-    const jwt = state.data.eventsData.session.token;
+    const projectId = state.data.sessionData.session.project_id;
+    const jwt = state.data.sessionData.session.token;
     const exportUrl = `${retracedEndpoint}/project/${projectId}/export`;
     
     // TODO (10Dimensional): Update flow so that name can be associated with export id 
