@@ -193,11 +193,12 @@
   outline: 0;
 }
 
-.ExportEventsModal .name-input {
+.modal .name-input,
+.modal .name-input {
   display: flex;
 }
 
-.ExportEventsModal .name-input input {
+.modal .name-input input {
   flex: 1;
   margin-right: 20px;
   height: 38px;

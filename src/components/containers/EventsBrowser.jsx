@@ -223,11 +223,7 @@ getSavedExports() {
                 onClick={() => {
                   this.renderModal(
                     <AccessTokensModal 
-                      exportCSV={this.exportCSV}
-                      nameCSVExport={this.nameCSVExport}
-                      saveExportQuery={this.saveExportQuery} 
-                      savedExports={exportResults}
-                      exporting={this.props.dataLoading.exportCSVLoading}
+                      apiTokens={apiTokens}
                     />
                 )}}
               >API Tokens</button>

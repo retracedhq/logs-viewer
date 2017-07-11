@@ -8,6 +8,9 @@ export default class AccessTokensModal extends React.Component {
   constructor() {
     super();
     autoBind(this);
+    this.state = {
+        creatingToken: false,
+    }
   }
 
   render() {
@@ -18,8 +21,8 @@ export default class AccessTokensModal extends React.Component {
               <h3>Create a new token</h3>
               <p>Create a new API token for your team to access and stream your audit logs.</p>
               <div className="name-input">
-                <input type="text" placeholder="Release 1.0.0" onChange={(e) => { this.setState({ newSavedExportName: e.target.value }) }}  />
-                <button className="Button primary" onClick={() => { this.handleExportCSV(searchQuery, newSavedExportName) }}></button>
+                <input type="text" placeholder="Token Name" onChange={(e) => { this.setState({ newSavedExportName: e.target.value }) }}  />
+                <button className="Button primary" onClick={() => { this.handleExportCSV(searchQuery, newSavedExportName) }}>Create Token</button>
               </div>
           </div>
       </div>

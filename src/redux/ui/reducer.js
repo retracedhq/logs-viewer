@@ -19,7 +19,7 @@ export function loadingData(state = loadingState, action = {}) {
   switch (action.type) {
     case constants.LOADING_DATA:
       return Object.assign({}, state, {
-        ...state.loadingState,
+        ...state,
         [`${action.payload.key}Loading`]: action.payload.isLoading,
       });
     default:
