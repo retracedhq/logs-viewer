@@ -171,11 +171,16 @@ class EventsBrowser extends React.Component {
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column">
             <div className="EventsTable-header flex flex-auto">
-              <h3 className="flex-1-auto u-lineHeight--more u-fontSize--header3">Events</h3>
-              <span className="flex flex-auto justifyContent--flexEnd">
-                <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
-              </span>
-              <button onClick={() => {this.renderModal(<ExportEventsModal />)}}>Export</button>
+              <div className="flex-1-auto flex">
+                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">Events</h3>
+                <span className="flex flex-auto u-marginLeft--more">
+                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
+                </span>
+              </div>
+              <div className="flex flex-auto">
+                <span className="icon u-csvExportIcon" onClick={() => {this.renderModal(<ExportEventsModal />)}}></span>
+                <span className="icon u-gearIcon u-marginLeft--normal" onClick={() => {this.renderModal(<ExportEventsModal />)}}></span>
+              </div>
             </div>
             <div className="flex flex-auto">
               <FixedTableHeader

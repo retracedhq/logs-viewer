@@ -29,11 +29,19 @@
   background-position: 0 -43px;
 }
 .icon.u-gearIcon {
-  background-position: 0 -192px;
+  background-position: 0 -54px;
   width: 16px;
   height: 16px;
 }
 .icon.u-gearIcon:hover {
+  background-position: 0 -72px;
+}
+.icon.u-csvExportIcon {
+  background-position: 0 -90px;
+  width: 16px;
+  height: 19px;
+}
+.icon.u-csvExportIcon:hover {
   background-position: 0 -210px;
 }
 .icon.u-codeIcon {
