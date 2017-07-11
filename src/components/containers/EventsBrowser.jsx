@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as accounting from "accounting";
-import { requestEventSearch, createSession } from "../../redux/data/events/thunks";
+import { requestEventSearch, createSession, createSavedExport, fetchSavedExports } from "../../redux/data/events/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -31,6 +31,7 @@ class EventsBrowser extends React.Component {
         name: "",
       },
       isModalOpen: false,
+      searchQuery: "",
     };
   }
 
@@ -74,6 +75,7 @@ class EventsBrowser extends React.Component {
 
   componentWillMount() {
     this.props.createSession(this.props.auditLogToken);
+    this.props.fetchSavedExports();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,6 +88,7 @@ class EventsBrowser extends React.Component {
   }
 
   search(query) {
+    this.setState({ searchQuery: query });
     this.submitQuery(query, "");
   }
 
@@ -152,6 +155,29 @@ class EventsBrowser extends React.Component {
      },
    })
  }
+ 
+ /* CSV Methods ---------- */
+ exportCSV(query) {
+   if(query !== "current") {
+    // Fetch download
+    console.log("Fetching export for this id: " + query); 
+   } else {
+     this.props.createSavedExport(this.state.searchQuery)
+   }
+ }
+
+ saveExportQuery(query) {
+   return;
+ }
+
+ nameCSVExport() {
+   return;
+ }
+
+getSavedExports() {
+  return;
+}
+ /* ---------------------- */
 
   render() {
     const {
@@ -175,7 +201,17 @@ class EventsBrowser extends React.Component {
               <span className="flex flex-auto justifyContent--flexEnd">
                 <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
               </span>
-              <button onClick={() => {this.renderModal(<ExportEventsModal />)}}>Export</button>
+              <button 
+                onClick={() => {
+                  this.renderModal(
+                    <ExportEventsModal 
+                      exportCSV={this.exportCSV}
+                      nameCSVExport={this.nameCSVExport}
+                      saveExportQuery={this.saveExportQuery} 
+                      savedExports={currentResults.savedSearchQueries}
+                    />
+                )}}
+              >Export</button>
             </div>
             <div className="flex flex-auto">
               <FixedTableHeader
@@ -252,7 +288,12 @@ class EventsBrowser extends React.Component {
             </div>
           </div>
         </div>
-        <ModalPortal isOpen={this.state.isModalOpen} name={this.state.activeModal.name} closeModal={() => {this.closeModal()}} content={this.state.activeModal.modal} />
+        <ModalPortal 
+          isOpen={this.state.isModalOpen} 
+          session={this.props.session} 
+          name={this.state.activeModal.name} 
+          closeModal={() => {this.closeModal()}} 
+          content={this.state.activeModal.modal} />
       </div>
     );
   }
@@ -272,6 +313,12 @@ export default connect(
     },
     createSession(token) {
       return dispatch(createSession(token));
+    },
+    createSavedExport(query) {
+      return dispatch(createSavedExport(query));
+    },
+    fetchSavedExports() {
+      return dispatch(fetchSavedExports());
     },
   }),
 )(EventsBrowser);

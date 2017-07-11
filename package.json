@@ -1,10 +1,10 @@
 {
-  "name": "logs-viewer",
+  "name": "replicated-logs-viewer",
   "version": "2.0.0",
   "description": "Logs viewer widget",
   "main": "dist/index.js",
   "repository": {
-    "url": "git@github.com:retracedhq/logs-viewer.git",
+    "url": "git+ssh://git@github.com/retracedhq/logs-viewer.git",
     "type": "git"
   },
   "author": "Replicated Inc",
@@ -62,5 +62,9 @@
   "devDependencies": {
     "react": "^15.6.1",
     "react-dom": "^15.6.1"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/retracedhq/logs-viewer/issues"
+  },
+  "homepage": "https://github.com/retracedhq/logs-viewer#readme"
 }
