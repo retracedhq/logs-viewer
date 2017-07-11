@@ -36,7 +36,7 @@ export default class EventRow extends React.Component {
               </div>
               <div style={{ maxWidth: "40px" }} className="flex flex1 content-section actions-section justifyContent--flexEnd">
                 <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
-                  <span className="icon clickable u-codeIcon"></span>
+                  <span className="icon clickable u-codeIcon" onClick={this.props.openModal}></span>
                 </div>
               </div>
             </div>
