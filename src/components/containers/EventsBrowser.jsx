@@ -2,7 +2,7 @@ import * as React from "react";
 import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as accounting from "accounting";
-import { requestEventSearch, createSession } from "../../redux/data/events/thunks";
+import { requestEventSearch, createSession, createSavedExport, fetchSavedExports } from "../../redux/data/events/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -31,6 +31,7 @@ class EventsBrowser extends React.Component {
         name: "",
       },
       isModalOpen: false,
+      searchQuery: "",
     };
   }
 
@@ -74,6 +75,7 @@ class EventsBrowser extends React.Component {
 
   componentWillMount() {
     this.props.createSession(this.props.auditLogToken);
+    this.props.fetchSavedExports();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -86,6 +88,7 @@ class EventsBrowser extends React.Component {
   }
 
   search(query) {
+    this.setState({ searchQuery: query });
     this.submitQuery(query, "");
   }
 
@@ -133,25 +136,49 @@ class EventsBrowser extends React.Component {
     });
   }
 
- renderModal(modal) {
-   this.setState({
-    isModalOpen: true,
-    activeModal: {
-      modal,
-      name: modal.type.name,
-    },
-   });
- }
+  renderModal(modal) {
+    this.setState({
+      isModalOpen: true,
+      activeModal: {
+        modal,
+        name: modal.type.name,
+      },
+    });
+  }
 
- closeModal() {
-   this.setState({
-     isModalOpen: false,
-     activeModal: {
-       modal: null,
-       name: "",
-     },
-   })
- }
+  closeModal() {
+    this.setState({
+      isModalOpen: false,
+      activeModal: {
+        modal: null,
+        name: "",
+      },
+    })
+  }
+
+  /* CSV Methods ---------- */
+  exportCSV(query, name) {
+    if (query !== "current") {
+      // Fetch download
+      console.log("Fetching export for this id: " + query);
+    } else {
+      const checkedName = name === "" ? this.state.searchQuery : name;
+      this.props.createSavedExport(this.state.searchQuery, checkedName)
+    }
+  }
+
+  saveExportQuery(query) {
+    return;
+  }
+
+  nameCSVExport() {
+    return;
+  }
+
+  getSavedExports() {
+    return;
+  }
+  /* ---------------------- */
 
   render() {
     const {
@@ -178,8 +205,22 @@ class EventsBrowser extends React.Component {
                 </span>
               </div>
               <div className="flex flex-auto">
-                <span className="icon u-csvExportIcon" onClick={() => {this.renderModal(<ExportEventsModal />)}}></span>
-                <span className="icon u-gearIcon u-marginLeft--normal" onClick={() => {this.renderModal(<ExportEventsModal />)}}></span>
+                <div className="flex-auto flex-column flex-verticalCenter">
+                  <span className="icon clickable u-csvExportIcon" onClick={() => {
+                    this.renderModal(
+                      <ExportEventsModal
+                        exportCSV={this.exportCSV}
+                        nameCSVExport={this.nameCSVExport}
+                        saveExportQuery={this.saveExportQuery}
+                        savedExports={currentResults.savedSearchQueries}
+                      />
+                    )
+                  }}>
+                  </span>
+                </div>
+                <div className="u-marginLeft--normal flex-auto flex-column flex-verticalCenter">
+                  <span className="icon clickable u-gearIcon" onClick={() => { this.renderModal(<div></div>) }}></span>
+                </div>
               </div>
             </div>
             <div className="flex flex-auto">
@@ -257,7 +298,12 @@ class EventsBrowser extends React.Component {
             </div>
           </div>
         </div>
-        <ModalPortal isOpen={this.state.isModalOpen} name={this.state.activeModal.name} closeModal={() => {this.closeModal()}} content={this.state.activeModal.modal} />
+        <ModalPortal
+          isOpen={this.state.isModalOpen}
+          session={this.props.session}
+          name={this.state.activeModal.name}
+          closeModal={() => { this.closeModal() }}
+          content={this.state.activeModal.modal} />
       </div>
     );
   }
@@ -277,6 +323,12 @@ export default connect(
     },
     createSession(token) {
       return dispatch(createSession(token));
+    },
+    createSavedExport(query, name) {
+      return dispatch(createSavedExport(query, name));
+    },
+    fetchSavedExports() {
+      return dispatch(fetchSavedExports());
     },
   }),
 )(EventsBrowser);

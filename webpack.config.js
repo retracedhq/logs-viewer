@@ -51,8 +51,9 @@ var common = {
         include: srcPath,
         use: [
           { loader: "style-loader" },
-          { loader: "css-loader?importLoaders=2" },
-          { loader: "sass-loader" },
+          { loader: "css-loader" },
+          { loader: "resolve-url-loader" },
+          { loader: "sass-loader?sourceMap" },
           { loader: "postcss-loader" }
         ]
       },
@@ -71,9 +72,14 @@ var common = {
         use: ["less-loader"],
       },
       {
-        test: /\.(png|jpg|svg|ico)$/,
+        test: /\.(png|jpg|ico)$/,
         include: srcPath,
         use: ["file-loader"],
+      },
+      {
+        test: /\.svg/,
+        include: srcPath,
+        use: ["svg-url-loader"],
       },
       {
         test: /\.woff(2)?(\?v=\d+\.\d+\.\d+)?$/,
@@ -94,6 +100,7 @@ var common = {
         NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),
       }
     }),
+    new CopyWebpackPlugin([{ from: "./src/assets/logs_spritesheet.svg" }]),
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: [
