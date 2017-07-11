@@ -210,6 +210,7 @@ getSavedExports() {
                       nameCSVExport={this.nameCSVExport}
                       saveExportQuery={this.saveExportQuery} 
                       savedExports={currentResults.savedSearchQueries}
+                      exporting={this.props.dataLoading.exportCSVLoading}
                     />
                 )}}
               >Export</button>

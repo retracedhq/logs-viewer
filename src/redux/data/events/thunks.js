@@ -179,6 +179,8 @@ export function createSavedExport(query, name) {
       name,
     }
 
+    dispatch(loadingData("exportCSVLoading", true));
+
     try {
       const exportResponse = await fetch(exportUrl, {
         method: "POST",
@@ -206,10 +208,11 @@ export function createSavedExport(query, name) {
 
       savedExports.push(exportResult);
       localStorage.setItem("savedExports", JSON.stringify(savedExports));
-
+      
+      dispatch(loadingData("exportCSVLoading", false));
       dispatch(fetchSavedExports());
 
-      return exportResult
+      return exportResult;
       //const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
       //window.location = downloadUrl;
 

@@ -15,20 +15,24 @@ export default class ExportEventsModal extends React.Component {
     }
   }
 
+  handleExportCSV(query, name) {
+    this.props.exportCSV(query, name);
+  }
+
   updateSearchQuery(e) {
     this.setState({ searchQuery: e.target.value })
   }
 
   checkForNewExport() {
     if(this.state.searchQuery === "current") {
-      this.setState({ newSavedExport: true })
+      this.setState({ newSavedExport: true });
     } else {
-      this.props.exportCSV(this.state.searchQuery, null);
+      this.handleExportCSV(this.state.searchQuery, null);
     }
   }
 
   render() {
-    const { savedExports } = this.props;
+    const { savedExports, exporting } = this.props;
     const { searchQuery, newSavedExportName } = this.state;
     return (
       <div>
@@ -40,7 +44,7 @@ export default class ExportEventsModal extends React.Component {
                   <p>Save this search query so that you can easily use these presets to export any new events in the future that match your new query.</p>
                   <div className="name-input">
                     <input type="text" placeholder="Release 1.0.0" onChange={(e) => { this.setState({ newSavedExportName: e.target.value }) }}  />
-                    <button className="Button primary" onClick={() => { this.props.exportCSV(searchQuery, newSavedExportName) }}>Name & Save</button>
+                    <button className="Button primary" disabled={exporting ? true : false}  onClick={() => { this.handleExportCSV(searchQuery, newSavedExportName) }}>{ exporting ? "Saving..." : "Name & Save" }</button>
                   </div>
                 </div>
               :
@@ -59,7 +63,7 @@ export default class ExportEventsModal extends React.Component {
                         </select>
                         <span className="icon clickable u-dropdownArrowIcon"></span>
                       </div>
-                      <button className="Button primary" onClick={() => { this.checkForNewExport() }}>Export</button>
+                      <button className="Button primary" disabled={exporting ? true : false} onClick={() => { this.checkForNewExport() }}>{ exporting ? "Exporting..." : "Export" }</button>
                   </div>
                 </div>
               }
