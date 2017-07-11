@@ -13,7 +13,6 @@ var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js"
 var common = {
   output: {
     path: distPath,
-    publicPath: "/",
     filename: "index.js",
     libraryTarget: 'umd',
     library: 'RetracedEventsBrowser'
