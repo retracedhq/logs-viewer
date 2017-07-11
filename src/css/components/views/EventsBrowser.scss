@@ -193,3 +193,16 @@
   outline: 0;
 }
 
+.ExportEventsModal .name-input {
+  display: flex;
+}
+
+.ExportEventsModal .name-input input {
+  flex: 1;
+  margin-right: 20px;
+  height: 38px;
+  border-radius: 4px;
+  border: solid 1px #C4C7CA;
+  padding: 0 10px;
+}
+

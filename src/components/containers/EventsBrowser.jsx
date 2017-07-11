@@ -157,12 +157,13 @@ class EventsBrowser extends React.Component {
  }
  
  /* CSV Methods ---------- */
- exportCSV(query) {
+ exportCSV(query, name) {
    if(query !== "current") {
     // Fetch download
     console.log("Fetching export for this id: " + query); 
    } else {
-     this.props.createSavedExport(this.state.searchQuery)
+     const checkedName = name === "" ? this.state.searchQuery : name;
+     this.props.createSavedExport(this.state.searchQuery, checkedName)
    }
  }
 
@@ -314,8 +315,8 @@ export default connect(
     createSession(token) {
       return dispatch(createSession(token));
     },
-    createSavedExport(query) {
-      return dispatch(createSavedExport(query));
+    createSavedExport(query, name) {
+      return dispatch(createSavedExport(query, name));
     },
     fetchSavedExports() {
       return dispatch(fetchSavedExports());

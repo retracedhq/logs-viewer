@@ -176,7 +176,7 @@ export function createSavedExport(query, name) {
     // TODO (10Dimensional): Update flow so that name can be associated with export id 
     const payload = {
       exportBody: query,
-      name: "",
+      name,
     }
 
     try {
@@ -209,7 +209,7 @@ export function createSavedExport(query, name) {
 
       dispatch(fetchSavedExports());
 
-      return exportResult;
+      return exportResult
       //const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
       //window.location = downloadUrl;
 
