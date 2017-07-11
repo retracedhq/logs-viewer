@@ -10,6 +10,7 @@ import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
 import EventRow from "../views/EventRow";
+import MobileEventRow from "../views/MobileEventRow";
 import SearchForm from "../views/SearchForm";
 import ModalPortal from "../modals/ModalPortal";
 import ExportEventsModal from "../modals/ExportEventsModal";
@@ -18,6 +19,10 @@ import RawEventOutputModal from "../modals/RawEventOutputModal";
 
 import "../../css/components/views/EventsBrowser.scss";
 
+import { Resizer } from "./wrappers/Resize";
+import { BreakpointConfig } from "../../services/breakpoints";
+
+@Resizer(BreakpointConfig)
 class EventsBrowser extends React.Component {
   constructor(props) {
     super(props);
@@ -190,12 +195,13 @@ class EventsBrowser extends React.Component {
       events,
       currentResults,
       exportResults,
-      tableHeaderItems
+      tableHeaderItems,
+      breakpoint
     } = this.props;
     const searchText = currentResults
       && currentResults.sourceQuery
       && currentResults.sourceQuery.search_text;
-    const isMobile = false;
+    const isMobile = breakpoint === "mobile";;
     const renderers = {
       "Link": InlineLink,
     };
@@ -236,11 +242,13 @@ class EventsBrowser extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="flex flex-auto">
-              <FixedTableHeader
-                items={tableHeaderItems}
-              />
-            </div>
+            {!isMobile ?
+              <div className="flex flex-auto">
+                <FixedTableHeader
+                  items={tableHeaderItems}
+                />
+              </div>
+            : null}
             {this.props.dataLoading.eventFetchLoading ?
               <div className="flex-column flex1 justifyContent--center alignItems--center">
                 <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
@@ -249,22 +257,40 @@ class EventsBrowser extends React.Component {
               <div className="flex-column flex-1-auto u-overflow--auto">
                 {currentResults.resultIds.length ?
                   currentResults.resultIds.map((eid, i) => (
-                    <EventRow
-                      key={`${eid}-${i}`}
-                      event={events[eid]}
-                      renderers={renderers}
-                      isMobile={isMobile}
-                      index={i}
-                      outputHovered={this.state[`output-${eid}Hovered`]}
-                      displayTooltip={() => { return; }}
-                      openModal={() => {
-                        this.renderModal(
-                          <RawEventOutputModal
-                            rawOutput={events[eid].raw}
-                          />
-                        )
-                      }}
-                    />
+                    !isMobile ?
+                      <EventRow
+                        key={`${eid}-${i}`}
+                        event={events[eid]}
+                        renderers={renderers}
+                        isMobile={isMobile}
+                        index={i}
+                        outputHovered={this.state[`output-${eid}Hovered`]}
+                        displayTooltip={() => { return; }}
+                        openModal={() => {
+                          this.renderModal(
+                            <RawEventOutputModal
+                              rawOutput={events[eid].raw}
+                            />
+                          )
+                        }}
+                      />
+                      :
+                      <MobileEventRow
+                        key={`${eid}-${i}`}
+                        event={events[eid]}
+                        renderers={renderers}
+                        isMobile={isMobile}
+                        index={i}
+                        outputHovered={this.state[`output-${eid}Hovered`]}
+                        displayTooltip={() => { return; }}
+                        openModal={() => {
+                          this.renderModal(
+                            <RawEventOutputModal
+                              rawOutput={events[eid].raw}
+                            />
+                          )
+                        }}
+                      />
                   ))
                   : currentResults.sourceQuery.search_text !== "" ?
                     <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
