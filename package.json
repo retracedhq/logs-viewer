@@ -37,6 +37,7 @@
     "node-sass": "^4.5.3",
     "postcss-loader": "^2.0.6",
     "prop-types": "^15.5.10",
+    "react-ace": "^5.1.0",
     "react-autobind": "^1.0.6",
     "react-datepicker": "^0.48.0",
     "react-hot-loader": "next",

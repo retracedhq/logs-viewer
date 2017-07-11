@@ -11,6 +11,7 @@ import SearchForm from "../views/SearchForm";
 import ModalPortal from "../modals/ModalPortal";
 import ExportEventsModal from "../modals/ExportEventsModal";
 import AccessTokensModal from "../modals/AccessTokensModal";
+import RawEventOutputModal from "../modals/RawEventOutputModal";
 
 import "../../css/components/views/EventsBrowser.scss";
 
@@ -244,7 +245,13 @@ class EventsBrowser extends React.Component {
                       index={i}
                       outputHovered={this.state[`output-${eid}Hovered`]}
                       displayTooltip={() => { return; }}
-                      openModal={() => { return; }}
+                      openModal={() => {
+                        this.renderModal(
+                          <RawEventOutputModal
+                            rawOutput={events[eid].raw}
+                          />
+                        )
+                      }}
                     />
                   ))
                   : currentResults.sourceQuery.search_text !== "" ?
