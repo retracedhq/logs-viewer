@@ -7,20 +7,11 @@ const initialState = {
     sourceQuery: {},
     totalResultCount: 0,
     resultIds: [],
-    savedSearchQueries: [],
   },
-  session: {},
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case actions.RECEIVE_SESSION_INFO: {
-      const result = {
-        ...state,
-        session: action.payload.session,
-      };
-      return result;
-    }
     case actions.RECEIVE_EVENT_LIST: {
       // To save on RAM, we only store the latest page received
       const result = {
@@ -33,16 +24,6 @@ export default (state = initialState, action) => {
           resultIds: action.payload.list.map(e => e.id),
           cursor: action.payload.cursor,
         },
-      };
-      return result;
-    }
-    case actions.RECEIVE_SAVED_EXPORTS: {
-      const result = {
-        ...state,
-        latestServerResults: {
-          ...state.latestServerResults,
-          savedSearchQueries: action.payload.queries,
-        }
       };
       return result;
     }
