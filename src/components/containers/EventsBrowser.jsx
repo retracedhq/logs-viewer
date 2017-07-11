@@ -225,7 +225,7 @@ class EventsBrowser extends React.Component {
                   }}>
                   </span>
                 </div>
-                <div className="u-marginLeft--normal flex-auto flex-column flex-verticalCenter">
+                <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
                   <span className="icon clickable u-gearIcon" onClick={() => {
                     this.renderModal(
                       <AccessTokensModal
