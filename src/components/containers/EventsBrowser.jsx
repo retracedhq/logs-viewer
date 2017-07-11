@@ -14,6 +14,7 @@ import SearchForm from "../views/SearchForm";
 import ModalPortal from "../modals/ModalPortal";
 import ExportEventsModal from "../modals/ExportEventsModal";
 import AccessTokensModal from "../modals/AccessTokensModal";
+import RawEventOutputModal from "../modals/RawEventOutputModal";
 
 import "../../css/components/views/EventsBrowser.scss";
 
@@ -140,49 +141,49 @@ class EventsBrowser extends React.Component {
     });
   }
 
- renderModal(modal) {
-   this.setState({
-    isModalOpen: true,
-    activeModal: {
-      modal,
-      name: modal.type.name,
-    },
-   });
- }
+  renderModal(modal) {
+    this.setState({
+      isModalOpen: true,
+      activeModal: {
+        modal,
+        name: modal.type.name,
+      },
+    });
+  }
 
- closeModal() {
-   this.setState({
-     isModalOpen: false,
-     activeModal: {
-       modal: null,
-       name: "",
-     },
-   })
- }
- 
- /* CSV Methods ---------- */
- exportCSV(query, name) {
-   if(query !== "current") {
-    // Fetch download
-    console.log("Fetching export for this id: " + query); 
-   } else {
-     const checkedName = name === "" ? this.state.searchQuery : name;
-     this.props.createSavedExport(this.state.searchQuery, checkedName)
-   }
- }
+  closeModal() {
+    this.setState({
+      isModalOpen: false,
+      activeModal: {
+        modal: null,
+        name: "",
+      },
+    })
+  }
 
- saveExportQuery(query) {
-   return;
- }
+  /* CSV Methods ---------- */
+  exportCSV(query, name) {
+    if (query !== "current") {
+      // Fetch download
+      console.log("Fetching export for this id: " + query);
+    } else {
+      const checkedName = name === "" ? this.state.searchQuery : name;
+      this.props.createSavedExport(this.state.searchQuery, checkedName)
+    }
+  }
 
- nameCSVExport() {
-   return;
- }
+  saveExportQuery(query) {
+    return;
+  }
 
-getSavedExports() {
-  return;
-}
- /* ---------------------- */
+  nameCSVExport() {
+    return;
+  }
+
+  getSavedExports() {
+    return;
+  }
+  /* ---------------------- */
 
   render() {
     const {
@@ -204,30 +205,37 @@ getSavedExports() {
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column">
             <div className="EventsTable-header flex flex-auto">
-              <h3 className="flex-1-auto u-lineHeight--more u-fontSize--header3">Events</h3>
-              <span className="flex flex-auto justifyContent--flexEnd">
-                <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
-              </span>
-              <button 
-                onClick={() => {
-                  this.renderModal(
-                    <ExportEventsModal 
-                      exportCSV={this.exportCSV}
-                      nameCSVExport={this.nameCSVExport}
-                      saveExportQuery={this.saveExportQuery} 
-                      savedExports={exportResults}
-                      exporting={this.props.dataLoading.exportCSVLoading}
-                    />
-                )}}
-              >Export</button>
-              <button 
-                onClick={() => {
-                  this.renderModal(
-                    <AccessTokensModal 
-                      apiTokens={apiTokens}
-                    />
-                )}}
-              >API Tokens</button>
+              <div className="flex-1-auto flex">
+                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">Events</h3>
+                <span className="flex flex-auto u-marginLeft--more">
+                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
+                </span>
+              </div>
+              <div className="flex flex-auto">
+                <div className="flex-auto flex-column flex-verticalCenter">
+                  <span className="icon clickable u-csvExportIcon" onClick={() => {
+                    this.renderModal(
+                      <ExportEventsModal
+                        exportCSV={this.exportCSV}
+                        nameCSVExport={this.nameCSVExport}
+                        saveExportQuery={this.saveExportQuery}
+                        savedExports={exportResults}
+                        exporting={this.props.dataLoading.exportCSVLoading}
+                      />
+                    )
+                  }}>
+                  </span>
+                </div>
+                <div className="u-marginLeft--normal flex-auto flex-column flex-verticalCenter">
+                  <span className="icon clickable u-gearIcon" onClick={() => {
+                    this.renderModal(
+                      <AccessTokensModal
+                        apiTokens={apiTokens}
+                      />
+                    )
+                  }}></span>
+                </div>
+              </div>
             </div>
             <div className="flex flex-auto">
               <FixedTableHeader
@@ -250,7 +258,13 @@ getSavedExports() {
                       index={i}
                       outputHovered={this.state[`output-${eid}Hovered`]}
                       displayTooltip={() => { return; }}
-                      openModal={() => { return; }}
+                      openModal={() => {
+                        this.renderModal(
+                          <RawEventOutputModal
+                            rawOutput={events[eid].raw}
+                          />
+                        )
+                      }}
                     />
                   ))
                   : currentResults.sourceQuery.search_text !== "" ?
