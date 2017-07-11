@@ -211,7 +211,7 @@ class EventsBrowser extends React.Component {
           <div className="flex1 flex-column">
             <div className="EventsTable-header flex flex-auto">
               <div className="flex-1-auto flex">
-                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">Events</h3>
+                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">{this.props.headerTitle}</h3>
                 <span className="flex flex-auto u-marginLeft--more">
                   <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
                 </span>
