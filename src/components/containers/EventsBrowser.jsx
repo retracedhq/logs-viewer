@@ -228,7 +228,11 @@ getSavedExports() {
                 {currentResults.resultIds.length ?
                   currentResults.resultIds.map((eid, i) => (
                     <EventRow
+<<<<<<< HEAD
                       key={`${eid}-${i}`}
+=======
+                      key={eid}
+>>>>>>> parent of 3f19156... adding query save features
                       event={events[eid]}
                       renderers={renderers}
                       isMobile={isMobile}
