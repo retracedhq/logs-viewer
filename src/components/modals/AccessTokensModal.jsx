@@ -14,17 +14,35 @@ export default class AccessTokensModal extends React.Component {
   }
 
   render() {
+    const { apiTokens } = this.props;
     return (
       <div>
           <h1>Access Tokens</h1>
-          <div className="modal-content">
+          { apiTokens.length ?
+            <table className="tokens-table">
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                </tr>
+                {
+                    apiTokens.map((token, i) => (
+                        <tr>
+                            <td>{token.id}</td>
+                            <td>{token.display_name}</td>
+                        </tr>
+                    ))
+                }
+                </table>
+            :
+            <div className="modal-content">
               <h3>Create a new token</h3>
               <p>Create a new API token for your team to access and stream your audit logs.</p>
               <div className="name-input">
-                <input type="text" placeholder="Token Name" onChange={(e) => { this.setState({ newSavedExportName: e.target.value }) }}  />
-                <button className="Button primary" onClick={() => { this.handleExportCSV(searchQuery, newSavedExportName) }}>Create Token</button>
+                <input type="text" placeholder="Token Name" onChange={(e) => { return; }}  />
+                <button className="Button primary" onClick={() => { return; }}>Create Token</button>
               </div>
-          </div>
+            </div>
+          }
       </div>
     );
   }

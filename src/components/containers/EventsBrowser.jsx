@@ -189,7 +189,8 @@ getSavedExports() {
       events,
       currentResults,
       exportResults,
-      tableHeaderItems
+      tableHeaderItems,
+      apiTokens,
     } = this.props;
     const searchText = currentResults
       && currentResults.sourceQuery
@@ -305,7 +306,6 @@ getSavedExports() {
         </div>
         <ModalPortal 
           isOpen={this.state.isModalOpen} 
-          session={this.props.session} 
           name={this.state.activeModal.name} 
           closeModal={() => {this.closeModal()}} 
           content={this.state.activeModal.modal} />
