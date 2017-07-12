@@ -1,9 +1,13 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
-import Modal from "react-modal";
+import { fetchEitapiTokensList, 
+         createEitapiToken, 
+         deleteEitapiToken, 
+         updateEitapiToken } from "../../redux/data/apiTokens/thunks";
 
-export default class AccessTokensModal extends React.Component {
+class AccessTokensModal extends React.Component {
   
   constructor(props, context) {
     super(props);
@@ -14,6 +18,10 @@ export default class AccessTokensModal extends React.Component {
         tokenToUpdate: {},
         newTokenName: "",
     }
+  }
+
+  componentWillMount() {
+    this.props.fetchEitapiTokensList();
   }
 
   handleTokenCreation(name) {
@@ -93,4 +101,25 @@ export default class AccessTokensModal extends React.Component {
     );
   }
 }
+
+export default connect(
+  state => ({
+    apiTokens: state.data.apiTokenData.apiTokens,
+    tokensLoading: state.ui.loadingData.tokensLoading,
+  }),
+  dispatch => ({
+    fetchEitapiTokensList() {
+      return dispatch(fetchEitapiTokensList());
+    },
+    createEitapiToken(name) {
+      return dispatch(createEitapiToken(name));
+    },
+    deleteEitapiToken(token) {
+      return dispatch(deleteEitapiToken(token));
+    },
+    updateEitapiToken(token, newName) {
+      return dispatch(updateEitapiToken(token, newName));
+    },
+  }),
+)(AccessTokensModal);
 
