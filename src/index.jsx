@@ -12,6 +12,7 @@ export default class RetracedEventsBrowser extends React.Component {
   static propTypes = {
     auditLogToken: PropTypes.string,
     theme: PropTypes.string,
+    customClass: PropTypes.string,
   };
   static defaultProps = {
     theme: "light",
