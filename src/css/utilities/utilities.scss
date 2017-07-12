@@ -136,3 +136,11 @@
 
 .u-display--block { display: block; }
 .u-display--inlineBlock { display: inline-block; }
+
+/* Border classes */
+
+.u-borderAll--gray { border: 1px solid #C4C8CA; }
+.u-borderTop--gray { border-top: 1px solid #C4C8CA; }
+.u-borderRight--gray { border-right: 1px solid #C4C8CA; }
+.u-borderBottom--gray { border-bottom: 1px solid #C4C8CA; }
+.u-borderLeft--gray { border-left: 1px solid #C4C8CA; }

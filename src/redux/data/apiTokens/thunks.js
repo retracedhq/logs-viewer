@@ -118,7 +118,7 @@ export function deleteEitapiToken(token) {
   };
 }
 
-export function updateEitapiToken(token) {
+export function updateEitapiToken(token, newName) {
   return async (dispatch, getState) => {
     //dispatch(setIsLoading(true));
     //dispatch(setError(null));
@@ -127,11 +127,16 @@ export function updateEitapiToken(token) {
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
 
+    const newToken = {
+      displayName: newName,
+      id: token.id
+    }
+
     try {
       const url = `${retracedEndpoint}/project/${projectId}/eitapi_token/${token.id}`;
       const response = await fetch(url, {
         method: "PUT",
-        body: JSON.stringify(token),
+        body: JSON.stringify(newToken),
         headers: {
           "Content-Type": "application/json",
           Authorization: jwt,

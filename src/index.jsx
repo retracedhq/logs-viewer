@@ -15,13 +15,14 @@ export default class RetracedEventsBrowser extends React.Component {
   };
   static defaultProps = {
     theme: "light",
+    header: "Events"
   }
   render() {
     return (
-      <div id="retracedLogsViewerApp">
+      <div id="retracedLogsViewerApp" className="retraced-logs-viewer-app">
         <AppContainer>
           <Provider store={store}>
-            <EventsBrowser auditLogToken={this.props.auditLogToken} theme={this.props.theme} />
+            <EventsBrowser auditLogToken={this.props.auditLogToken} theme={this.props.theme} headerTitle={this.props.header} />
           </Provider>
         </AppContainer>
       </div>

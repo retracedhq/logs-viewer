@@ -226,7 +226,15 @@
 .AccessTokensModal .tokens-table th,
 .AccessTokensModal .tokens-table td {
   padding: 15px 20px;
-  min-width: 100px;
+}
+
+.AccessTokensModal .tokens-table .icon {
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.AccessTokensModal .token-name {
+  min-width: 130px;
 }
 
 .AccessTokensModal .tokens-table td {

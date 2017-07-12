@@ -31,8 +31,11 @@ html, body {
   @import "./utilities/utilities.scss";
   @import "./utilities/flexbox.scss";
   @import "./utilities/forms.scss";
-  @import "./utilities/icons.scss";
   @import "./components/tables/FixedTableHeader.scss";
   @import "./components/tables/TableRow.scss";
   @import "./components/views/EventsBrowser.scss";
+}
+
+.retraced-logs-viewer-app {
+  @import "./utilities/icons.scss";
 }
