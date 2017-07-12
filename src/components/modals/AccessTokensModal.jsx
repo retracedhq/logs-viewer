@@ -13,8 +13,6 @@ export default class AccessTokensModal extends React.Component {
         updatingToken: false,
         tokenToUpdate: {},
         newTokenName: "",
-        apiTokens: props.apiTokens,
-        tokensLoading: props.tokensLoading,
     }
   }
 
@@ -29,7 +27,8 @@ export default class AccessTokensModal extends React.Component {
   }
 
   render() {
-    const { creatingToken, apiTokens, tokensLoading, updatingToken } = this.state;
+    const { creatingToken, updatingToken } = this.state;
+    const { apiTokens, tokensLoading } = this.props;
     return (
       <div>
           <h1>Access Tokens</h1>

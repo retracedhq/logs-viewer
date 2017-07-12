@@ -87,8 +87,6 @@ export function deleteEitapiToken(token) {
     //dispatch(setIsLoading(true));
     //dispatch(setError(null));
 
-    console.log(token);
-
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
