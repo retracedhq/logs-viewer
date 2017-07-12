@@ -13,6 +13,7 @@ export function modalData(state = modalState, action = {}) {
 const loadingState = {
   eventFetchLoading: false,
   exportCSVLoading: false,
+  apiTokensLoading:  false,
 };
 
 export function loadingData(state = loadingState, action = {}) {
