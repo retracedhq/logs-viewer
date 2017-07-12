@@ -5,7 +5,7 @@ import * as accounting from "accounting";
 import { requestEventSearch } from "../../redux/data/events/thunks";
 import { createSession } from "../../redux/data/session/thunks";
 import { createSavedExport, fetchSavedExports } from "../../redux/data/exports/thunks";
-import { fetchEitapiTokensList } from "../../redux/data/apiTokens/thunks";
+import { fetchEitapiTokensList, createEitapiToken, deleteEitapiToken, updateEitapiToken } from "../../redux/data/apiTokens/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -231,6 +231,12 @@ class EventsBrowser extends React.Component {
                     this.renderModal(
                       <AccessTokensModal
                         apiTokens={apiTokens}
+                        createEitapiToken={this.props.createEitapiToken}
+                        closeModal={this.closeModal}
+                        tokensLoading={this.props.dataLoading.apiTokensLoading}
+                        fetchEitapiTokensList={this.props.fetchEitapiTokensList}
+                        deleteEitapiToken={this.props.deleteEitapiToken}
+                        updateEitapiToken={this.props.updateEitapiToken}
                       />
                     )
                   }}></span>
@@ -353,6 +359,15 @@ export default connect(
     },
     fetchEitapiTokensList() {
       return dispatch(fetchEitapiTokensList());
+    },
+    createEitapiToken(name) {
+      return dispatch(createEitapiToken(name));
+    },
+    deleteEitapiToken(token) {
+      return dispatch(deleteEitapiToken(token));
+    },
+    updateEitapiToken(token) {
+      return dispatch(updateEitapiToken(token));
     },
   }),
 )(EventsBrowser);

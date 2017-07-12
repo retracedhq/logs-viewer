@@ -206,11 +206,15 @@
   outline: 0;
 }
 
+.AccessTokensModal {
+  width: 600px;
+}
+
 .AccessTokensModal .tokens-table {
   width: 100%;
 }
 
-.AccessTokensModal .tokens-table tr:first-of-type {
+.AccessTokensModal .tokens-table thead tr:first-of-type {
   background: #F7F7F7;
 }
 
@@ -222,10 +226,19 @@
 .AccessTokensModal .tokens-table th,
 .AccessTokensModal .tokens-table td {
   padding: 15px 20px;
-  min-width: 120px;
+  min-width: 100px;
 }
 
 .AccessTokensModal .tokens-table td {
   margin-right: 15px;
+}
+
+.AccessTokensModal .buttons {
+  padding: 20px;
+  text-align: right;
+}
+
+.AccessTokensModal .buttons button:first-of-type {
+  margin-right: 10px;
 }
 
