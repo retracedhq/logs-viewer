@@ -8,46 +8,6 @@ code {
   display: flex;
   flex-direction: column;
   flex: 1;
-
-  &.light {
-    background-color: #ffffff;
-
-    h1, h2, h3, h4, h5, h6 {
-      color: #323232;
-    }
-    p, span {
-      color: #4A4A4A;
-    }
-    a {
-      color: #2A98CB;
-      text-decoration: none;
-      &:hover {
-        text-decoration: underline;
-      }
-    }
-    code {
-      color: #c7254e;
-      background-color: #f9f2f4;
-    }
-  }
-  &.dark {
-    background-color: #323232;
-
-    h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong {
-      color: #ffffff;
-    }
-    a {
-     text-decoration: underline;
-    }
-    code {
-      color: #323232;
-      background-color: rgba(255,255,255,.8);
-    }
-
-    .FixedTableHeader-wrapper {
-      background-color: #4A4A4A;
-    }
-  }
 }
 
 .container {

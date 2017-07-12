@@ -207,7 +207,7 @@ class EventsBrowser extends React.Component {
       "Link": InlineLink,
     };
     return (
-      <div className={`LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1 ${this.props.theme}`}>
+      <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column">
             <div className="EventsTable-header flex flex-auto">
