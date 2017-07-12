@@ -61,7 +61,7 @@ class AccessTokensModal extends React.Component {
               {updatingToken ?
                 <div className="u-paddingBottom--more">
                   <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">Update your token</h3>
-                  <p className="u-fontWeight--normal">Update the name of <span className="token">{this.state.tokenToUpdate.display_name}</span> by filling out the field below.</p>
+                  <p className="u-fontWeight--normal">Update <span className="u-fontWeight--bold">{this.state.tokenToUpdate.display_name}</span> by filling out the field below.</p>
                 </div>
                 :
                 <div className="u-paddingBottom--more">

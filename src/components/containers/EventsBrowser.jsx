@@ -4,7 +4,6 @@ import * as autobind from "react-autobind";
 import * as accounting from "accounting";
 import { requestEventSearch } from "../../redux/data/events/thunks";
 import { createSession } from "../../redux/data/session/thunks";
-import { createSavedExport, fetchSavedExports } from "../../redux/data/exports/thunks";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -88,7 +87,6 @@ class EventsBrowser extends React.Component {
   componentWillReceiveProps(nextProps) {
     if (nextProps.session && this.props.session !== nextProps.session) {
       this.submitQuery("", "");
-      this.props.fetchSavedExports();
     }
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
@@ -164,30 +162,6 @@ class EventsBrowser extends React.Component {
     })
   }
 
-  /* CSV Methods ---------- */
-  exportCSV(query, name) {
-    if (query !== "current") {
-      // Fetch download
-      console.log("Fetching export for this id: " + query);
-    } else {
-      const checkedName = name === "" ? this.state.searchQuery : name;
-      this.props.createSavedExport(this.state.searchQuery, checkedName)
-    }
-  }
-
-  saveExportQuery(query) {
-    return;
-  }
-
-  nameCSVExport() {
-    return;
-  }
-
-  getSavedExports() {
-    return;
-  }
-  /* ---------------------- */
-
   render() {
     const {
       events,
@@ -217,27 +191,11 @@ class EventsBrowser extends React.Component {
               </div>
               <div className="flex flex-auto">
                 <div className="flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-csvExportIcon" onClick={() => {
-                    this.renderModal(
-                      <ExportEventsModal
-                        exportCSV={this.exportCSV}
-                        nameCSVExport={this.nameCSVExport}
-                        saveExportQuery={this.saveExportQuery}
-                        savedExports={exportResults}
-                        exporting={this.props.dataLoading.exportCSVLoading}
-                      />
-                    )
-                  }}>
+                  <span className="icon clickable u-csvExportIcon" onClick={() => { this.renderModal(<ExportEventsModal />, "ExportEventsModal") }}>
                   </span>
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-gearIcon" onClick={() => {
-                    this.renderModal(
-                      <AccessTokensModal
-                        closeModal={this.closeModal}
-                      />, "AccessTokensModal"
-                    )
-                  }}></span>
+                  <span className="icon clickable u-gearIcon" onClick={() => { this.renderModal(<AccessTokensModal closeModal={this.closeModal} />, "AccessTokensModal") }}></span>
                 </div>
               </div>
             </div>
@@ -357,7 +315,6 @@ export default connect(
     session: state.data.sessionData.session,
     events: state.data.eventsData.byId,
     currentResults: state.data.eventsData.latestServerResults,
-    exportResults: state.data.exportsData.savedSearchQueries,
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
@@ -367,12 +324,6 @@ export default connect(
     },
     createSession(token) {
       return dispatch(createSession(token));
-    },
-    createSavedExport(query, name) {
-      return dispatch(createSavedExport(query, name));
-    },
-    fetchSavedExports() {
-      return dispatch(fetchSavedExports());
     },
   }),
 )(EventsBrowser);
