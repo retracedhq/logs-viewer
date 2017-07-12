@@ -23,7 +23,9 @@ html, body {
   a {
     font-weight: 500;
   }
+}
 
+.retraced-logs-viewer-app {
   @import "./utilities/reset.scss";
   @import "./utilities/base.scss";
   @import "./utilities/typography.scss";
@@ -34,8 +36,94 @@ html, body {
   @import "./components/tables/FixedTableHeader.scss";
   @import "./components/tables/TableRow.scss";
   @import "./components/views/EventsBrowser.scss";
-}
-
-.retraced-logs-viewer-app {
   @import "./utilities/icons.scss";
+
+  &.light {
+    background-color: #ffffff;
+
+    h1, h2, h3, h4, h5, h6 {
+      color: #323232;
+    }
+    p, span {
+      color: #4A4A4A;
+    }
+    a {
+      color: #2A98CB;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    code {
+      color: #c7254e;
+      background-color: #f9f2f4;
+    }
+  }
+  &.dark {
+    background-color: #323232;
+
+    h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong {
+      color: #ffffff;
+    }
+    a {
+     text-decoration: underline;
+    }
+    code {
+      color: #323232;
+      background-color: rgba(255,255,255,.8);
+    }
+
+    .FixedTableHeader-wrapper {
+      background-color: #4A4A4A;
+    }
+  }
+
+  &.modal {
+    width: 100%;
+    max-width: 500px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    right: auto;
+    bottom: auto;
+    background: #ffffff;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    border-radius: 6px;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .6);
+    outline: 0;
+
+    h1 {
+      font-size: 26px;
+      padding: 20px 25px;
+      border-bottom: 1px solid #C4C8CA;
+    }
+    p { line-height: 1.4; }
+    .modal-content {
+      padding: 20px 25px;
+      font-size: 14px;
+    }
+    .icon.u-closeIcon {
+      background-color: transparent;
+      border: 0;
+      text-indent: -9999px;
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      cursor: pointer;
+      outline: 0;
+    }
+
+    &.AccessTokensModal {
+       max-width: 600px;
+       max-height: 600px;
+
+      .token-name {
+        min-width: 130px;
+      }
+      .buttons {
+        padding: 20px;
+      }
+    }
+  }
 }

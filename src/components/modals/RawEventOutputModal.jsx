@@ -20,7 +20,7 @@ export default class RawEventOutputModal extends React.Component {
     const raw = JSON.stringify(rawObj, null, 2);
     return (
       <div>
-        <h1>Event Output</h1>
+        <h1 className="u-fontWeight--normal">Event Output</h1>
         <div className="modal-content">
           <div>
             <AceEditor
