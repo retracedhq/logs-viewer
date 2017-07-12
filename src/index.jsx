@@ -20,7 +20,7 @@ export default class RetracedEventsBrowser extends React.Component {
   }
   render() {
     return (
-      <div id="retracedLogsViewerApp" className="retraced-logs-viewer-app">
+      <div id="retracedLogsViewerApp" className={`retraced-logs-viewer-app ${this.props.customClass || ""}`}>
         <AppContainer>
           <Provider store={store}>
             <EventsBrowser auditLogToken={this.props.auditLogToken} theme={this.props.theme} headerTitle={this.props.header} />
