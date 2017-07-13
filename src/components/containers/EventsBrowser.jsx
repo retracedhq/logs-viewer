@@ -191,7 +191,7 @@ class EventsBrowser extends React.Component {
               </div>
               <div className="flex flex-auto">
                 <div className="flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-csvExportIcon" onClick={() => { this.renderModal(<ExportEventsModal />, "ExportEventsModal") }}>
+                  <span className="icon clickable u-csvExportIcon" onClick={() => { this.renderModal(<ExportEventsModal  searchInputQuery={this.state.searchQuery} />, "ExportEventsModal") }}>
                   </span>
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
