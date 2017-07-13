@@ -1,11 +1,15 @@
 import * as React from "react";
+import { connect } from "react-redux";
 import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
-import Modal from "react-modal";
 import FixedTableHeader from "../views/FixedTableHeader";
+import { fetchEitapiTokensList, 
+         createEitapiToken, 
+         deleteEitapiToken, 
+         updateEitapiToken } from "../../redux/data/apiTokens/thunks";
 
-export default class AccessTokensModal extends React.Component {
-
+class AccessTokensModal extends React.Component {
+  
   constructor(props, context) {
     super(props);
     autoBind(this);
@@ -15,6 +19,10 @@ export default class AccessTokensModal extends React.Component {
       tokenToUpdate: {},
       newTokenName: "",
     }
+  }
+
+  componentWillMount() {
+    this.props.fetchEitapiTokensList();
   }
 
   handleTokenCreation(name) {
@@ -53,7 +61,7 @@ export default class AccessTokensModal extends React.Component {
               {updatingToken ?
                 <div className="u-paddingBottom--more">
                   <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">Update your token</h3>
-                  <p className="u-fontWeight--normal">Update the name of <span className="token">{this.state.tokenToUpdate.display_name}</span> by filling out the field below.</p>
+                  <p className="u-fontWeight--normal">Update <span className="u-fontWeight--bold">{this.state.tokenToUpdate.display_name}</span> by filling out the field below.</p>
                 </div>
                 :
                 <div className="u-paddingBottom--more">
@@ -123,3 +131,25 @@ export default class AccessTokensModal extends React.Component {
     );
   }
 }
+
+export default connect(
+  state => ({
+    apiTokens: state.data.apiTokenData.apiTokens,
+    tokensLoading: state.ui.loadingData.tokensLoading,
+  }),
+  dispatch => ({
+    fetchEitapiTokensList() {
+      return dispatch(fetchEitapiTokensList());
+    },
+    createEitapiToken(name) {
+      return dispatch(createEitapiToken(name));
+    },
+    deleteEitapiToken(token) {
+      return dispatch(deleteEitapiToken(token));
+    },
+    updateEitapiToken(token, newName) {
+      return dispatch(updateEitapiToken(token, newName));
+    },
+  }),
+)(AccessTokensModal);
+

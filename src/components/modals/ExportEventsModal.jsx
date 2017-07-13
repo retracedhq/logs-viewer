@@ -2,8 +2,11 @@ import * as React from "react";
 import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
 import Modal from "react-modal";
+import { connect } from "react-redux";
+import { createSavedExport, fetchSavedExports } from "../../redux/data/exports/thunks";
 
-export default class ExportEventsModal extends React.Component {
+
+class ExportEventsModal extends React.Component {
 
   constructor() {
     super();
@@ -15,8 +18,13 @@ export default class ExportEventsModal extends React.Component {
     }
   }
 
+  componentWillMount() {
+    this.props.fetchSavedExports();
+  }
+
   handleExportCSV(query, name) {
-    this.props.exportCSV(query, name);
+    this.exportCSV(query, name);
+    this.setState({ newSavedExport: false });
   }
 
   updateSearchQuery(e) {
@@ -28,6 +36,16 @@ export default class ExportEventsModal extends React.Component {
       this.setState({ newSavedExport: true });
     } else {
       this.handleExportCSV(this.state.searchQuery, null);
+    }
+  }
+
+  exportCSV(query, name) {
+    if (query !== "current") {
+      // Fetch download
+      console.log("Fetching export for this id: " + query);
+    } else {
+      const checkedName = name === "" ? this.state.searchQuery : name;
+      this.props.createSavedExport(this.state.searchQuery, checkedName)
     }
   }
 
@@ -71,4 +89,18 @@ export default class ExportEventsModal extends React.Component {
     );
   }
 }
+
+export default connect(
+  state => ({
+    savedExports: state.data.exportsData.savedSearchQueries,
+  }),
+  dispatch => ({
+    createSavedExport(query, name) {
+      return dispatch(createSavedExport(query, name));
+    },
+    fetchSavedExports() {
+      return dispatch(fetchSavedExports());
+    },
+  }),
+)(ExportEventsModal);
 
