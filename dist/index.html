@@ -1,0 +1,39 @@
+Html Webpack Plugin:
+<pre>
+  TypeError: Cannot read property 'html-webpack-plugin-before-html-generation' of undefined
+  
+  - Tapable.js:196 Object.applyPluginsAsyncWaterfall
+    [logs-viewer]/[tapable]/lib/Tapable.js:196:19
+  
+  - util.js:26 Object.tryCatcher
+    [logs-viewer]/[bluebird]/js/main/util.js:26:23
+  
+  
+  - index.js:641 
+    [logs-viewer]/[html-webpack-plugin]/index.js:641:12
+  
+  - index.js:122 
+    [logs-viewer]/[html-webpack-plugin]/index.js:122:16
+  
+  - util.js:26 tryCatcher
+    [logs-viewer]/[bluebird]/js/main/util.js:26:23
+  
+  - promise.js:510 Promise._settlePromiseFromHandler
+    [logs-viewer]/[bluebird]/js/main/promise.js:510:31
+  
+  - promise.js:584 Promise._settlePromiseAt
+    [logs-viewer]/[bluebird]/js/main/promise.js:584:18
+  
+  - promise.js:700 Promise._settlePromises
+    [logs-viewer]/[bluebird]/js/main/promise.js:700:14
+  
+  - async.js:123 Async._drainQueue
+    [logs-viewer]/[bluebird]/js/main/async.js:123:16
+  
+  - async.js:133 Async._drainQueues
+    [logs-viewer]/[bluebird]/js/main/async.js:133:10
+  
+  - async.js:15 Immediate.Async.drainQueues
+    [logs-viewer]/[bluebird]/js/main/async.js:15:14
+  
+</pre>
