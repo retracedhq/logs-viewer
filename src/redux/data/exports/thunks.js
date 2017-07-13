@@ -62,7 +62,14 @@ export function createSavedExport(query, name) {
     
     // TODO (10Dimensional): Update flow so that name can be associated with export id 
     const payload = {
-      exportBody: query,
+      exportBody: {
+        searchQuery: query,
+        showCreate: true,
+        showDelete: true,
+        showRead: false,
+        showUpdate: true,
+        version: 1,
+      },
       name,
     }
 
@@ -96,12 +103,12 @@ export function createSavedExport(query, name) {
       savedExports.push(exportResult);
       localStorage.setItem("savedExports", JSON.stringify(savedExports));
       
-      dispatch(loadingData("exportCSVLoading", false));
       dispatch(fetchSavedExports());
 
-      return exportResult;
-      //const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
-      //window.location = downloadUrl;
+      const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
+      window.location = downloadUrl;
+
+      dispatch(loadingData("exportCSVLoading", false));
 
       //dispatch(setIsLoading(false));
       //dispatch(addNewSavedExport(result));
@@ -111,5 +118,24 @@ export function createSavedExport(query, name) {
       //dispatch(setIsLoading(false));
       //dispatch(setError(err));
     }
+  };
+}
+
+export function renderSavedExport(id) {
+  return async (dispatch, getState) => {
+    //dispatch(setIsLoading(true));
+    //dispatch(setError(null));
+
+
+    const state = getState();
+    const projectId = state.data.sessionData.session.project_id;
+    const jwt = state.data.sessionData.session.token;
+    const encodedJwt = encodeURIComponent(jwt);
+
+    const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${id}/rendered?jwt=${encodedJwt}`;
+    window.location = downloadUrl;
+
+    //dispatch(setIsLoading(false));
+    //dispatch(addNewSavedExport(result));
   };
 }
