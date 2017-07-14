@@ -5,7 +5,6 @@ var srcPath = path.join(__dirname, "src");
 
 module.exports = {
   entry: [
-    "react-hot-loader/patch",
     "./src/index.jsx",
   ],
 
@@ -14,19 +13,16 @@ module.exports = {
       {
         test: /\.[tj]sx?$/,
         include: srcPath,
-        loaders: ["react-hot-loader/webpack", "awesome-typescript-loader"],
+        loaders: ["awesome-typescript-loader"],
       },
     ],
   },
 
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
   ],
   
   devServer: {
-    hot: true,
-    hotOnly: true,
     port: 6012,
     historyApiFallback: {
       verbose: true,

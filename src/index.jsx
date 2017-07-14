@@ -1,5 +1,4 @@
 import * as React from "react";
-import { AppContainer } from "react-hot-loader";
 import * as PropTypes from "prop-types";
 import { Provider } from "react-redux";
 import { configStore } from "./redux";
@@ -20,11 +19,9 @@ export default class RetracedEventsBrowser extends React.Component {
   render() {
     return (
       <div id="retracedLogsViewerApp" className={`retraced-logs-viewer-app ${this.props.customClass || ""} ${this.props.theme || ""}`}>
-        <AppContainer>
-          <Provider store={store}>
-            <EventsBrowser auditLogToken={this.props.auditLogToken} headerTitle={this.props.header} />
-          </Provider>
-        </AppContainer>
+        <Provider store={store}>
+          <EventsBrowser auditLogToken={this.props.auditLogToken} headerTitle={this.props.header} />
+        </Provider>
       </div>
     );
   }
