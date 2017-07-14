@@ -32,7 +32,7 @@ class AccessTokensModal extends React.Component {
   handleTokenCreation(name) {
     if(!this.state.nameEmptyError) {
       this.props.createEitapiToken(name);
-      this.setState({ creatingToken: false, showErrorClass: false });
+      this.reset();
     } else {
       this.setState({ showErrorClass: true });
     }
@@ -41,7 +41,7 @@ class AccessTokensModal extends React.Component {
   handleUpdateToken(token) {
     if(!this.state.nameEmptyError) {
       this.props.updateEitapiToken(token, this.state.newTokenName);
-      this.setState({ updatingToken: false, tokenToUpdate: {}, showErrorClass: false });
+      this.reset();
     } else {
       this.setState({ showErrorClass: true });
     }
@@ -68,6 +68,8 @@ class AccessTokensModal extends React.Component {
       creatingToken: false, 
       showErrorClass: false, 
       nameEmptyError: true,
+      tokenToUpdate: {},
+      newTokenName: "",
     })
   }
 
@@ -166,11 +168,24 @@ class AccessTokensModal extends React.Component {
                 </div>
                 </div>
           :
-          <div className="modal-content flex flexWrap--wrap justifyContent--center">
-            <div className="u-tokenIllustration u-padding--normal"></div>
-            <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
-            <button className="Button primary u-margin--small" onClick={() => { return; }}>Create new token</button>
-          </div>
+            creatingToken ?
+                <div className="modal-content">
+                    <div className="u-paddingBottom--more">
+                        <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">Update your token</h3>
+                        <p className="u-fontWeight--normal">Update <span className="u-fontWeight--bold">{this.state.tokenToUpdate.display_name}</span> by filling out the field below.</p>
+                    </div>
+                    <div className="flex flexWrap--wrap justifyContent--flexEnd">
+                        <input className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} type="text" placeholder="Token Name" onChange={(e) => { this.handleNameUpdate(e); }} />
+                        <button className="Button secondary flex-auto u-marginLeft--normal" onClick={() => { this.reset(); }}>Back</button>
+                        <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleTokenCreation(this.state.newTokenName) }}>Create Token</button>
+                    </div>
+                </div>
+            :
+                <div className="modal-content flex flexWrap--wrap justifyContent--center">
+                    <div className="u-tokenIllustration u-padding--normal"></div>
+                    <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
+                    <button className="Button primary u-margin--small" onClick={() => { this.setState({ creatingToken: true }) }}>Create new token</button>
+                </div>
         }
       </div>
     );

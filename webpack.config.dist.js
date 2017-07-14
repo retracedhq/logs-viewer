@@ -18,7 +18,6 @@ if (appEnv.ENVIRONMENT === "production") {
 
 module.exports = {
   entry: [
-    "react-hot-loader/patch",
     "./src/index.jsx",
   ],
 
