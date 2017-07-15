@@ -8,8 +8,9 @@ const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
 export function createSession(token) {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     //dispatch(loadingData("signup", true));
+
     let response;
     const url = `${retracedEndpoint}/viewersession`;
     const payload = { token };
