@@ -81,7 +81,9 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillMount() {
-    this.props.createSession(this.props.auditLogToken);
+    // Pass the audit log token and the preferred host (which will be stored in the state)
+    console.log(this.props.host);
+    this.props.createSession(this.props.auditLogToken, this.props.host);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -322,8 +324,8 @@ export default connect(
     requestEventSearch(query) {
       return dispatch(requestEventSearch(query));
     },
-    createSession(token) {
-      return dispatch(createSession(token));
+    createSession(token, host) {
+      return dispatch(createSession(token, host));
     },
   }),
 )(EventsBrowser);

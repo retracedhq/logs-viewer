@@ -29,6 +29,15 @@ class AccessTokensModal extends React.Component {
     this.props.fetchEitapiTokensList();
   }
 
+  componentDidUpdate() {
+    const { creatingToken, updatingToken } = this.state;
+    if (creatingToken || updatingToken) {
+      setTimeout(() => {
+        this.refs.tokenName.focus();
+      }, 10);
+    }
+  }
+
   handleTokenCreation(name) {
     if(!this.state.nameEmptyError) {
       this.props.createEitapiToken(name);
@@ -108,7 +117,7 @@ class AccessTokensModal extends React.Component {
                 </div>
               }
               <div className="flex flexWrap--wrap justifyContent--flexEnd">
-                <input className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} type="text" placeholder="Token Name" onChange={(e) => { this.handleNameUpdate(e); }} />
+                <input className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} ref="tokenName" type="text" placeholder="Token Name" onChange={(e) => { this.handleNameUpdate(e); }} />
                 <button className="Button secondary flex-auto u-marginLeft--normal" onClick={() => { this.reset(); }}>Back</button>             
                 {updatingToken ?
                   <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleUpdateToken(this.state.tokenToUpdate) }}>Update Token</button> :
@@ -175,7 +184,7 @@ class AccessTokensModal extends React.Component {
                         <p className="u-fontWeight--normal">Update <span className="u-fontWeight--bold">{this.state.tokenToUpdate.display_name}</span> by filling out the field below.</p>
                     </div>
                     <div className="flex flexWrap--wrap justifyContent--flexEnd">
-                        <input className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} type="text" placeholder="Token Name" onChange={(e) => { this.handleNameUpdate(e); }} />
+                        <input className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} ref="tokenName" type="text" placeholder="Token Name" onChange={(e) => { this.handleNameUpdate(e); }} />
                         <button className="Button secondary flex-auto u-marginLeft--normal" onClick={() => { this.reset(); }}>Back</button>
                         <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleTokenCreation(this.state.newTokenName) }}>Create Token</button>
                     </div>

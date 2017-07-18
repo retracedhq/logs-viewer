@@ -3,8 +3,6 @@ import "isomorphic-fetch";
 import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
-// const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
 export function fetchSavedExports(limit) {
@@ -58,7 +56,8 @@ export function createSavedExport(query, name) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
-    const exportUrl = `${retracedEndpoint}/project/${projectId}/export`;
+    const host = state.data.sessionData.host;
+    const exportUrl = `${host}/project/${projectId}/export`;
     
     // TODO (10Dimensional): Update flow so that name can be associated with export id 
     const payload = {
@@ -105,7 +104,7 @@ export function createSavedExport(query, name) {
       
       dispatch(fetchSavedExports());
 
-      const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
+      const downloadUrl = `${host}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
       window.location = downloadUrl;
 
       dispatch(loadingData("exportCSVLoading", false));
@@ -130,9 +129,10 @@ export function renderSavedExport(id) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
+    const host = state.data.sessionData.host;
     const encodedJwt = encodeURIComponent(jwt);
 
-    const downloadUrl = `${retracedEndpoint}/project/${projectId}/export/${id}/rendered?jwt=${encodedJwt}`;
+    const downloadUrl = `${host}/project/${projectId}/export/${id}/rendered?jwt=${encodedJwt}`;
     window.location = downloadUrl;
 
     //dispatch(setIsLoading(false));

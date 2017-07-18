@@ -3,8 +3,6 @@ import "isomorphic-fetch";
 import { receiveApiTokens } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
-// const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
 export function fetchEitapiTokensList() {
@@ -15,9 +13,10 @@ export function fetchEitapiTokensList() {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
+    const host = state.data.sessionData.host;
 
     try {
-      const url = `${retracedEndpoint}/project/${projectId}/eitapi_tokens`;
+      const url = `${host}/project/${projectId}/eitapi_tokens`;
       const response = await fetch(url, {
         headers: {
           Authorization: jwt,
@@ -49,13 +48,14 @@ export function createEitapiToken(name) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
+    const host = state.data.sessionData.host;    
 
     const payload = {
       displayName: name
     }
 
     try {
-      const url = `${retracedEndpoint}/project/${projectId}/eitapi_token`;
+      const url = `${host}/project/${projectId}/eitapi_token`;
       const response = await fetch(url, {
         method: "POST",
         body: JSON.stringify(payload),
@@ -90,9 +90,10 @@ export function deleteEitapiToken(token) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
+    const host = state.data.sessionData.host;    
 
     try {
-      const url = `${retracedEndpoint}/project/${projectId}/eitapi_token/${token.id}`;
+      const url = `${host}/project/${projectId}/eitapi_token/${token.id}`;
       const response = await fetch(url, {
         method: "DELETE",
         headers: {
@@ -124,6 +125,7 @@ export function updateEitapiToken(token, newName) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
+    const host = state.data.sessionData.host;    
 
     const newToken = {
       displayName: newName,
@@ -131,7 +133,7 @@ export function updateEitapiToken(token, newName) {
     }
 
     try {
-      const url = `${retracedEndpoint}/project/${projectId}/eitapi_token/${token.id}`;
+      const url = `${host}/project/${projectId}/eitapi_token/${token.id}`;
       const response = await fetch(url, {
         method: "PUT",
         body: JSON.stringify(newToken),
