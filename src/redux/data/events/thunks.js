@@ -3,8 +3,6 @@ import "isomorphic-fetch";
 import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
-// const apiEndpoint = window.env.API_ENDPOINT;
-//const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
 export function requestEventSearch(query) {
