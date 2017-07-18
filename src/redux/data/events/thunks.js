@@ -4,7 +4,7 @@ import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actio
 import { loadingData } from "../../ui/actions" ;
 
 // const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
+//const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
 export function requestEventSearch(query) {
@@ -18,7 +18,8 @@ export function requestEventSearch(query) {
     last = q;
 
     const state = getState();
-    const url = `${retracedEndpoint}/graphql`;
+    const host = state.data.sessionData.host;
+    const url = `${host}/graphql`;
     const response = await fetch(url, {
       method: "post",
       headers: {

@@ -6,4 +6,4 @@ const actions = {
 export default actions;
 
 export const receiveSessionId = createAction(actions.RECEIVE_SESSION_INFO,
-  (session) => ({ session }));
+  (session, host) => ({ session, host }));

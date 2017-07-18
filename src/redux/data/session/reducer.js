@@ -3,6 +3,7 @@ import actions from "./actions";
 
 const initialState = {
   session: {},
+  host: "",
 };
 
 export default (state = initialState, action) => {
@@ -11,6 +12,7 @@ export default (state = initialState, action) => {
       const result = {
         ...state,
         session: action.payload.session,
+        host: action.payload.host,
       };
       return result;
     }

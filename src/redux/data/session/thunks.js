@@ -4,15 +4,15 @@ import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actio
 import { loadingData } from "../../ui/actions" ;
 
 // const apiEndpoint = window.env.API_ENDPOINT;
-const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
+//const retracedEndpoint = "https://api.staging.retraced.io/viewer/v1";
 let last = null;
 
-export function createSession(token) {
+export function createSession(token, host) {
   return async (dispatch, getState) => {
     //dispatch(loadingData("signup", true));
 
     let response;
-    const url = `${retracedEndpoint}/viewersession`;
+    const url = `${host}/viewersession`;
     const payload = { token };
     response = await fetch(url, {
       method: "POST",
@@ -26,7 +26,7 @@ export function createSession(token) {
       return
     }
     const body = await response.json();
-    dispatch(receiveSessionId(body));
+    dispatch(receiveSessionId(body, host));
   };
 }
 
