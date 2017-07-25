@@ -16,6 +16,12 @@ export default (state = initialState, action) => {
       };
       return result;
     }
+    case actions.CLEAR_SESSION: {
+      return state = {
+        session: {},
+        host: "",
+      };
+    }
     default:
       return state;
   }

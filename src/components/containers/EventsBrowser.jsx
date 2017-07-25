@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as accounting from "accounting";
 import { requestEventSearch } from "../../redux/data/events/thunks";
-import { createSession, clearSession } from "../../redux/data/session/thunks";
-import { receiveSessionId } from "../../redux/data/session/actions";
+import { createSession } from "../../redux/data/session/thunks";
+import { clearSession } from "../../redux/data/session/actions";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -94,15 +94,18 @@ class EventsBrowser extends React.Component {
   }
 
   componentWillUpdate(nextProps) {
+    // If we have a new token, we need to create a new session
     if(this.props.auditLogToken != nextProps.auditLogToken) {
       this.props.createSession(nextProps.auditLogToken, this.props.host);
     }
+    // If we have a new session, we need to request a new event search
     if(this.props.session.token != nextProps.session.token) {
       this.submitQuery("", "");
     }
   }
 
   componentWillUnmount() {
+    // Clearing the store
     console.log("Unmounting...")
     this.props.clearSession();
   } 
@@ -118,7 +121,6 @@ class EventsBrowser extends React.Component {
       cursor,
       length: this.state.resultsPerPage,
     };
-
     this.props.requestEventSearch(queryObj);
   }
 
@@ -341,7 +343,7 @@ export default connect(
       return dispatch(createSession(token, host));
     },
     clearSession() {
-      return dispatch(receiveSessionId({}, ""));
+      return dispatch(clearSession());
     },
   }),
 )(EventsBrowser);

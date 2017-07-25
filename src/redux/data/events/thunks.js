@@ -9,11 +9,6 @@ export function requestEventSearch(query) {
   return async (dispatch, getState) => {
     dispatch(loadingData("eventFetch", true));
     const q = { query };
-    if (_.isEqual(last, q)) {
-      dispatch(loadingData("eventFetch", false));
-      return;
-    }
-    last = q;
 
     const state = getState();
     const host = state.data.sessionData.host;
