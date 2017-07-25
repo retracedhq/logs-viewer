@@ -83,7 +83,6 @@ class EventsBrowser extends React.Component {
 
   componentWillMount() {
     // Pass the audit log token and the preferred host (which will be stored in the state)
-    console.log("Mounting...");
     this.props.createSession(this.props.auditLogToken, this.props.host);
   }
 
@@ -106,7 +105,6 @@ class EventsBrowser extends React.Component {
 
   componentWillUnmount() {
     // Clearing the store
-    console.log("Unmounting...")
     this.props.clearSession();
   } 
 
