@@ -14,16 +14,18 @@ export default class RetracedEventsBrowser extends React.Component {
     customClass: PropTypes.string,
     host: PropTypes.string,
     header: PropTypes.string,
+    mount: PropTypes.bool,
   };
   static defaultProps = {
     header: "Events",
     host: "https://api.staging.retraced.io/viewer/v1",
+    mount: true,
   }
   render() {
     return (
       <div id="retracedLogsViewerApp" className={`retraced-logs-viewer-app ${this.props.customClass || ""} ${this.props.theme || ""}`}>
         <Provider store={store}>
-          <EventsBrowser auditLogToken={this.props.auditLogToken} headerTitle={this.props.header} host={this.props.host} />
+          <EventsBrowser auditLogToken={this.props.auditLogToken} mount={this.props.mount} headerTitle={this.props.header} host={this.props.host} />
         </Provider>
       </div>
     );

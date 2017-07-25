@@ -9,16 +9,12 @@ export function requestEventSearch(query) {
   return async (dispatch, getState) => {
     dispatch(loadingData("eventFetch", true));
     const q = { query };
-    if (_.isEqual(last, q)) {
-      dispatch(loadingData("eventFetch", false));
-      return;
-    }
-    last = q;
 
     const state = getState();
     const host = state.data.sessionData.host;
     const url = `${host}/graphql`;
-    const response = await fetch(url, {
+    try {
+      const response = await fetch(url, {
       method: "post",
       headers: {
         Accept: "application/json",
@@ -79,6 +75,9 @@ export function requestEventSearch(query) {
         }`,
       }),
     });
+    } catch(err) {
+      console.log(err);
+    }
 
     // TODO(zhaytee): Make API return proper status codes...
     // if (response.status === 403) {
