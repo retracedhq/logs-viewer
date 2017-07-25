@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as accounting from "accounting";
 import { requestEventSearch } from "../../redux/data/events/thunks";
-import { createSession } from "../../redux/data/session/thunks";
+import { createSession, clearSession } from "../../redux/data/session/thunks";
+import { receiveSessionId } from "../../redux/data/session/actions";
 import FixedTableHeader from "../views/FixedTableHeader";
 import InlineLink from "../views/InlineLink";
 import Loader from "../views/Loader";
@@ -82,18 +83,29 @@ class EventsBrowser extends React.Component {
 
   componentWillMount() {
     // Pass the audit log token and the preferred host (which will be stored in the state)
-    console.log(this.props.host);
+    console.log("Mounting...");
     this.props.createSession(this.props.auditLogToken, this.props.host);
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.session && this.props.session !== nextProps.session) {
-      this.submitQuery("", "");
-    }
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
     }
   }
+
+  componentWillUpdate(nextProps) {
+    if(this.props.auditLogToken != nextProps.auditLogToken) {
+      this.props.createSession(nextProps.auditLogToken, this.props.host);
+    }
+    if(this.props.session.token != nextProps.session.token) {
+      this.submitQuery("", "");
+    }
+  }
+
+  componentWillUnmount() {
+    console.log("Unmounting...")
+    this.props.clearSession();
+  } 
 
   search(query) {
     this.setState({ searchQuery: query });
@@ -181,7 +193,8 @@ class EventsBrowser extends React.Component {
       "Link": InlineLink,
     };
     return (
-      <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
+      this.props.mount ? 
+        <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column">
             <div className="EventsTable-header flex flex-auto">
@@ -307,7 +320,7 @@ class EventsBrowser extends React.Component {
           name={this.state.activeModal.name} 
           closeModal={() => {this.closeModal()}} 
           content={this.state.activeModal.modal} />
-      </div>
+      </div> : null
     );
   }
 }
@@ -326,6 +339,9 @@ export default connect(
     },
     createSession(token, host) {
       return dispatch(createSession(token, host));
+    },
+    clearSession() {
+      return dispatch(receiveSessionId({}, ""));
     },
   }),
 )(EventsBrowser);
