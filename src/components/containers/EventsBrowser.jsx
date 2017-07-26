@@ -15,6 +15,7 @@ import ModalPortal from "../modals/ModalPortal";
 import ExportEventsModal from "../modals/ExportEventsModal";
 import AccessTokensModal from "../modals/AccessTokensModal";
 import RawEventOutputModal from "../modals/RawEventOutputModal";
+import Tooltip from "../shared/Tooltip";
 
 import "../../css/components/views/EventsBrowser.scss";
 
@@ -40,6 +41,8 @@ class EventsBrowser extends React.Component {
       },
       isModalOpen: false,
       searchQuery: "",
+      tokenTooltip: false,
+      exportTooltip: false,
     };
   }
 
@@ -206,11 +209,31 @@ class EventsBrowser extends React.Component {
               </div>
               <div className="flex flex-auto">
                 <div className="flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-csvExportIcon" onClick={() => { this.renderModal(<ExportEventsModal  searchInputQuery={this.state.searchQuery} />, "ExportEventsModal") }}>
-                  </span>
+                  <span className="icon clickable u-csvExportIcon" 
+                    onClick={() => { this.renderModal(<ExportEventsModal  
+                    searchInputQuery={this.state.searchQuery} />, "ExportEventsModal") }}
+                    onMouseEnter={() => {this.setState({ exportTooltip: true })}}
+                    onMouseLeave={() => {this.setState({ exportTooltip: false })}}>
+                    <Tooltip
+                      visible={this.state.exportTooltip}
+                      text="Export Events"
+                      minWidth="120"
+                      position="bottom-left"
+                    />
+                    </span>
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-gearIcon" onClick={() => { this.renderModal(<AccessTokensModal closeModal={this.closeModal} />, "AccessTokensModal") }}></span>
+                  <span className="icon clickable u-gearIcon" 
+                    onClick={() => { this.renderModal(<AccessTokensModal closeModal={this.closeModal} />, "AccessTokensModal") }}
+                    onMouseEnter={() => {this.setState({ tokenTooltip: true })}}
+                    onMouseLeave={() => {this.setState({ tokenTooltip: false })}}>
+                    <Tooltip
+                      visible={this.state.tokenTooltip}
+                      text="Manage Access Tokens"
+                      minWidth="120"
+                      position="bottom-left"
+                    />
+                    </span>
                 </div>
               </div>
             </div>
