@@ -4,7 +4,17 @@ import * as autobind from "react-autobind";
 import * as ReactMarkdown from "react-markdown";
 import * as moment from "moment";
 
+import Tooltip from "../shared/Tooltip";
+
 export default class EventRow extends React.Component {
+  constructor(props) {
+    super(props);
+    autobind(this);
+    this.state = {
+      eventInfoToken: false,
+    };
+  }
+
   render() {
     return (
       <div className="TableRow-wrapper flex-auto">
@@ -36,7 +46,17 @@ export default class EventRow extends React.Component {
               </div>
               <div style={{ maxWidth: "100px" }} className="flex flex1 content-section actions-section justifyContent--flexEnd">
                 <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
-                  <span className="icon clickable u-codeIcon" onClick={this.props.openModal}></span>
+                  <span className="icon clickable u-codeIcon" 
+                    onClick={this.props.openModal}
+                    onMouseEnter={() => {this.setState({ eventInfoToken: true })}}
+                    onMouseLeave={() => {this.setState({ eventInfoToken: false })}}>
+                    <Tooltip
+                      visible={this.state.eventInfoToken}
+                      text="More Info"
+                      minWidth="80"
+                      position="bottom-left"
+                    />
+                  </span>
                 </div>
               </div>
             </div>
