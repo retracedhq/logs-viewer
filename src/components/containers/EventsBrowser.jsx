@@ -196,7 +196,7 @@ class EventsBrowser extends React.Component {
       this.props.mount ? 
         <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
-          <div className="flex1 flex-column">
+          <div className="flex1 flex-column u-minHeight--full">
             <div className="EventsTable-header flex flex-auto">
               <div className="flex-1-auto flex">
                 <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">{this.props.headerTitle}</h3>
