@@ -88,12 +88,6 @@ var common = {
   },
 
   plugins: [
-    new HtmlWebpackPlugin({
-      template: HtmlWebpackTemplate,
-      title: "Retraced Logs Viewer",
-      appMountId: "retracedLogsViewerApp",
-      inject: false,
-    }),
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),
