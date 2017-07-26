@@ -9,7 +9,7 @@ export default class FixedTableHeader extends React.Component {
     } = this.props;
 
     const renderItem = (item, i) => (
-      <div key={`${item.label}-${i}`} className={`flex flex1 title-section ${item.className || ""}`} style={item.style}>
+      <div key={`${item.label}-${i}`} className={`flex title-section ${item.className || ""}`} style={item.style}>
         <p className="FixedTableHeader-title">{item.label}</p>
       </div>
     );

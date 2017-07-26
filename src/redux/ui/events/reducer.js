@@ -3,23 +3,23 @@ const initialState = {
   eventTableHeaderItems: [
     {
       label: "Description",
-      style: { maxWidth: "600px" },
+      style: { maxWidth: "none" },
+      className: "flex-1-auto"
     },
     { 
       label: "Date",
-      style: { maxWidth: "230px" },
-    },
-    {
-      label: "Group",
-      style: { maxWidth: "230px" },
+      style: { maxWidth: "180px" },
+      className: "flex1"
     },
     {
       label: "Location",
-      style: { maxWidth: "320px" },
+      style: { maxWidth: "180px" },
+      className: "flex1"
     },
     {
       label: "",
-      style: { maxWidth: "100px" },
+      style: { maxWidth: "20px" },
+      className: "flex1"
     },
   ]
 };
