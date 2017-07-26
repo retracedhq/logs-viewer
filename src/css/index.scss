@@ -36,6 +36,7 @@ html, body {
   @import "./components/tables/FixedTableHeader.scss";
   @import "./components/tables/TableRow.scss";
   @import "./components/views/EventsBrowser.scss";
+  @import "./components/shared/Tooltip.scss";
   @import "./utilities/icons.scss";
 
   &.light {
