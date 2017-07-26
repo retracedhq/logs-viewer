@@ -89,14 +89,17 @@ class AccessTokensModal extends React.Component {
       {
         label: "Id",
         style: { maxWidth: "300px" },
+        className: "flex1",
       },
       {
         label: "Name",
         style: { maxWidth: "160px" },
+        className: "flex1",
       },
       {
         label: "",
         style: { maxWidth: "40px" },
+        className: "flex1",
       }
     ]
     return (
@@ -172,7 +175,6 @@ class AccessTokensModal extends React.Component {
                         }
                     </div>
                 <div className="flex flex-auto buttons justifyContent--flexEnd">
-                    <button className="Button secondary" onClick={() => { this.props.closeModal(); }}>Done</button>
                     <button className="Button primary u-marginLeft--normal" onClick={() => { this.setState({ creatingToken: true }) }}>Create Token</button>
                 </div>
                 </div>

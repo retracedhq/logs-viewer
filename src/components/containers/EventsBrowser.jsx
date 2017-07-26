@@ -223,14 +223,14 @@ class EventsBrowser extends React.Component {
                     </span>
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-gearIcon" 
+                  <span className="icon clickable u-tokensIcon" 
                     onClick={() => { this.renderModal(<AccessTokensModal closeModal={this.closeModal} />, "AccessTokensModal") }}
                     onMouseEnter={() => {this.setState({ tokenTooltip: true })}}
                     onMouseLeave={() => {this.setState({ tokenTooltip: false })}}>
                     <Tooltip
                       visible={this.state.tokenTooltip}
                       text="Manage Access Tokens"
-                      minWidth="120"
+                      minWidth="150"
                       position="bottom-left"
                     />
                     </span>
