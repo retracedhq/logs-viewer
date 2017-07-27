@@ -21,7 +21,7 @@ export default class EventRow extends React.Component {
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              <div className="flex flex-1-auto content-section">
+              <div className="flex flex1 content-section ellipsis-overflow">
                 <ReactMarkdown
                   className="EventItem u-fontWeight--medium ellipsis-overflow u-lineHeight--more"
                   sourcePos={true}
