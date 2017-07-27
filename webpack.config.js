@@ -2,7 +2,6 @@ var path = require("path");
 var webpackMerge = require("webpack-merge");
 var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
-var HtmlWebpackPlugin = require("html-webpack-plugin");
 var HtmlWebpackTemplate = require("html-webpack-template");
 var distPath = path.join(__dirname, "dist");
 var srcPath = path.join(__dirname, "src");
