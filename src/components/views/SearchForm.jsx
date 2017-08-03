@@ -18,7 +18,7 @@ export default class SearchForm extends React.Component {
   }
 
   handleCrudFilterChange(field, e) {
-    let newCrudFilters = this.state.crudFilters;
+    let newCrudFilters = this.state.crudFiltersArray;
     if (!newCrudFilters.includes(field)) {
       newCrudFilters.push(field);
     } else {
@@ -28,8 +28,11 @@ export default class SearchForm extends React.Component {
       }
     }
     this.setState({
-      crudFilters: newCrudFilters,
-      [`${field}Checked`]: e.target.checked,
+      crudFiltersArray: newCrudFilters,
+      crudFilters: {
+        ...this.state.crudFilters,
+        [`${field}Checked`]: e.target.checked,
+      },
       isDefault: false,
     });
   }
@@ -54,11 +57,13 @@ export default class SearchForm extends React.Component {
       receivedStartDate: null,
       receivedEndDate: null,
       searchQuery: "",
-      crudFilters: ["c", "u", "d"],
-      cChecked: true,
-      rChecked: false,
-      uChecked: true,
-      dChecked: true,
+      crudFiltersArray: ["c", "u", "d"],
+      crudFilters: {
+        cChecked: true,
+        rChecked: false,
+        uChecked: true,
+        dChecked: true,
+      },
       isDefault: true,
     });
   }
@@ -81,7 +86,12 @@ export default class SearchForm extends React.Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    const crudQuery = this.state.crudFilters.length ? `crud:${this.state.crudFilters.join()}` : "";
+    const crudQuery = this.state.crudFiltersArray.length ? `crud:${this.state.crudFiltersArray.join()}` : "";
+    const crudFilters = this.state.crudFilters;
+    const dates = {
+      startDate: this.state.receivedStartDate,
+      endDate: this.state.receivedEndDate
+    }
     const receivedQuery = (!this.state.receivedStartDate && !this.state.receivedEndDate)
       ? []
       : [this.dateFormat(this.state.receivedStartDate, "YYYY-MM-DD"), this.dateFormat(this.state.receivedEndDate, "YYYY-MM-DD")];
@@ -91,7 +101,7 @@ export default class SearchForm extends React.Component {
     query = rewriteHumanTimes(query, "received");
     query = rewriteHumanTimes(query, "created");
 
-    this.props.onSubmit(query);
+    this.props.onSubmit(query, crudFilters, dates);
     if (this.props.filtersOpen) {
       this.props.toggleDropdown();
     }
@@ -153,7 +163,7 @@ export default class SearchForm extends React.Component {
                             <input
                               type="checkbox"
                               id="createEventType"
-                              checked={this.state.cChecked}
+                              checked={this.state.crudFilters.cChecked}
                               value=""
                               onChange={(e) => { this.handleCrudFilterChange("c", e); }}
                             />
@@ -169,7 +179,7 @@ export default class SearchForm extends React.Component {
                             <input
                               type="checkbox"
                               id="readEventType"
-                              checked={this.state.rChecked}
+                              checked={this.state.crudFilters.rChecked}
                               value=""
                               onChange={(e) => { this.handleCrudFilterChange("r", e); }}
                             />
@@ -187,7 +197,7 @@ export default class SearchForm extends React.Component {
                             <input
                               type="checkbox"
                               id="updateEventType"
-                              checked={this.state.uChecked}
+                              checked={this.state.crudFilters.uChecked}
                               value=""
                               onChange={(e) => { this.handleCrudFilterChange("u", e); }}
                             />
@@ -203,7 +213,7 @@ export default class SearchForm extends React.Component {
                             <input
                               type="checkbox"
                               id="deleteEventType"
-                              checked={this.state.dChecked}
+                              checked={this.state.crudFilters.dChecked}
                               value=""
                               onChange={(e) => { this.handleCrudFilterChange("d", e); }}
                             />

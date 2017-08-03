@@ -41,6 +41,13 @@ class EventsBrowser extends React.Component {
       },
       isModalOpen: false,
       searchQuery: "",
+      crudFilters: {
+        cChecked: true,
+        rChecked: false,
+        uChecked: true,
+        dChecked: true,
+      },
+      dateFilters: null,
       tokenTooltip: false,
       exportTooltip: false,
     };
@@ -111,8 +118,12 @@ class EventsBrowser extends React.Component {
     this.props.clearSession();
   } 
 
-  search(query) {
-    this.setState({ searchQuery: query });
+  search(query, filters, dates) {
+    this.setState({ 
+      searchQuery: query, 
+      crudFilters: filters, 
+      dateFilters: dates
+    });
     this.submitQuery(query, "");
   }
 
@@ -210,8 +221,11 @@ class EventsBrowser extends React.Component {
               <div className="flex flex-auto">
                 <div className="flex-auto flex-column flex-verticalCenter">
                   <span className="icon clickable u-csvExportIcon" 
-                    onClick={() => { this.renderModal(<ExportEventsModal  
-                    searchInputQuery={this.state.searchQuery} />, "ExportEventsModal") }}
+                    onClick={() => { this.renderModal(
+                      <ExportEventsModal  
+                        searchInputQuery={this.state.searchQuery} 
+                        crudFilters={this.state.crudFilters} 
+                        dateFilters={this.state.dateFilters} />, "ExportEventsModal") }}
                     onMouseEnter={() => {this.setState({ exportTooltip: true })}}
                     onMouseLeave={() => {this.setState({ exportTooltip: false })}}>
                     <Tooltip

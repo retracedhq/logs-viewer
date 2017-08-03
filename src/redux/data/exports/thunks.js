@@ -42,7 +42,7 @@ export function fetchSavedExports(limit) {
   };
 }
 
-export function createSavedExport(query, name) {
+export function createSavedExport(query, filters, dates, name) {
   return async (dispatch, getState) => {
     //dispatch(setIsLoading(true));
     //dispatch(setError(null));
@@ -53,13 +53,22 @@ export function createSavedExport(query, name) {
     const host = state.data.sessionData.host;
     const exportUrl = `${host}/project/${projectId}/export`;
     
-    // TODO (10Dimensional): Update flow so that name can be associated with export id 
-    const payload = {
+    let payload = {
       exportBody: {
         searchQuery: query,
+        showCreate: filters.cChecked,
+        showDelete: filters.dChecked,
+        showRead: filters.rChecked,
+        showUpdate: filters.uChecked,
         version: 1,
       },
       name,
+    }
+
+    // Check to see if dates have values, if so add to paylod
+    if(dates.startDate && dates.endDate) {
+      payload.exportBody.startTime = dates.startDate;
+      payload.exportBody.endTime = dates.endDate;
     }
 
     dispatch(loadingData("exportCSVLoading", true));
