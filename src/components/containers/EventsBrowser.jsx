@@ -198,7 +198,6 @@ class EventsBrowser extends React.Component {
       tableHeaderItems,
       breakpoint,
       apiTokens,
-      dataLoading
     } = this.props;
     const searchText = currentResults
       && currentResults.sourceQuery
