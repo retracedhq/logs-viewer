@@ -198,6 +198,7 @@ class EventsBrowser extends React.Component {
       tableHeaderItems,
       breakpoint,
       apiTokens,
+      dataLoading
     } = this.props;
     const searchText = currentResults
       && currentResults.sourceQuery
@@ -323,7 +324,7 @@ class EventsBrowser extends React.Component {
                 {this.currentPage() > 0 ?
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={this.prevPage}
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.prevPage : null}
                   >
                     <span className="icon clickable u-dropdownArrowIcon previous"></span> Newer
                 </p>
@@ -343,7 +344,7 @@ class EventsBrowser extends React.Component {
                 {this.currentPage() < (this.pageCount() - 1) ?
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={this.nextPage}
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.nextPage : null }
                   >
                     Older <span className="icon clickable u-dropdownArrowIcon next"></span>
                   </p>
