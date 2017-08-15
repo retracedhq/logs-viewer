@@ -2,6 +2,7 @@ import * as React from "react";
 import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
 import Modal from "react-modal";
+import * as moment from "moment";
 import { connect } from "react-redux";
 import { createSavedExport, fetchSavedExports, renderSavedExport } from "../../redux/data/exports/thunks";
 
@@ -34,8 +35,31 @@ class ExportEventsModal extends React.Component {
   }
 
   handleExportCSV(query, name) {
+    const filters = this.props.crudFilters;
+    let dates = {};
+    let searchQuery = query;
+
+    // If we have date filters (TEMP) convert to MS
+    if(this.props.dateFilters) {
+      let startDate = this.props.dateFilters.startDate ? 
+        this.props.dateFilters.startDate.valueOf() : null;
+      let endDate = this.props.dateFilters.endDate ? 
+        this.props.dateFilters.endDate.valueOf() : null;
+
+      dates = {
+        startDate,
+        endDate
+      };
+    }
+    
     if(!this.state.nameEmptyError) {
-      this.props.createSavedExport(query, name);
+      // TEMP: Remove all crud and date stuff from string
+      if(query.includes("crud:")) {
+        const scrubbed = query.split("crud:")[0];
+        searchQuery = scrubbed;
+      }
+
+      this.props.createSavedExport(searchQuery, filters, dates, name);
       this.setState({ newSavedExport: false, showErrorClass: false });
     } else {
       this.setState({ showErrorClass: true });
@@ -71,7 +95,7 @@ class ExportEventsModal extends React.Component {
   }
 
   render() {
-    const { savedExports, exporting, searchInputQuery } = this.props;
+    const { savedExports, exporting, searchInputQuery, crudFilters, dateFilters } = this.props;
     const { searchBody, newSavedExportName } = this.state;
     return (
       <div>
@@ -118,8 +142,8 @@ export default connect(
     exporting: state.ui.loadingData.exportCSVLoading,
   }),
   dispatch => ({
-    createSavedExport(query, name) {
-      return dispatch(createSavedExport(query, name));
+    createSavedExport(query, filters, dates, name) {
+      return dispatch(createSavedExport(query, filters, dates, name));
     },
     fetchSavedExports() {
       return dispatch(fetchSavedExports());

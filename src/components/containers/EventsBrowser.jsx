@@ -41,6 +41,13 @@ class EventsBrowser extends React.Component {
       },
       isModalOpen: false,
       searchQuery: "",
+      crudFilters: {
+        cChecked: true,
+        rChecked: false,
+        uChecked: true,
+        dChecked: true,
+      },
+      dateFilters: null,
       tokenTooltip: false,
       exportTooltip: false,
     };
@@ -102,7 +109,7 @@ class EventsBrowser extends React.Component {
     }
     // If we have a new session, we need to request a new event search
     if(this.props.session.token != nextProps.session.token) {
-      this.submitQuery("", "");
+      this.submitQuery("crud: c,u,d", "");
     }
   }
 
@@ -111,8 +118,12 @@ class EventsBrowser extends React.Component {
     this.props.clearSession();
   } 
 
-  search(query) {
-    this.setState({ searchQuery: query });
+  search(query, filters, dates) {
+    this.setState({ 
+      searchQuery: query, 
+      crudFilters: filters, 
+      dateFilters: dates
+    });
     this.submitQuery(query, "");
   }
 
@@ -210,8 +221,11 @@ class EventsBrowser extends React.Component {
               <div className="flex flex-auto">
                 <div className="flex-auto flex-column flex-verticalCenter">
                   <span className="icon clickable u-csvExportIcon" 
-                    onClick={() => { this.renderModal(<ExportEventsModal  
-                    searchInputQuery={this.state.searchQuery} />, "ExportEventsModal") }}
+                    onClick={() => { this.renderModal(
+                      <ExportEventsModal  
+                        searchInputQuery={this.state.searchQuery} 
+                        crudFilters={this.state.crudFilters} 
+                        dateFilters={this.state.dateFilters} />, "ExportEventsModal") }}
                     onMouseEnter={() => {this.setState({ exportTooltip: true })}}
                     onMouseLeave={() => {this.setState({ exportTooltip: false })}}>
                     <Tooltip
@@ -309,7 +323,7 @@ class EventsBrowser extends React.Component {
                 {this.currentPage() > 0 ?
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={this.prevPage}
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.prevPage : null}
                   >
                     <span className="icon clickable u-dropdownArrowIcon previous"></span> Newer
                 </p>
@@ -329,7 +343,7 @@ class EventsBrowser extends React.Component {
                 {this.currentPage() < (this.pageCount() - 1) ?
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={this.nextPage}
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.nextPage : null }
                   >
                     Older <span className="icon clickable u-dropdownArrowIcon next"></span>
                   </p>
