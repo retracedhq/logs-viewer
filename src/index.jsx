@@ -18,7 +18,7 @@ export default class RetracedEventsBrowser extends React.Component {
   };
   static defaultProps = {
     header: "Events",
-    host: "https://api.staging.retraced.io/viewer/v1",
+    host: "https://api.retraced.io/viewer/v1",
     mount: true,
   }
   render() {
