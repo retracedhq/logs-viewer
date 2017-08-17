@@ -4,18 +4,6 @@ var webpack = require("webpack");
 var srcPath = path.join(__dirname, "src");
 var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js");
 
-var webpackPlugins;
-if (appEnv.ENVIRONMENT === "production") {
-  webpackPlugins = [
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.NamedModulesPlugin(),
-  ];
-} else {
-  webpackPlugins = [
-    new webpack.NamedModulesPlugin(),
-  ];
-}
-
 module.exports = {
   entry: [
     "./src/index.jsx",
@@ -31,9 +19,12 @@ module.exports = {
     ],
   },
 
-  plugins: webpackPlugins,
+  plugins: [
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.optimize.UglifyJsPlugin(),
+  ],
 
-  devtool: false,
+  devtool: 'source-map',
   stats: {
     colors: true,
     reasons: false
