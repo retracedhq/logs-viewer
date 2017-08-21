@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
 import FixedTableHeader from "../views/FixedTableHeader";
+import Loader from "../views/Loader";
 import { fetchEitapiTokensList, 
          createEitapiToken, 
          deleteEitapiToken, 
@@ -87,7 +88,7 @@ class AccessTokensModal extends React.Component {
     const { apiTokens, tokensLoading } = this.props;
     const tableHeaderItems = [
       {
-        label: "Id",
+        label: "Token",
         style: { maxWidth: "300px" },
         className: "flex1",
       },
@@ -116,7 +117,7 @@ class AccessTokensModal extends React.Component {
                 :
                 <div className="u-paddingBottom--more">
                   <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">Create a new token</h3>
-                  <p className="u-fontWeight--normal">Create a new API token for your team to access and stream your audit logs.</p>
+                  <p className="u-fontWeight--normal">Create a new <a href="https://www.replicated.com/docs/kb/developer-resources/generate-api-token/" className="u-color--curiousBlue u-fontWeight--bold" target="_blank">API token</a> for your team to access and stream your audit logs.</p>
                 </div>
               }
               <div className="flex flexWrap--wrap justifyContent--flexEnd">
@@ -175,6 +176,7 @@ class AccessTokensModal extends React.Component {
                         }
                     </div>
                 <div className="flex flex-auto buttons justifyContent--flexEnd">
+                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href="https://www.replicated.com/docs/kb/developer-resources/generate-api-token/" target="_blank">What is an API token?</a>
                     <button className="Button primary u-marginLeft--normal" onClick={() => { this.setState({ creatingToken: true }) }}>Create Token</button>
                 </div>
                 </div>
@@ -191,7 +193,12 @@ class AccessTokensModal extends React.Component {
                         <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleTokenCreation(this.state.newTokenName) }}>Create Token</button>
                     </div>
                 </div>
-            :
+            : 
+              tokensLoading ?
+                <div className="flex-column flex1 justifyContent--center alignItems--center u-padding--more">
+                  <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
+                </div>
+              :
                 <div className="modal-content flex flexWrap--wrap justifyContent--center">
                     <div className="u-tokenIllustration u-padding--normal"></div>
                     <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
@@ -206,7 +213,7 @@ class AccessTokensModal extends React.Component {
 export default connect(
   state => ({
     apiTokens: state.data.apiTokenData.apiTokens,
-    tokensLoading: state.ui.loadingData.tokensLoading,
+    tokensLoading: state.ui.loadingData.apiTokensLoading,
   }),
   dispatch => ({
     fetchEitapiTokensList() {

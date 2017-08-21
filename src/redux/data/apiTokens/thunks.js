@@ -7,7 +7,7 @@ let last = null;
 
 export function fetchEitapiTokensList() {
   return async (dispatch, getState) => {
-    //dispatch(setIsLoading(true));
+    dispatch(loadingData("apiTokens", true));
     //dispatch(setError(null));
 
     const state = getState();
@@ -31,11 +31,12 @@ export function fetchEitapiTokensList() {
       const result = await response.json();
       //dispatch(setIsLoading(false));
 
+      dispatch(loadingData("apiTokens", false));      
       dispatch(receiveApiTokens(result));
 
     } catch (err) {
         console.log(err);
-      //dispatch(setIsLoading(false));
+        dispatch(loadingData("apiTokens", false));   
       //dispatch(setError(err));
     }
   };
@@ -43,8 +44,6 @@ export function fetchEitapiTokensList() {
 
 export function createEitapiToken(name) {
   return async (dispatch, getState) => {
-    dispatch(loadingData("apiTokensLoading", true));
-
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
@@ -71,7 +70,6 @@ export function createEitapiToken(name) {
       }
 
       // New one is created, let's grab a fresh list.
-      dispatch(loadingData("apiTokensLoading", false));
       dispatch(fetchEitapiTokensList());
 
     } catch (err) {
