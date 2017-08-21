@@ -7,7 +7,7 @@ let last = null;
 
 export function createSession(token, host) {
   return async (dispatch, getState) => {
-    //dispatch(loadingData("signup", true));
+    dispatch(loadingData("eventFetch", true));
     let response;
     const url = `${host}/viewersession`;
     const payload = { token };

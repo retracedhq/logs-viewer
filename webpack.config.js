@@ -40,7 +40,7 @@ var common = {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".css", ".scss", ".png", ".jpg", ".svg", ".ico"],
   },
 
-  devtool: "eval-source-map",
+  devtool: "source-map",
 
   module: {
     rules: [
