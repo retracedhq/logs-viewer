@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as ReactMarkdown from "react-markdown";
 import * as moment from "moment";
-
+import ResizeAware from 'react-resize-aware';
 import Tooltip from "../shared/Tooltip";
 
 export default class EventRow extends React.Component {
@@ -12,7 +12,15 @@ export default class EventRow extends React.Component {
     autobind(this);
     this.state = {
       eventInfoToken: false,
+      enableEventTooltip: false,
+      showEventTooltip: false,
     };
+  }
+
+  handleEventRowResize({width, height}) {
+    console.log(width, height);
+    const eventRowWidth = this.eventRowDiv.offsetWidth;
+    this.setState({ enableEventTooltip: (eventRowWidth <= width) ? true : false });
   }
 
   render() {
@@ -21,12 +29,26 @@ export default class EventRow extends React.Component {
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              <div className="flex flex1 content-section ellipsis-overflow">
-                <ReactMarkdown
-                  className="EventItem u-fontWeight--medium ellipsis-overflow u-lineHeight--more"
-                  sourcePos={true}
-                  renderers={this.props.renderers}
-                  source={this.props.event.display.markdown}
+              <div className={`flex flex1 content-section ellipsis-overflow ${this.state.enableEventTooltip ? "u-cursor--pointer" : null}`} 
+                ref={(eventRowDiv) => this.eventRowDiv = eventRowDiv}
+                onMouseEnter={() => {this.setState({ showEventTooltip: true })}}
+                onMouseLeave={() => {this.setState({ showEventTooltip: false })}}>
+                <ResizeAware
+                  onlyEvent
+                  onResize={this.handleEventRowResize}
+                >
+                  <ReactMarkdown
+                    className="EventItem u-fontWeight--medium ellipsis-overflow u-lineHeight--more"
+                    sourcePos={true}
+                    renderers={this.props.renderers}
+                    source={this.props.event.display.markdown}
+                  />
+                </ResizeAware>
+                <Tooltip
+                  visible={this.state.showEventTooltip && this.state.enableEventTooltip}
+                  text={this.props.event.description}
+                  minWidth="80"
+                  position="center-right"
                 />
               </div>
               <div style={{ maxWidth: "180px" }} className="flex flex1 content-section">
