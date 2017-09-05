@@ -202,7 +202,8 @@ class EventsBrowser extends React.Component {
     const searchText = currentResults
       && currentResults.sourceQuery
       && currentResults.sourceQuery.search_text;
-    const isMobile = breakpoint === "mobile";;
+    const isMobile = breakpoint === "mobile";
+    const isMobileEvents = breakpoint === "mobileEvents";
     const renderers = {
       "Link": InlineLink,
     };
@@ -251,7 +252,7 @@ class EventsBrowser extends React.Component {
                 </div>
               </div>
             </div>
-            {!isMobile ?
+            {!isMobileEvents ?
               <div className="flex flex-auto">
                 <FixedTableHeader
                   items={tableHeaderItems}
@@ -263,15 +264,15 @@ class EventsBrowser extends React.Component {
                 <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
               </div>
               :
-              <div className="flex-column flex-1-auto u-overflow--auto">
+              <div className="EventsWrapper flex-column flex-1-auto u-overflow--auto">
                 {currentResults.resultIds.length ?
                   currentResults.resultIds.map((eid, i) => (
-                    !isMobile ?
+                    !isMobileEvents ?
                       <EventRow
                         key={`${eid}-${i}`}
                         event={events[eid]}
                         renderers={renderers}
-                        isMobile={isMobile}
+                        isMobile={isMobileEvents}
                         index={i}
                         outputHovered={this.state[`output-${eid}Hovered`]}
                         displayTooltip={() => { return; }}
@@ -288,7 +289,7 @@ class EventsBrowser extends React.Component {
                         key={`${eid}-${i}`}
                         event={events[eid]}
                         renderers={renderers}
-                        isMobile={isMobile}
+                        isMobile={isMobileEvents}
                         index={i}
                         outputHovered={this.state[`output-${eid}Hovered`]}
                         displayTooltip={() => { return; }}

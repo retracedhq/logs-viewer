@@ -65,7 +65,8 @@
   top: 100%;
   transform: translateX(-50%);
 }
-.Tooltip-wrapper.tooltip-bottom-center::after {
+.Tooltip-wrapper.tooltip-bottom-center::after,
+.EventsWrapper > .TableRow-wrapper:first-of-type .eventTooltip::after {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(74,74,74,.9);
@@ -86,5 +87,29 @@
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(74,74,74,.9);
   right: 12px;
+  top: 3px;
+}
+.Tooltip-wrapper.eventTooltip {
+  left: 20px;
+  right: auto;
+  width: auto;
+  transform: translateX(0);
+  bottom: 60%;
+  pointer-events: none;
+  word-wrap: break-word;
+}
+
+/* First event in table per page */
+.EventsWrapper > .TableRow-wrapper:first-of-type .eventTooltip {
+  left: 20px;
+  top: 70%;
+  right: auto;
+  padding-top: 8px;
+}
+.EventsWrapper > .TableRow-wrapper:first-of-type .eventTooltip::after {
+  border-top: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid rgba(74,74,74,.9);
   top: 3px;
 }
