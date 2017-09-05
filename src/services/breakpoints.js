@@ -18,10 +18,14 @@ export const BreakpointConfig = {
     if (win.innerWidth < 768) {
       breakpoint = "mobile";
     }
+    if (win.innerWidth < 1200) {
+      breakpoint = "mobileEvents";
+    }
     return { breakpoint, winWidth };
   },
   breakpoints: {
     mobile: 768,
+    mobileEvents: 1200,
     desktopSmall: 840,
     desktop: 960,
     full: 1020,

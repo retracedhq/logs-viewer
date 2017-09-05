@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import * as autobind from "react-autobind";
 import * as ReactMarkdown from "react-markdown";
 import * as moment from "moment";
-
 import Tooltip from "../shared/Tooltip";
 
 export default class EventRow extends React.Component {
@@ -21,13 +20,13 @@ export default class EventRow extends React.Component {
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              <div className="flex flex1 content-section ellipsis-overflow">
+              <div className={`flex flex1 content-section ellipsis-overflow`} >
                 <ReactMarkdown
-                  className="EventItem u-fontWeight--medium ellipsis-overflow u-lineHeight--more"
-                  sourcePos={true}
-                  renderers={this.props.renderers}
-                  source={this.props.event.display.markdown}
-                />
+                    className="EventItem u-fontWeight--medium u-lineHeight--more"
+                    sourcePos={true}
+                    renderers={this.props.renderers}
+                    source={this.props.event.display.markdown}
+                  />
               </div>
               <div style={{ maxWidth: "180px" }} className="flex flex1 content-section">
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
