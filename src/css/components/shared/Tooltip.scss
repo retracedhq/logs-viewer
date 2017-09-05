@@ -65,8 +65,7 @@
   top: 100%;
   transform: translateX(-50%);
 }
-.Tooltip-wrapper.tooltip-bottom-center::after,
-.EventsWrapper > .TableRow-wrapper:first-of-type .eventTooltip::after {
+.Tooltip-wrapper.tooltip-bottom-center::after, {
   border-left: 5px solid transparent;
   border-right: 5px solid transparent;
   border-bottom: 5px solid rgba(74,74,74,.9);
@@ -88,13 +87,4 @@
   border-bottom: 5px solid rgba(74,74,74,.9);
   right: 12px;
   top: 3px;
-}
-.Tooltip-wrapper.eventTooltip {
-  left: 20px;
-  right: auto;
-  width: auto;
-  transform: translateX(0);
-  bottom: 60%;
-  pointer-events: none;
-  word-wrap: break-word;
 }
