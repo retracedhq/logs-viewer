@@ -19,8 +19,8 @@ export default class EventRow extends React.Component {
       <div className="TableRow-wrapper flex-auto">
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
-            <div className="flex flex1 u-position--relative">
-              <div className={`flex flex1 content-section ellipsis-overflow ${this.state.enableEventTooltip ? "u-cursor--pointer" : null}`} >
+            <div className="flex flex1">
+              <div className={`flex flex1 content-section ellipsis-overflow`} >
                 <ReactMarkdown
                     className="EventItem u-fontWeight--medium u-lineHeight--more"
                     sourcePos={true}
