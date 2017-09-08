@@ -24,16 +24,10 @@ export default class MobileEventRow extends React.Component {
                   </div>
                 </div>
               </div>
-
               <div className="flex flex1 u-marginTop--normal">
                 <div className="flex flex1 u-paddingRight--small ellipsis-overflow">
                   <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
                     Date: <span className="u-fontWeight--medium u-color--tundora">{moment(this.props.event.canonical_time).fromNow()}</span>
-                  </p>
-                </div>
-                <div className="flex flex1 u-paddingLeft--small ellipsis-overflow">
-                  <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                    Group: <span className="u-fontWeight--medium u-color--tundora">{this.props.event.group && this.props.event.group.name}</span>
                   </p>
                 </div>
                 <div className="flex flex-auto u-paddingLeft--small justifyContent--flexEnd">
