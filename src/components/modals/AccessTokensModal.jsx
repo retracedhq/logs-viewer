@@ -150,17 +150,17 @@ class AccessTokensModal extends React.Component {
                             <div className="TableRow flex">
                                 <div className="TableRow-content flex flex1">
                                 <div className="flex flex1">
-                                    <div style={{ maxWidth: "300px" }} className="flex-column flex1 content-section flex-verticalCenter ellipsis-overflow">
+                                    <div style={{ minWidth: "300px" }} className="flex-column flex1 content-section flex-verticalCenter ellipsis-overflow">
                                     <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                                         {token.id}
                                     </p>
                                     </div>
-                                    <div style={{ maxWidth: "160px" }} className="flex-column flex1 content-section flex-verticalCenter">
+                                    <div style={{ minWidth: "160px" }} className="flex-column flex1 content-section flex-verticalCenter">
                                     <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                                         {token.display_name}
                                     </p>
                                     </div>
-                                    <div style={{ maxWidth: "40px" }} className="flex flex-auto content-section justifyContent--flexEnd">
+                                    <div style={{ minWidth: "40px" }} className="flex flex-auto content-section justifyContent--flexEnd">
                                     <div className="flex-column flex-verticalCenter">
                                         <span className="icon clickable u-editTokenIcon" onClick={() => { this.setState({ updatingToken: true, tokenToUpdate: token }); }}></span>
                                     </div>

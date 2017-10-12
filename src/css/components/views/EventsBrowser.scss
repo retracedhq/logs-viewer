@@ -37,7 +37,8 @@
 .Input.SearchEvents {
   min-width: 320px;
   position: relative;
-  z-index: 100;
+  z-index: 201;
+  height: 100%;
 }
 
 .FilterDropdown-trigger {
@@ -51,12 +52,12 @@
   line-height: 38px;
   color: #2A98CB !important;
   background-color: #ffffff;
-  z-index: 410;
+  z-index: 201;
 }
 
 .searchButton {
   position: relative;
-  z-index: 410;
+  z-index: 201;
 }
 .helpLink {
   color: #2A98CB !important;
