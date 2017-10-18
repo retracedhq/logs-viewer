@@ -117,7 +117,7 @@ class AccessTokensModal extends React.Component {
                 :
                 <div className="u-paddingBottom--more">
                   <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">Create a new token</h3>
-                  <p className="u-fontWeight--normal">Create a new <a href="https://www.replicated.com/docs/kb/developer-resources/generate-api-token/" className="u-color--curiousBlue u-fontWeight--bold" target="_blank">API token</a> for your team to access and stream your audit logs.</p>
+                  <p className="u-fontWeight--normal">Create a new <a href="https://preview.retraced.io/documentation/apis/enterprise-api/" className="u-color--curiousBlue u-fontWeight--bold" target="_blank">API token</a> for your team to access and stream your audit logs.</p>
                 </div>
               }
               <div className="flex flexWrap--wrap justifyContent--flexEnd">
@@ -176,7 +176,7 @@ class AccessTokensModal extends React.Component {
                         }
                     </div>
                 <div className="flex flex-auto buttons justifyContent--flexEnd">
-                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href="https://www.replicated.com/docs/kb/developer-resources/generate-api-token/" target="_blank">What is an API token?</a>
+                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href="https://preview.retraced.io/documentation/apis/enterprise-api/" target="_blank">What is an API token?</a>
                     <button className="Button primary u-marginLeft--normal" onClick={() => { this.setState({ creatingToken: true }) }}>Create Token</button>
                 </div>
                 </div>
@@ -203,7 +203,7 @@ class AccessTokensModal extends React.Component {
                     <div className="u-tokenIllustration u-padding--normal"></div>
                     <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
                     <button className="Button primary u-margin--small" onClick={() => { this.setState({ creatingToken: true }) }}>Create new token</button>
-                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href="https://www.replicated.com/docs/kb/developer-resources/generate-api-token/" target="_blank">What is an API token?</a>
+                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href="https://preview.retraced.io/documentation/apis/enterprise-api/" target="_blank">What is an API token?</a>
                 </div>
         }
       </div>
