@@ -150,17 +150,17 @@ class AccessTokensModal extends React.Component {
                             <div className="TableRow flex">
                                 <div className="TableRow-content flex flex1">
                                 <div className="flex flex1">
-                                    <div style={{ maxWidth: "300px" }} className="flex-column flex1 content-section flex-verticalCenter ellipsis-overflow">
+                                    <div style={{ minWidth: "300px" }} className="flex-column flex1 content-section flex-verticalCenter ellipsis-overflow">
                                     <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                                         {token.id}
                                     </p>
                                     </div>
-                                    <div style={{ maxWidth: "160px" }} className="flex-column flex1 content-section flex-verticalCenter">
+                                    <div style={{ minWidth: "160px" }} className="flex-column flex1 content-section flex-verticalCenter">
                                     <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                                         {token.display_name}
                                     </p>
                                     </div>
-                                    <div style={{ maxWidth: "40px" }} className="flex flex-auto content-section justifyContent--flexEnd">
+                                    <div style={{ minWidth: "40px" }} className="flex flex-auto content-section justifyContent--flexEnd">
                                     <div className="flex-column flex-verticalCenter">
                                         <span className="icon clickable u-editTokenIcon" onClick={() => { this.setState({ updatingToken: true, tokenToUpdate: token }); }}></span>
                                     </div>
@@ -176,7 +176,11 @@ class AccessTokensModal extends React.Component {
                         }
                     </div>
                 <div className="flex flex-auto buttons justifyContent--flexEnd">
+<<<<<<< HEAD
+                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href="https://preview.staging.retraced.io/documentation/getting-started/embedded-viewer/#call-the-embed-function-to-initialize-the-viewer" target="_blank">What is an API token?</a>
+=======
                     <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href="https://preview.retraced.io/documentation/apis/enterprise-api/" target="_blank">What is an API token?</a>
+>>>>>>> 8522ae73e0dee3f0e8fadc5fd200014a2f5e4bda
                     <button className="Button primary u-marginLeft--normal" onClick={() => { this.setState({ creatingToken: true }) }}>Create Token</button>
                 </div>
                 </div>
@@ -203,7 +207,11 @@ class AccessTokensModal extends React.Component {
                     <div className="u-tokenIllustration u-padding--normal"></div>
                     <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
                     <button className="Button primary u-margin--small" onClick={() => { this.setState({ creatingToken: true }) }}>Create new token</button>
+<<<<<<< HEAD
+                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href="https://preview.staging.retraced.io/documentation/getting-started/embedded-viewer/#call-the-embed-function-to-initialize-the-viewer" target="_blank">What is an API token?</a>
+=======
                     <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href="https://preview.retraced.io/documentation/apis/enterprise-api/" target="_blank">What is an API token?</a>
+>>>>>>> 8522ae73e0dee3f0e8fadc5fd200014a2f5e4bda
                 </div>
         }
       </div>

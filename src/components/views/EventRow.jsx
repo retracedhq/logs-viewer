@@ -28,12 +28,12 @@ export default class EventRow extends React.Component {
                     source={this.props.event.display.markdown}
                   />
               </div>
-              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section">
+              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section date">
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                   {moment(this.props.event.canonical_time).fromNow()}
                 </p>
               </div>
-              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section">
+              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section location">
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                   {this.props.event.country || this.props.event.source_ip}
                 </p>
