@@ -12,16 +12,14 @@ export default class MobileEventRow extends React.Component {
         <div className="TableRow flex mobile-row">
           <div className="TableRow-content flex flex1">
             <div className="flex-column flex1 u-overflow--hidden">
-              <div className="flex flex1">
-                <div className="flex flex1 ellipsis-overflow">
-                  <div className="u-color--dustyGray u-fontSize--normal u-lineHeight--normal ellipsis-overflow">
-                    <ReactMarkdown
-                      className="EventItem u-fontWeight--medium ellipsis-overflow u-lineHeight--more u-display--inlineBlock"
-                      sourcePos={true}
-                      renderers={this.props.renderers}
-                      source={this.props.event.display.markdown}
-                    />
-                  </div>
+              <div className="flex flex-auto">
+                <div className="u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
+                  <ReactMarkdown
+                    className="EventItem u-fontWeight--medium u-lineHeight--more u-display--inlineBlock"
+                    sourcePos={true}
+                    renderers={this.props.renderers}
+                    source={this.props.event.display.markdown}
+                  />
                 </div>
               </div>
               <div className="flex flex1 u-marginTop--normal">
