@@ -104,7 +104,7 @@ var common = {
 };
 
 module.exports = function (env) {
-  if (process.env.RETRACED_ENV === "dev" || !process.env.RETRACED_ENV) {
+  if (process.env.LOGS_VIEWER_ENV === "dev" || !process.env.LOGS_VIEWER_ENV) {
     var dev = require("./webpack.config.dev");
     return webpackMerge(common, dev);
   } else {
