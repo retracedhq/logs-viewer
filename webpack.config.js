@@ -89,7 +89,7 @@ var common = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),
+        NODE_ENV: JSON.stringify(appEnv.RETRACED_ENV),
       }
     }),
     new CopyWebpackPlugin([{ from: "./src/assets/logs_spritesheet.svg" }]),
