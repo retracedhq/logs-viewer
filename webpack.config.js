@@ -89,7 +89,7 @@ var common = {
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: JSON.stringify(appEnv.ENVIRONMENT),
+        NODE_ENV: JSON.stringify(appEnv.RETRACED_ENV),
       }
     }),
     new CopyWebpackPlugin([{ from: "./src/assets/logs_spritesheet.svg" }]),
@@ -104,7 +104,7 @@ var common = {
 };
 
 module.exports = function (env) {
-  if (process.env.LOGS_VIEWER_ENV === "dev" || !process.env.LOGS_VIEWER_ENV) {
+  if (process.env.RETRACED_ENV === "dev" || !process.env.RETRACED_ENV) {
     var dev = require("./webpack.config.dev");
     return webpackMerge(common, dev);
   } else {

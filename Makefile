@@ -15,7 +15,7 @@ build_staging:
 	LOGS_VIEWER_ENV=staging `npm bin`/webpack --config webpack.config.js
 
 build_prod:
-	LOGS_VIEWER_ENV=prod `npm bin`/webpack --config webpack.config.js
+	LOGS_VIEWER_ENV=prod `npm bin`/webpack -p --config webpack.config.js
 
 test:
 	yarn test
