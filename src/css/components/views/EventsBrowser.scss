@@ -15,8 +15,8 @@
 .EventItem p {
   width: 100%;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .FilterApplied-tag {
