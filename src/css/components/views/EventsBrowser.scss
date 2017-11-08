@@ -117,3 +117,20 @@
   transform: rotate(90deg) translate(-1px, 3px);
 }
 
+@media screen and (max-width: 640px) {
+  .EventsTable-header h3 {
+    font-size: 18px;
+    align-self: center;
+  }
+  .Input.SearchEvents {
+    min-width: 180px;
+  }
+  .resultsCount {
+    flex: 2;
+  }
+  .FilterDropdown {
+    min-width: 200px;
+    left: -50px;
+  }
+}
+
