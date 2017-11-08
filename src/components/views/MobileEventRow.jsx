@@ -30,7 +30,7 @@ export default class MobileEventRow extends React.Component {
                 </div>
                 <div className="flex flex-auto u-paddingLeft--small justifyContent--flexEnd">
                   <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                    Location: <span className="u-fontWeight--medium u-color--tundora">{this.props.event.country || this.props.event.source_ip}</span>
+                    Location: <span className="u-fontWeight--medium u-color--tundora">{this.props.event.country || this.props.event.source_ip || "Unknown" }</span>
                   </p>
                 </div>
               </div>
