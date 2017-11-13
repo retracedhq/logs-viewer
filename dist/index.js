@@ -76586,7 +76586,7 @@ var EventsBrowser = (function (_super) {
                             React.createElement("div", { className: "flex-1-auto flex" },
                                 React.createElement("h3", { className: "flex-auto u-lineHeight--more u-fontSize--header3" }, this.props.headerTitle),
                                 React.createElement("span", { className: "flex flex-auto u-marginLeft--more" },
-                                    React.createElement(SearchForm_1.default, { onSubmit: this.search, text: searchText, filtersOpen: this.state.filtersOpen, toggleDropdown: this.toggleFitlerDropdown, hasFilters: this.hasFilters }))),
+                                    React.createElement(SearchForm_1.default, { onSubmit: this.search, text: searchText, filtersOpen: this.state.filtersOpen, toggleDropdown: this.toggleFitlerDropdown, hasFilters: this.hasFilters, searchHelpURL: this.props.searchHelpURL }))),
                             React.createElement("div", { className: "flex flex-auto icons" },
                                 React.createElement("div", { className: "flex-auto flex-column flex-verticalCenter" },
                                     React.createElement("span", { className: "icon clickable u-csvExportIcon", onClick: function () {
@@ -76594,7 +76594,7 @@ var EventsBrowser = (function (_super) {
                                         }, onMouseEnter: function () { _this.setState({ exportTooltip: true }); }, onMouseLeave: function () { _this.setState({ exportTooltip: false }); } },
                                         React.createElement(Tooltip_1.default, { visible: this.state.exportTooltip, text: "Export Events", minWidth: "120", position: "bottom-left" }))),
                                 React.createElement("div", { className: "u-marginLeft--more flex-auto flex-column flex-verticalCenter" },
-                                    React.createElement("span", { className: "icon clickable u-tokensIcon", onClick: function () { _this.renderModal(React.createElement(AccessTokensModal_1.default, { closeModal: _this.closeModal }), "AccessTokensModal"); }, onMouseEnter: function () { _this.setState({ tokenTooltip: true }); }, onMouseLeave: function () { _this.setState({ tokenTooltip: false }); } },
+                                    React.createElement("span", { className: "icon clickable u-tokensIcon", onClick: function () { _this.renderModal(React.createElement(AccessTokensModal_1.default, { apiTokenHelpURL: _this.props.apiTokenHelpURL, closeModal: _this.closeModal }), "AccessTokensModal"); }, onMouseEnter: function () { _this.setState({ tokenTooltip: true }); }, onMouseLeave: function () { _this.setState({ tokenTooltip: false }); } },
                                         React.createElement(Tooltip_1.default, { visible: this.state.tokenTooltip, text: "Manage Access Tokens", minWidth: "150", position: "bottom-left" }))))),
                         !isMobileEvents ?
                             React.createElement("div", { className: "flex flex-auto" },
@@ -76924,7 +76924,7 @@ var AccessTokensModal = (function (_super) {
                                                         React.createElement("div", { className: "flex-column flex-verticalCenter" },
                                                             React.createElement("span", { className: "icon clickable u-deleteTokenIcon u-marginLeft--normal", onClick: function () { _this.handleDeleteToken(token); } })))))))); })),
                                     React.createElement("div", { className: "flex flex-auto buttons justifyContent--flexEnd" },
-                                        React.createElement("a", { className: "u-padding--normal u-fontSize--normal u-color--curiousBlue", href: "https://preview.retraced.io/documentation/apis/enterprise-api/", target: "_blank" }, "What is an API token?"),
+                                        React.createElement("a", { className: "u-padding--normal u-fontSize--normal u-color--curiousBlue", href: this.props.apiTokenHelpURL, target: "_blank" }, "What is an API token?"),
                                         React.createElement("button", { className: "Button primary u-marginLeft--normal", onClick: function () { _this.setState({ creatingToken: true }); } }, "Create Token")))
                 :
                     creatingToken ?
@@ -76948,7 +76948,7 @@ var AccessTokensModal = (function (_super) {
                                         React.createElement("div", { className: "u-tokenIllustration u-padding--normal" }),
                                         React.createElement("p", { className: "u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center" }, "You have not created any access tokens"),
                                         React.createElement("button", { className: "Button primary u-margin--small", onClick: function () { _this.setState({ creatingToken: true }); } }, "Create new token"),
-                                        React.createElement("a", { className: "u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue", href: "https://preview.retraced.io/documentation/apis/enterprise-api/", target: "_blank" }, "What is an API token?"))));
+                                        React.createElement("a", { className: "u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue", href: this.props.apiTokenHelpURL, target: "_blank" }, "What is an API token?"))));
     };
     return AccessTokensModal;
 }(React.Component));
@@ -77483,7 +77483,7 @@ var MobileEventRow = (function (_super) {
                             React.createElement("div", { className: "flex flex-auto u-paddingLeft--small justifyContent--flexEnd" },
                                 React.createElement("p", { className: "u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal" },
                                     "Location: ",
-                                    React.createElement("span", { className: "u-fontWeight--medium u-color--tundora" }, this.props.event.country || this.props.event.source_ip)))))))));
+                                    React.createElement("span", { className: "u-fontWeight--medium u-color--tundora" }, this.props.event.country || this.props.event.source_ip || "Unknown")))))))));
     };
     return MobileEventRow;
 }(React.Component));
@@ -77659,7 +77659,7 @@ var SearchForm = (function (_super) {
                                 React.createElement("div", { className: "u-textAlign--center" },
                                     this.state.isDefault ? null :
                                         React.createElement("button", { type: "button", className: "Button secondary gray small u-display--block u-width--full u-marginBottom--normal", onClick: this.setInitialState }, "Reset filters"),
-                                    React.createElement("a", { target: "_blank", href: "https://preview.retraced.io/documentation/apis/graphql/#search", className: "u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink" }, "Get help with search")))
+                                    React.createElement("a", { target: "_blank", href: this.props.searchHelpURL, className: "u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink" }, "Get help with search")))
                             : null),
                     React.createElement("button", { type: "submit", className: "Button primary u-marginLeft--normal searchButton" }, "Search"))),
             this.props.filtersOpen ? React.createElement("div", { className: "hidden-trigger", onClick: this.props.toggleDropdown }) : null));
@@ -77846,10 +77846,12 @@ var RetracedEventsBrowser = (function (_super) {
     RetracedEventsBrowser.prototype.render = function () {
         return (React.createElement("div", { id: "retracedLogsViewerApp", className: "retraced-logs-viewer-app u-minHeight--full " + (this.props.customClass || "") + " " + (this.props.theme || "") },
             React.createElement(react_redux_1.Provider, { store: store },
-                React.createElement(EventsBrowser_1.default, { auditLogToken: this.props.auditLogToken, mount: this.props.mount, headerTitle: this.props.header, host: this.props.host }))));
+                React.createElement(EventsBrowser_1.default, { auditLogToken: this.props.auditLogToken, mount: this.props.mount, headerTitle: this.props.header, host: this.props.host, apiTokenHelpURL: this.props.apiTokenHelpURL, searchHelpURL: this.props.searchHelpURL }))));
     };
     RetracedEventsBrowser.propTypes = {
         auditLogToken: PropTypes.string,
+        apiTokenHelpURL: PropTypes.string,
+        searchHelpURL: PropTypes.string,
         theme: PropTypes.string,
         customClass: PropTypes.string,
         host: PropTypes.string,
@@ -77859,6 +77861,8 @@ var RetracedEventsBrowser = (function (_super) {
     RetracedEventsBrowser.defaultProps = {
         header: "Events",
         host: "https://api.retraced.io/viewer/v1",
+        apiTokenHelpURL: "https://preview.retraced.io/documentation/apis/enterprise-api/",
+        searchHelpURL: "https://preview.retraced.io/documentation/apis/graphql/#search",
         mount: true,
     };
     return RetracedEventsBrowser;

@@ -216,7 +216,7 @@ class EventsBrowser extends React.Component {
               <div className="flex-1-auto flex">
                 <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">{this.props.headerTitle}</h3>
                 <span className="flex flex-auto u-marginLeft--more">
-                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
+                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} searchHelpURL={this.props.searchHelpURL} />
                 </span>
               </div>
               <div className="flex flex-auto icons">
@@ -239,7 +239,7 @@ class EventsBrowser extends React.Component {
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
                   <span className="icon clickable u-tokensIcon" 
-                    onClick={() => { this.renderModal(<AccessTokensModal closeModal={this.closeModal} />, "AccessTokensModal") }}
+                    onClick={() => { this.renderModal(<AccessTokensModal apiTokenHelpURL={this.props.apiTokenHelpURL} closeModal={this.closeModal} />, "AccessTokensModal") }}
                     onMouseEnter={() => {this.setState({ tokenTooltip: true })}}
                     onMouseLeave={() => {this.setState({ tokenTooltip: false })}}>
                     <Tooltip
