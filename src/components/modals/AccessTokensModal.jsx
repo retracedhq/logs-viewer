@@ -176,7 +176,7 @@ class AccessTokensModal extends React.Component {
                         }
                     </div>
                 <div className="flex flex-auto buttons justifyContent--flexEnd">
-                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href="https://preview.retraced.io/documentation/apis/enterprise-api/" target="_blank">What is an API token?</a>
+                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">What is an API token?</a>
                     <button className="Button primary u-marginLeft--normal" onClick={() => { this.setState({ creatingToken: true }) }}>Create Token</button>
                 </div>
                 </div>
@@ -203,7 +203,7 @@ class AccessTokensModal extends React.Component {
                     <div className="u-tokenIllustration u-padding--normal"></div>
                     <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
                     <button className="Button primary u-margin--small" onClick={() => { this.setState({ creatingToken: true }) }}>Create new token</button>
-                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href="https://preview.retraced.io/documentation/apis/enterprise-api/" target="_blank">What is an API token?</a>
+                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">What is an API token?</a>
                 </div>
         }
       </div>
