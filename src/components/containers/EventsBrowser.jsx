@@ -244,7 +244,7 @@ class EventsBrowser extends React.Component {
                     onMouseLeave={() => {this.setState({ tokenTooltip: false })}}>
                     <Tooltip
                       visible={this.state.tokenTooltip}
-                      text="Manage Access Tokens"
+                      text="Manage API Tokens"
                       minWidth="150"
                       position="bottom-left"
                     />
