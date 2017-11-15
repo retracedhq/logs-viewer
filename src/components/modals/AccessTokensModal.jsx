@@ -105,7 +105,7 @@ class AccessTokensModal extends React.Component {
     ]
     return (
       <div>
-        <h1 className="u-fontWeight--normal">Access Tokens</h1>
+        <h1 className="u-fontWeight--normal">API Tokens</h1>
         {apiTokens.length ?
           (creatingToken || updatingToken) && !tokensLoading ?
             <div className="modal-content">

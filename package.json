@@ -30,7 +30,7 @@
     "react-autobind": "^1.0.6",
     "react-datepicker": "^0.48.0",
     "react-markdown": "^2.5.0",
-    "react-modal": "^2.2.1",
+    "react-modal": "^3.1.2",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "redux": "^3.7.1",

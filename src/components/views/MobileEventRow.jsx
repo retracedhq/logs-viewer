@@ -7,6 +7,9 @@ import * as moment from "moment";
 export default class MobileEventRow extends React.Component {
   
   render() {
+    const location = this.props.event.country || this.props.event.source_ip;
+    const date = moment(this.props.event.canonical_time).fromNow();
+
     return (
       <div className={`TableRow-wrapper flex-auto u-cursor--pointer ${this.props.index === 0 ? "u-borderTop--gray" : ""}`} onClick={this.props.openModal}>
         <div className="TableRow flex mobile-row">
@@ -25,13 +28,16 @@ export default class MobileEventRow extends React.Component {
               <div className="flex flex1 u-marginTop--normal">
                 <div className="flex flex1 u-paddingRight--small ellipsis-overflow">
                   <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                    Date: <span className="u-fontWeight--medium u-color--tundora">{moment(this.props.event.canonical_time).fromNow()}</span>
+                    Date: <span className="u-fontWeight--medium u-color--tundora">{date}</span>
                   </p>
                 </div>
                 <div className="flex flex-auto u-paddingLeft--small justifyContent--flexEnd">
-                  <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                    Location: <span className="u-fontWeight--medium u-color--tundora">{this.props.event.country || this.props.event.source_ip || "Unknown" }</span>
-                  </p>
+                  { location ?
+                    <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
+                      Location: <span className="u-fontWeight--medium u-color--tundora">{location}</span>
+                    </p>
+                    : null
+                  }
                 </div>
               </div>
             </div>
