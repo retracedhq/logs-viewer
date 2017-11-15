@@ -20,7 +20,7 @@ export default class EventRow extends React.Component {
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              <div className={`flex flex1 content-section ellipsis-overflow`} >
+              <div className={`flex flex1 content-section`} >
                 <ReactMarkdown
                     className="EventItem u-fontWeight--medium u-lineHeight--more"
                     sourcePos={true}
@@ -28,12 +28,12 @@ export default class EventRow extends React.Component {
                     source={this.props.event.display.markdown}
                   />
               </div>
-              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section">
+              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section date alignItems--center">
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                   {moment(this.props.event.canonical_time).fromNow()}
                 </p>
               </div>
-              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section">
+              <div style={{ maxWidth: "180px" }} className="flex flex1 content-section location alignItems--center">
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                   {this.props.event.country || this.props.event.source_ip}
                 </p>

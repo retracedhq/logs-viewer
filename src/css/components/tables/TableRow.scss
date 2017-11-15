@@ -29,6 +29,7 @@
 
 .TableRow-content .content-section p {
   font-size: 14px;
+  color: #323232;
 }
 .TableRow-content .content-section.has-border::after {
   content: "";
@@ -70,7 +71,7 @@
     padding: 18px 20px 16px;
   }
   .TableRow-content .content-section p {
-    font-size: 16px;
+    font-size: 15px;
     transition: color .2s ease;
   }
   .TableRow-content .content-section.linked:hover p {

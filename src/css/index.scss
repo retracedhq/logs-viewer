@@ -63,7 +63,8 @@ html, body {
   &.dark {
     background-color: #323232;
 
-    h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong {
+    h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong,
+    .EventItem p, .date p, .location p {
       color: #ffffff;
     }
     a {
@@ -122,11 +123,14 @@ html, body {
       font-size: 26px;
       padding: 20px 25px;
       border-bottom: 1px solid #C4C8CA;
+      color: #323232;
     }
     p { line-height: 1.4; }
     .modal-content {
       padding: 20px 25px;
       font-size: 14px;
+      color: #323232;
+      background: #fff;
     }
     .icon.u-closeIcon {
       background-color: transparent;
@@ -140,7 +144,7 @@ html, body {
     }
 
     &.AccessTokensModal {
-       max-width: 600px;
+       max-width: 650px;
        max-height: 600px;
        overflow: scroll;
 

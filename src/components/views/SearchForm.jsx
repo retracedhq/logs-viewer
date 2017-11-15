@@ -229,7 +229,7 @@ export default class SearchForm extends React.Component {
                     {this.state.isDefault ? null :
                       <button type="button" className="Button secondary gray small u-display--block u-width--full u-marginBottom--normal" onClick={this.setInitialState}>Reset filters</button>
                     }
-                    <a target="_blank" href="https://preview.retraced.io/documentation/apis/graphql/#search" className="u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink">
+                    <a target="_blank" href={this.props.searchHelpURL} className="u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink">
                       Get help with search
                     </a>
                   </div>

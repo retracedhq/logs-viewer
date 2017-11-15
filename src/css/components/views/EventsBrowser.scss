@@ -15,8 +15,8 @@
 .EventItem p {
   width: 100%;
   overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .FilterApplied-tag {
@@ -37,7 +37,8 @@
 .Input.SearchEvents {
   min-width: 320px;
   position: relative;
-  z-index: 100;
+  z-index: 201;
+  height: 100%;
 }
 
 .FilterDropdown-trigger {
@@ -51,12 +52,12 @@
   line-height: 38px;
   color: #2A98CB !important;
   background-color: #ffffff;
-  z-index: 410;
+  z-index: 201;
 }
 
 .searchButton {
   position: relative;
-  z-index: 410;
+  z-index: 201;
 }
 .helpLink {
   color: #2A98CB !important;
@@ -114,5 +115,28 @@
 }
 .arrow-wrapper p:hover .icon.icon.previous {
   transform: rotate(90deg) translate(-1px, 3px);
+}
+
+@media screen and (max-width: 900px) {
+  .Input.SearchEvents {
+    min-width: 240px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .EventsTable-header h3 {
+    font-size: 18px;
+    align-self: center;
+  }
+  .Input.SearchEvents {
+    min-width: 180px;
+  }
+  .resultsCount {
+    flex: 2;
+  }
+  .FilterDropdown {
+    min-width: 200px;
+    left: -50px;
+  }
 }
 

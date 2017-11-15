@@ -109,7 +109,7 @@ class EventsBrowser extends React.Component {
     }
     // If we have a new session, we need to request a new event search
     if(this.props.session.token != nextProps.session.token) {
-      this.submitQuery("crud: c,u,d", "");
+      this.submitQuery("crud:c,u,d", "");
     }
   }
 
@@ -212,14 +212,14 @@ class EventsBrowser extends React.Component {
         <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column u-minHeight--full">
-            <div className="EventsTable-header flex flex-auto">
+            <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
                 <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">{this.props.headerTitle}</h3>
                 <span className="flex flex-auto u-marginLeft--more">
-                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} />
+                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} searchHelpURL={this.props.searchHelpURL} />
                 </span>
               </div>
-              <div className="flex flex-auto">
+              <div className="flex flex-auto icons">
                 <div className="flex-auto flex-column flex-verticalCenter">
                   <span className="icon clickable u-csvExportIcon" 
                     onClick={() => { this.renderModal(
@@ -239,7 +239,7 @@ class EventsBrowser extends React.Component {
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
                   <span className="icon clickable u-tokensIcon" 
-                    onClick={() => { this.renderModal(<AccessTokensModal closeModal={this.closeModal} />, "AccessTokensModal") }}
+                    onClick={() => { this.renderModal(<AccessTokensModal apiTokenHelpURL={this.props.apiTokenHelpURL} closeModal={this.closeModal} />, "AccessTokensModal") }}
                     onMouseEnter={() => {this.setState({ tokenTooltip: true })}}
                     onMouseLeave={() => {this.setState({ tokenTooltip: false })}}>
                     <Tooltip
@@ -330,7 +330,7 @@ class EventsBrowser extends React.Component {
                 </p>
                   : null}
               </div>
-              <div className="flex1">
+              <div className="flex1 resultsCount">
                 {currentResults.resultIds.length
                   ? <p className="u-fontSize--normal u-lineHeight--normal u-textAlign--center">
                     <span className="u-color--dustyGray">Showing events </span>
