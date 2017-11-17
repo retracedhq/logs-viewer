@@ -20,6 +20,7 @@
 .icon.u-closeIcon:hover {
   background-position: 0 -16px;
 }
+
 .icon.u-dropdownArrowIcon {
   background-position: 0 -32px;
   width: 16px;
@@ -28,6 +29,15 @@
 .icon.u-dropdownArrowIcon:hover {
   background-position: 0 -43px;
 }
+.dark .icon.u-dropdownArrowIcon {
+  background-position: -18px -32px;
+  width: 16px;
+  height: 9px;
+}
+.dark .icon.u-dropdownArrowIcon:hover {
+  background-position: -18px -43px;
+}
+
 .icon.u-gearIcon {
   background-position: 0 -54px;
   width: 16px;
@@ -36,6 +46,13 @@
 .icon.u-gearIcon:hover {
   background-position: 0 -72px;
 }
+.dark .icon.u-gearIcon {
+  background-position: -18px -54px;
+}
+.dark .icon.u-gearIcon:hover {
+  background-position: -18px -72px;
+}
+
 .icon.u-csvExportIcon {
   background-position: 0 -90px;
   width: 16px;
@@ -44,6 +61,15 @@
 .icon.u-csvExportIcon:hover {
   background-position: 0 -111px;
 }
+.dark .icon.u-csvExportIcon {
+  background-position: -18px -90px;
+  width: 16px;
+  height: 19px;
+}
+.dark .icon.u-csvExportIcon:hover {
+  background-position: -18px -111px;
+}
+
 .icon.u-codeIcon {
   background-position: 0 -132px;
   width: 18px;
@@ -52,6 +78,15 @@
 .icon.u-codeIcon:hover {
   background-position: 0 -146px;
 }
+.dark .icon.u-codeIcon {
+  background-position: -18px -132px;
+  width: 18px;
+  height: 12px;
+}
+.dark .icon.u-codeIcon:hover {
+  background-position: -18px -146px;
+}
+
 .icon.u-infoIcon {
   background-position: 0 -161px;
   width: 16px;
@@ -60,6 +95,15 @@
 .icon.u-infoIcon:hover {
   background-position: 0 -181px;
 }
+.dark .icon.u-infoIcon {
+  background-position: -18px -161px;
+  width: 16px;
+  height: 16px;
+}
+.dark .icon.u-infoIcon:hover {
+  background-position: -18px -181px;
+}
+
 .icon.u-tokensIcon {
   background-position: 0 -275px;
   width: 16px;
@@ -68,6 +112,15 @@
 .icon.u-tokensIcon:hover {
   background-position: 0 -298px;
 }
+.dark .icon.u-tokensIcon {
+  background-position: -18px -275px;
+  width: 16px;
+  height: 20px;
+}
+.dark .icon.u-tokensIcon:hover {
+  background-position: -18px -298px;
+}
+
 .icon.u-editTokenIcon {
   background-position: 0 -198px;
   width: 18px;
@@ -76,6 +129,8 @@
 .icon.u-editTokenIcon:hover {
   background-position: 0 -217px;
 }
+
+
 .icon.u-deleteTokenIcon {
   background-position: 0 -237px;
   width: 18px;
