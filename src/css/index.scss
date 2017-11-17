@@ -25,6 +25,10 @@ html, body {
   }
 }
 
+.ReactModal__Overlay {
+  background-color: rgba(50,50,50,.4) !important;
+}
+
 .retraced-logs-viewer-app {
   @import "./utilities/reset.scss";
   @import "./utilities/base.scss";
@@ -40,8 +44,6 @@ html, body {
   @import "./utilities/icons.scss";
 
   &.light {
-    background-color: #ffffff;
-
     h1, h2, h3, h4, h5, h6 {
       color: #323232;
     }
@@ -61,8 +63,6 @@ html, body {
     }
   }
   &.dark {
-    background-color: #323232;
-
     h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong,
     .EventItem p, .date p, .location p {
       color: #ffffff;
@@ -125,7 +125,10 @@ html, body {
       border-bottom: 1px solid #C4C8CA;
       color: #323232;
     }
-    p { line-height: 1.4; }
+    p { 
+      line-height: 1.4; 
+      color: #323232;
+    }
     .modal-content {
       padding: 20px 25px;
       font-size: 14px;

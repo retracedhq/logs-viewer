@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
-import Modal from "react-modal";
+import * as Modal from "react-modal";
 
 export default class ModalPortal extends React.Component {
 

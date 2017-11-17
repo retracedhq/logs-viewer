@@ -4,13 +4,13 @@ import * as autoBind from "react-autobind";
 import * as PropTypes from 'prop-types';
 import FixedTableHeader from "../views/FixedTableHeader";
 import Loader from "../views/Loader";
-import { fetchEitapiTokensList, 
-         createEitapiToken, 
-         deleteEitapiToken, 
+import { fetchEitapiTokensList,
+         createEitapiToken,
+         deleteEitapiToken,
          updateEitapiToken } from "../../redux/data/apiTokens/thunks";
 
 class AccessTokensModal extends React.Component {
-  
+
   constructor(props, context) {
     super(props);
     autoBind(this);
@@ -56,9 +56,9 @@ class AccessTokensModal extends React.Component {
       this.setState({ showErrorClass: true });
     }
   }
-  
+
   handleDeleteToken(token) {
-    this.setState({ 
+    this.setState({
         tokenToDelete: token,
         deletingToken: true,
     })
@@ -73,10 +73,10 @@ class AccessTokensModal extends React.Component {
   }
 
   reset() {
-    this.setState({ 
-      updatingToken: false, 
-      creatingToken: false, 
-      showErrorClass: false, 
+    this.setState({
+      updatingToken: false,
+      creatingToken: false,
+      showErrorClass: false,
       nameEmptyError: true,
       tokenToUpdate: {},
       newTokenName: "",
@@ -105,7 +105,7 @@ class AccessTokensModal extends React.Component {
     ]
     return (
       <div>
-        <h1 className="u-fontWeight--normal">Access Tokens</h1>
+        <h1 className="u-fontWeight--normal">API Tokens</h1>
         {apiTokens.length ?
           (creatingToken || updatingToken) && !tokensLoading ?
             <div className="modal-content">
@@ -122,7 +122,7 @@ class AccessTokensModal extends React.Component {
               }
               <div className="flex flexWrap--wrap justifyContent--flexEnd">
                 <input className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} ref="tokenName" type="text" placeholder="Token Name" onChange={(e) => { this.handleNameUpdate(e); }} />
-                <button className="Button secondary flex-auto u-marginLeft--normal" onClick={() => { this.reset(); }}>Back</button>             
+                <button className="Button secondary flex-auto u-marginLeft--normal" onClick={() => { this.reset(); }}>Back</button>
                 {updatingToken ?
                   <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleUpdateToken(this.state.tokenToUpdate) }}>Update Token</button> :
                   <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleTokenCreation(this.state.newTokenName) }}>Create Token</button>
@@ -176,7 +176,7 @@ class AccessTokensModal extends React.Component {
                         }
                     </div>
                 <div className="flex flex-auto buttons justifyContent--flexEnd">
-                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">What is an API token?</a>
+                    <a className="u-padding--normal u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">How to use Audit Log API Tokens</a>
                     <button className="Button primary u-marginLeft--normal" onClick={() => { this.setState({ creatingToken: true }) }}>Create Token</button>
                 </div>
                 </div>
@@ -193,7 +193,7 @@ class AccessTokensModal extends React.Component {
                         <button className="Button primary flex-auto u-marginLeft--normal" onClick={() => { this.handleTokenCreation(this.state.newTokenName) }}>Create Token</button>
                     </div>
                 </div>
-            : 
+            :
               tokensLoading ?
                 <div className="flex-column flex1 justifyContent--center alignItems--center u-padding--more">
                   <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
@@ -203,7 +203,7 @@ class AccessTokensModal extends React.Component {
                     <div className="u-tokenIllustration u-padding--normal"></div>
                     <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
                     <button className="Button primary u-margin--small" onClick={() => { this.setState({ creatingToken: true }) }}>Create new token</button>
-                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">What is an API token?</a>
+                    <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">How to use Audit Log API Tokens</a>
                 </div>
         }
       </div>
