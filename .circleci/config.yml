@@ -11,9 +11,31 @@ jobs:
       - run:
           name: Test Build
           command: 'make build'
+  publish:
+    docker:
+      - image: circleci/node:8.7
+    steps:
+      - checkout
+      - run:
+          name: Yarn
+          command: 'yarn install'
+      - run:
+          name: Build Prod
+          command: 'make build_prod'
+      - run:
+          name: npm login
+          command: 'npm run login-cli'
+      - run:
+          name: Publish if version changed
+          command: 'npm maybe-publish'
 
 workflows:
   version: 2
-  build:
+  build-n-deploy:
     jobs:
       - build
+      - publish:
+          filters:
+            branches:
+              only: master
+

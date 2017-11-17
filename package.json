@@ -42,6 +42,8 @@
   },
   "scripts": {
     "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
+    "login-cli": "npm-cli-login"
+    "maybe-publish": "publish"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.1",
@@ -54,7 +56,9 @@
     "isomorphic-fetch": "^2.2.1",
     "less-loader": "^4.0.4",
     "node-sass": "^4.5.3",
+    "npm-cli-login": "^0.0.10",
     "postcss-loader": "^2.0.6",
+    "publish": "^0.6.0",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "resolve-url-loader": "^2.1.0",
