@@ -41,8 +41,8 @@
     "webpack": "^3.0.0"
   },
   "scripts": {
-    "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
-    "login-cli": "npm-cli-login"
+    "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev",
+    "login-cli": "npm-cli-login",
     "maybe-publish": "publish"
   },
   "devDependencies": {
