@@ -77,9 +77,10 @@ html, body {
 
     .FixedTableHeader-wrapper {
       background-color: rgba(255,255,255,.4);
+      border-color: #F7F7F7;
 
       p.FixedTableHeader-title {
-        color: #323232;
+        color: #fff;
       }
     }
 
@@ -90,6 +91,10 @@ html, body {
       &:hover {
         background-color:rgba(248, 248, 248, .2);
       }
+    }
+
+    .TableRow-wrapper {
+      border-color: #F7F7F7;
     }
 
     .FilterDropdown p {
@@ -105,6 +110,58 @@ html, body {
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
       border-bottom: 5px solid rgba(255,255,255,1);
+    }
+
+    .icon.u-dropdownArrowIcon {
+      background-position: -18px -32px;
+      width: 16px;
+      height: 9px;
+    }
+    .icon.u-dropdownArrowIcon:hover {
+      background-position: -18px -43px;
+    }
+
+    .icon.u-gearIcon {
+      background-position: -18px -54px;
+    }
+    .icon.u-gearIcon:hover {
+      background-position: -18px -72px;
+    }
+
+    .icon.u-csvExportIcon {
+      background-position: -18px -90px;
+      width: 16px;
+      height: 19px;
+    }
+    .icon.u-csvExportIcon:hover {
+      background-position: -18px -111px;
+    }
+
+    .icon.u-codeIcon {
+      background-position: -18px -132px;
+      width: 18px;
+      height: 12px;
+    }
+    .icon.u-codeIcon:hover {
+      background-position: -18px -146px;
+    }
+
+    .icon.u-infoIcon {
+      background-position: -18px -161px;
+      width: 16px;
+      height: 16px;
+    }
+    .icon.u-infoIcon:hover {
+      background-position: -18px -181px;
+    }
+
+    .icon.u-tokensIcon {
+      background-position: -18px -275px;
+      width: 17px;
+      height: 20px;
+    }
+    .icon.u-tokensIcon:hover {
+      background-position: -18px -298px;
     }
   }
 
