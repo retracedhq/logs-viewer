@@ -27,7 +27,7 @@ jobs:
           command: 'npm run login-cli'
       - run:
           name: Publish if version changed
-          command: 'npm maybe-publish'
+          command: 'npm run maybe-publish'
 
 workflows:
   version: 2
