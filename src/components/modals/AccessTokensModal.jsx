@@ -201,7 +201,7 @@ class AccessTokensModal extends React.Component {
               :
                 <div className="modal-content flex flexWrap--wrap justifyContent--center">
                     <div className="u-tokenIllustration u-padding--normal"></div>
-                    <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any access tokens</p>
+                    <p className="u-fontWeight--medium u-paddingBottom--small u-width--full u-textAlign--center">You have not created any API tokens</p>
                     <button className="Button primary u-margin--small" onClick={() => { this.setState({ creatingToken: true }) }}>Create new token</button>
                     <a className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue" href={this.props.apiTokenHelpURL} target="_blank">How to use Audit Log API Tokens</a>
                 </div>
