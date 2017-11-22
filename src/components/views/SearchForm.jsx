@@ -79,9 +79,13 @@ export default class SearchForm extends React.Component {
     }
   }
 
-  dateFormat(date, format) {
-    if (!date) { return ""; };
-    return moment.utc(date).format(format);
+  // The API requires a start and end date in ISO8601 format.
+  // Add 24 hours to end date to include that date.
+  dateRangeWithDefaults(start, end) {
+    return [
+      start ? moment(start).format() : "2017-01-01T00:00:00Z",
+      end ? moment(end).add(1, "d").format() : moment().add(1, "d").startOf("day").format(),
+    ];
   }
 
   onSubmit = (e) => {
@@ -94,7 +98,7 @@ export default class SearchForm extends React.Component {
     }
     const receivedQuery = (!this.state.receivedStartDate && !this.state.receivedEndDate)
       ? []
-      : [this.dateFormat(this.state.receivedStartDate, "YYYY-MM-DD"), this.dateFormat(this.state.receivedEndDate, "YYYY-MM-DD")];
+      : this.dateRangeWithDefaults(this.state.receivedStartDate, this.date.receivedEndDate);
 
     let query = `${this.state.searchQuery.length ? `${this.state.searchQuery} ` : ""}${crudQuery}${receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""}`;
 
