@@ -98,7 +98,7 @@ export default class SearchForm extends React.Component {
     }
     const receivedQuery = (!this.state.receivedStartDate && !this.state.receivedEndDate)
       ? []
-      : this.dateRangeWithDefaults(this.state.receivedStartDate, this.date.receivedEndDate);
+      : this.dateRangeWithDefaults(this.state.receivedStartDate, this.state.receivedEndDate);
 
     let query = `${this.state.searchQuery.length ? `${this.state.searchQuery} ` : ""}${crudQuery}${receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""}`;
 
