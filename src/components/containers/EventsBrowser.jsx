@@ -109,7 +109,7 @@ class EventsBrowser extends React.Component {
     }
     // If we have a new session, we need to request a new event search
     if(this.props.session.token != nextProps.session.token) {
-      this.submitQuery("crud:c,u,d", "");
+      this.submitQuery("", "");
     }
   }
 
