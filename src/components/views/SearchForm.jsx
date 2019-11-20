@@ -123,6 +123,7 @@ export default class SearchForm extends React.Component {
                 className="Input SearchEvents"
                 onChange={this.onChange}
                 placeholder="Search events"
+                aria-label="Search events"
               />
               <span className="FilterDropdown-trigger u-textDecoration--underlineOnHover" onClick={this.props.toggleDropdown}>{this.props.filtersOpen ? "Close" : "Filters"}</span>
               {this.props.filtersOpen ?
