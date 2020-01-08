@@ -52,6 +52,7 @@
     "copy-webpack-plugin": "^4.0.1",
     "css-loader": "^0.28.4",
     "file-loader": "^0.11.2",
+    "html-webpack-plugin": "^3.2.0",
     "html-webpack-template": "^6.0.1",
     "isomorphic-fetch": "^2.2.1",
     "less-loader": "^4.0.4",
@@ -67,6 +68,7 @@
     "svg-url-loader": "^2.1.1",
     "typescript": "^2.4.1",
     "url-loader": "^0.5.9",
+    "webpack-dev-server": "^2.11.3",
     "webpack-merge": "^4.1.0"
   },
   "bugs": {
