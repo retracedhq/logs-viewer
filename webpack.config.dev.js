@@ -3,20 +3,22 @@ var webpack = require("webpack");
 var HtmlWebpackPlugin = require("html-webpack-plugin");
 var HtmlWebpackTemplate = require("html-webpack-template");
 
-var srcPath = path.join(__dirname, "src");
-var devPath = path.join(__dirname, "dev");
-
 module.exports = {
   entry: [
-    "./dev/index.jsx",
+    "./src/dev/index.jsx",
   ],
 
   module: {
     rules: [
       {
-        test: /\.[tj]sx?$/,
-        include: [srcPath, devPath],
-        loaders: ["awesome-typescript-loader"],
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env'],
+          },
+        },
       },
     ],
   },
@@ -27,6 +29,24 @@ module.exports = {
       template: HtmlWebpackTemplate,
       title: "Retraced Logs Viewer",
       appMountId: "app",
+      externals: [
+        {
+          'react-dom': {
+            root: 'ReactDOM',
+            commonjs2: 'react-dom',
+            commonjs: 'react-dom',
+            amd: 'react-dom'
+          }
+        },
+        {
+          'react': {
+            root: 'React',
+            commonjs2: 'react',
+            commonjs: 'react',
+            amd: 'react'
+          }
+        }
+      ]
     }),
   ],
   

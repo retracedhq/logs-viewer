@@ -1,20 +1,20 @@
 {
     "compilerOptions": {
-      "allowJs": true,
+      "target": "es2017",
       "module": "commonjs",
-      "target": "es5",
+      "lib": ["es6", "dom"],
+      "types": ["reflect-metadata"],
+      "noImplicitAny": false,
+      "noEmitOnError": true,
       "sourceMap": true,
+      "preserveConstEnums": true,
       "experimentalDecorators": true,
+      "emitDecoratorMetadata": true,
       "strictNullChecks": true,
+      "skipLibCheck": true,
+      "allowJs": true,
       "outDir": "dist",
-      "pretty": true,
-      "jsx": "react",
-      "lib": [
-        "dom",
-        "es5",
-        "scripthost",
-        "es2015.promise"
-      ]
+      "pretty": true
     },
     "include": [
       "src/**/*.ts",

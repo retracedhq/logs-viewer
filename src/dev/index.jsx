@@ -1,6 +1,6 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { RetracedEventsBrowser } from "../src/index";
+import * as RetracedEventsBrowser from "../index";
 
 ReactDOM.render((
     <RetracedEventsBrowser auditLogToken="123" />
