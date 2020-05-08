@@ -1,6 +1,6 @@
 {
   "name": "retraced-logs-viewer",
-  "version": "2.2.6",
+  "version": "2.2.7",
   "description": "Logs viewer widget",
   "main": "dist/index.js",
   "repository": {
