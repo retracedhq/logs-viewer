@@ -94,7 +94,7 @@ export default class SearchForm extends React.Component {
     const crudFilters = this.state.crudFilters;
     const dates = {
       startDate: this.state.receivedStartDate,
-      endDate: this.state.receivedEndDate && moment(this.state.receivedEndDate).add(1, "d").valueof(),
+      endDate: this.state.receivedEndDate && moment(this.state.receivedEndDate).add(1, "d").toDate(),
     }
     const receivedQuery = (!this.state.receivedStartDate && !this.state.receivedEndDate)
       ? []
