@@ -5,10 +5,13 @@ var srcPath = path.join(__dirname, "src");
 var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js");
 
 module.exports = {
+  optimization: {
+    minimize: true //Update this to true or false
+  },
   entry: [
     "./src/index.jsx",
   ],
-
+  mode: "production",
   module: {
     rules: [
       {
@@ -21,7 +24,7 @@ module.exports = {
 
   plugins: [
     new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
+    // new webpack.optimize.UglifyJsPlugin(),
   ],
 
   devtool: 'source-map',

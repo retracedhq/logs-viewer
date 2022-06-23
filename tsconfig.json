@@ -14,7 +14,8 @@
       "skipLibCheck": true,
       "allowJs": true,
       "outDir": "dist",
-      "pretty": true
+      "pretty": true,
+      "jsx": "react"
     },
     "include": [
       "src/**/*.ts",
