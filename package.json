@@ -1,90 +1,77 @@
 {
-  "name": "retraced-logs-viewer",
-  "version": "2.2.7",
-  "description": "Logs viewer widget",
-  "main": "dist/index.js",
-  "repository": {
-    "url": "git+ssh://git@github.com/retracedhq/logs-viewer.git",
-    "type": "git"
-  },
-  "author": "Replicated Inc",
-  "contributors": [
-    "Grayson Null <grayson@replicated.com>"
-  ],
-  "license": "MIT",
-  "browserslist": [
-    "> 1%",
-    "last 4 versions"
-  ],
-  "peerDependencies": {
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1"
-  },
-  "dependencies": {
-    "accounting": "^0.4.1",
-    "lodash": "^4.17.21",
-    "moment": "^2.29.3",
-    "prop-types": "^15.8.1",
-    "react-ace": "^5.1.0",
-    "react-autobind": "^1.0.6",
-    "react-datepicker": "^0.48.0",
-    "react-markdown": "^2.5.0",
-    "react-modal": "^3.15.1",
-    "react-redux": "^5.0.5",
-    "react-router-dom": "^4.1.1",
-    "redux": "^4.2.0",
-    "redux-actions": "^2.6.5",
-    "redux-thunk": "^2.4.1",
-    "reflect-metadata": "^0.1.13",
-    "search-query-parser": "^1.6.0",
-    "url": "^0.11.0",
-    "webpack": "^4.17.2"
-  },
-  "scripts": {
-    "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev",
-    "login-cli": "npm-cli-login",
-    "maybe-publish": "publish"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.18.5",
-    "@babel/plugin-proposal-class-properties": "^7.17.12",
-    "@babel/plugin-proposal-decorators": "^7.18.2",
-    "@babel/plugin-proposal-object-rest-spread": "^7.18.0",
-    "@babel/plugin-proposal-optional-chaining": "^7.17.12",
-    "@babel/plugin-syntax-dynamic-import": "^7.8.3",
-    "@babel/preset-env": "^7.18.2",
-    "@babel/preset-react": "^7.17.12",
-    "autoprefixer": "^7.1.1",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-generator": "^6.26.1",
-    "babel-loader": "^8.2.5",
-    "babel-plugin-import": "^1.13.5",
-    "copy-webpack-plugin": "4.6.0",
-    "css-loader": "^2.1.1",
-    "file-loader": "^2.0.0",
-    "html-webpack-plugin": "^3.2.0",
-    "html-webpack-template": "^6.2.0",
-    "isomorphic-fetch": "^2.2.1",
-    "less": "^3.10.3",
-    "less-loader": "^5.0.0",
-    "node-sass": "^4.5.3",
-    "npm-cli-login": "^1.0.0",
-    "postcss-loader": "^3.0.0",
-    "publish": "^0.6.0",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "resolve-url-loader": "^3.1.1",
-    "sass-loader": "^6.0.6",
-    "style-loader": "^0.23.0",
-    "svg-url-loader": "^3.0.3",
-    "typescript": "^3.7.4",
-    "url-loader": "^0.5.7",
-    "webpack-cli": "^3.3.10",
-    "webpack-dev-server": "^3.1.7",
-    "webpack-merge": "^4.1.4"
-  },
-  "bugs": {
-    "url": "https://github.com/retracedhq/logs-viewer/issues"
-  },
-  "homepage": "https://github.com/retracedhq/logs-viewer#readme"
+    "name": "retraced-logs-viewer",
+    "version": "2.2.7",
+    "description": "Logs viewer widget",
+    "main": "dist/index.js",
+    "repository": {
+        "url": "git+ssh://git@github.com/retracedhq/logs-viewer.git",
+        "type": "git"
+    },
+    "author": "Replicated Inc",
+    "contributors": [
+        "Grayson Null <grayson@replicated.com>"
+    ],
+    "license": "MIT",
+    "browserslist": [
+        "> 1%",
+        "last 4 versions"
+    ],
+    "peerDependencies": {
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1"
+    },
+    "dependencies": {
+        "accounting": "^0.4.1",
+        "compression-webpack-plugin": "^1.0.0",
+        "lodash": "^4.17.21",
+        "moment": "^2.29.3",
+        "prop-types": "^15.8.1",
+        "react-ace": "^5.1.0",
+        "react-autobind": "^1.0.6",
+        "react-datepicker": "^0.48.0",
+        "react-markdown": "^2.5.0",
+        "react-modal": "^3.1.2",
+        "react-redux": "^5.0.5",
+        "react-router-dom": "^4.1.1",
+        "redux": "^3.7.1",
+        "redux-actions": "^2.0.3",
+        "redux-thunk": "^2.2.0",
+        "reflect-metadata": "^0.1.13",
+        "search-query-parser": "^1.3.0",
+        "url": "^0.11.0",
+        "webpack": "^3.0.0"
+    },
+    "scripts": {
+        "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev",
+        "login-cli": "npm-cli-login",
+        "maybe-publish": "publish"
+    },
+    "devDependencies": {
+        "autoprefixer": "^7.1.1",
+        "awesome-typescript-loader": "^3.2.1",
+        "babel-generator": "^6.25.0",
+        "copy-webpack-plugin": "^4.0.1",
+        "css-loader": "^0.28.4",
+        "file-loader": "^0.11.2",
+        "html-webpack-template": "^6.0.1",
+        "isomorphic-fetch": "^2.2.1",
+        "less-loader": "^4.0.4",
+        "node-sass": "^7.0.1",
+        "npm-cli-login": "^0.0.10",
+        "postcss-loader": "^2.0.6",
+        "publish": "^0.6.0",
+        "react": "^15.6.1",
+        "react-dom": "^15.6.1",
+        "resolve-url-loader": "^2.1.0",
+        "sass-loader": "^6.0.6",
+        "style-loader": "^0.18.2",
+        "svg-url-loader": "^2.1.1",
+        "typescript": "^2.4.1",
+        "url-loader": "^0.5.9",
+        "webpack-merge": "^4.1.0"
+    },
+    "bugs": {
+        "url": "https://github.com/retracedhq/logs-viewer/issues"
+    },
+    "homepage": "https://github.com/retracedhq/logs-viewer#readme"
 }
