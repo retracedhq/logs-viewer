@@ -5,6 +5,7 @@ var srcPath = path.join(__dirname, "src");
 var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js");
 
 module.exports = {
+    mode: "production",
     // optimization: {
     //     minimize: true //Update this to true or false
     // },
