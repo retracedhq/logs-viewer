@@ -39,7 +39,7 @@
         "reflect-metadata": "^0.1.13",
         "search-query-parser": "^1.6.0",
         "url": "^0.11.0",
-        "webpack": "^4.0.0"
+        "webpack": "^5.73.0"
     },
     "scripts": {
         "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev",
@@ -51,8 +51,9 @@
         "awesome-typescript-loader": "^5.2.1",
         "babel-generator": "^6.26.1",
         "copy-webpack-plugin": "^5.0.0",
-        "css-loader": "^5.0.0",
+        "css-loader": "^6.7.1",
         "file-loader": "^5.0.0",
+        "html-webpack-plugin": "^5.5.0",
         "html-webpack-template": "^6.2.0",
         "isomorphic-fetch": "^3.0.0",
         "less-loader": "^8.0.0",
@@ -64,9 +65,9 @@
         "react-dom": "^18.2.0",
         "resolve-url-loader": "^5.0.0",
         "sass-loader": "^6.0.6",
-        "style-loader": "^2.0.0",
+        "style-loader": "^3.0.0",
         "svg-url-loader": "^7.1.1",
-        "typescript": "^2.4.1",
+        "typescript": "^3.0.0",
         "url-loader": "^4.1.1",
         "webpack-cli": "^4.10.0",
         "webpack-merge": "^4.1.0"

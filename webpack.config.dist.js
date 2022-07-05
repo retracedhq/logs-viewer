@@ -18,7 +18,7 @@ module.exports = {
             {
                 test: /\.[tj]sx?$/,
                 include: srcPath,
-                loaders: ["awesome-typescript-loader"],
+                use: ["awesome-typescript-loader"],
             },
         ],
     },
@@ -34,9 +34,5 @@ module.exports = {
         reasons: false
     },
 
-    node: {
-        dns: 'empty',
-        net: 'empty',
-        tls: 'empty'
-    },
+    node: false,
 };

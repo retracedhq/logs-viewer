@@ -25,7 +25,7 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.NamedModulesPlugin(),
+        // new webpack.NamedModulesPlugin(),
         new HtmlWebpackPlugin({
             template: HtmlWebpackTemplate,
             title: "Retraced Logs Viewer",
