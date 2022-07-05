@@ -17,8 +17,8 @@
         "last 4 versions"
     ],
     "peerDependencies": {
-        "react": "^15.6.1",
-        "react-dom": "^15.6.1"
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "dependencies": {
         "accounting": "^0.4.1",
@@ -47,25 +47,25 @@
         "maybe-publish": "publish"
     },
     "devDependencies": {
-        "autoprefixer": "^9.0.0",
+        "autoprefixer": "^10.4.7",
         "awesome-typescript-loader": "^5.2.1",
         "babel-generator": "^6.26.1",
         "copy-webpack-plugin": "^5.0.0",
         "css-loader": "^6.7.1",
-        "file-loader": "^5.0.0",
+        "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.5.0",
         "html-webpack-template": "^6.2.0",
         "isomorphic-fetch": "^3.0.0",
-        "less-loader": "^8.0.0",
-        "node-sass": "^7.0.1",
+        "less-loader": "^11.0.0",
         "npm-cli-login": "^1.0.0",
-        "postcss-loader": "^4.0.0",
+        "postcss-loader": "^7.0.0",
         "publish": "^0.6.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "resolve-url-loader": "^5.0.0",
-        "sass-loader": "^6.0.6",
-        "style-loader": "^3.0.0",
+        "sass": "^1.53.0",
+        "sass-loader": "^10.3.0",
+        "style-loader": "^3.3.1",
         "svg-url-loader": "^7.1.1",
         "typescript": "^3.0.0",
         "url-loader": "^4.1.1",
