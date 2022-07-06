@@ -1,5 +1,5 @@
 var path = require("path");
-var webpackMerge = require("webpack-merge");
+const { merge } = require('webpack-merge');
 var webpack = require("webpack");
 var CopyWebpackPlugin = require("copy-webpack-plugin");
 var distPath = path.join(__dirname, "dist");
@@ -50,7 +50,7 @@ var common = {
           { loader: "style-loader" },
           { loader: "css-loader" },
           { loader: "resolve-url-loader" },
-          { loader: "sass-loader?sourceMap" },
+          { loader: "sass-loader" },
           { loader: "postcss-loader" }
         ]
       },
@@ -91,10 +91,12 @@ var common = {
         NODE_ENV: JSON.stringify(appEnv.RETRACED_ENV),
       }
     }),
-    new CopyWebpackPlugin([{ from: "./src/assets/logs_spritesheet.svg" }]),
-    new webpack.LoaderOptionsPlugin({
-      options: {
-        postcss: [
+      new CopyWebpackPlugin({
+          patterns: [{ from: "./src/assets/logs_spritesheet.svg" }]
+      }),
+      new webpack.LoaderOptionsPlugin({
+          options: {
+              postcss: [
           require("autoprefixer")
         ]
       },
@@ -105,9 +107,9 @@ var common = {
 module.exports = function (env) {
   if (process.env.LOGS_VIEWER_ENV === "dev" || !process.env.LOGS_VIEWER_ENV) {
     var dev = require("./webpack.config.dev");
-    return webpackMerge(common, dev);
+    return merge(common, dev);
   } else {
     var dist = require("./webpack.config.dist");
-    return webpackMerge(common, dist);
+    return merge(common, dist);
   }
 };
