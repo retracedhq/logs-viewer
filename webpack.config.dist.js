@@ -1,6 +1,5 @@
 var path = require("path");
 var webpack = require("webpack");
-
 var srcPath = path.join(__dirname, "src");
 var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js");
 
@@ -18,14 +17,16 @@ module.exports = {
             {
                 test: /\.[tj]sx?$/,
                 include: srcPath,
-                use: ["awesome-typescript-loader"],
+                exclude: /node_modules/,
+                use: [{
+                    loader:"babel-loader"
+            }],
             },
         ],
     },
 
     plugins: [
         new webpack.optimize.AggressiveMergingPlugin(),
-        // new webpack.optimize.UglifyJsPlugin(),
     ],
 
     devtool: 'source-map',
