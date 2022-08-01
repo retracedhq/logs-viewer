@@ -13,6 +13,7 @@ export function requestEventSearch(query) {
     const state = getState();
     const host = state.data.sessionData.host;
     const url = `${host}/graphql`;
+    var body;
     try {
       const response = await fetch(url, {
       method: "post",
@@ -75,6 +76,10 @@ export function requestEventSearch(query) {
         }`,
       }),
     });
+    if (!response.ok) {
+      return null;
+    }
+    body = await response.json();
     } catch(err) {
       console.log(err);
     }
@@ -84,11 +89,6 @@ export function requestEventSearch(query) {
     //    explode
     // }
 
-    if (!response.ok) {
-      return null;
-    }
-    
-    const body = await response.json();
     const events = body.data.search.edges.map(({ node }) => node);
     const cursor = body.data.search.pageInfo.hasPreviousPage && _.last(body.data.search.edges).cursor;
     dispatch(receiveEventList(query, body.data.search.totalCount, events, cursor));

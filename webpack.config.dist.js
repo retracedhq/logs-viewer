@@ -26,7 +26,7 @@ module.exports = {
     },
 
     plugins: [
-        new webpack.optimize.AggressiveMergingPlugin(),
+        // new webpack.optimize.AggressiveMergingPlugin(),
     ],
 
     devtool: 'source-map',
