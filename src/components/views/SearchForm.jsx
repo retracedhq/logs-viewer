@@ -145,7 +145,6 @@ export default class SearchForm extends React.Component {
                         />
                       </div>
                       <div className="flex1 u-paddingLeft--small">
-                        <label id="pickerEndLabel" htmlFor="picker-end">End</label>
                         <DatePicker
                           key="picker-end"
                           id="picker-end"
