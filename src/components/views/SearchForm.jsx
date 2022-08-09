@@ -137,7 +137,7 @@ export default class SearchForm extends React.Component {
                           selected={this.state.receivedStartDate}
                           className="Input u-width--full"
                           placeholderText="Start"
-                          dateFormat="MM/DD/YYYY"
+                          dateFormat="MM/dd/yyyy"
                           popoverAttachment="bottom center"
                           popoverTargetAttachment="top center"
                           popoverTargetOffset="10px 40px"
@@ -152,7 +152,7 @@ export default class SearchForm extends React.Component {
                           selected={this.state.receivedEndDate}
                           className="Input u-width--full"
                           placeholderText="End"
-                          dateFormat="MM/DD/YYYY"
+                          dateFormat="MM/dd/yyyy"
                           popoverAttachment="bottom center"
                           popoverTargetAttachment="top center"
                           popoverTargetOffset="10px 40px"
