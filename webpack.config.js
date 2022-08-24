@@ -91,9 +91,9 @@ var common = {
         NODE_ENV: JSON.stringify(appEnv.RETRACED_ENV),
       }
     }),
-      new CopyWebpackPlugin({
-          patterns: [{ from: "./src/assets/logs_spritesheet.svg" }]
-      }),
+      // new CopyWebpackPlugin({
+      //     patterns: [{ from: "./src/assets/logs_spritesheet.svg" }]
+      // }),
       new webpack.LoaderOptionsPlugin({
           options: {
               postcss: [
