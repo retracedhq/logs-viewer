@@ -26,7 +26,7 @@ class ExportEventsModal extends React.Component {
     const { newSavedExport } = this.state;
     if (newSavedExport) {
       setTimeout(() => {
-        this.exportName.focus();
+        this.exportName.current.focus();
       }, 10);
     }
   }

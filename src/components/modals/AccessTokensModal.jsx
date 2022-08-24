@@ -35,7 +35,7 @@ class AccessTokensModal extends React.Component {
     const { creatingToken, updatingToken } = this.state;
     if (creatingToken || updatingToken) {
       setTimeout(() => {
-        this.tokenName.focus();
+        this.tokenName.current.focus();
       }, 10);
     }
   }
