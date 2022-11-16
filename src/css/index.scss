@@ -1,4 +1,3 @@
-@import "./components/views/DatePicker.scss";
 html, body {
   display: flex;
   flex-direction: column;
@@ -29,9 +28,14 @@ html, body {
   background-color: rgba(50,50,50,.4) !important;
 }
 
+// Ace Editor fix
+.ace_line {
+  height: 16px !important;
+}
+
 .retraced-logs-viewer-app {
-  @import "./utilities/reset.scss";
   @import "./utilities/base.scss";
+  @import "./utilities/reset.scss";
   @import "./utilities/typography.scss";
   @import "./utilities/buttons.scss";
   @import "./utilities/utilities.scss";
@@ -40,6 +44,7 @@ html, body {
   @import "./components/tables/FixedTableHeader.scss";
   @import "./components/tables/TableRow.scss";
   @import "./components/views/EventsBrowser.scss";
+  @import "./components/views/DatePicker.scss";
   @import "./components/shared/Tooltip.scss";
   @import "./utilities/icons.scss";
 
@@ -68,7 +73,7 @@ html, body {
       color: #ffffff;
     }
     a {
-     text-decoration: underline;
+    text-decoration: underline;
     }
     code {
       color: #323232;
@@ -208,9 +213,9 @@ html, body {
     }
 
     &.AccessTokensModal {
-       max-width: 650px;
-       max-height: 600px;
-       overflow: scroll;
+      max-width: 650px;
+      max-height: 600px;
+      overflow: scroll;
 
       .token-name {
         min-width: 130px;

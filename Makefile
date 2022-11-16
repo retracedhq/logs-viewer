@@ -1,21 +1,20 @@
+PHONY: clean
 clean:
 	rm -rf node_modules
 	rm -rf dist
 
+PHONY: deps
 deps:
-	yarn install
+	npm install
 
+PHONY: build
 build:
-	LOGS_VIEWER_ENV=dev `npm bin`/webpack --config webpack.config.js
+	npm run build
 
-build_local:
-	`npm bin`/webpack --config webpack.config.js
+PHONY: dev
+dev:
+  npm run dev
 
-build_staging:
-	LOGS_VIEWER_ENV=staging `npm bin`/webpack --config webpack.config.js
-
-build_prod:
-	LOGS_VIEWER_ENV=prod `npm bin`/webpack --config webpack.config.js
-
-test:
-	yarn test
+PHONY: watch
+watch:
+  npm run watch

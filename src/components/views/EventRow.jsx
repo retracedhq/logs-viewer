@@ -1,8 +1,7 @@
-import * as React from "react";
-import { connect } from "react-redux";
-import * as autobind from "react-autobind";
-import * as ReactMarkdown from "react-markdown";
-import * as moment from "moment";
+import React from "react";
+import autobind from "react-autobind";
+import ReactMarkdown from "react-markdown";
+import moment from "moment";
 import Tooltip from "../shared/Tooltip";
 
 export default class EventRow extends React.Component {
@@ -24,8 +23,8 @@ export default class EventRow extends React.Component {
                 <ReactMarkdown
                     className="EventItem u-fontWeight--medium u-lineHeight--more"
                     sourcePos={true}
-                    renderers={this.props.renderers}
-                    source={this.props.event.display.markdown}
+                    components={this.props.renderers}
+                    children={this.props.event.display.markdown}
                   />
               </div>
               <div style={{ maxWidth: "180px" }} className="flex flex1 content-section date alignItems--center">

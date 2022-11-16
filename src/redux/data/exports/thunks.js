@@ -1,7 +1,7 @@
 import "isomorphic-fetch";
-import * as url from "url";
+import url from "url";
 
-import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actions";
+import { receiveSavedExports } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
 let last = null;

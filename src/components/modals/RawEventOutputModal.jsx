@@ -1,10 +1,8 @@
-import * as React from "react";
-import * as autoBind from "react-autobind";
-import * as PropTypes from 'prop-types';
+import React from "react";
+import autoBind from "react-autobind";
 import AceEditor from "react-ace";
-import Modal from "react-modal";
-import "brace/mode/javascript";
-import "brace/theme/github";
+import "ace-builds/src-noconflict/mode-javascript";
+import "ace-builds/src-noconflict/theme-github";
 
 export default class RawEventOutputModal extends React.Component {
 
@@ -33,6 +31,7 @@ export default class RawEventOutputModal extends React.Component {
               showPrintMargin={false}
               editorProps={{ $blockScrolling: true }}
               value={raw}
+              fontSize={14}
             />
           </div>
         </div>

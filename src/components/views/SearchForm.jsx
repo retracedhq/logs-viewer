@@ -1,7 +1,8 @@
-import * as React from "react";
-import * as autoBind from "react-autobind";
-import * as moment from "moment";
-import * as searchQueryParser from "search-query-parser";
+import React from "react";
+import autoBind from "react-autobind";
+import moment from "moment";
+import searchQueryParser from "search-query-parser";
+import _ from 'lodash';
 import DatePicker from "react-datepicker";
 
 export default class SearchForm extends React.Component {
@@ -131,29 +132,39 @@ export default class SearchForm extends React.Component {
                   <div className="u-paddingBottom--more">
                     <p className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal">Date range</p>
                     <div className="flex flex1">
-                      <div className="flex1 u-paddingRight--small">
+                      <div className="flex1 u-paddingRight--small datepicker-style-boundary datepicker-specificity-hack">
                         <DatePicker
                           key="picker-start"
                           selected={this.state.receivedStartDate}
                           className="Input u-width--full"
                           placeholderText="Start"
-                          dateFormat="MM/DD/YYYY"
-                          popoverAttachment="bottom center"
-                          popoverTargetAttachment="top center"
-                          popoverTargetOffset="10px 40px"
+                          dateFormat="MM/dd/yyyy"
+                          popperModifiers={[
+                            {
+                              name: "offset",
+                              options: {
+                                offset: [-10, 0],
+                              },
+                            },
+                          ]}
                           onChange={this.handleReceivedStartDateChange}
                         />
                       </div>
-                      <div className="flex1 u-paddingLeft--small">
+                      <div className="flex1 u-paddingLeft--small datepicker-style-boundary datepicker-specificity-hack">
                         <DatePicker
                           key="picker-end"
                           selected={this.state.receivedEndDate}
                           className="Input u-width--full"
                           placeholderText="End"
-                          dateFormat="MM/DD/YYYY"
-                          popoverAttachment="bottom center"
-                          popoverTargetAttachment="top center"
-                          popoverTargetOffset="10px 40px"
+                          dateFormat="MM/dd/yyyy"
+                          popperModifiers={[
+                            {
+                              name: "offset",
+                              options: {
+                                offset: [-10, 0],
+                              },
+                            },
+                          ]}
                           onChange={this.handleReceivedEndDateChange}
                         />
                       </div>

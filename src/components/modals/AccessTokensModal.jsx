@@ -1,7 +1,6 @@
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
-import * as autoBind from "react-autobind";
-import * as PropTypes from 'prop-types';
+import autoBind from "react-autobind";
 import FixedTableHeader from "../views/FixedTableHeader";
 import Loader from "../views/Loader";
 import { fetchEitapiTokensList,
