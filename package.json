@@ -1,5 +1,5 @@
 {
-    "name": "retraced-logs-viewer",
+    "name": "@retraced-hq/logs-viewer",
     "version": "2.3.0",
     "description": "Logs viewer widget",
     "main": "dist/index.js",
@@ -11,7 +11,7 @@
     "contributors": [
         "Grayson Null <grayson@replicated.com>"
     ],
-    "license": "MIT",
+    "license": "Apache-2.0 license",
     "browserslist": [
         "> 1%",
         "last 4 versions"
