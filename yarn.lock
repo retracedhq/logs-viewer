@@ -5053,9 +5053,9 @@ sntp@1.x.x:
     hoek "2.x.x"
 
 snyk@^1.124.1:
-  version "1.964.0"
-  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.964.0.tgz#81d0f7121a3471751f2ef90fdc9ac3e65ac696cd"
-  integrity sha512-vSolAWnBAq7nhRUk/VZWrQefORlIYpZ4/i00dwYIAYqID0U4BI3E0bHQ4/a4ac8V84iC/bDsEFUiwqeegjVJnQ==
+  version "1.1069.0"
+  resolved "https://registry.yarnpkg.com/snyk/-/snyk-1.1069.0.tgz#8d229aba5994e2dcca0ce14c7a90f6dae0d0e543"
+  integrity sha512-WPgp8oh9tHMGIKwmPh6BbNZZyhDdCN4Tbv3eqdYJfTTY347xYXsIiIqUiRAAgAS0Oo5UABNGhdGV6fsxFWSUhg==
 
 sorted-object@~2.0.0:
   version "2.0.1"
