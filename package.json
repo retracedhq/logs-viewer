@@ -42,8 +42,7 @@
         "webpack": "5.73.0"
     },
     "scripts": {
-        "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev",
-        "login-cli": "npm-cli-login"
+        "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
     },
     "devDependencies": {
         "@babel/core": "7.18.6",
@@ -65,7 +64,6 @@
         "html-webpack-template": "6.2.0",
         "isomorphic-fetch": "3.0.0",
         "less-loader": "11.0.0",
-        "npm-cli-login": "1.0.0",
         "postcss-loader": "7.0.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",

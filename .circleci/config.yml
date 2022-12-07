@@ -23,11 +23,10 @@ jobs:
           name: Build Prod
           command: "make build_prod"
       - run:
-          name: npm login
-          command: "npm run login-cli"
-      - run:
-          name: Publish if version changed
-          command: "npm run publish"
+          name: publish
+          command: |
+            echo "//registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN" >> ~/.npmrc
+            npm run publish
 
 workflows:
   version: 2
