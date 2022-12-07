@@ -1,38 +1,39 @@
 var path = require("path");
 var webpack = require("webpack");
-
 var srcPath = path.join(__dirname, "src");
 var appEnv = require("./env/" + (process.env.LOGS_VIEWER_ENV || "local") + ".js");
 
 module.exports = {
-  entry: [
-    "./src/index.jsx",
-  ],
-
-  module: {
-    rules: [
-      {
-        test: /\.[tj]sx?$/,
-        include: srcPath,
-        loaders: ["awesome-typescript-loader"],
-      },
+    mode: "production",
+    // optimization: {
+    //     minimize: true //Update this to true or false
+    // },
+    entry: [
+        "./src/index.jsx",
     ],
-  },
 
-  plugins: [
-    new webpack.optimize.AggressiveMergingPlugin(),
-    new webpack.optimize.UglifyJsPlugin(),
-  ],
+    module: {
+        rules: [
+            {
+                test: /\.[tj]sx?$/,
+                include: srcPath,
+                exclude: /node_modules/,
+                use: [{
+                    loader:"babel-loader"
+            }],
+            },
+        ],
+    },
 
-  devtool: 'source-map',
-  stats: {
-    colors: true,
-    reasons: false
-  },
+    plugins: [
+        // new webpack.optimize.AggressiveMergingPlugin(),
+    ],
 
-  node: {
-    dns: 'empty',
-    net: 'empty',
-    tls: 'empty'
-  },
+    devtool: 'source-map',
+    stats: {
+        colors: true,
+        reasons: false
+    },
+
+    node: false,
 };

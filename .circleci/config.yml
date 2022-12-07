@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.7
+      - image: circleci/node:16.13.1
     steps:
       - checkout
       - run:
@@ -13,7 +13,7 @@ jobs:
           command: 'make build'
   publish:
     docker:
-      - image: circleci/node:8.7
+      - image: circleci/node:16.13.1
     steps:
       - checkout
       - run:

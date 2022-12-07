@@ -12,7 +12,7 @@ export default class ModalPortal extends React.Component {
 
   generateClassNames() {
     return {
-        base: "retraced-logs-viewer-app modal " + this.props.name,
+        base: "retraced-logs-viewer-app retracedModal " + this.props.name,
         afterOpen: this.props.name + "_after-open",
         beforeClose: this.props.name + "_before-close"
     }

@@ -129,7 +129,7 @@ export default class SearchForm extends React.Component {
               {this.props.filtersOpen ?
                 <div className="FilterDropdown">
                   <div className="u-paddingBottom--more">
-                    <p className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal">Date range</p>
+                    <p id="dateRangeLabel" className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal">Date range</p>
                     <div className="flex flex1">
                       <div className="flex1 u-paddingRight--small">
                         <DatePicker
@@ -137,7 +137,7 @@ export default class SearchForm extends React.Component {
                           selected={this.state.receivedStartDate}
                           className="Input u-width--full"
                           placeholderText="Start"
-                          dateFormat="MM/DD/YYYY"
+                          dateFormat="MM/dd/yyyy"
                           popoverAttachment="bottom center"
                           popoverTargetAttachment="top center"
                           popoverTargetOffset="10px 40px"
@@ -147,10 +147,12 @@ export default class SearchForm extends React.Component {
                       <div className="flex1 u-paddingLeft--small">
                         <DatePicker
                           key="picker-end"
+                          id="picker-end"
+                          ariaLabelledBy="pickerEndLabel"
                           selected={this.state.receivedEndDate}
                           className="Input u-width--full"
                           placeholderText="End"
-                          dateFormat="MM/DD/YYYY"
+                          dateFormat="MM/dd/yyyy"
                           popoverAttachment="bottom center"
                           popoverTargetAttachment="top center"
                           popoverTargetOffset="10px 40px"

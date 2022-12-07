@@ -19,3 +19,12 @@ build_prod:
 
 test:
 	yarn test
+
+.PHONY: dev
+dev:
+	docker build -t retraced-logs-viewer-dev .
+	docker run --rm -it \
+		--name retraced-logs-viewer-dev \
+		-p 6012:6012 \
+		-v `pwd`:/src \
+		retraced-logs-viewer-dev

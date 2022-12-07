@@ -1,7 +1,7 @@
 import * as React from "react";
 import { connect } from "react-redux";
 import * as autobind from "react-autobind";
-import * as ReactMarkdown from "react-markdown";
+import ReactMarkdown from "react-markdown";
 import * as moment from "moment";
 
 export default class MobileEventRow extends React.Component {
@@ -20,8 +20,8 @@ export default class MobileEventRow extends React.Component {
                   <ReactMarkdown
                     className="EventItem u-fontWeight--medium u-lineHeight--more u-display--inlineBlock"
                     sourcePos={true}
-                    renderers={this.props.renderers}
-                    source={this.props.event.display.markdown}
+                    components={this.props.renderers}
+                    children={this.props.event.display.markdown}
                   />
                 </div>
               </div>

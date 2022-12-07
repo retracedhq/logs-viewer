@@ -11,6 +11,7 @@ class ExportEventsModal extends React.Component {
 
   constructor() {
     super();
+    this.exportName = React.createRef();
     autoBind(this);
     this.state = {
       searchBody: "current",
@@ -25,7 +26,7 @@ class ExportEventsModal extends React.Component {
     const { newSavedExport } = this.state;
     if (newSavedExport) {
       setTimeout(() => {
-        this.refs.exportName.focus();
+        this.exportName.current.focus();
       }, 10);
     }
   }
@@ -106,7 +107,7 @@ class ExportEventsModal extends React.Component {
               <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">Name your search</h3>
               <p className="u-fontWeight--normal u-fontSize--normal u-marginBottom--more">Save this search query so that you can easily use these presets to export any new events in the future that match your new query.</p>
               <div className="flex flexWrap--wrap justifyContent--flexEnd">
-                <input type="text" className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} ref="exportName" placeholder="Release 1.0.0" onChange={(e) => { this.handleNameUpdate(e) }} />
+                <input type="text" className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`} ref={this.exportName} placeholder="Release 1.0.0" onChange={(e) => { this.handleNameUpdate(e) }} />
                 <button className="Button secondary flex-auto u-marginLeft--normal" disabled={exporting ? true : false} onClick={() => { this.reset(); }}>Back</button>                
                 <button className="Button primary flex-auto u-marginLeft--normal" disabled={exporting ? true : false} onClick={() => { this.handleExportCSV(searchInputQuery, newSavedExportName) }}>{exporting ? "Saving..." : "Name & Save"}</button>
               </div>
