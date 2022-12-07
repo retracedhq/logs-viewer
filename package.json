@@ -1,6 +1,6 @@
 {
     "name": "retraced-logs-viewer",
-    "version": "2.2.7",
+    "version": "2.3.0",
     "description": "Logs viewer widget",
     "main": "dist/index.js",
     "repository": {
@@ -43,8 +43,7 @@
     },
     "scripts": {
         "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev",
-        "login-cli": "npm-cli-login",
-        "maybe-publish": "publish"
+        "login-cli": "npm-cli-login"
     },
     "devDependencies": {
         "@babel/core": "7.18.6",
@@ -68,7 +67,6 @@
         "less-loader": "11.0.0",
         "npm-cli-login": "1.0.0",
         "postcss-loader": "7.0.0",
-        "publish": "0.6.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "resolve-url-loader": "5.0.0",
