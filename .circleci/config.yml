@@ -26,7 +26,7 @@ jobs:
           name: publish
           command: |
             echo "//registry.npmjs.org/:_authToken=$NPM_PUBLISH_TOKEN" >> ~/.npmrc
-            npm run publish
+            npm publish --access public
 
 workflows:
   version: 2
@@ -34,6 +34,8 @@ workflows:
     jobs:
       - build
       - publish:
+          context:
+            - retracedhq
           filters:
             branches:
               only: release
