@@ -38,6 +38,8 @@ workflows:
     jobs:
       - build
       - publish:
+          requires:
+            - build
           context:
             - retracedhq
           filters:

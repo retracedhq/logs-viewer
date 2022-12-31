@@ -1,9 +1,7 @@
 import "isomorphic-fetch";
 
-import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actions";
-import { loadingData } from "../../ui/actions" ;
-
-let last = null;
+import { receiveSessionId } from "./actions";
+import { loadingData } from "../../ui/actions";
 
 export function createSession(token, host) {
   return async (dispatch, getState) => {
@@ -20,12 +18,10 @@ export function createSession(token, host) {
           "Content-Type": "application/json",
         },
       });
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
     const body = await response.json();
     dispatch(receiveSessionId(body, host));
   };
 }
-
-

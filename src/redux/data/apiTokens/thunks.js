@@ -1,9 +1,7 @@
 import "isomorphic-fetch";
 
 import { receiveApiTokens } from "./actions";
-import { loadingData } from "../../ui/actions" ;
-
-let last = null;
+import { loadingData } from "../../ui/actions";
 
 export function fetchEitapiTokensList() {
   return async (dispatch, getState) => {
@@ -31,12 +29,11 @@ export function fetchEitapiTokensList() {
       const result = await response.json();
       //dispatch(setIsLoading(false));
 
-      dispatch(loadingData("apiTokens", false));      
+      dispatch(loadingData("apiTokens", false));
       dispatch(receiveApiTokens(result));
-
     } catch (err) {
-        console.log(err);
-        dispatch(loadingData("apiTokens", false));   
+      console.log(err);
+      dispatch(loadingData("apiTokens", false));
       //dispatch(setError(err));
     }
   };
@@ -47,11 +44,11 @@ export function createEitapiToken(name) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
-    const host = state.data.sessionData.host;    
+    const host = state.data.sessionData.host;
 
     const payload = {
-      displayName: name
-    }
+      displayName: name,
+    };
 
     try {
       const url = `${host}/project/${projectId}/eitapi_token`;
@@ -71,7 +68,6 @@ export function createEitapiToken(name) {
 
       // New one is created, let's grab a fresh list.
       dispatch(fetchEitapiTokensList());
-
     } catch (err) {
       console.log(err);
       //dispatch(setIsLoading(false));
@@ -88,7 +84,7 @@ export function deleteEitapiToken(token) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
-    const host = state.data.sessionData.host;    
+    const host = state.data.sessionData.host;
 
     try {
       const url = `${host}/project/${projectId}/eitapi_token/${token.id}`;
@@ -106,7 +102,6 @@ export function deleteEitapiToken(token) {
 
       // Deletion complete, let's grab a fresh list.
       dispatch(fetchEitapiTokensList());
-
     } catch (err) {
       console.log(err);
       //dispatch(setIsLoading(false));
@@ -123,12 +118,12 @@ export function updateEitapiToken(token, newName) {
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
-    const host = state.data.sessionData.host;    
+    const host = state.data.sessionData.host;
 
     const newToken = {
       displayName: newName,
-      id: token.id
-    }
+      id: token.id,
+    };
 
     try {
       const url = `${host}/project/${projectId}/eitapi_token/${token.id}`;
@@ -148,7 +143,6 @@ export function updateEitapiToken(token, newName) {
 
       // Update complete, let's grab a fresh list.
       dispatch(fetchEitapiTokensList());
-
     } catch (err) {
       console.log(err);
       //dispatch(setIsLoading(false));

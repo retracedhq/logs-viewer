@@ -1,14 +1,11 @@
 import * as React from "react";
 import * as autoBind from "react-autobind";
-import * as PropTypes from 'prop-types';
 import AceEditor from "react-ace";
-import Modal from "react-modal";
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/ext-language_tools";
 
 export default class RawEventOutputModal extends React.Component {
-
   constructor() {
     super();
     autoBind(this);
@@ -41,4 +38,3 @@ export default class RawEventOutputModal extends React.Component {
     );
   }
 }
-
