@@ -1,13 +1,13 @@
-FROM node:16
+FROM node:16.18
 
 WORKDIR /src
 
 ADD package.json /src
-ADD yarn.lock /src
-RUN yarn
+ADD package-lock.json /src
+RUN npm install
 
 ADD . /src
 
 EXPOSE 6012
 
-CMD yarn run start
+CMD npm run start

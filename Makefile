@@ -3,7 +3,7 @@ clean:
 	rm -rf dist
 
 deps:
-	yarn install
+	npm install
 
 build:
 	LOGS_VIEWER_ENV=dev `npm bin`/webpack --config webpack.config.js
@@ -18,7 +18,7 @@ build_prod:
 	LOGS_VIEWER_ENV=prod `npm bin`/webpack --config webpack.config.js
 
 test:
-	yarn test
+	npm run test
 
 .PHONY: dev
 dev:
