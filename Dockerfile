@@ -4,7 +4,7 @@ WORKDIR /src
 
 ADD package.json /src
 ADD package-lock.json /src
-RUN npm install
+RUN npm install --legacy-peer-deps
 
 ADD . /src
 

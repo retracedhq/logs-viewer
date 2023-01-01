@@ -3,7 +3,7 @@ clean:
 	rm -rf dist
 
 deps:
-	npm install
+	npm install --legacy-peer-deps
 
 build:
 	LOGS_VIEWER_ENV=dev `npm bin`/webpack --config webpack.config.js

@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: npm
-          command: "npm install"
+          command: "npm install --legacy-peer-deps"
       - run:
           name: Test Build
           command: "make build"
@@ -22,7 +22,7 @@ jobs:
       - checkout
       - run:
           name: npm
-          command: "npm install"
+          command: "npm install --legacy-peer-deps"
       - run:
           name: Build Prod
           command: "make build_prod"
