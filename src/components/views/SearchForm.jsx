@@ -1,6 +1,6 @@
 import React from "react";
 import autoBind from "react-autobind";
-import moment from "moment";
+import dayjs from "dayjs";
 import searchQueryParser from "search-query-parser";
 import _ from "lodash";
 import DatePicker from "react-datepicker";
@@ -84,10 +84,10 @@ export default class SearchForm extends React.Component {
   // Add 24 hours to end date to include that date.
   dateRangeWithDefaults(start, end) {
     return [
-      start ? moment(start).format() : "2017-01-01T00:00:00Z",
+      start ? dayjs(start).format() : "2017-01-01T00:00:00Z",
       end
-        ? moment(end).add(1, "d").format()
-        : moment().add(1, "d").startOf("day").format(),
+        ? dayjs(end).add(1, "d").format()
+        : dayjs().add(1, "d").startOf("day").format(),
     ];
   }
 
@@ -101,7 +101,7 @@ export default class SearchForm extends React.Component {
       startDate: this.state.receivedStartDate,
       endDate:
         this.state.receivedEndDate &&
-        moment(this.state.receivedEndDate).add(1, "d").toDate(),
+        dayjs(this.state.receivedEndDate).add(1, "d").toDate(),
     };
     const receivedQuery =
       !this.state.receivedStartDate && !this.state.receivedEndDate
@@ -401,7 +401,7 @@ function rewriteHumanTimes(query, keyword) {
  * @return {string}
  */
 function daysAgoRange(count) {
-  const start = moment().subtract(count, "days").startOf("day");
+  const start = dayjs().subtract(count, "days").startOf("day");
   const end = start.clone().add(1, "day");
 
   return `${start.format()},${end.format()}`;
@@ -412,7 +412,7 @@ function daysAgoRange(count) {
  * @return {string}
  */
 function hoursAgoRange(count) {
-  const start = moment().subtract(count, "hours").startOf("hour");
+  const start = dayjs().subtract(count, "hours").startOf("hour");
   const end = start.clone().add(1, "hour");
 
   return `${start.format()},${end.format()}`;
