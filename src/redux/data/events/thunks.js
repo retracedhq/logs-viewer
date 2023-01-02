@@ -72,7 +72,6 @@ export function requestEventSearch(query) {
         `,
       });
     } catch (err) {
-      console.log("error");
       console.log(err);
       return null;
     }

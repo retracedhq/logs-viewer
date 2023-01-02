@@ -1,7 +1,7 @@
 import "isomorphic-fetch";
 
 import { receiveSessionId } from "./actions";
-import { loadingData } from "../../ui/actions" ;
+import { loadingData } from "../../ui/actions";
 
 let last = null;
 
@@ -20,12 +20,10 @@ export function createSession(token, host) {
           "Content-Type": "application/json",
         },
       });
-    } catch(err) {
+    } catch (err) {
       console.log(err);
     }
     const body = await response.json();
     dispatch(receiveSessionId(body, host));
   };
 }
-
-

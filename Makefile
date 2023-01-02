@@ -13,8 +13,8 @@ build:
 
 PHONY: dev
 dev:
-  npm run dev
+	npm run dev
 
 PHONY: watch
 watch:
-  npm run watch
+	npm run watch

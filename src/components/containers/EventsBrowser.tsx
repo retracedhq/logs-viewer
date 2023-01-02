@@ -66,13 +66,17 @@ class EventsBrowser extends React.Component {
     }
     // Next page of current query
     if (next.sourceQuery.cursor === current.cursor) {
-      this.setState({ pageCursors: this.state.pageCursors.concat(next.sourceQuery.cursor) });
+      this.setState({
+        pageCursors: this.state.pageCursors.concat(next.sourceQuery.cursor),
+      });
       return;
     }
     // Previous page of current query
     const pageIndex = this.state.pageCursors.indexOf(next.sourceQuery.cursor);
     if (pageIndex >= 0) {
-      this.setState({ pageCursors: this.state.pageCursors.slice(0, pageIndex + 1) });
+      this.setState({
+        pageCursors: this.state.pageCursors.slice(0, pageIndex + 1),
+      });
       return;
     }
     // Recover from unexpected state
@@ -84,7 +88,9 @@ class EventsBrowser extends React.Component {
   }
 
   pageCount() {
-    return Math.ceil(this.props.currentResults.totalResultCount / this.state.resultsPerPage);
+    return Math.ceil(
+      this.props.currentResults.totalResultCount / this.state.resultsPerPage
+    );
   }
 
   offset() {
@@ -104,11 +110,11 @@ class EventsBrowser extends React.Component {
 
   componentWillUpdate(nextProps) {
     // If we have a new token, we need to create a new session
-    if(this.props.auditLogToken != nextProps.auditLogToken) {
+    if (this.props.auditLogToken != nextProps.auditLogToken) {
       this.props.createSession(nextProps.auditLogToken, this.props.host);
     }
     // If we have a new session, we need to request a new event search
-    if(this.props.session.token != nextProps.session.token) {
+    if (this.props.session.token != nextProps.session.token) {
       this.submitQuery("", "");
     }
   }
@@ -116,13 +122,13 @@ class EventsBrowser extends React.Component {
   componentWillUnmount() {
     // Clearing the store
     this.props.clearSession();
-  } 
+  }
 
   search(query, filters, dates) {
-    this.setState({ 
-      searchQuery: query, 
-      crudFilters: filters, 
-      dateFilters: dates
+    this.setState({
+      searchQuery: query,
+      crudFilters: filters,
+      dateFilters: dates,
     });
     this.submitQuery(query, "");
   }
@@ -139,22 +145,35 @@ class EventsBrowser extends React.Component {
   nextPage() {
     this.submitQuery(
       this.props.currentResults.sourceQuery.search_text,
-      this.props.currentResults.cursor,
+      this.props.currentResults.cursor
     );
   }
 
   prevPage() {
     this.submitQuery(
       this.props.currentResults.sourceQuery.search_text,
-      this.state.pageCursors[this.currentPage() - 1],
+      this.state.pageCursors[this.currentPage() - 1]
     );
   }
 
   determineIfFilters(filters) {
-    if (!filters) { return false; }
-    if (filters.receivedStartDate || filters.receivedEndDate) { return true; };
-    if (filters.searchQuery.length > 0 || filters.crudFilters.length > 0) { return true; };
-    if (filters.cChecked || filters.rChecked || filters.uChecked || filters.dChecked) { return true; };
+    if (!filters) {
+      return false;
+    }
+    if (filters.receivedStartDate || filters.receivedEndDate) {
+      return true;
+    }
+    if (filters.searchQuery.length > 0 || filters.crudFilters.length > 0) {
+      return true;
+    }
+    if (
+      filters.cChecked ||
+      filters.rChecked ||
+      filters.uChecked ||
+      filters.dChecked
+    ) {
+      return true;
+    }
     return false;
   }
 
@@ -187,7 +206,7 @@ class EventsBrowser extends React.Component {
         modal: null,
         name: "",
       },
-    })
+    });
   }
 
   render() {
@@ -199,75 +218,110 @@ class EventsBrowser extends React.Component {
       breakpoint,
       apiTokens,
     } = this.props;
-    const searchText = currentResults
-      && currentResults.sourceQuery
-      && currentResults.sourceQuery.search_text;
+    const searchText =
+      currentResults &&
+      currentResults.sourceQuery &&
+      currentResults.sourceQuery.search_text;
     const isMobile = breakpoint === "mobile";
     const isMobileEvents = breakpoint === "mobileEvents";
     const renderers = {
-      "Link": InlineLink,
+      Link: InlineLink,
     };
-    return (
-      this.props.mount ? 
-        <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
+    return this.props.mount ? (
+      <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column u-minHeight--full">
             <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
-                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">{this.props.headerTitle}</h3>
+                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">
+                  {this.props.headerTitle}
+                </h3>
                 <span className="flex flex-auto u-marginLeft--more">
-                  <SearchForm onSubmit={this.search} text={searchText} filtersOpen={this.state.filtersOpen} toggleDropdown={this.toggleFitlerDropdown} hasFilters={this.hasFilters} searchHelpURL={this.props.searchHelpURL} />
+                  <SearchForm
+                    onSubmit={this.search}
+                    text={searchText}
+                    filtersOpen={this.state.filtersOpen}
+                    toggleDropdown={this.toggleFitlerDropdown}
+                    hasFilters={this.hasFilters}
+                    searchHelpURL={this.props.searchHelpURL}
+                  />
                 </span>
               </div>
               <div className="flex flex-auto icons">
                 <div className="flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-csvExportIcon" 
-                    onClick={() => { this.renderModal(
-                      <ExportEventsModal  
-                        searchInputQuery={this.state.searchQuery} 
-                        crudFilters={this.state.crudFilters} 
-                        dateFilters={this.state.dateFilters} />, "ExportEventsModal") }}
-                    onMouseEnter={() => {this.setState({ exportTooltip: true })}}
-                    onMouseLeave={() => {this.setState({ exportTooltip: false })}}>
+                  <span
+                    className="icon clickable u-csvExportIcon"
+                    onClick={() => {
+                      this.renderModal(
+                        <ExportEventsModal
+                          searchInputQuery={this.state.searchQuery}
+                          crudFilters={this.state.crudFilters}
+                          dateFilters={this.state.dateFilters}
+                        />,
+                        "ExportEventsModal"
+                      );
+                    }}
+                    onMouseEnter={() => {
+                      this.setState({ exportTooltip: true });
+                    }}
+                    onMouseLeave={() => {
+                      this.setState({ exportTooltip: false });
+                    }}
+                  >
                     <Tooltip
                       visible={this.state.exportTooltip}
                       text="Export Events"
                       minWidth="120"
                       position="bottom-left"
                     />
-                    </span>
+                  </span>
                 </div>
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
-                  <span className="icon clickable u-tokensIcon" 
-                    onClick={() => { this.renderModal(<AccessTokensModal apiTokenHelpURL={this.props.apiTokenHelpURL} closeModal={this.closeModal} />, "AccessTokensModal") }}
-                    onMouseEnter={() => {this.setState({ tokenTooltip: true })}}
-                    onMouseLeave={() => {this.setState({ tokenTooltip: false })}}>
+                  <span
+                    className="icon clickable u-tokensIcon"
+                    onClick={() => {
+                      this.renderModal(
+                        <AccessTokensModal
+                          apiTokenHelpURL={this.props.apiTokenHelpURL}
+                          closeModal={this.closeModal}
+                        />,
+                        "AccessTokensModal"
+                      );
+                    }}
+                    onMouseEnter={() => {
+                      this.setState({ tokenTooltip: true });
+                    }}
+                    onMouseLeave={() => {
+                      this.setState({ tokenTooltip: false });
+                    }}
+                  >
                     <Tooltip
                       visible={this.state.tokenTooltip}
                       text="Manage API Tokens"
                       minWidth="150"
                       position="bottom-left"
                     />
-                    </span>
+                  </span>
                 </div>
               </div>
             </div>
-            {!isMobileEvents ?
+            {!isMobileEvents ? (
               <div className="flex flex-auto">
-                <FixedTableHeader
-                  items={tableHeaderItems}
+                <FixedTableHeader items={tableHeaderItems} />
+              </div>
+            ) : null}
+            {this.props.dataLoading.eventFetchLoading ? (
+              <div className="flex-column flex1 justifyContent--center alignItems--center">
+                <Loader
+                  size="70"
+                  color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"}
                 />
               </div>
-            : null}
-            {this.props.dataLoading.eventFetchLoading ?
-              <div className="flex-column flex1 justifyContent--center alignItems--center">
-                <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
-              </div>
-              :
+            ) : (
               <div className="EventsWrapper flex-column flex-1-auto u-overflow--auto">
-                {currentResults.resultIds.length ?
-                  currentResults.resultIds.map((eid, i) => (
-                    !isMobileEvents ?
+                {currentResults.resultIds.length ? (
+                  currentResults.resultIds.map((eid, i) =>
+                    !isMobileEvents ? (
                       <EventRow
                         key={`${eid}-${i}`}
                         event={events[eid]}
@@ -275,16 +329,16 @@ class EventsBrowser extends React.Component {
                         isMobile={isMobileEvents}
                         index={i}
                         outputHovered={this.state[`output-${eid}Hovered`]}
-                        displayTooltip={() => { return; }}
+                        displayTooltip={() => {
+                          return;
+                        }}
                         openModal={() => {
                           this.renderModal(
-                            <RawEventOutputModal
-                              rawOutput={events[eid].raw}
-                            />
-                          )
+                            <RawEventOutputModal rawOutput={events[eid].raw} />
+                          );
                         }}
                       />
-                      :
+                    ) : (
                       <MobileEventRow
                         key={`${eid}-${i}`}
                         event={events[eid]}
@@ -292,86 +346,136 @@ class EventsBrowser extends React.Component {
                         isMobile={isMobileEvents}
                         index={i}
                         outputHovered={this.state[`output-${eid}Hovered`]}
-                        displayTooltip={() => { return; }}
+                        displayTooltip={() => {
+                          return;
+                        }}
                         openModal={() => {
                           this.renderModal(
-                            <RawEventOutputModal
-                              rawOutput={events[eid].raw}
-                            />
-                          )
+                            <RawEventOutputModal rawOutput={events[eid].raw} />
+                          );
                         }}
                       />
-                  ))
-                  : currentResults.sourceQuery.search_text !== "" ?
-                    <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
-                      <p className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large">The query<code className="u-marginLeft--small u-marginRight--small">{currentResults.sourceQuery.search_text}</code>found no results</p>
-                      <p className="u-marginTop--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
-                        Try <span className="u-color--curiousBlue u-textDecoration--underlineOnHover" onClick={this.toggleFitlerDropdown}>adjusting your filters</span> or changing your keyword terms
-                  </p>
+                    )
+                  )
+                ) : currentResults.sourceQuery.search_text !== "" ? (
+                  <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
+                    <p className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                      The query
+                      <code className="u-marginLeft--small u-marginRight--small">
+                        {currentResults.sourceQuery.search_text}
+                      </code>
+                      found no results
+                    </p>
+                    <p className="u-marginTop--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                      Try{" "}
+                      <span
+                        className="u-color--curiousBlue u-textDecoration--underlineOnHover"
+                        onClick={this.toggleFitlerDropdown}
+                      >
+                        adjusting your filters
+                      </span>{" "}
+                      or changing your keyword terms
+                    </p>
+                  </div>
+                ) : (
+                  <div className="u-marginTop--more u-textAlign--center flex1 flex-column alignItems--center justifyContent--center">
+                    <div className="flex-auto">
+                      <div className="icon u-eventsEmptyIcon u-marginBottom--normal"></div>
+                      <p className="u-margin--none u-paddingTop--normal u-paddingBottom--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                        No events found
+                      </p>
                     </div>
-                    :
-                    <div className="u-marginTop--more u-textAlign--center flex1 flex-column alignItems--center justifyContent--center">
-                      <div className="flex-auto">
-                        <div className="icon u-eventsEmptyIcon u-marginBottom--normal"></div>
-                        <p className="u-margin--none u-paddingTop--normal u-paddingBottom--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">No events found</p>
-                      </div>
-                    </div>
-                }
+                  </div>
+                )}
               </div>
-            }
-            <div className={`flex flex-auto EventPager ${!currentResults.resultIds.length || (currentResults.resultIds.length < this.state.resultsPerPage) ? "" : "has-shadow"}`}>
-              <div className={`flex arrow-wrapper justifyContent--flexEnd ${isMobile ? "flex-auto u-paddingLeft--more" : "flex1"}`}>
-                {this.currentPage() > 0 ?
+            )}
+            <div
+              className={`flex flex-auto EventPager ${
+                !currentResults.resultIds.length ||
+                currentResults.resultIds.length < this.state.resultsPerPage
+                  ? ""
+                  : "has-shadow"
+              }`}
+            >
+              <div
+                className={`flex arrow-wrapper justifyContent--flexEnd ${
+                  isMobile ? "flex-auto u-paddingLeft--more" : "flex1"
+                }`}
+              >
+                {this.currentPage() > 0 ? (
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={!this.props.dataLoading.eventFetchLoading ? this.prevPage : null}
+                    onClick={
+                      !this.props.dataLoading.eventFetchLoading
+                        ? this.prevPage
+                        : null
+                    }
                   >
-                    <span className="icon clickable u-dropdownArrowIcon previous"></span> Newer
-                </p>
-                  : null}
+                    <span className="icon clickable u-dropdownArrowIcon previous"></span>{" "}
+                    Newer
+                  </p>
+                ) : null}
               </div>
               <div className="flex1 resultsCount">
-                {currentResults.resultIds.length
-                  ? <p className="u-fontSize--normal u-lineHeight--normal u-textAlign--center">
+                {currentResults.resultIds.length ? (
+                  <p className="u-fontSize--normal u-lineHeight--normal u-textAlign--center">
                     <span className="u-color--dustyGray">Showing events </span>
-                    <span className="u-color-tuna u-fontWeight--medium">{`${this.offset() + 1} - ${this.offset() + currentResults.resultIds.length}`}</span>
+                    <span className="u-color-tuna u-fontWeight--medium">{`${
+                      this.offset() + 1
+                    } - ${
+                      this.offset() + currentResults.resultIds.length
+                    }`}</span>
                     <span className="u-color--dustyGray"> of </span>
-                    <span className="u-color-tuna u-fontWeight--medium">{accounting.formatNumber(currentResults.totalResultCount)}</span>
+                    <span className="u-color-tuna u-fontWeight--medium">
+                      {accounting.formatNumber(currentResults.totalResultCount)}
+                    </span>
                   </p>
-                  : null}
+                ) : null}
               </div>
-              <div className={`flex arrow-wrapper justifyContent--flexStart ${isMobile ? "flex-auto u-paddingRight--more" : "flex1"}`}>
-                {this.currentPage() < (this.pageCount() - 1) ?
+              <div
+                className={`flex arrow-wrapper justifyContent--flexStart ${
+                  isMobile ? "flex-auto u-paddingRight--more" : "flex1"
+                }`}
+              >
+                {this.currentPage() < this.pageCount() - 1 ? (
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={!this.props.dataLoading.eventFetchLoading ? this.nextPage : null }
+                    onClick={
+                      !this.props.dataLoading.eventFetchLoading
+                        ? this.nextPage
+                        : null
+                    }
                   >
-                    Older <span className="icon clickable u-dropdownArrowIcon next"></span>
+                    Older{" "}
+                    <span className="icon clickable u-dropdownArrowIcon next"></span>
                   </p>
-                  : null}
+                ) : null}
               </div>
             </div>
           </div>
         </div>
-        <ModalPortal 
-          isOpen={this.state.isModalOpen} 
-          name={this.state.activeModal.name} 
-          closeModal={() => {this.closeModal()}} 
-          content={this.state.activeModal.modal} />
-      </div> : null
-    );
+        <ModalPortal
+          isOpen={this.state.isModalOpen}
+          name={this.state.activeModal.name}
+          closeModal={() => {
+            this.closeModal();
+          }}
+          content={this.state.activeModal.modal}
+        />
+      </div>
+    ) : null;
   }
 }
 
 export default connect(
-  state => ({
+  (state) => ({
     session: state.data.sessionData.session,
     events: state.data.eventsData.byId,
     currentResults: state.data.eventsData.latestServerResults,
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
-  dispatch => ({
+  (dispatch) => ({
     requestEventSearch(query) {
       return dispatch(requestEventSearch(query));
     },
@@ -381,5 +485,5 @@ export default connect(
     clearSession() {
       return dispatch(clearSession());
     },
-  }),
+  })
 )(EventsBrowser);
