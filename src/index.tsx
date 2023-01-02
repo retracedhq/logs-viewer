@@ -21,10 +21,8 @@ export default class RetracedEventsBrowser extends React.Component {
   static defaultProps = {
     header: "Events",
     host: "http://localhost:3000/auditlog/viewer/v1",
-    apiTokenHelpURL:
-      "https://preview.retraced.io/documentation/apis/enterprise-api/",
-    searchHelpURL:
-      "https://preview.retraced.io/documentation/apis/graphql/#search",
+    apiTokenHelpURL: "https://boxyhq.com/docs/retraced/apis/enterprise-api",
+    searchHelpURL: "https://boxyhq.com/docs/retraced/apis/graphql#search",
     mount: true,
   };
   render() {
