@@ -1,7 +1,9 @@
 # Retraced Embedded Logs Viewer
+
 A React library for viewing Retraced logs.
 
 ## Local development
+
 ```sh
 # Install dependencies
 make deps
@@ -11,7 +13,9 @@ make dev
 ```
 
 ## Embedded local development
+
 **Run from root of this project**
+
 ```sh
 # Install dependencies
 make deps
@@ -24,6 +28,7 @@ make watch
 ```
 
 **Run from root of dependent project**
+
 ```sh
 # Create a project link, may be npm or yarn
 npm link # or yarn link
