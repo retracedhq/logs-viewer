@@ -1,9 +1,5 @@
-import "isomorphic-fetch";
-
 import { receiveSessionId } from "./actions";
 import { loadingData } from "../../ui/actions";
-
-let last = null;
 
 export function createSession(token, host) {
   return async (dispatch, getState) => {

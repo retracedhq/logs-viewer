@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   resource_class: large
   docker:
-    - image: cimg/node:16.16
+    - image: cimg/node:16.18
 
 jobs:
   build:

@@ -1,8 +1,7 @@
-import "isomorphic-fetch";
 import url from "url";
 
 import { receiveSavedExports } from "./actions";
-import { loadingData } from "../../ui/actions" ;
+import { loadingData } from "../../ui/actions";
 
 let last = null;
 
@@ -33,7 +32,6 @@ export function fetchSavedExports(limit) {
       const result = await response.json();
       // dispatch(setIsLoading(false));
       dispatch(receiveSavedExports(result));
-
     } catch (err) {
       console.log(err);
       // dispatch(setIsLoading(false));
@@ -52,7 +50,7 @@ export function createSavedExport(query, filters, dates, name) {
     const jwt = state.data.sessionData.session.token;
     const host = state.data.sessionData.host;
     const exportUrl = `${host}/project/${projectId}/export`;
-    
+
     let payload = {
       exportBody: {
         searchQuery: query,
@@ -63,10 +61,10 @@ export function createSavedExport(query, filters, dates, name) {
         version: 1,
       },
       name,
-    }
+    };
 
     // Check to see if dates have values, if so add to paylod
-    if(dates.startDate && dates.endDate) {
+    if (dates.startDate && dates.endDate) {
       payload.exportBody.startTime = dates.startDate;
       payload.exportBody.endTime = dates.endDate;
     }
@@ -85,12 +83,14 @@ export function createSavedExport(query, filters, dates, name) {
       });
 
       if (!exportResponse.ok) {
-        throw new Error(`${exportResponse.status} ${exportResponse.statusText}`);
+        throw new Error(
+          `${exportResponse.status} ${exportResponse.statusText}`
+        );
       }
 
       const exportResult = await exportResponse.json();
       const encodedJwt = encodeURIComponent(jwt);
-      
+
       dispatch(fetchSavedExports());
 
       const downloadUrl = `${host}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
@@ -100,7 +100,6 @@ export function createSavedExport(query, filters, dates, name) {
 
       //dispatch(setIsLoading(false));
       //dispatch(addNewSavedExport(result));
-
     } catch (err) {
       console.log(err);
       //dispatch(setIsLoading(false));
@@ -113,7 +112,6 @@ export function renderSavedExport(id) {
   return async (dispatch, getState) => {
     //dispatch(setIsLoading(true));
     //dispatch(setError(null));
-
 
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
