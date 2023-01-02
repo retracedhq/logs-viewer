@@ -1,7 +1,9 @@
+import React from "react";
 import ReactDOM from "react-dom/client";
-import RetracedEventsBrowser from "../index";
+import LogsViewerWrapper from "./LogsViewerWrapper";
 
-ReactDOM.render(
-  <RetracedEventsBrowser auditLogToken="123" />,
-  document.getElementById("app")
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <LogsViewerWrapper />
+  </React.StrictMode>
 );
