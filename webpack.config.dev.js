@@ -1,5 +1,11 @@
+const path = require("path");
+const fs = require("fs");
+
 var HtmlWebpackPlugin = require("html-webpack-plugin");
-var HtmlWebpackTemplate = require("html-webpack-template");
+
+const appDirectory = fs.realpathSync(process.cwd());
+const resolveAppPath = (relativePath) =>
+  path.resolve(appDirectory, relativePath);
 
 module.exports = {
   mode: "development",
@@ -21,9 +27,8 @@ module.exports = {
   },
 
   plugins: [
-    // new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
-      template: HtmlWebpackTemplate,
+      template: resolveAppPath("public/index.html"),
       title: "Retraced Logs Viewer",
       appMountId: "app",
       externals: [

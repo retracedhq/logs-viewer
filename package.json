@@ -41,7 +41,7 @@
         "webpack": "5.75.0"
     },
     "scripts": {
-        "start": "LOGS_VIEWER_ENV=dev webpack-dev-server --env dev"
+        "start": "LOGS_VIEWER_ENV=dev webpack serve --env dev"
     },
     "devDependencies": {
         "@babel/core": "7.20.7",
@@ -59,7 +59,6 @@
         "css-loader": "6.7.3",
         "file-loader": "6.2.0",
         "html-webpack-plugin": "5.5.0",
-        "html-webpack-template": "6.2.0",
         "isomorphic-fetch": "3.0.0",
         "less-loader": "11.1.0",
         "postcss-loader": "7.0.2",
