@@ -1,7 +1,7 @@
-import * as React from "react";
-import * as autobind from "react-autobind";
+import React from "react";
+import autobind from "react-autobind";
 import ReactMarkdown from "react-markdown";
-import * as moment from "moment";
+import moment from "moment";
 import Tooltip from "../shared/Tooltip";
 
 export default class EventRow extends React.Component {
@@ -19,32 +19,47 @@ export default class EventRow extends React.Component {
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              <div className={ `flex flex1 content-section` } >
+              <div className={`flex flex1 content-section`}>
                 <ReactMarkdown
                   className="EventItem u-fontWeight--medium u-lineHeight--more"
-                  sourcePos={ true }
-                  components={ this.props.renderers }
-                  children={ this.props.event.display.markdown }
+                  sourcePos={true}
+                  components={this.props.renderers}
+                  children={this.props.event.display.markdown}
                 />
               </div>
-              <div style={ { maxWidth: "180px" } } className="flex flex1 content-section date alignItems--center">
+              <div
+                style={{ maxWidth: "180px" }}
+                className="flex flex1 content-section date alignItems--center"
+              >
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
-                  { moment(this.props.event.canonical_time).fromNow() }
+                  {moment(this.props.event.canonical_time).fromNow()}
                 </p>
               </div>
-              <div style={ { maxWidth: "180px" } } className="flex flex1 content-section location alignItems--center">
+              <div
+                style={{ maxWidth: "180px" }}
+                className="flex flex1 content-section location alignItems--center"
+              >
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
-                  { this.props.event.country || this.props.event.source_ip }
+                  {this.props.event.country || this.props.event.source_ip}
                 </p>
               </div>
-              <div style={ { maxWidth: "20px" } } className="flex flex1 content-section actions-section justifyContent--flexEnd">
+              <div
+                style={{ maxWidth: "20px" }}
+                className="flex flex1 content-section actions-section justifyContent--flexEnd"
+              >
                 <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
-                  <span className="icon clickable u-codeIcon"
-                    onClick={ this.props.openModal }
-                    onMouseEnter={ () => { this.setState({ eventInfoToken: true }) } }
-                    onMouseLeave={ () => { this.setState({ eventInfoToken: false }) } }>
+                  <span
+                    className="icon clickable u-codeIcon"
+                    onClick={this.props.openModal}
+                    onMouseEnter={() => {
+                      this.setState({ eventInfoToken: true });
+                    }}
+                    onMouseLeave={() => {
+                      this.setState({ eventInfoToken: false });
+                    }}
+                  >
                     <Tooltip
-                      visible={ this.state.eventInfoToken }
+                      visible={this.state.eventInfoToken}
                       text="More Info"
                       minWidth="80"
                       position="bottom-left"
@@ -58,5 +73,4 @@ export default class EventRow extends React.Component {
       </div>
     );
   }
-
 }

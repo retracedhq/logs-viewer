@@ -1,7 +1,7 @@
-import * as React from "react";
+import React from "react";
 import { connect } from "react-redux";
-import * as autobind from "react-autobind";
-import * as accounting from "accounting";
+import autobind from "react-autobind";
+import accounting from "accounting";
 import { requestEventSearch } from "../../redux/data/events/thunks";
 import { createSession } from "../../redux/data/session/thunks";
 import { clearSession } from "../../redux/data/session/actions";

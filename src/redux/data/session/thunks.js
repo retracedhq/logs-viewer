@@ -1,6 +1,6 @@
 import "isomorphic-fetch";
 
-import { receiveEventList, receiveSessionId, receiveSavedExports } from "./actions";
+import { receiveSessionId } from "./actions";
 import { loadingData } from "../../ui/actions" ;
 
 let last = null;

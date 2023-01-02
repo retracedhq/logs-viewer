@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as _ from "lodash";
-const handlers = [];
+import React from "react";
+import _ from "lodash";
+const handlers: any[] = [];
 
 function defferedHandlerCaller() {
   handlers.forEach((handle) => {

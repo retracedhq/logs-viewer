@@ -1,11 +1,7 @@
-import * as React from "react";
-import * as autoBind from "react-autobind";
-import * as PropTypes from 'prop-types';
-import Modal from "react-modal";
-import * as moment from "moment";
+import React from "react";
+import autoBind from "react-autobind";
 import { connect } from "react-redux";
 import { createSavedExport, fetchSavedExports, renderSavedExport } from "../../redux/data/exports/thunks";
-
 
 class ExportEventsModal extends React.Component {
 
