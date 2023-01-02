@@ -1,9 +1,5 @@
-import url from "url";
-
 import { receiveSavedExports } from "./actions";
 import { loadingData } from "../../ui/actions";
-
-let last = null;
 
 export function fetchSavedExports(limit) {
   return async (dispatch, getState) => {
@@ -16,8 +12,9 @@ export function fetchSavedExports(limit) {
     const host = state.data.sessionData.host;
 
     try {
-      const q = url.format({ query: { limit } });
-      const urlWithQuery = `${host}/project/${projectId}/exports${q}`;
+      const urlWithQuery = `${host}/project/${projectId}/exports?limit=${
+        limit ? limit : ""
+      }`;
       const response = await fetch(urlWithQuery, {
         headers: {
           Authorization: jwt,
