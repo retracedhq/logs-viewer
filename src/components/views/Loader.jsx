@@ -1,6 +1,6 @@
-import * as React from "react";
-import * as autoBind from "react-autobind";
-import * as PropTypes from 'prop-types';
+import React from "react";
+import autoBind from "react-autobind";
+import PropTypes from "prop-types";
 
 
 export default class Loader extends React.Component {

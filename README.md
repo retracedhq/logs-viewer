@@ -1,10 +1,44 @@
 # Retraced Embedded Logs Viewer
 
-### Installing dependencies:
-- `yarn`
+A React library for viewing Retraced logs.
 
-### Building:
-`make build_staging` or `make build_prod`
+## Local development
 
-### Run locally (via `webpack-dev-server`):
-`make serve_local` accessible on `localhost:6012`
+Make sure you are running (Retraced)[https://github.com/retracedhq/retraced] with the `dev` project and token bootstrapped.
+
+```sh
+# Install dependencies
+make deps
+
+# Run local dev server
+make dev
+```
+
+## Embedded local development
+
+**Run from root of this project**
+
+```sh
+# Install dependencies
+make deps
+
+# Create a project link, may be npm or yarn
+npm link # or yarn link
+
+# Run the build on watch mode
+make watch
+```
+
+**Run from root of dependent project**
+
+```sh
+# Create a project link, may be npm or yarn
+npm link # or yarn link
+
+# -or-
+
+# Install the linked library
+npm link retraced-logs-viewer # or yarn link retraced-logs-viewer
+```
+
+Then follow development instructions for the dependent project. Changes to the logs viewer should reflect in the consuming project in realtime.

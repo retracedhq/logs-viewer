@@ -3,7 +3,7 @@ version: 2
 defaults: &defaults
   resource_class: large
   docker:
-    - image: cimg/node:16.16
+    - image: cimg/node:16.18
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: Yarn
-          command: "yarn install"
+          command: "npm install"
       - run:
           name: Test Build
           command: "make build"
@@ -22,10 +22,10 @@ jobs:
       - checkout
       - run:
           name: Yarn
-          command: "yarn install"
+          command: "npm install"
       - run:
           name: Build Prod
-          command: "make build_prod"
+          command: "make build"
       - run:
           name: publish
           command: |
@@ -38,6 +38,8 @@ workflows:
     jobs:
       - build
       - publish:
+          requires:
+            - build
           context:
             - retracedhq
           filters:
