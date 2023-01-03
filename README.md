@@ -4,6 +4,8 @@ A React library for viewing Retraced logs.
 
 ## Local development
 
+Make sure you are running (Retraced)[https://github.com/retracedhq/retraced] with the `dev` project and token bootstrapped.
+
 ```sh
 # Install dependencies
 make deps
