@@ -39,7 +39,6 @@
     "react-router-dom": "6.6.1"
   },
   "dependencies": {
-    "accounting": "0.4.1",
     "dayjs": "1.11.7",
     "graphql-request": "5.1.0",
     "lodash": "4.17.21",
