@@ -461,6 +461,7 @@ class EventsBrowser extends React.Component {
             this.closeModal();
           }}
           content={this.state.activeModal.modal}
+          ariaHideApp={false}
         />
       </div>
     ) : null;
