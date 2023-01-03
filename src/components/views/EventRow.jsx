@@ -1,7 +1,9 @@
 import React from "react";
 import autobind from "react-autobind";
 import ReactMarkdown from "react-markdown";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 import Tooltip from "../shared/Tooltip";
 
 export default class EventRow extends React.Component {
@@ -32,7 +34,7 @@ export default class EventRow extends React.Component {
                 className="flex flex1 content-section date alignItems--center"
               >
                 <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
-                  {moment(this.props.event.canonical_time).fromNow()}
+                  {dayjs(this.props.event.canonical_time).fromNow()}
                 </p>
               </div>
               <div

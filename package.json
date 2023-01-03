@@ -41,9 +41,9 @@
   "dependencies": {
     "accounting": "0.4.1",
     "ace-builds": "1.14.0",
+    "dayjs": "1.11.7",
     "graphql-request": "5.1.0",
     "lodash": "4.17.21",
-    "moment": "2.29.4",
     "prop-types": "15.8.1",
     "react-ace": "10.1.0",
     "react-autobind": "1.0.6",

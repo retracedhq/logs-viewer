@@ -1,11 +1,13 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import moment from "moment";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 export default class MobileEventRow extends React.Component {
   render() {
     const location = this.props.event.country || this.props.event.source_ip;
-    const date = moment(this.props.event.canonical_time).fromNow();
+    const date = dayjs(this.props.event.canonical_time).fromNow();
 
     return (
       <div

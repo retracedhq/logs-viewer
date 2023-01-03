@@ -1,4 +1,4 @@
-import moment from "moment";
+import dayjs from "dayjs";
 import { constants } from "./actions";
 
 const modalState = {};
@@ -13,7 +13,7 @@ export function modalData(state = modalState, action = {}) {
 const loadingState = {
   eventFetchLoading: false,
   exportCSVLoading: false,
-  apiTokensLoading:  false,
+  apiTokensLoading: false,
 };
 
 export function loadingData(state = loadingState, action = {}) {
@@ -30,8 +30,8 @@ export function loadingData(state = loadingState, action = {}) {
 
 const filterState = {
   timerange: {
-    start: moment().startOf("day").valueOf(),
-    end: moment().endOf("day").valueOf(),
+    start: dayjs().startOf("day").valueOf(),
+    end: dayjs().endOf("day").valueOf(),
   },
   crud: "cud",
 };
