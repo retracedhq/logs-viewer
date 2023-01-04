@@ -20,7 +20,8 @@
   },
   "author": "Replicated Inc",
   "contributors": [
-    "Grayson Null <grayson@replicated.com>"
+    "Grayson Null <grayson@replicated.com>",
+    "Team BoxyHQ <retraced@boxyhq.com>"
   ],
   "license": "MIT",
   "browserslist": [
