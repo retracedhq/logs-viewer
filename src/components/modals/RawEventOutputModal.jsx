@@ -1,8 +1,5 @@
 import React from "react";
 import autoBind from "react-autobind";
-import AceEditor from "react-ace";
-import "ace-builds/src-noconflict/mode-javascript";
-import "ace-builds/src-noconflict/theme-github";
 
 export default class RawEventOutputModal extends React.Component {
   constructor() {
@@ -20,18 +17,16 @@ export default class RawEventOutputModal extends React.Component {
         <h1 className="u-fontWeight--normal">Audit Event Info</h1>
         <div className="modal-content">
           <div>
-            <AceEditor
-              mode="javascript"
-              theme="github"
-              width="100%"
-              height="300px"
-              readOnly={true}
-              showGutter={false}
-              showPrintMargin={false}
-              editorProps={{ $blockScrolling: true }}
+            <textarea
+              style={{
+                width: "100%",
+                minHeight: "200px",
+                height: "300px",
+                resize: "none",
+              }}
+              readOnly
               value={raw}
-              fontSize={14}
-            />
+            ></textarea>
           </div>
         </div>
       </div>

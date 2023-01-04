@@ -20,7 +20,8 @@
   },
   "author": "Replicated Inc",
   "contributors": [
-    "Grayson Null <grayson@replicated.com>"
+    "Grayson Null <grayson@replicated.com>",
+    "Team BoxyHQ <retraced@boxyhq.com>"
   ],
   "license": "MIT",
   "browserslist": [
@@ -39,13 +40,10 @@
     "react-router-dom": "6.6.1"
   },
   "dependencies": {
-    "accounting": "0.4.1",
-    "ace-builds": "1.14.0",
     "dayjs": "1.11.7",
     "graphql-request": "5.1.0",
     "lodash": "4.17.21",
     "prop-types": "15.8.1",
-    "react-ace": "10.1.0",
     "react-autobind": "1.0.6",
     "react-datepicker": "4.8.0",
     "react-markdown": "8.0.4",

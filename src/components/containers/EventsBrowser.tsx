@@ -1,7 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import autobind from "react-autobind";
-import accounting from "accounting";
 import { requestEventSearch } from "../../redux/data/events/thunks";
 import { createSession } from "../../redux/data/session/thunks";
 import { clearSession } from "../../redux/data/session/actions";
@@ -427,7 +426,9 @@ class EventsBrowser extends React.Component {
                     }`}</span>
                     <span className="u-color--dustyGray"> of </span>
                     <span className="u-color-tuna u-fontWeight--medium">
-                      {accounting.formatNumber(currentResults.totalResultCount)}
+                      {currentResults.totalResultCount.toLocaleString
+                        ? currentResults.totalResultCount.toLocaleString()
+                        : currentResults.totalResultCount}
                     </span>
                   </p>
                 ) : null}
@@ -461,6 +462,7 @@ class EventsBrowser extends React.Component {
             this.closeModal();
           }}
           content={this.state.activeModal.modal}
+          ariaHideApp={false}
         />
       </div>
     ) : null;
