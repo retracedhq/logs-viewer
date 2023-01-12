@@ -1,6 +1,5 @@
 import React from "react";
 import _ from "lodash";
-import { Link } from "react-router-dom";
 
 export default class InlineLink extends React.Component {
   render() {
@@ -12,12 +11,12 @@ export default class InlineLink extends React.Component {
     }
 
     return (
-      <Link
-        to={this.props.href}
+      <a
+        href={this.props.href}
         className="u-color--curiousBlue u-textDecoration--underlineOnHover"
       >
         {this.props.children}
-      </Link>
+      </a>
     );
   }
 }
