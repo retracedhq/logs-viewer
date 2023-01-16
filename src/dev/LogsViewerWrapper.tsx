@@ -11,24 +11,26 @@ const LogsViewerWrapper = () => {
   const [token, setToken] = useState("");
 
   useEffect(() => {
-    const urlWithQuery = `${endpoint}/publisher/v1/project/${projectId}/viewertoken?group_id=${groupId}&actor_id=${actorId}&is_admin=true`;
-    fetch(urlWithQuery, {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        Authorization: `Token token=${apiKey}`,
-      },
-    }).then((res) => {
-      if (res.ok) {
-        res.json().then((data) => {
-          setToken(data.token);
-        });
+    if (!token) {
+      const urlWithQuery = `${endpoint}/publisher/v1/project/${projectId}/viewertoken?group_id=${groupId}&actor_id=${actorId}&is_admin=true`;
+      fetch(urlWithQuery, {
+        method: "GET",
+        headers: {
+          Accept: "application/json",
+          Authorization: `Token token=${apiKey}`,
+        },
+      }).then((res) => {
+        if (res.ok) {
+          res.json().then((data) => {
+            setToken(data.token);
+          });
 
-        return;
-      }
+          return;
+        }
 
-      throw new Error("Failed to fetch viewer token");
-    });
+        throw new Error("Failed to fetch viewer token");
+      });
+    }
   }, []);
 
   if (!token) {
