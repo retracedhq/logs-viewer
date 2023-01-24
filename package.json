@@ -19,7 +19,7 @@
     "url": "git+ssh://git@github.com/retracedhq/logs-viewer.git",
     "type": "git"
   },
-  "author": "Replicated Inc",
+  "author": "Replicated Inc., BoxyHQ Inc.",
   "contributors": [
     "Grayson Null <grayson@replicated.com>",
     "Team BoxyHQ <retraced@boxyhq.com>"
