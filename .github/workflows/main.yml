@@ -122,13 +122,13 @@ jobs:
           curl -LO "https://cdn.bundle.bar/clients/oras/${ORAS_VERSION}/${ORAS_FILENAME}"
           mkdir oras_install
           tar -xvf "${ORAS_FILENAME}" -C oras_install
-          ../oras_install/oras push ghcr.io/${{github.repository_owner}}/jackson/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} ./sbom.*
+          ./oras_install/oras push ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} ./sbom.*
           cd ..
 
       - name: Sign the sbom images
         # if: github.ref == 'refs/heads/release'
         run: |
-          cosign sign --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/jackson/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} || true
+          cosign sign --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} || true
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
 
