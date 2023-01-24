@@ -78,6 +78,8 @@ jobs:
         run: |
           npm install -g json
           LOGS_VIEWER_VERSION=${{ needs.ci.outputs.NPM_VERSION }}
+          json -I -f package.json -e "this.main=\"dist/retraced-logs-viewer.umd.cjs\""
+          json -I -f package.json -e "this.version=\"${LOGS_VIEWER_VERSION}\""
 
           npm publish --tag ${{ needs.ci.outputs.PUBLISH_TAG }} --access public
         working-directory: ./
