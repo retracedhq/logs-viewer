@@ -122,7 +122,6 @@ jobs:
           curl -LO "https://cdn.bundle.bar/clients/oras/${ORAS_VERSION}/${ORAS_FILENAME}"
           mkdir oras_install
           tar -xvf "${ORAS_FILENAME}" -C oras_install
-          cd npm
           ../oras_install/oras push ghcr.io/${{github.repository_owner}}/jackson/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} ./sbom.*
           cd ..
 
