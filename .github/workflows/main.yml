@@ -1,0 +1,85 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - "*"
+    tags:
+      - "beta-v*"
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  # Schedule
+  schedule:
+    - cron: "0 8 * * MON,THU" # Run every Monday and Thursday at 08:00 UTC
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    outputs:
+      NPM_VERSION: ${{ steps.version.outputs.NPM_VERSION }}
+      PUBLISH_TAG: ${{ steps.version.outputs.PUBLISH_TAG }}
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: npm install
+      - run: npm run build
+      - id: version
+        run: |
+          npm install -g json
+          LOGS_VIEWER_VERSION=$(echo $(cat ./package.json) | json version)
+
+          publishTag="latest"
+
+          if [[ "$GITHUB_REF" == *\/release ]]
+          then
+            echo "Release branch"
+          else
+            echo "Dev branch"
+            publishTag="beta"
+            LOGS_VIEWER_VERSION="${LOGS_VIEWER_VERSION}-beta.${GITHUB_RUN_NUMBER}"
+          fi
+
+          echo "NPM_VERSION=${LOGS_VIEWER_VERSION}" >> $GITHUB_OUTPUT
+          echo "PUBLISH_TAG=${publishTag}" >> $GITHUB_OUTPUT
+
+  publish:
+    needs: ci
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo ${{ needs.ci.outputs.NPM_VERSION }}
+      - run: echo ${{ needs.ci.outputs.PUBLISH_TAG }}
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          always-auth: true
+          node-version: ${{ matrix.node-version }}
+          registry-url: https://registry.npmjs.org
+          scope: "@retracedhq"
+          cache: "npm"
+      - run: npm install
+      - run: npm run build
+        working-directory: ./
+
+      - name: Publish NPM
+        # if: github.ref == 'refs/heads/release' || contains(github.ref, 'refs/tags/beta-v')
+        run: |
+          npm install -g json
+          LOGS_VIEWER_VERSION=${{ needs.ci.outputs.NPM_VERSION }}
+
+          npm publish --tag ${{ needs.ci.outputs.PUBLISH_TAG }} --access public
+        working-directory: ./
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
