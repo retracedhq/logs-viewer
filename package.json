@@ -1,6 +1,6 @@
 {
   "name": "@retracedhq/logs-viewer",
-  "version": "2.4.4",
+  "version": "2.4.5",
   "type": "module",
   "description": "Logs viewer widget",
   "files": [
@@ -24,7 +24,7 @@
     "Grayson Null <grayson@replicated.com>",
     "Team BoxyHQ <retraced@boxyhq.com>"
   ],
-  "license": "MIT",
+  "license": "Apache-2.0",
   "browserslist": [
     "> 1%",
     "last 2 versions"
