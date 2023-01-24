@@ -105,11 +105,11 @@ jobs:
       - name: Download artifact for SPDX Report
         uses: actions/download-artifact@v3
         with:
-          name: npm_sbom.spdx
+          name: sbom.spdx
       - name: Download artifact for CycloneDx Report
         uses: actions/download-artifact@v3
         with:
-          name: npm_sbom.cyclonedx
+          name: sbom.cyclonedx
       - name: Remove older SBOMs
         run: rm -rf ./npm/sbom*.* || true
       - name: Remove older SBOMs
