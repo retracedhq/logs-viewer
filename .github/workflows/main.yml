@@ -74,7 +74,7 @@ jobs:
         working-directory: ./
 
       - name: Publish NPM
-        # if: github.ref == 'refs/heads/release' || contains(github.ref, 'refs/tags/beta-v')
+        if: github.ref == 'refs/heads/release' || contains(github.ref, 'refs/tags/beta-v')
         run: |
           npm install -g json
           LOGS_VIEWER_VERSION=${{ needs.ci.outputs.NPM_VERSION }}
