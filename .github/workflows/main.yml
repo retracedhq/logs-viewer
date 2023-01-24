@@ -110,10 +110,10 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: npm_sbom.cyclonedx
-      - name: Remove older SBOMs
-        run: rm -rf ./npm/sbom*.* || true
-      - name: Remove older SBOMs
-        run: rm -rf sbom*.* || true
+      # - name: Remove older SBOMs
+      #   run: rm -rf ./npm/sbom*.* || true
+      # - name: Remove older SBOMs
+      #   run: rm -rf sbom*.* || true
       - name: ORAS Setup & Push SBOM reports to GitHub Container Registry
         # if: github.ref == 'refs/heads/release'
         run: |
