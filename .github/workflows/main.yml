@@ -114,8 +114,8 @@ jobs:
         run: rm -rf ./npm/sbom*.* || true
       # - name: Move SPDX Report
       #   run: mv npm_sbom.spdx "./npm/sbom.spdx"
-      - name: Move CycloneDx Report
-        run: mv npm_sbom.cyclonedx "./npm/sbom.cyclonedx"
+      # - name: Move CycloneDx Report
+      #   run: mv npm_sbom.cyclonedx "./npm/sbom.cyclonedx"
       # - name: Next Js Project SBOM Report [SPDX]
       #   uses: anchore/sbom-action@v0
       #   with:
