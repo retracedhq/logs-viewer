@@ -37,7 +37,12 @@ const LogsViewerWrapper = () => {
     return <progress> </progress>;
   }
 
-  return <RetracedEventsBrowser auditLogToken={token} host={endpoint} />;
+  return (
+    <RetracedEventsBrowser
+      auditLogToken={token}
+      host={`${endpoint}/viewer/v1`}
+    />
+  );
 };
 
 export default LogsViewerWrapper;
