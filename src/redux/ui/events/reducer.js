@@ -3,25 +3,18 @@ const initialState = {
   eventTableHeaderItems: [
     {
       label: "Description",
-      style: { maxWidth: "none" },
-      className: "flex-1-auto"
+      field: "display.markdown",
+      type: "markdown",
     },
-    { 
+    {
       label: "Date",
-      style: { maxWidth: "180px" },
-      className: "flex1"
+      field: "canonical_time",
     },
     {
       label: "Location",
-      style: { maxWidth: "180px" },
-      className: "flex1"
+      field: "source_ip",
     },
-    {
-      label: "",
-      style: { maxWidth: "20px" },
-      className: "flex1"
-    },
-  ]
+  ],
 };
 
 export default (state = initialState, action) => {

@@ -17,6 +17,8 @@ export default class RetracedEventsBrowser extends React.Component {
     host: PropTypes.string,
     header: PropTypes.string,
     mount: PropTypes.bool,
+    disableShowRawEvent: PropTypes.bool,
+    fields: PropTypes.array,
   };
   static defaultProps = {
     header: "Events",
@@ -29,10 +31,9 @@ export default class RetracedEventsBrowser extends React.Component {
     return (
       <div
         id="retracedLogsViewerApp"
-        className={`retraced-logs-viewer-app u-minHeight--full ${
-          this.props.customClass || ""
-        } ${this.props.theme || ""}`}
-      >
+        className={`retraced-logs-viewer-app u-minHeight--full ${this.props.customClass || ""} ${
+          this.props.theme || ""
+        }`}>
         <Provider store={store}>
           <EventsBrowser
             auditLogToken={this.props.auditLogToken}
@@ -41,6 +42,8 @@ export default class RetracedEventsBrowser extends React.Component {
             host={this.props.host}
             apiTokenHelpURL={this.props.apiTokenHelpURL}
             searchHelpURL={this.props.searchHelpURL}
+            fields={this.props.fields || []}
+            disableShowRawEvent={this.props.disableShowRawEvent}
           />
         </Provider>
       </div>
