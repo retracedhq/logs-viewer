@@ -102,6 +102,8 @@ jobs:
         uses: anchore/sbom-action/publish-sbom@v0
         with:
           sbom-artifact-match: ".*\\.cyclonedx$"
+      - name: Remove older SBOMs
+        run: rm -rf sbom*.* || true
       - name: Download artifact for SPDX Report
         uses: actions/download-artifact@v3
         with:
@@ -110,10 +112,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: sbom.cyclonedx
-      - name: Remove older SBOMs
-        run: rm -rf ./npm/sbom*.* || true
-      - name: Remove older SBOMs
-        run: rm -rf sbom*.* || true
       - name: ORAS Setup & Push SBOM reports to GitHub Container Registry
         if: github.ref == 'refs/heads/release'
         run: |
