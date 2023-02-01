@@ -33,4 +33,5 @@ export default defineConfig({
       },
     },
   },
+  test: {},
 });
