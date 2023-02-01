@@ -7,7 +7,7 @@ const endpoint = "http://localhost:3000/auditlog";
 const groupId = "dev";
 const actorId = "dev";
 
-const LogsViewerWrapper = () => {
+const LogsViewerWrapper = (props) => {
   const [token, setToken] = useState("");
 
   useEffect(() => {
@@ -39,6 +39,7 @@ const LogsViewerWrapper = () => {
 
   return (
     <RetracedEventsBrowser
+      breakpoint={props.breakpoint}
       auditLogToken={token}
       host={`${endpoint}/viewer/v1`}
       fields={[

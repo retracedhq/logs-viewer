@@ -19,6 +19,7 @@ export default class RetracedEventsBrowser extends React.Component {
     mount: PropTypes.bool,
     disableShowRawEvent: PropTypes.bool,
     fields: PropTypes.array,
+    breakpoint: PropTypes.string,
   };
   static defaultProps = {
     header: "Events",
@@ -36,6 +37,7 @@ export default class RetracedEventsBrowser extends React.Component {
         }`}>
         <Provider store={store}>
           <EventsBrowser
+            breakpoint={this.props.breakpoint}
             auditLogToken={this.props.auditLogToken}
             mount={this.props.mount}
             headerTitle={this.props.header}
