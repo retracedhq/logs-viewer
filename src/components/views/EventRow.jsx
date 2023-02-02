@@ -14,7 +14,7 @@ export default class EventRow extends React.Component {
   }
 
   getItemValue = (object, selector) => {
-    if (!selector) {
+    if (!selector || typeof selector !== 'string') {
       return '';
     }
     if (selector.indexOf('.') !== -1) {
@@ -32,14 +32,38 @@ export default class EventRow extends React.Component {
     }
   }
 
+  getValue = (item) => {
+    try {
+      debugger;
+      if (item.getValue) {
+        if (typeof item.getValue === 'function') {
+          const value = item.getValue(this.props.event);
+          if (typeof value === 'string') {
+            return value;
+          } else {
+            return '';
+          }
+        } return '';
+      } else {
+        return this.getItemValue(this.props.event, item.field);
+      }
+    } catch (ex) {
+      if (ex instanceof TypeError && ex.message.includes('Cannot read property')) {
+        return '';
+      }
+      console.log(ex);
+      return '';
+    }
+  }
+
   render() {
     return (
       <div className="TableRow-wrapper flex-auto">
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              { this.state.items.map((i, idx) => {
-                if (i.type === 'markdown') {
+              { this.state.items.map((item, idx) => {
+                if (item.type === 'markdown') {
                   return (
                     <div
                       key={ idx } className={ `flex flex1 content-section` }>
@@ -47,15 +71,15 @@ export default class EventRow extends React.Component {
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
                         sourcePos={ true }
                         components={ this.props.renderers }
-                        children={ i.getValue ? i.getValue(this.props.event) : this.getItemValue(this.props.event, i.field) }
+                        children={ this.getValue(item) }
                       />
                     </div>
                   );
-                } else if (i.type === "showEvent") {
+                } else if (item.type === "showEvent") {
                   return (
                     <div
                       key={ idx }
-                      style={ i.style }
+                      style={ item.style }
                       className="flex flex1 content-section actions-section justifyContent--flexEnd"
                     >
                       <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
@@ -81,11 +105,11 @@ export default class EventRow extends React.Component {
                 } else {
                   return (<div
                     key={ idx }
-                    style={ i.style }
+                    style={ item.style }
                     className="flex flex1 content-section alignItems--center"
                   >
                     <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
-                      { i.getValue ? i.getValue(this.props.event) : this.getItemValue(this.props.event, i.field) }
+                      { this.getValue(item) }
                     </p>
                   </div>)
                 }
