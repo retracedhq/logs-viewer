@@ -47,10 +47,6 @@ export default class EventRow extends React.Component {
         return this.getItemValue(this.props.event, item.field);
       }
     } catch (ex) {
-      if (ex instanceof TypeError && ex.message.includes('Cannot read property')) {
-        return '';
-      }
-      console.log(ex);
       return '';
     }
   }
