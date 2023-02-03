@@ -16,43 +16,47 @@ const sleep = async (time) => {
 }
 describe('Log Viewer Component', () => {
   beforeAll(() => {
-    startServer();
-    Object.defineProperty(window, 'innerWidth', { value: 1300 });
+    try {
+      Object.defineProperty(window, 'innerWidth', { value: 1300 });
+      startServer();
+    } catch (ex) {
+
+    }
   });
 
   afterAll(() => {
     stopServer();
   });
 
-  test("should render EventBrowser", async () => {
+  test("EventBrowser is correctly rendered", async () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("Events").length > 0);
-    expect(screen.getAllByText("Filters").length > 0);
-    expect(screen.getAllByText("Search").length > 0);
-    expect(screen.getAllByText("Export Events").length > 0);
-    expect(screen.getAllByText("Manage API Tokens").length > 0);
+    expect(screen.getAllByText("Events")).toBeDefined();
+    expect(screen.getAllByText("Filters")).toBeDefined();
+    expect(screen.getAllByText("Search")).toBeDefined();
+    expect(screen.getAllByText("Export Events")).toBeDefined();
+    expect(screen.getAllByText("Manage API Tokens")).toBeDefined();
   });
 
-  test("should render EventBrowser with empty fields", async () => {
+  test("EventBrowser is correctly rendered with empty fields", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("Events").length > 0);
-    expect(screen.getAllByText("Filters").length > 0);
-    expect(screen.getAllByText("Search").length > 0);
-    expect(screen.getAllByText("Export Events").length > 0);
-    expect(screen.getAllByText("Manage API Tokens").length > 0);
+    expect(screen.getAllByText("Events")).toBeDefined();
+    expect(screen.getAllByText("Filters")).toBeDefined();
+    expect(screen.getAllByText("Search")).toBeDefined();
+    expect(screen.getAllByText("Export Events")).toBeDefined();
+    expect(screen.getAllByText("Manage API Tokens")).toBeDefined();
   });
 
-  test("should render EventBrowser with empty field path", async () => {
+  test("EventBrowser is correctly rendered with empty field path", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -64,45 +68,45 @@ describe('Log Viewer Component', () => {
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("Events").length > 0);
-    expect(screen.getAllByText("Filters").length > 0);
-    expect(screen.getAllByText("Search").length > 0);
-    expect(screen.getAllByText("Export Events").length > 0);
-    expect(screen.getAllByText("Manage API Tokens").length > 0);
+    expect(screen.getAllByText("Events")).toBeDefined();
+    expect(screen.getAllByText("Filters")).toBeDefined();
+    expect(screen.getAllByText("Search")).toBeDefined();
+    expect(screen.getAllByText("Export Events")).toBeDefined();
+    expect(screen.getAllByText("Manage API Tokens")).toBeDefined();
   });
 
-  test("should render correct headers", async () => {
+  test("EventBrowser rendered correct headers", async () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("Description").length > 0);
-    expect(screen.getAllByText("Date").length > 0);
-    expect(screen.getAllByText("Group").length > 0);
-    expect(screen.getAllByText("CRUD").length > 0);
-    expect(screen.getAllByText("Location").length > 0);
+    expect(screen.getAllByText("Description")).toBeDefined();
+    expect(screen.getAllByText("Date")).toBeDefined();
+    expect(screen.getAllByText("Group")).toBeDefined();
+    expect(screen.getAllByText("CRUD")).toBeDefined();
+    expect(screen.getAllByText("Location")).toBeDefined();
   });
 
-  test("should render correct headers with empty fields", async () => {
+  test("EventBrowser rendered correct headers with empty fields", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("Description").length > 0);
-    expect(screen.getAllByText("Date").length > 0);
-    expect(screen.getAllByText("Location").length > 0);
+    expect(screen.getAllByText("Description")).toBeDefined();
+    expect(screen.getAllByText("Date")).toBeDefined();
+    expect(screen.getAllByText("Location")).toBeDefined();
     try {
-      expect(screen.getAllByText("Group").length > 0);
+      expect(screen.getAllByText("Group")).toBeDefined();
     } catch (ex) {
       expect(true);
     }
   });
 
-  test("should render correct headers with empty field path", async () => {
+  test("EventBrowser rendered correct headers with empty field path", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -113,36 +117,36 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Date").length > 0);
+    expect(screen.getAllByText("Date")).toBeDefined();
   });
 
-  test("should render correct event", async () => {
+  test("EventBrowser rendered correct event", async () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("audit.log.view (r)").length > 0);
-    expect(screen.getAllByText("172.22.0.1").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("r").length > 0);
-    expect(screen.getAllByText("Showing events").length > 0);
+    expect(screen.getAllByText("audit.log.view (r)")).toBeDefined();
+    expect(screen.getAllByText("172.22.0.1")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("r")).toBeDefined();
+    expect(screen.getAllByText("Showing events")).toBeDefined();
   });
 
-  test("should render correct event with empty fields", async () => {
+  test("EventBrowser rendered correct event with empty fields", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
     await sleep(0.05);
 
 
-    expect(screen.getAllByText("audit.log.view").length > 0);
-    expect(screen.getAllByText("172.22.0.1").length > 0);
-    expect(screen.getAllByText("An unknown actor").length > 0);
+    expect(screen.getAllByText("audit.log.view")).toBeDefined();
+    expect(screen.getAllByText("172.22.0.1")).toBeDefined();
+    expect(screen.getAllByText("An unknown actor")).toBeDefined();
   });
 
-  test("should render correct headers & rows with empty label", async () => {
+  test("EventBrowser rendered correct headers & rows with empty label", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -157,11 +161,11 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Group").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
+    expect(screen.getAllByText("Group")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
   });
 
-  test("should render correct headers & rows with invalid field", async () => {
+  test("EventBrowser rendered correct headers & rows with invalid field", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -176,12 +180,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Date").length > 0);
-    expect(screen.getAllByText("Group").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
+    expect(screen.getAllByText("Date")).toBeDefined();
+    expect(screen.getAllByText("Group")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
   });
 
-  test("should render correct headers & rows with field which does not exists", async () => {
+  test("EventBrowser rendered correct headers & rows with field which does not exists", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -196,12 +200,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("Group").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("Group")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
   });
 
-  test("should render correct headers & rows with empty field and label", async () => {
+  test("EventBrowser rendered correct headers & rows with empty field and label", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -216,11 +220,11 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
   });
 
-  test("should render correct headers & rows with field as number", async () => {
+  test("EventBrowser rendered correct headers & rows with field as number", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -235,12 +239,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("0").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("0")).toBeDefined();
   });
 
-  test("should render correct headers & rows with field as array", async () => {
+  test("EventBrowser rendered correct headers & rows with field as array", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -255,12 +259,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("0").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("0")).toBeDefined();
   });
 
-  test("should render correct headers & rows with field as object", async () => {
+  test("EventBrowser rendered correct headers & rows with field as object", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -275,12 +279,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("0").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("0")).toBeDefined();
   });
 
-  test("should render correct headers & rows with field as object function name", async () => {
+  test("EventBrowser rendered correct headers & rows with field as object function name", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -295,12 +299,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("0").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("0")).toBeDefined();
   });
 
-  test("should render correct headers & rows with label as object", async () => {
+  test("EventBrowser rendered correct headers & rows with label as object", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -315,11 +319,11 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
   });
 
-  test("should render correct headers & rows with getValue function", async () => {
+  test("EventBrowser rendered correct headers & rows with getValue function", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -336,13 +340,13 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("info").length > 0);
-    expect(screen.getAllByText("Group id: dev").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("info")).toBeDefined();
+    expect(screen.getAllByText("Group id: dev")).toBeDefined();
   });
 
-  test("should render correct headers & rows with getValue as non function", async () => {
+  test("EventBrowser rendered correct headers & rows with getValue as non function", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -357,12 +361,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("info").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("info")).toBeDefined();
   });
 
-  test("should render correct headers & rows with getValue as exception throwing function", async () => {
+  test("EventBrowser rendered correct headers & rows with getValue as exception throwing function", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -379,12 +383,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("info").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("info")).toBeDefined();
   });
 
-  test("should render correct headers & rows with getValue returns non string", async () => {
+  test("EventBrowser rendered correct headers & rows with getValue returns non string", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -401,12 +405,12 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("info").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("info")).toBeDefined();
   });
 
-  test("should render correct headers & rows with getValue returns jsx", async () => {
+  test("EventBrowser rendered correct headers & rows with getValue returns jsx", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
         {
@@ -423,8 +427,8 @@ describe('Log Viewer Component', () => {
     });
     await sleep(0.05);
 
-    expect(screen.getAllByText("Actor").length > 0);
-    expect(screen.getAllByText("dev").length > 0);
-    expect(screen.getAllByText("info").length > 0);
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("info")).toBeDefined();
   });
 });

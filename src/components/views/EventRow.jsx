@@ -34,7 +34,6 @@ export default class EventRow extends React.Component {
 
   getValue = (item) => {
     try {
-      debugger;
       if (item.getValue) {
         if (typeof item.getValue === 'function') {
           const value = item.getValue(this.props.event);
