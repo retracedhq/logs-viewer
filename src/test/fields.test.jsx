@@ -1,6 +1,6 @@
 import { expect, test } from "vitest";
 import { startServer, stopServer } from './server.js';
-import { render, screen } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import LogsViewerWrapper from "../dev/LogsViewerWrapper";
 import fetch from 'node-fetch'
 import { act } from "react-dom/test-utils";
@@ -32,7 +32,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('Events'));
 
 
     expect(screen.getAllByText("Events")).toBeDefined();
@@ -46,7 +46,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('Events'));
 
 
     expect(screen.getAllByText("Events")).toBeDefined();
@@ -65,7 +65,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('Events'));
 
 
     expect(screen.getAllByText("Events")).toBeDefined();
@@ -79,7 +79,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('Events'));
 
 
     expect(screen.getAllByText("Description")).toBeDefined();
@@ -93,7 +93,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('Events'));
 
 
     expect(screen.getAllByText("Description")).toBeDefined();
@@ -124,7 +124,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('audit.log.view (r)'));
 
 
     expect(screen.getAllByText("audit.log.view (r)")).toBeDefined();
@@ -138,7 +138,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('audit.log.view'));
 
 
     expect(screen.getAllByText("audit.log.view")).toBeDefined();
@@ -178,7 +178,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Date")).toBeDefined();
     expect(screen.getAllByText("Group")).toBeDefined();
@@ -198,7 +198,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("Group")).toBeDefined();
@@ -218,7 +218,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -237,7 +237,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -257,7 +257,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -277,7 +277,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -297,7 +297,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -338,7 +338,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -359,7 +359,7 @@ describe('Log Viewer Component', () => {
         }
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -381,7 +381,7 @@ describe('Log Viewer Component', () => {
         }
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -403,7 +403,7 @@ describe('Log Viewer Component', () => {
         }
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -425,7 +425,7 @@ describe('Log Viewer Component', () => {
         }
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('dev'));
 
     expect(screen.getAllByText("Actor")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
