@@ -99,11 +99,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("Description")).toBeDefined();
     expect(screen.getAllByText("Date")).toBeDefined();
     expect(screen.getAllByText("Location")).toBeDefined();
-    try {
-      expect(screen.getAllByText("Group")).toBeDefined();
-    } catch (ex) {
-      expect(true);
-    }
+    expect(screen.queryByText("Group")).toBeNull();
   });
 
   test("EventBrowser rendered correct headers with empty field path", async () => {
