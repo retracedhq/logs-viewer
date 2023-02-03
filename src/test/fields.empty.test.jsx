@@ -1,24 +1,23 @@
-import { expect, test } from "vitest";
-import { startServer, stopServer } from './server.js';
+import { expect, test, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import LogsViewerWrapper from "../dev/LogsViewerWrapper";
-import fetch from 'node-fetch'
+import createFetchMock from 'vitest-fetch-mock';
 import { act } from "react-dom/test-utils";
+import MockHelper from './mock';
+
+const fetchMock = createFetchMock(vi);
+global.fetch = fetchMock
 
 global.fetch = fetch
 
 describe('Log Viewer Component with empty list of fields', () => {
   beforeAll(() => {
-    try {
-      Object.defineProperty(window, 'innerWidth', { value: 1300 });
-      startServer();
-    } catch (ex) {
-
-    }
+    Object.defineProperty(window, 'innerWidth', { value: 1300 });
+    MockHelper(fetchMock);
   });
 
   afterAll(async () => {
-    await stopServer();
+    fetchMock.dontMock();
   });
 
   test("EventBrowser is correctly rendered with empty fields", async () => {

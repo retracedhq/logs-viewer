@@ -1,32 +1,23 @@
-import { expect, test } from "vitest";
-import { startServer, stopServer } from './server.js';
+import { expect, test, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import LogsViewerWrapper from "../dev/LogsViewerWrapper";
-import fetch from 'node-fetch'
+import createFetchMock from 'vitest-fetch-mock';
 import { act } from "react-dom/test-utils";
+import MockHelper from './mock';
+
+const fetchMock = createFetchMock(vi);
+global.fetch = fetchMock
 
 global.fetch = fetch
 
-const sleep = async (time) => {
-  return new Promise((r) => {
-    setTimeout(() => {
-      r(1);
-    }, time * 1000)
-  });
-}
-
 describe('Log Viewer Component with custom fields', () => {
   beforeAll(() => {
-    try {
-      Object.defineProperty(window, 'innerWidth', { value: 1300 });
-      startServer();
-    } catch (ex) {
-
-    }
+    Object.defineProperty(window, 'innerWidth', { value: 1300 });
+    MockHelper(fetchMock);
   });
 
   afterAll(() => {
-    stopServer();
+    fetchMock.dontMock();
   });
 
   test("EventBrowser is correctly rendered with empty field path", async () => {
@@ -61,7 +52,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await sleep(1);
+    await waitFor(() => screen.findByTestId('headerTitle'));
 
     expect(screen.findAllByText("Date")).toBeDefined();
     expect(screen.findAllByText("Group")).toBeDefined();
