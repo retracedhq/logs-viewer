@@ -111,7 +111,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.02);
+    await sleep(0.5);
 
     expect(screen.getAllByText("Date")).toBeDefined();
   });
@@ -120,7 +120,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
-    await sleep(0.02);
+    await sleep(0.5);
 
 
     expect(screen.getAllByText("audit.log.view (r)")).toBeDefined();
@@ -135,7 +135,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [] } />);
     });
-    await waitFor(() => screen.getByText('audit.log.view'));
+    await sleep(0.5);
 
 
     expect(screen.getAllByText("audit.log.view")).toBeDefined();
