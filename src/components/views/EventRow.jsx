@@ -63,6 +63,7 @@ export default class EventRow extends React.Component {
                     <div
                       key={ idx } className={ `flex flex1 content-section` }>
                       <ReactMarkdown
+                        data-testid='markdown'
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
                         sourcePos={ true }
                         components={ this.props.renderers }
@@ -99,6 +100,7 @@ export default class EventRow extends React.Component {
                     </div>)
                 } else {
                   return (<div
+                    data-testid={ `event-cell-${idx}` }
                     key={ idx }
                     style={ item.style }
                     className="flex flex1 content-section alignItems--center"

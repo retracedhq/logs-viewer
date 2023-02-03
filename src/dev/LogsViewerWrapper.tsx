@@ -37,39 +37,39 @@ const LogsViewerWrapper = (props) => {
     return <progress> </progress>;
   }
 
+  const defaultFields = [
+    {
+      label: "Description",
+      type: "markdown",
+      getValue: (event) => {
+        return `**${event.action} (${event.crud})** has been performed by __${event.actor.id}__.`;
+      },
+    },
+    {
+      label: "Date",
+      field: "canonical_time",
+    },
+    {
+      label: "Group",
+      field: "group",
+    },
+    {
+      label: "CRUD",
+      field: "crud",
+    },
+    {
+      label: "Location",
+      getValue: (event) => {
+        return event.country || event.source_ip;
+      },
+    },
+  ];
+
   return (
     <RetracedEventsBrowser
       auditLogToken={token}
       host={`${endpoint}/viewer/v1`}
-      fields={
-        props.fields || [
-          {
-            label: "Description",
-            type: "markdown",
-            getValue: (event) => {
-              return `**${event.action} (${event.crud})** has been performed by __${event.actor.id}__.`;
-            },
-          },
-          {
-            label: "Date",
-            field: "canonical_time",
-          },
-          {
-            label: "Group",
-            field: "group",
-          },
-          {
-            label: "CRUD",
-            field: "crud",
-          },
-          {
-            label: "Location",
-            getValue: (event) => {
-              return event.country || event.source_ip;
-            },
-          },
-        ]
-      }
+      fields={props.fields ? (Array.isArray(props.fields) ? props.fields : defaultFields) : defaultFields}
       disableShowRawEvent={false}
     />
   );

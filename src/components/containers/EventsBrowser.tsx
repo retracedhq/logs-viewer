@@ -278,7 +278,9 @@ class EventsBrowser extends React.Component {
           <div className="flex1 flex-column u-minHeight--full">
             <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
-                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">{this.props.headerTitle}</h3>
+                <h3 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
+                  {this.props.headerTitle}
+                </h3>
                 <span className="flex flex-auto u-marginLeft--more">
                   <SearchForm
                     onSubmit={this.search}
