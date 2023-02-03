@@ -115,7 +115,7 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await sleep(0.02);
 
     expect(screen.getAllByText("Date")).toBeDefined();
   });
@@ -130,6 +130,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("audit.log.view (r)")).toBeDefined();
     expect(screen.getAllByText("172.22.0.1")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getAllByText("a few seconds ago")).toBeDefined();
     expect(screen.getAllByText("r")).toBeDefined();
     expect(screen.getAllByText("Showing events")).toBeDefined();
   });
@@ -159,10 +160,11 @@ describe('Log Viewer Component', () => {
         },
       ] } />);
     });
-    await sleep(0.05);
+    await waitFor(() => screen.getByText('a few seconds ago'));
 
     expect(screen.getAllByText("Group")).toBeDefined();
     expect(screen.getAllByText("dev")).toBeDefined();
+    expect(screen.getByText("a few seconds ago")).toBeDefined();
   });
 
   test("EventBrowser rendered correct headers & rows with invalid field", async () => {
