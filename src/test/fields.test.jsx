@@ -120,7 +120,7 @@ describe('Log Viewer Component', () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
-    await waitFor(() => screen.getByText('audit.log.view (r)'));
+    await sleep(0.02);
 
 
     expect(screen.getAllByText("audit.log.view (r)")).toBeDefined();
