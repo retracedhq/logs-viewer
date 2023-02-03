@@ -200,6 +200,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("Group").length > 0);
     expect(screen.getAllByText("dev").length > 0);
   });
+
   test("should render correct headers & rows with empty field and label", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -218,6 +219,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("Actor").length > 0);
     expect(screen.getAllByText("dev").length > 0);
   });
+
   test("should render correct headers & rows with field as number", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -237,6 +239,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("0").length > 0);
   });
+
   test("should render correct headers & rows with field as array", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -256,6 +259,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("0").length > 0);
   });
+
   test("should render correct headers & rows with field as object", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -275,6 +279,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("0").length > 0);
   });
+
   test("should render correct headers & rows with field as object function name", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -294,6 +299,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("0").length > 0);
   });
+
   test("should render correct headers & rows with label as object", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -312,6 +318,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("Actor").length > 0);
     expect(screen.getAllByText("dev").length > 0);
   });
+
   test("should render correct headers & rows with getValue function", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -334,6 +341,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("info").length > 0);
     expect(screen.getAllByText("Group id: dev").length > 0);
   });
+
   test("should render correct headers & rows with getValue as non function", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -353,6 +361,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("info").length > 0);
   });
+
   test("should render correct headers & rows with getValue as exception throwing function", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -374,6 +383,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("info").length > 0);
   });
+
   test("should render correct headers & rows with getValue returns non string", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
@@ -395,6 +405,7 @@ describe('Log Viewer Component', () => {
     expect(screen.getAllByText("dev").length > 0);
     expect(screen.getAllByText("info").length > 0);
   });
+
   test("should render correct headers & rows with getValue returns jsx", async () => {
     await act(async () => {
       render(<LogsViewerWrapper fields={ [
