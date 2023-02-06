@@ -360,4 +360,52 @@ describe('Log Viewer Component with custom fields', () => {
     expect(screen.getAllByText("dev")).toBeDefined();
     expect(screen.getAllByText("info")).toBeDefined();
   });
+
+  test("EventBrowser rendered correct headers & rows with empty object in fields", async () => {
+    await act(async () => {
+      render(<LogsViewerWrapper fields={ [
+        {},
+        {
+          label: "Actor",
+          field: "actor"
+        }
+      ] } />);
+    });
+    await waitFor(() => screen.findByTestId('event-cell-1'));
+
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+  });
+
+  test("EventBrowser rendered correct headers & rows with empty array in fields", async () => {
+    await act(async () => {
+      render(<LogsViewerWrapper fields={ [
+        [],
+        {
+          label: "Actor",
+          field: "actor"
+        }
+      ] } />);
+    });
+    await waitFor(() => screen.findByTestId('event-cell-0'));
+
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+  });
+
+  test("EventBrowser rendered correct headers & rows with undefined in fields", async () => {
+    await act(async () => {
+      render(<LogsViewerWrapper fields={ [
+        undefined,
+        {
+          label: "Actor",
+          field: "actor"
+        }
+      ] } />);
+    });
+    await waitFor(() => screen.findByTestId('event-cell-0'));
+
+    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.getAllByText("dev")).toBeDefined();
+  });
 });

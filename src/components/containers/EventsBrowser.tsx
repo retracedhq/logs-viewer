@@ -242,7 +242,9 @@ class EventsBrowser extends React.Component {
 
   processFields(fields) {
     // filter fields which can not be rendered
-    fields = fields.filter((f) => f.type !== "showEvent");
+    fields = fields.filter((f) =>
+      !Array.isArray(f) && typeof f === "object" ? f.type !== "showEvent" : false
+    );
     return this.props.disableShowRawEvent
       ? fields.map((f) => {
           return this.processField(f);
