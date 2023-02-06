@@ -41,9 +41,7 @@ const LogsViewerWrapper = (props) => {
     {
       label: "Description",
       type: "markdown",
-      getValue: (event) => {
-        return `**${event.action} (${event.crud})** has been performed by __${event.actor.id}__.`;
-      },
+      field: "display.markdown",
     },
     {
       label: "Date",
