@@ -202,6 +202,14 @@ class EventsBrowser extends React.Component {
     });
   }
 
+  /**
+   *
+   * @param info field object
+   * @returns processed field object
+   *
+   * Add default style parameters to field object if not provided
+   * In case of well known fields add getValue to get the correct values to display
+   */
   processField(info) {
     if (info.type === "markdown") {
       info = {
@@ -240,6 +248,13 @@ class EventsBrowser extends React.Component {
     }
   }
 
+  /**
+   *
+   * @param fields Array of field object
+   * @returns cleaned up Array of fields
+   *
+   * Filters invalid fields & add show event field if disableShowRawEvent flag is not set
+   */
   processFields(fields) {
     // filter fields which can not be rendered
     fields = fields.filter((f) =>

@@ -7,6 +7,7 @@ export default class FixedTableHeader extends React.Component {
       className,
       items,
     } = this.props;
+
     const renderItem = (item, i) => {
       const label = typeof item.label === 'string' ? item.label : ''
       return (

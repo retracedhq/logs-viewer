@@ -13,7 +13,7 @@ export default class EventRow extends React.Component {
     };
   }
 
-  getItemValue = (object, selector) => {
+  getFieldValue = (object, selector) => {
     if (!selector || typeof selector !== 'string') {
       return '';
     }
@@ -32,7 +32,7 @@ export default class EventRow extends React.Component {
     }
   }
 
-  getValue = (item) => {
+  getCellValue = (item) => {
     try {
       if (item.getValue) {
         if (typeof item.getValue === 'function') {
@@ -44,7 +44,7 @@ export default class EventRow extends React.Component {
           }
         } return '';
       } else {
-        return this.getItemValue(this.props.event, item.field);
+        return this.getFieldValue(this.props.event, item.field);
       }
     } catch (ex) {
       return '';
@@ -67,7 +67,7 @@ export default class EventRow extends React.Component {
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
                         sourcePos={ true }
                         components={ this.props.renderers }
-                        children={ this.getValue(item) }
+                        children={ this.getCellValue(item) }
                       />
                     </div>
                   );
@@ -106,7 +106,7 @@ export default class EventRow extends React.Component {
                     className="flex flex1 content-section alignItems--center"
                   >
                     <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
-                      { this.getValue(item) }
+                      { this.getCellValue(item) }
                     </p>
                   </div>)
                 }
