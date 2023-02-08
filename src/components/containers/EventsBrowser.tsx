@@ -317,6 +317,7 @@ class EventsBrowser extends React.Component {
                 <div className="flex-auto flex-column flex-verticalCenter">
                   <span
                     className="icon clickable u-csvExportIcon"
+                    data-testid={`export-events`}
                     onClick={() => {
                       this.renderModal(
                         <ExportEventsModal
@@ -344,6 +345,7 @@ class EventsBrowser extends React.Component {
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
                   <span
                     className="icon clickable u-tokensIcon"
+                    data-testid={`manage-api-tokens`}
                     onClick={() => {
                       this.renderModal(
                         <AccessTokensModal

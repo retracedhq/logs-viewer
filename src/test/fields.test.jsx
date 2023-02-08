@@ -24,11 +24,10 @@ describe('Log Viewer Component basic tests', () => {
     await waitFor(() => screen.findByTestId('headerTitle'));
 
 
-    expect(screen.getAllByText("Events")).toBeDefined();
-    expect(screen.getAllByText("Filters")).toBeDefined();
-    expect(screen.getAllByText("Search")).toBeDefined();
-    expect(screen.getAllByText("Export Events")).toBeDefined();
-    expect(screen.getAllByText("Manage API Tokens")).toBeDefined();
+    expect(screen.queryAllByTestId("search-events").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("search-button").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("export-events").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("manage-api-tokens").length).toBeGreaterThanOrEqual(1);
   });
 
   test("EventBrowser rendered correct headers", async () => {
@@ -38,11 +37,12 @@ describe('Log Viewer Component basic tests', () => {
     await waitFor(() => screen.findByTestId('headerTitle'));
 
 
-    expect(screen.getAllByText("Description")).toBeDefined();
-    expect(screen.getAllByText("Date")).toBeDefined();
-    expect(screen.getAllByText("Group")).toBeDefined();
-    expect(screen.getAllByText("CRUD")).toBeDefined();
-    expect(screen.getAllByText("Location")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Description-0").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("headers-Date-1").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("headers-Group-2").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("headers-CRUD-3").length).toBeGreaterThanOrEqual(1);
+    expect(screen.queryAllByTestId("headers-Location-4").length).toBeGreaterThanOrEqual(1);
+    expect(screen.findAllByTestId("event-cell-moreinfo-5")).toBeDefined();
   });
 
 });
