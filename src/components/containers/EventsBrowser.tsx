@@ -472,7 +472,9 @@ class EventsBrowser extends React.Component {
               <div className="flex1 resultsCount">
                 {currentResults.resultIds.length ? (
                   <p className="u-fontSize--normal u-lineHeight--normal u-textAlign--center">
-                    <span className="u-color--dustyGray">Showing events </span>
+                    <span data-testid="showing-events" className="u-color--dustyGray">
+                      Showing events{" "}
+                    </span>
                     <span className="u-color-tuna u-fontWeight--medium">{`${this.offset() + 1} - ${
                       this.offset() + currentResults.resultIds.length
                     }`}</span>

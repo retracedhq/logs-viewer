@@ -71,7 +71,7 @@ describe('Log Viewer Component with custom fields', () => {
     expect(screen.findAllByText("dev")).toBeDefined();
     expect(screen.findAllByText("a few seconds ago")).toBeDefined();
     expect(screen.findAllByText("r")).toBeDefined();
-    expect(screen.findAllByText("Showing events")).toBeDefined();
+    expect(screen.queryAllByTestId("showing-events").length).toBe(1);
   });
 
   test("EventBrowser rendered correct headers & rows with empty label", async () => {
@@ -324,9 +324,9 @@ describe('Log Viewer Component with custom fields', () => {
     });
     await waitFor(() => screen.findByTestId('event-cell-1'));
 
-    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
-    expect(screen.getAllByText("info")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-info-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("event-cell-moreinfo-2").length).toBe(1);
   });
 
@@ -347,9 +347,9 @@ describe('Log Viewer Component with custom fields', () => {
     });
     await waitFor(() => screen.findByTestId('event-cell-1'));
 
-    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
-    expect(screen.getAllByText("info")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-info-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("event-cell-moreinfo-2").length).toBe(1);
   });
 
@@ -370,9 +370,9 @@ describe('Log Viewer Component with custom fields', () => {
     });
     await waitFor(() => screen.findByTestId('event-cell-1'));
 
-    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
-    expect(screen.getAllByText("info")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-info-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("event-cell-moreinfo-2").length).toBe(1);
   });
 
@@ -388,7 +388,7 @@ describe('Log Viewer Component with custom fields', () => {
     });
     await waitFor(() => screen.findByTestId('event-cell-1'));
 
-    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Actor-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
     expect(screen.queryAllByTestId("event-cell-moreinfo-2").length).toBe(1);
   });
@@ -405,7 +405,7 @@ describe('Log Viewer Component with custom fields', () => {
     });
     await waitFor(() => screen.findByTestId('event-cell-0'));
 
-    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
     expect(screen.queryAllByTestId("event-cell-moreinfo-1").length).toBe(1);
   });
@@ -422,7 +422,7 @@ describe('Log Viewer Component with custom fields', () => {
     });
     await waitFor(() => screen.findByTestId('event-cell-0'));
 
-    expect(screen.getAllByText("Actor")).toBeDefined();
+    expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
     expect(screen.queryAllByTestId("event-cell-moreinfo-1").length).toBe(1);
   });
