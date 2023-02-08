@@ -234,13 +234,17 @@ class EventsBrowser extends React.Component {
         };
         return info;
       case "actor":
+      case "actor.id":
+      case "actor.name":
         info.getValue = (event) => {
-          return event.actor.id || event.actor.name;
+          return event.actor.name || event.actor.id;
         };
         return info;
       case "group":
+      case "group.id":
+      case "group.name":
         info.getValue = (event) => {
-          return event.group.id || event.group.name;
+          return event.group.name || event.group.id;
         };
         return info;
       default:
