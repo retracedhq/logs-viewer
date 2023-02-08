@@ -66,7 +66,7 @@ describe('Log Viewer Component with custom fields', () => {
     await waitFor(() => screen.findByTestId('event-cell-4'));
 
 
-    expect(screen.findAllByText("audit.log.view (r)")).toBeDefined();
+    expect(screen.findByTestId("markdown")).toBeDefined();
     expect(screen.findAllByText("172.22.0.1")).toBeDefined();
     expect(screen.findAllByText("dev")).toBeDefined();
     expect(screen.findAllByText("a few seconds ago")).toBeDefined();
