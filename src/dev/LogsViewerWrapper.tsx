@@ -68,7 +68,7 @@ const LogsViewerWrapper = (props) => {
       auditLogToken={token}
       host={`${endpoint}/viewer/v1`}
       fields={props.fields ? (Array.isArray(props.fields) ? props.fields : defaultFields) : defaultFields}
-      disableShowRawEvent={false}
+      disableShowRawEvent={props.disableShowRawEvent ? props.disableShowRawEvent : false}
     />
   );
 };

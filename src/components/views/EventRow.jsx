@@ -77,6 +77,7 @@ export default class EventRow extends React.Component {
                       key={ idx }
                       style={ item.style }
                       className="flex flex1 content-section actions-section justifyContent--flexEnd"
+                      data-testid={ `event-cell-moreinfo-${idx}` }
                     >
                       <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
                         <span
