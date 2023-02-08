@@ -42,7 +42,7 @@ describe('Log Viewer Component basic tests', () => {
     expect(screen.queryAllByTestId("headers-Group-2").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-CRUD-3").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Location-4").length).toBeGreaterThanOrEqual(1);
-    expect(screen.findAllByTestId("event-cell-moreinfo-5")).toBeDefined();
+    expect(screen.queryAllByTestId("event-cell-moreinfo-5")).toBeDefined();
   });
 
 });

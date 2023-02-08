@@ -42,7 +42,7 @@ describe('Log Viewer Component with empty list of fields', () => {
     expect(screen.queryAllByTestId("headers-Description-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Date-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Location-2").length).toBeGreaterThanOrEqual(1);
-    expect(screen.findAllByTestId("event-cell-moreinfo-3")).toBeDefined();
+    expect(screen.queryAllByTestId("event-cell-moreinfo-3")).toBeDefined();
   });
 
   test("EventBrowser rendered correct event with empty fields", async () => {
