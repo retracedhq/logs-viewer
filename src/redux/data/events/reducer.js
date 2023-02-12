@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
           ...state.latestServerResults,
           sourceQuery: action.payload.sourceQuery,
           totalResultCount: action.payload.totalHitCount,
-          resultIds: action.payload.list.map(e => e.id),
+          resultIds: action.payload.list.map((e) => e.id),
           cursor: action.payload.cursor,
         },
       };

@@ -85,35 +85,26 @@ export default class SearchForm extends React.Component {
   dateRangeWithDefaults(start, end) {
     return [
       start ? dayjs(start).format() : "2017-01-01T00:00:00Z",
-      end
-        ? dayjs(end).add(1, "d").format()
-        : dayjs().add(1, "d").startOf("day").format(),
+      end ? dayjs(end).add(1, "d").format() : dayjs().add(1, "d").startOf("day").format(),
     ];
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    const crudQuery = this.state.crudFiltersArray.length
-      ? `crud:${this.state.crudFiltersArray.join()}`
-      : "";
+    const crudQuery = this.state.crudFiltersArray.length ? `crud:${this.state.crudFiltersArray.join()}` : "";
     const crudFilters = this.state.crudFilters;
     const dates = {
       startDate: this.state.receivedStartDate,
-      endDate:
-        this.state.receivedEndDate &&
-        dayjs(this.state.receivedEndDate).add(1, "d").toDate(),
+      endDate: this.state.receivedEndDate && dayjs(this.state.receivedEndDate).add(1, "d").toDate(),
     };
     const receivedQuery =
       !this.state.receivedStartDate && !this.state.receivedEndDate
         ? []
-        : this.dateRangeWithDefaults(
-          this.state.receivedStartDate,
-          this.state.receivedEndDate
-        );
+        : this.dateRangeWithDefaults(this.state.receivedStartDate, this.state.receivedEndDate);
 
-    let query = `${this.state.searchQuery.length ? `${this.state.searchQuery} ` : ""
-      }${crudQuery}${receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
-      }`;
+    let query = `${this.state.searchQuery.length ? `${this.state.searchQuery} ` : ""}${crudQuery}${
+      receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
+    }`;
 
     query = rewriteHumanTimes(query, "received");
     query = rewriteHumanTimes(query, "created");
@@ -127,50 +118,48 @@ export default class SearchForm extends React.Component {
   render() {
     return (
       <div>
-        <form onSubmit={ this.onSubmit }>
+        <form onSubmit={this.onSubmit}>
           <div className="flex flex1">
             <div className="u-position--relative">
               <input
                 type="text"
-                data-testid={ `search-events` }
-                defaultValue={ this.props.text }
+                data-testid={`search-events`}
+                defaultValue={this.props.text}
                 className="Input SearchEvents"
-                onChange={ this.onChange }
+                onChange={this.onChange}
                 placeholder="Search events"
                 aria-label="Search events"
               />
               <span
                 className="FilterDropdown-trigger u-textDecoration--underlineOnHover"
-                onClick={ this.props.toggleDropdown }
-              >
-                { this.props.filtersOpen ? "Close" : "Filters" }
+                onClick={this.props.toggleDropdown}>
+                {this.props.filtersOpen ? "Close" : "Filters"}
               </span>
-              { this.props.filtersOpen ? (
+              {this.props.filtersOpen ? (
                 <div className="FilterDropdown">
                   <div className="u-paddingBottom--more">
                     <p
                       id="dateRangeLabel"
-                      className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal"
-                    >
+                      className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal">
                       Date range
                     </p>
                     <div className="flex flex1">
                       <div className="flex1 u-paddingRight--small datepicker-style-boundary datepicker-specificity-hack">
                         <DatePicker
                           key="picker-start"
-                          selected={ this.state.receivedStartDate }
+                          selected={this.state.receivedStartDate}
                           className="Input u-width--full"
                           placeholderText="Start"
                           dateFormat="MM/dd/yyyy"
-                          popperModifiers={ [
+                          popperModifiers={[
                             {
                               name: "offset",
                               options: {
                                 offset: [-10, 0],
                               },
                             },
-                          ] }
-                          onChange={ this.handleReceivedStartDateChange }
+                          ]}
+                          onChange={this.handleReceivedStartDateChange}
                         />
                       </div>
                       <div className="flex1 u-paddingLeft--small datepicker-style-boundary datepicker-specificity-hack">
@@ -178,22 +167,22 @@ export default class SearchForm extends React.Component {
                           key="picker-end"
                           id="picker-end"
                           ariaLabelledBy="pickerEndLabel"
-                          selected={ this.state.receivedEndDate }
+                          selected={this.state.receivedEndDate}
                           className="Input u-width--full"
                           placeholderText="End"
                           dateFormat="MM/dd/yyyy"
                           popoverAttachment="bottom center"
                           popoverTargetAttachment="top center"
                           popoverTargetOffset="10px 40px"
-                          popperModifiers={ [
+                          popperModifiers={[
                             {
                               name: "offset",
                               options: {
                                 offset: [-10, 0],
                               },
                             },
-                          ] }
-                          onChange={ this.handleReceivedEndDateChange }
+                          ]}
+                          onChange={this.handleReceivedEndDateChange}
                         />
                       </div>
                     </div>
@@ -205,23 +194,22 @@ export default class SearchForm extends React.Component {
                     <div className="flex flex1 u-paddingBottom--normal">
                       <div className="flex1 u-paddingRight--small">
                         <div
-                          className={ `flex1 CustomCheckbox no-margin ${this.state.cChecked ? "is-checked" : ""
-                            }` }
-                        >
+                          className={`flex1 CustomCheckbox no-margin ${
+                            this.state.cChecked ? "is-checked" : ""
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
                               id="createEventType"
-                              checked={ this.state.crudFilters.cChecked }
+                              checked={this.state.crudFilters.cChecked}
                               value=""
-                              onChange={ (e) => {
+                              onChange={(e) => {
                                 this.handleCrudFilterChange("c", e);
-                              } }
+                              }}
                             />
                             <label
                               htmlFor="createEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Create
                             </label>
                           </div>
@@ -229,23 +217,22 @@ export default class SearchForm extends React.Component {
                       </div>
                       <div className="flex1 u-paddingLeft--small">
                         <div
-                          className={ `flex1 CustomCheckbox no-margin ${this.state.rChecked ? "is-checked" : ""
-                            }` }
-                        >
+                          className={`flex1 CustomCheckbox no-margin ${
+                            this.state.rChecked ? "is-checked" : ""
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
                               id="readEventType"
-                              checked={ this.state.crudFilters.rChecked }
+                              checked={this.state.crudFilters.rChecked}
                               value=""
-                              onChange={ (e) => {
+                              onChange={(e) => {
                                 this.handleCrudFilterChange("r", e);
-                              } }
+                              }}
                             />
                             <label
                               htmlFor="readEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Read
                             </label>
                           </div>
@@ -255,23 +242,22 @@ export default class SearchForm extends React.Component {
                     <div className="flex flex1">
                       <div className="flex1 u-paddingRight--small">
                         <div
-                          className={ `flex1 CustomCheckbox no-margin ${this.state.uChecked ? "is-checked" : ""
-                            }` }
-                        >
+                          className={`flex1 CustomCheckbox no-margin ${
+                            this.state.uChecked ? "is-checked" : ""
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
                               id="updateEventType"
-                              checked={ this.state.crudFilters.uChecked }
+                              checked={this.state.crudFilters.uChecked}
                               value=""
-                              onChange={ (e) => {
+                              onChange={(e) => {
                                 this.handleCrudFilterChange("u", e);
-                              } }
+                              }}
                             />
                             <label
                               htmlFor="updateEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Update
                             </label>
                           </div>
@@ -279,23 +265,22 @@ export default class SearchForm extends React.Component {
                       </div>
                       <div className="flex1 u-paddingLeft--small">
                         <div
-                          className={ `flex1 CustomCheckbox no-margin ${this.state.dChecked ? "is-checked" : ""
-                            }` }
-                        >
+                          className={`flex1 CustomCheckbox no-margin ${
+                            this.state.dChecked ? "is-checked" : ""
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
                               id="deleteEventType"
-                              checked={ this.state.crudFilters.dChecked }
+                              checked={this.state.crudFilters.dChecked}
                               value=""
-                              onChange={ (e) => {
+                              onChange={(e) => {
                                 this.handleCrudFilterChange("d", e);
-                              } }
+                              }}
                             />
                             <label
                               htmlFor="deleteEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Delete
                             </label>
                           </div>
@@ -304,41 +289,35 @@ export default class SearchForm extends React.Component {
                     </div>
                   </div>
                   <div className="u-textAlign--center">
-                    { this.state.isDefault ? null : (
+                    {this.state.isDefault ? null : (
                       <button
                         type="button"
                         className="Button secondary gray small u-display--block u-width--full u-marginBottom--normal"
-                        onClick={ this.setInitialState }
-                      >
+                        onClick={this.setInitialState}>
                         Reset filters
                       </button>
-                    ) }
+                    )}
                     <a
                       target="_blank"
-                      href={ this.props.searchHelpURL }
-                      className="u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink"
-                    >
+                      href={this.props.searchHelpURL}
+                      className="u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink">
                       Get help with search
                     </a>
                   </div>
                 </div>
-              ) : null }
+              ) : null}
             </div>
             <button
               type="submit"
               className="Button primary u-marginLeft--normal searchButton"
-              data-testid={ `search-button` }
-            >
+              data-testid={`search-button`}>
               Search
             </button>
           </div>
         </form>
-        { this.props.filtersOpen ? (
-          <div
-            className="hidden-trigger"
-            onClick={ this.props.toggleDropdown }
-          ></div>
-        ) : null }
+        {this.props.filtersOpen ? (
+          <div className="hidden-trigger" onClick={this.props.toggleDropdown}></div>
+        ) : null}
       </div>
     );
   }

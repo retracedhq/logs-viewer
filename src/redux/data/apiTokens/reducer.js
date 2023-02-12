@@ -2,7 +2,7 @@ import _ from "lodash";
 import actions from "./actions";
 
 const initialState = {
-    apiTokens: [],
+  apiTokens: [],
 };
 
 export default (state = initialState, action) => {

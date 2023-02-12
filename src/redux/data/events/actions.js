@@ -5,6 +5,7 @@ const actions = {
 };
 export default actions;
 
-export const receiveEventList = createAction(actions.RECEIVE_EVENT_LIST,
-  (sourceQuery, totalHitCount, list, cursor) =>
-    ({ sourceQuery, totalHitCount, list, cursor }));
+export const receiveEventList = createAction(
+  actions.RECEIVE_EVENT_LIST,
+  (sourceQuery, totalHitCount, list, cursor) => ({ sourceQuery, totalHitCount, list, cursor })
+);

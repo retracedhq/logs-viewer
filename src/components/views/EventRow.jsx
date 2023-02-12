@@ -9,7 +9,7 @@ export default class EventRow extends React.Component {
     autobind(this);
     this.state = {
       eventInfoToken: false,
-      items: props.fields
+      items: props.fields,
     };
   }
 
@@ -21,7 +21,7 @@ export default class EventRow extends React.Component {
       const parts = selector.split(".");
       let data = object;
       for (let i = 0; i < parts.length; i++) {
-        data = data[parts[i]]
+        data = data[parts[i]];
         if (!data) {
           return undefined;
         }
@@ -30,7 +30,7 @@ export default class EventRow extends React.Component {
     } else {
       return object[selector];
     }
-  }
+  };
 
   getCellValue = (item) => {
     try {
@@ -42,14 +42,15 @@ export default class EventRow extends React.Component {
           } else {
             return "";
           }
-        } return "";
+        }
+        return "";
       } else {
         return this.getFieldValue(this.props.event, item.field);
       }
     } catch (ex) {
       return "";
     }
-  }
+  };
 
   render() {
     return (
@@ -57,61 +58,60 @@ export default class EventRow extends React.Component {
         <div className="TableRow flex">
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
-              { this.state.items.map((item, idx) => {
+              {this.state.items.map((item, idx) => {
                 if (item.type === "markdown") {
                   return (
-                    <div
-                      key={ idx } className={ `flex flex1 content-section` }>
+                    <div key={idx} className={`flex flex1 content-section`}>
                       <ReactMarkdown
                         data-testid="markdown"
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
-                        sourcePos={ true }
-                        components={ this.props.renderers }
-                        children={ this.getCellValue(item) }
+                        sourcePos={true}
+                        components={this.props.renderers}
+                        children={this.getCellValue(item)}
                       />
                     </div>
                   );
                 } else if (item.type === "showEvent") {
                   return (
                     <div
-                      key={ idx }
-                      style={ item.style }
+                      key={idx}
+                      style={item.style}
                       className="flex flex1 content-section actions-section justifyContent--flexEnd"
-                      data-testid={ `event-cell-moreinfo-${idx}` }
-                    >
+                      data-testid={`event-cell-moreinfo-${idx}`}>
                       <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
                         <span
                           className="icon clickable u-codeIcon"
-                          onClick={ this.props.openModal }
-                          onMouseEnter={ () => {
+                          onClick={this.props.openModal}
+                          onMouseEnter={() => {
                             this.setState({ eventInfoToken: true });
-                          } }
-                          onMouseLeave={ () => {
+                          }}
+                          onMouseLeave={() => {
                             this.setState({ eventInfoToken: false });
-                          } }
-                        >
+                          }}>
                           <Tooltip
-                            visible={ this.state.eventInfoToken }
+                            visible={this.state.eventInfoToken}
                             text="More Info"
                             minWidth="80"
                             position="bottom-left"
                           />
                         </span>
                       </div>
-                    </div>)
+                    </div>
+                  );
                 } else {
-                  return (<div
-                    data-testid={ `event-cell-${idx}` }
-                    key={ idx }
-                    style={ item.style }
-                    className="flex flex1 content-section alignItems--center"
-                  >
-                    <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
-                      { this.getCellValue(item) }
-                    </p>
-                  </div>)
+                  return (
+                    <div
+                      data-testid={`event-cell-${idx}`}
+                      key={idx}
+                      style={item.style}
+                      className="flex flex1 content-section alignItems--center">
+                      <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
+                        {this.getCellValue(item)}
+                      </p>
+                    </div>
+                  );
                 }
-              }) }
+              })}
             </div>
           </div>
         </div>

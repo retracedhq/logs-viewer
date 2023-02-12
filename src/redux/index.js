@@ -10,12 +10,12 @@ const appReducer = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if(action.type === 'CLEAR_SESSION') {
-    state = undefined
+  if (action.type === "CLEAR_SESSION") {
+    state = undefined;
   }
-  
-  return appReducer(state, action)
-}
+
+  return appReducer(state, action);
+};
 
 // Global store instance
 export function configStore() {
@@ -23,9 +23,6 @@ export function configStore() {
 
   return createStore(
     rootReducer,
-    compose(
-      applyMiddleware(thunk),
-      hasExtension ? window.devToolsExtension() : f => f,
-    ),
+    compose(applyMiddleware(thunk), hasExtension ? window.devToolsExtension() : (f) => f)
   );
 }

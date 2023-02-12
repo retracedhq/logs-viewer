@@ -5,6 +5,4 @@ const actions = {
 };
 export default actions;
 
-export const receiveApiTokens = createAction(actions.RECEIVE_EITAPI_TOKENS,
-  ( tokens ) =>
-    ({ tokens }));
+export const receiveApiTokens = createAction(actions.RECEIVE_EITAPI_TOKENS, (tokens) => ({ tokens }));

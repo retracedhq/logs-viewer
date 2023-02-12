@@ -14,8 +14,7 @@ export default class MobileEventRow extends React.Component {
         className={`TableRow-wrapper flex-auto u-cursor--pointer ${
           this.props.index === 0 ? "u-borderTop--gray" : ""
         }`}
-        onClick={this.props.openModal}
-      >
+        onClick={this.props.openModal}>
         <div className="TableRow flex mobile-row">
           <div className="TableRow-content flex flex1">
             <div className="flex-column flex1 u-overflow--hidden">
@@ -32,19 +31,13 @@ export default class MobileEventRow extends React.Component {
               <div className="flex flex1 u-marginTop--normal">
                 <div className="flex flex1 u-paddingRight--small ellipsis-overflow">
                   <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                    Date:{" "}
-                    <span className="u-fontWeight--medium u-color--tundora">
-                      {date}
-                    </span>
+                    Date: <span className="u-fontWeight--medium u-color--tundora">{date}</span>
                   </p>
                 </div>
                 <div className="flex flex-auto u-paddingLeft--small justifyContent--flexEnd">
                   {location ? (
                     <p className="u-fontWeight--normal u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                      Location:{" "}
-                      <span className="u-fontWeight--medium u-color--tundora">
-                        {location}
-                      </span>
+                      Location: <span className="u-fontWeight--medium u-color--tundora">{location}</span>
                     </p>
                   ) : null}
                 </div>

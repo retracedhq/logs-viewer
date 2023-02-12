@@ -12,9 +12,7 @@ export function fetchSavedExports(limit) {
     const host = state.data.sessionData.host;
 
     try {
-      const urlWithQuery = `${host}/project/${projectId}/exports?limit=${
-        limit ? limit : ""
-      }`;
+      const urlWithQuery = `${host}/project/${projectId}/exports?limit=${limit ? limit : ""}`;
       const response = await fetch(urlWithQuery, {
         headers: {
           Authorization: jwt,
@@ -80,9 +78,7 @@ export function createSavedExport(query, filters, dates, name) {
       });
 
       if (!exportResponse.ok) {
-        throw new Error(
-          `${exportResponse.status} ${exportResponse.statusText}`
-        );
+        throw new Error(`${exportResponse.status} ${exportResponse.statusText}`);
       }
 
       const exportResult = await exportResponse.json();
