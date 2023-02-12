@@ -8,8 +8,6 @@ import MockHelper from './mock';
 const fetchMock = createFetchMock(vi);
 global.fetch = fetchMock
 
-global.fetch = fetch
-
 describe('Log Viewer Component with empty list of fields', () => {
   beforeAll(() => {
     Object.defineProperty(window, 'innerWidth', { value: 1300 });
