@@ -14,11 +14,11 @@ export default class EventRow extends React.Component {
   }
 
   getFieldValue = (object, selector) => {
-    if (!selector || typeof selector !== 'string') {
-      return '';
+    if (!selector || typeof selector !== "string") {
+      return "";
     }
-    if (selector.indexOf('.') !== -1) {
-      const parts = selector.split('.');
+    if (selector.indexOf(".") !== -1) {
+      const parts = selector.split(".");
       let data = object;
       for (let i = 0; i < parts.length; i++) {
         data = data[parts[i]]
@@ -35,19 +35,19 @@ export default class EventRow extends React.Component {
   getCellValue = (item) => {
     try {
       if (item.getValue) {
-        if (typeof item.getValue === 'function') {
+        if (typeof item.getValue === "function") {
           const value = item.getValue(this.props.event);
-          if (typeof value === 'string') {
+          if (typeof value === "string") {
             return value;
           } else {
-            return '';
+            return "";
           }
-        } return '';
+        } return "";
       } else {
         return this.getFieldValue(this.props.event, item.field);
       }
     } catch (ex) {
-      return '';
+      return "";
     }
   }
 
@@ -58,12 +58,12 @@ export default class EventRow extends React.Component {
           <div className="TableRow-content flex flex1">
             <div className="flex flex1">
               { this.state.items.map((item, idx) => {
-                if (item.type === 'markdown') {
+                if (item.type === "markdown") {
                   return (
                     <div
                       key={ idx } className={ `flex flex1 content-section` }>
                       <ReactMarkdown
-                        data-testid='markdown'
+                        data-testid="markdown"
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
                         sourcePos={ true }
                         components={ this.props.renderers }

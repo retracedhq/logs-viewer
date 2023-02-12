@@ -1,16 +1,16 @@
 import { expect, test, vi } from "vitest";
 import { render, screen, waitFor } from "@testing-library/react";
 import LogsViewerWrapper from "../dev/LogsViewerWrapper";
-import createFetchMock from 'vitest-fetch-mock';
+import createFetchMock from "vitest-fetch-mock";
 import { act } from "react-dom/test-utils";
-import MockHelper from './mock';
+import MockHelper from "./mock";
 
 const fetchMock = createFetchMock(vi);
 global.fetch = fetchMock
 
-describe('Log Viewer Component with custom fields', () => {
+describe("Log Viewer Component with custom fields", () => {
   beforeAll(() => {
-    Object.defineProperty(window, 'innerWidth', { value: 1300 });
+    Object.defineProperty(window, "innerWidth", { value: 1300 });
     MockHelper(fetchMock);
   });
 
@@ -27,7 +27,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('headerTitle'));
+    await waitFor(() => screen.findByTestId("headerTitle"));
 
 
     expect(screen.queryAllByTestId("search-events").length).toBeGreaterThanOrEqual(1);
@@ -49,7 +49,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('headerTitle'));
+    await waitFor(() => screen.findByTestId("headerTitle"));
 
     expect(screen.queryAllByTestId("headers-Date-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Group-1").length).toBeGreaterThanOrEqual(1);
@@ -61,7 +61,7 @@ describe('Log Viewer Component with custom fields', () => {
     await act(async () => {
       render(<LogsViewerWrapper />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-4'));
+    await waitFor(() => screen.findByTestId("event-cell-4"));
 
 
     expect(screen.findByTestId("markdown")).toBeDefined();
@@ -85,7 +85,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Group-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -106,7 +106,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Date-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Group-1").length).toBeGreaterThanOrEqual(1);
@@ -127,7 +127,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Group-1").length).toBeGreaterThanOrEqual(1);
@@ -148,7 +148,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("event-cell-moreinfo-2").length).toBe(1);
@@ -168,7 +168,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-0-1").length).toBeGreaterThanOrEqual(1);
@@ -190,7 +190,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -211,7 +211,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -232,7 +232,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -253,7 +253,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -275,7 +275,7 @@ describe('Log Viewer Component with custom fields', () => {
         },
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -297,7 +297,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -320,7 +320,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -343,7 +343,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -366,7 +366,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -384,7 +384,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-1'));
+    await waitFor(() => screen.findByTestId("event-cell-1"));
 
     expect(screen.queryAllByTestId("headers-Actor-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -401,7 +401,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-0'));
+    await waitFor(() => screen.findByTestId("event-cell-0"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
@@ -418,7 +418,7 @@ describe('Log Viewer Component with custom fields', () => {
         }
       ] } />);
     });
-    await waitFor(() => screen.findByTestId('event-cell-0'));
+    await waitFor(() => screen.findByTestId("event-cell-0"));
 
     expect(screen.queryAllByTestId("headers-Actor-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.getAllByText("dev")).toBeDefined();
