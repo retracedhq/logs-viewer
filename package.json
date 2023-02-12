@@ -34,7 +34,7 @@
     "dev": "vite build && vite",
     "build": "vite build",
     "watch": "vite build --watch",
-    "test": "vitest"
+    "test": "vitest run"
   },
   "peerDependencies": {
     "react": "18.2.0",
