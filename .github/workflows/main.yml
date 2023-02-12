@@ -74,12 +74,15 @@ jobs:
           echo "${{secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{github.repository_owner}} --password-stdin
 
       - name: Install Cosign
+        if: github.ref == 'refs/heads/release'
         uses: sigstore/cosign-installer@main
 
       - name: Check install!
+        if: github.ref == 'refs/heads/release'
         run: cosign version
 
       - name: place the cosign private key in a file
+        if: github.ref == 'refs/heads/release'
         run: 'echo "$COSIGN_KEY" > /tmp/cosign.key'
         shell: bash
         env:
@@ -109,18 +112,19 @@ jobs:
         uses: anchore/sbom-action/publish-sbom@v0
         with:
           sbom-artifact-match: ".*\\.cyclonedx$"
+      - name: Remove older SBOMs
+        if: github.ref == 'refs/heads/release'
+        run: rm -rf sbom*.* || true
       - name: Download artifact for SPDX Report
+        if: github.ref == 'refs/heads/release'
         uses: actions/download-artifact@v3
         with:
           name: sbom.spdx
       - name: Download artifact for CycloneDx Report
+        if: github.ref == 'refs/heads/release'
         uses: actions/download-artifact@v3
         with:
           name: sbom.cyclonedx
-      - name: Remove older SBOMs
-        run: rm -rf ./npm/sbom*.* || true
-      - name: Remove older SBOMs
-        run: rm -rf sbom*.* || true
       - name: ORAS Setup & Push SBOM reports to GitHub Container Registry
         if: github.ref == 'refs/heads/release'
         run: |
