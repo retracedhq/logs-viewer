@@ -6,7 +6,7 @@ import { act } from "react-dom/test-utils";
 import MockHelper from "./mock";
 
 const fetchMock = createFetchMock(vi);
-global.fetch = fetchMock
+global.fetch = fetchMock;
 
 describe("Log Viewer Component with custom fields", () => {
   beforeAll(() => {
@@ -20,15 +20,18 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser is correctly rendered with empty field path", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Date",
-          field: "",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Date",
+              field: "",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
-
 
     expect(screen.queryAllByTestId("search-events").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("search-button").length).toBeGreaterThanOrEqual(1);
@@ -38,16 +41,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers with empty field path", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Date",
-          field: "",
-        },
-        {
-          label: "Group",
-          field: "group",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Date",
+              field: "",
+            },
+            {
+              label: "Group",
+              field: "group",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
 
@@ -63,7 +70,6 @@ describe("Log Viewer Component with custom fields", () => {
     });
     await waitFor(() => screen.findByTestId("event-cell-4"));
 
-
     expect(screen.findByTestId("markdown")).toBeDefined();
     expect(screen.findAllByText("172.22.0.1")).toBeDefined();
     expect(screen.findAllByText("dev")).toBeDefined();
@@ -74,16 +80,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with empty label", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "",
-          field: "canonical_time",
-        },
-        {
-          label: "Group",
-          field: "group",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "",
+              field: "canonical_time",
+            },
+            {
+              label: "Group",
+              field: "group",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -95,16 +105,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with invalid field", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Date",
-          field: "canonical_time123",
-        },
-        {
-          label: "Group",
-          field: "group",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Date",
+              field: "canonical_time123",
+            },
+            {
+              label: "Group",
+              field: "group",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -116,16 +130,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with field which does not exists", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "Group",
-          field: "group.name.id.date",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "Group",
+              field: "group.name.id.date",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -137,16 +155,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with empty field and label", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "",
-          field: "",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "",
+              field: "",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -157,16 +179,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with field as number", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "0",
-          field: 0,
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "0",
+              field: 0,
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -179,16 +205,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with field as array", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "0",
-          field: [1, 2, 3, 4],
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "0",
+              field: [1, 2, 3, 4],
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -200,16 +230,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with field as object", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "0",
-          field: { a: "c" },
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "0",
+              field: { a: "c" },
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -221,16 +255,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with field as object function name", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "0",
-          field: "valueOf",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "0",
+              field: "valueOf",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -242,16 +280,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with label as object", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: { a: "c" },
-          field: "group",
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: { a: "c" },
+              field: "group",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -262,18 +304,22 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with getValue function", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "info",
-          getValue: (event) => {
-            return `Group id: ${event.group.id}`;
-          },
-        },
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "info",
+              getValue: (event) => {
+                return `Group id: ${event.group.id}`;
+              },
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -286,16 +332,20 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with getValue as non function", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "info",
-          getValue: {}
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "info",
+              getValue: {},
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -307,18 +357,22 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with getValue as exception throwing function", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "info",
-          getValue: (event) => {
-            throw new Error("Testing exceptions");
-          }
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "info",
+              getValue: (event) => {
+                throw new Error("Testing exceptions");
+              },
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -330,18 +384,22 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with getValue returns non string", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "info",
-          getValue: (event) => {
-            return event.group;
-          }
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "info",
+              getValue: (event) => {
+                return event.group;
+              },
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -353,18 +411,22 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with getValue returns jsx", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {
-          label: "Actor",
-          field: "actor",
-        },
-        {
-          label: "info",
-          getValue: (event) => {
-            return <div>123</div>;
-          }
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {
+              label: "Actor",
+              field: "actor",
+            },
+            {
+              label: "info",
+              getValue: (event) => {
+                return <div>123</div>;
+              },
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -376,13 +438,17 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with empty object in fields", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        {},
-        {
-          label: "Actor",
-          field: "actor"
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            {},
+            {
+              label: "Actor",
+              field: "actor",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-1"));
 
@@ -393,13 +459,17 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with empty array in fields", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        [],
-        {
-          label: "Actor",
-          field: "actor"
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            [],
+            {
+              label: "Actor",
+              field: "actor",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-0"));
 
@@ -410,13 +480,17 @@ describe("Log Viewer Component with custom fields", () => {
 
   test("EventBrowser rendered correct headers & rows with undefined in fields", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [
-        undefined,
-        {
-          label: "Actor",
-          field: "actor"
-        }
-      ] } />);
+      render(
+        <LogsViewerWrapper
+          fields={[
+            undefined,
+            {
+              label: "Actor",
+              field: "actor",
+            },
+          ]}
+        />
+      );
     });
     await waitFor(() => screen.findByTestId("event-cell-0"));
 

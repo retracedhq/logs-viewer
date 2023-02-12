@@ -6,7 +6,7 @@ import { act } from "react-dom/test-utils";
 import MockHelper from "./mock";
 
 const fetchMock = createFetchMock(vi);
-global.fetch = fetchMock
+global.fetch = fetchMock;
 
 describe("Log Viewer Component with empty list of fields", () => {
   beforeAll(() => {
@@ -20,10 +20,9 @@ describe("Log Viewer Component with empty list of fields", () => {
 
   test("EventBrowser is correctly rendered with empty fields", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [] } />);
+      render(<LogsViewerWrapper fields={[]} />);
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
-
 
     expect(screen.queryAllByTestId("search-events").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("search-button").length).toBeGreaterThanOrEqual(1);
@@ -33,7 +32,7 @@ describe("Log Viewer Component with empty list of fields", () => {
 
   test("EventBrowser rendered correct headers with empty fields", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [] } />);
+      render(<LogsViewerWrapper fields={[]} />);
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
 
@@ -45,14 +44,12 @@ describe("Log Viewer Component with empty list of fields", () => {
 
   test("EventBrowser rendered correct event with empty fields", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper fields={ [] } />);
+      render(<LogsViewerWrapper fields={[]} />);
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
-
 
     expect(screen.findAllByText("audit.log.view")).toBeDefined();
     expect(screen.findAllByText("172.22.0.1")).toBeDefined();
     expect(screen.findAllByText("dev")).toBeDefined();
   });
-
 });

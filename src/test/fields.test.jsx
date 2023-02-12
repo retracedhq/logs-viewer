@@ -5,7 +5,7 @@ import createFetchMock from "vitest-fetch-mock";
 import { act } from "react-dom/test-utils";
 import MockHelper from "./mock";
 const fetchMock = createFetchMock(vi);
-global.fetch = fetchMock
+global.fetch = fetchMock;
 
 describe("Log Viewer Component basic tests", () => {
   beforeAll(() => {
@@ -23,7 +23,6 @@ describe("Log Viewer Component basic tests", () => {
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
 
-
     expect(screen.queryAllByTestId("search-events").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("search-button").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("export-events").length).toBeGreaterThanOrEqual(1);
@@ -36,7 +35,6 @@ describe("Log Viewer Component basic tests", () => {
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
 
-
     expect(screen.queryAllByTestId("headers-Description-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Date-1").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Group-2").length).toBeGreaterThanOrEqual(1);
@@ -44,5 +42,4 @@ describe("Log Viewer Component basic tests", () => {
     expect(screen.queryAllByTestId("headers-Location-4").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("event-cell-moreinfo-5")).toBeDefined();
   });
-
 });

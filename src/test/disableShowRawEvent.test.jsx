@@ -5,7 +5,7 @@ import createFetchMock from "vitest-fetch-mock";
 import { act } from "react-dom/test-utils";
 import MockHelper from "./mock";
 const fetchMock = createFetchMock(vi);
-global.fetch = fetchMock
+global.fetch = fetchMock;
 
 describe("Log Viewer Component disableShowRawEvent tests", () => {
   beforeAll(() => {
@@ -19,10 +19,9 @@ describe("Log Viewer Component disableShowRawEvent tests", () => {
 
   test("EventBrowser rendered correct header and not More Info when disableShowRawEvent is true", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper disableShowRawEvent={ true } />);
+      render(<LogsViewerWrapper disableShowRawEvent={true} />);
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
-
 
     expect(screen.queryAllByTestId("search-events").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("search-button").length).toBeGreaterThanOrEqual(1);
@@ -38,10 +37,9 @@ describe("Log Viewer Component disableShowRawEvent tests", () => {
 
   test("EventBrowser rendered correct header and More info when disableShowRawEvent is false", async () => {
     await act(async () => {
-      render(<LogsViewerWrapper disableShowRawEvent={ false } />);
+      render(<LogsViewerWrapper disableShowRawEvent={false} />);
     });
     await waitFor(() => screen.findByTestId("headerTitle"));
-
 
     expect(screen.queryAllByTestId("headers-Description-0").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("headers-Date-1").length).toBeGreaterThanOrEqual(1);
@@ -50,5 +48,4 @@ describe("Log Viewer Component disableShowRawEvent tests", () => {
     expect(screen.queryAllByTestId("headers-Location-4").length).toBeGreaterThanOrEqual(1);
     expect(screen.queryAllByTestId("event-cell-moreinfo-5").length).toBe(1);
   });
-
 });
