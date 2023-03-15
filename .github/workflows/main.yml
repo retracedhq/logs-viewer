@@ -84,12 +84,6 @@ jobs:
         env:
           COSIGN_KEY: ${{secrets.COSIGN_KEY}}
 
-      - name: Sign the image
-        # if: github.ref == 'refs/heads/release'
-        run: cosign sign -y --key /tmp/cosign.key ${{ github.repository }}:${{ steps.slug.outputs.SHA7 }}
-        env:
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-
       - name: Create NPM Package SBOM Report [SPDX]
         uses: anchore/sbom-action@v0
         with:
@@ -165,7 +159,7 @@ jobs:
         working-directory: ./
 
       - name: Publish NPM
-        # if: github.ref == 'refs/heads/release' || contains(github.ref, 'refs/tags/beta-v')
+        if: github.ref == 'refs/heads/release' || contains(github.ref, 'refs/tags/beta-v')
         run: |
           npm install -g json
           LOGS_VIEWER_VERSION=${{ needs.ci.outputs.NPM_VERSION }}
