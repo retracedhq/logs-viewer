@@ -1,31 +1,19 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "lib": [
-      "esnext",
-      "DOM"
-    ],
+    "lib": ["esnext", "DOM"],
     "jsx": "react-jsx",
     "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "node",
     "allowJs": true,
-    "types": [
-      "vite/client",
-      "vitest/globals"
-    ],
+    "outDir": "dist",
+    "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
-      "~/*": [
-        "./*"
-      ],
-      "@/*": [
-        "./src/*"
-      ]
+      "~/*": ["./*"],
+      "@/*": ["./src/*"]
     }
   },
-  "include": [
-    "src",
-    "setupVitest.js"
-  ]
+  "include": ["src", "setupVitest.js"]
 }
