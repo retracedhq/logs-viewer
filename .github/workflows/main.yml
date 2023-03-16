@@ -83,12 +83,6 @@ jobs:
         env:
           COSIGN_KEY: ${{secrets.COSIGN_KEY}}
 
-      - name: Sign the image
-        if: github.ref == 'refs/heads/release'
-        run: cosign sign --key /tmp/cosign.key ${{ github.repository }}:${{ steps.slug.outputs.SHA7 }} || true
-        env:
-          COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
-
       - name: Create NPM Package SBOM Report [SPDX]
         uses: anchore/sbom-action@v0
         with:
@@ -123,9 +117,9 @@ jobs:
       - name: ORAS Setup & Push SBOM reports to GitHub Container Registry
         if: github.ref == 'refs/heads/release'
         run: |
-          ORAS_VERSION="0.8.1"
+          ORAS_VERSION="v0.8.1"
           ORAS_FILENAME="oras_0.8.1_linux_amd64.tar.gz"
-          curl -LO "https://cdn.bundle.bar/clients/oras/${ORAS_VERSION}/${ORAS_FILENAME}"
+          curl -LO "https://github.com/oras-project/oras/releases/download/${ORAS_VERSION}/${ORAS_FILENAME}"
           mkdir oras_install
           tar -xvf "${ORAS_FILENAME}" -C oras_install
           ./oras_install/oras push ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} ./*sbom.*
@@ -134,7 +128,7 @@ jobs:
       - name: Sign the sbom images
         if: github.ref == 'refs/heads/release'
         run: |
-          cosign sign --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} || true
+          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }}
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
 
