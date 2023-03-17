@@ -247,6 +247,14 @@ class EventsBrowser extends React.Component {
           return event.group.name || event.group.id;
         };
         return info;
+      case "target":
+      case "target.id":
+      case "target.name":
+      case "target.type":
+        info.getValue = (event) => {
+          return event.target.name || event.target.id || event.target.type;
+        };
+        return info;
       default:
         return info;
     }
