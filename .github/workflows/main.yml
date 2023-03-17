@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - release
+      - fix/gh-actions
     tags:
       - "beta-v*"
   pull_request:
@@ -23,6 +24,7 @@ jobs:
     outputs:
       NPM_VERSION: ${{ steps.version.outputs.NPM_VERSION }}
       PUBLISH_TAG: ${{ steps.version.outputs.PUBLISH_TAG }}
+      IMAGE_SUFFIX: ${{ steps.version.outputs.IMAGE_SUFFIX }}
     strategy:
       matrix:
         node-version: [18.x]
@@ -37,6 +39,7 @@ jobs:
           LOGS_VIEWER_VERSION=$(echo $(cat ./package.json) | json version)
 
           publishTag="latest"
+          imageSuffix=""
 
           if [[ "$GITHUB_REF" == *\/release ]]
           then
@@ -44,11 +47,13 @@ jobs:
           else
             echo "Dev branch"
             publishTag="beta"
+            imageSuffix="-beta"
             LOGS_VIEWER_VERSION="${LOGS_VIEWER_VERSION}-beta.${GITHUB_RUN_NUMBER}"
           fi
 
           echo "NPM_VERSION=${LOGS_VIEWER_VERSION}" >> $GITHUB_OUTPUT
           echo "PUBLISH_TAG=${publishTag}" >> $GITHUB_OUTPUT
+          echo "IMAGE_SUFFIX=${imageSuffix}" >> $GITHUB_OUTPUT
 
   build:
     needs: ci
@@ -58,26 +63,27 @@ jobs:
         uses: actions/checkout@v3
 
       - run: echo ${{ needs.ci.outputs.NPM_VERSION }}
+      - run: echo ${{ needs.ci.outputs.IMAGE_SUFFIX }}
 
       - name: Get short SHA
         id: slug
         run: echo "SHA7=$(echo ${GITHUB_SHA} | cut -c1-7)" >> $GITHUB_OUTPUT
 
       - name: Login to GitHub Container Registry
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         run: |
           echo "${{secrets.GITHUB_TOKEN}}" | docker login ghcr.io -u ${{github.repository_owner}} --password-stdin
 
       - name: Install Cosign
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         uses: sigstore/cosign-installer@main
 
       - name: Check install!
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         run: cosign version
 
       - name: place the cosign private key in a file
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         run: 'echo "$COSIGN_KEY" > /tmp/cosign.key'
         shell: bash
         env:
@@ -102,33 +108,33 @@ jobs:
         with:
           sbom-artifact-match: ".*\\.cyclonedx$"
       - name: Remove older SBOMs
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         run: rm -rf sbom*.* || true
       - name: Download artifact for SPDX Report
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         uses: actions/download-artifact@v3
         with:
           name: sbom.spdx
       - name: Download artifact for CycloneDx Report
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         uses: actions/download-artifact@v3
         with:
           name: sbom.cyclonedx
       - name: ORAS Setup & Push SBOM reports to GitHub Container Registry
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         run: |
           ORAS_VERSION="v0.8.1"
           ORAS_FILENAME="oras_0.8.1_linux_amd64.tar.gz"
           curl -LO "https://github.com/oras-project/oras/releases/download/${ORAS_VERSION}/${ORAS_FILENAME}"
           mkdir oras_install
           tar -xvf "${ORAS_FILENAME}" -C oras_install
-          ./oras_install/oras push ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }} ./*sbom.*
+          ./oras_install/oras push ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:npm-${{ needs.ci.outputs.NPM_VERSION }} ./*sbom.*
           cd ..
 
       - name: Sign the sbom images
-        if: github.ref == 'refs/heads/release'
+        #if: github.ref == 'refs/heads/release'
         run: |
-          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom:npm-${{ needs.ci.outputs.NPM_VERSION }}
+          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:npm-${{ needs.ci.outputs.NPM_VERSION }}
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
 
