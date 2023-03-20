@@ -120,7 +120,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: sbom.cyclonedx
-      - name: ORAS Setup & Push SBOM reports to GitHub Container Registry
+      - name: ORAS Setup
         #if: github.ref == 'refs/heads/release'
         run: |
           ORAS_VERSION="v0.8.1"
@@ -128,17 +128,17 @@ jobs:
           curl -LO "https://github.com/oras-project/oras/releases/download/${ORAS_VERSION}/${ORAS_FILENAME}"
           mkdir oras_install
           tar -xvf "${ORAS_FILENAME}" -C oras_install
+
+      - name: Push SBOM reports to GitHub Container Registry & Sign the sbom images
+        #if: github.ref == 'refs/heads/release'
+        run: |
           result=$(./oras_install/oras push ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:npm-${{ needs.ci.outputs.NPM_VERSION }} ./*sbom.*)
-          echo "::set-env name=ORAS_DIGEST::$(echo $result | grep -oE '[a-f0-9]{64}')"
+          ORAS_DIGEST=$(echo $result | grep -oE '[a-f0-9]{64}')
           if [ -z "$ORAS_DIGEST" ]; then
             echo "Error: ORAS_DIGEST is empty"
             exit 1
           fi
           cd ..
-
-      - name: Sign the sbom images
-        #if: github.ref == 'refs/heads/release'
-        run: |
           cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:npm-${ORAS_DIGEST}
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
