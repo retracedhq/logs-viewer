@@ -139,7 +139,7 @@ jobs:
             exit 1
           fi
           cd ..
-          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:npm-${ORAS_DIGEST}
+          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:${ORAS_DIGEST}
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
 
