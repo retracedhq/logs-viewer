@@ -133,13 +133,13 @@ jobs:
         #if: github.ref == 'refs/heads/release'
         run: |
           result=$(./oras_install/oras push ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:npm-${{ needs.ci.outputs.NPM_VERSION }} ./*sbom.*)
-          ORAS_DIGEST=$(echo $result | grep -oE '[a-f0-9]{64}')
+          ORAS_DIGEST=$(echo $result | grep -oE 'sha256:[a-f0-9]{64}')
           if [ -z "$ORAS_DIGEST" ]; then
             echo "Error: ORAS_DIGEST is empty"
             exit 1
           fi
           cd ..
-          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}:${ORAS_DIGEST}
+          cosign sign -y --key /tmp/cosign.key ghcr.io/${{github.repository_owner}}/logs-viewer/sbom${{ needs.ci.outputs.IMAGE_SUFFIX }}@${ORAS_DIGEST}
         env:
           COSIGN_PASSWORD: ${{secrets.COSIGN_PASSWORD}}
 
