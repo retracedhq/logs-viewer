@@ -41,7 +41,7 @@
   },
   "dependencies": {
     "dayjs": "1.11.7",
-    "graphql-request": "5.1.0",
+    "graphql-request": "5.2.0",
     "lodash": "4.17.21",
     "prop-types": "15.8.1",
     "react-autobind": "1.0.6",
