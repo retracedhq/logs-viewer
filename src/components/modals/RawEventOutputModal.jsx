@@ -25,8 +25,7 @@ export default class RawEventOutputModal extends React.Component {
                 resize: "none",
               }}
               readOnly
-              value={raw}
-            ></textarea>
+              value={raw}></textarea>
           </div>
         </div>
       </div>

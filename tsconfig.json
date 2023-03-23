@@ -7,6 +7,7 @@
     "module": "ESNext",
     "moduleResolution": "node",
     "allowJs": true,
+    "outDir": "dist",
     "types": ["vite/client", "vitest/globals"],
     "baseUrl": ".",
     "paths": {
@@ -14,5 +15,5 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "setupVitest.js"]
 }

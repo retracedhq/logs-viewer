@@ -85,35 +85,24 @@ export default class SearchForm extends React.Component {
   dateRangeWithDefaults(start, end) {
     return [
       start ? dayjs(start).format() : "2017-01-01T00:00:00Z",
-      end
-        ? dayjs(end).add(1, "d").format()
-        : dayjs().add(1, "d").startOf("day").format(),
+      end ? dayjs(end).add(1, "d").format() : dayjs().add(1, "d").startOf("day").format(),
     ];
   }
 
   onSubmit = (e) => {
     e.preventDefault();
-    const crudQuery = this.state.crudFiltersArray.length
-      ? `crud:${this.state.crudFiltersArray.join()}`
-      : "";
+    const crudQuery = this.state.crudFiltersArray.length ? `crud:${this.state.crudFiltersArray.join()}` : "";
     const crudFilters = this.state.crudFilters;
     const dates = {
       startDate: this.state.receivedStartDate,
-      endDate:
-        this.state.receivedEndDate &&
-        dayjs(this.state.receivedEndDate).add(1, "d").toDate(),
+      endDate: this.state.receivedEndDate && dayjs(this.state.receivedEndDate).add(1, "d").toDate(),
     };
     const receivedQuery =
       !this.state.receivedStartDate && !this.state.receivedEndDate
         ? []
-        : this.dateRangeWithDefaults(
-            this.state.receivedStartDate,
-            this.state.receivedEndDate
-          );
+        : this.dateRangeWithDefaults(this.state.receivedStartDate, this.state.receivedEndDate);
 
-    let query = `${
-      this.state.searchQuery.length ? `${this.state.searchQuery} ` : ""
-    }${crudQuery}${
+    let query = `${this.state.searchQuery.length ? `${this.state.searchQuery} ` : ""}${crudQuery}${
       receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
     }`;
 
@@ -134,6 +123,7 @@ export default class SearchForm extends React.Component {
             <div className="u-position--relative">
               <input
                 type="text"
+                data-testid={`search-events`}
                 defaultValue={this.props.text}
                 className="Input SearchEvents"
                 onChange={this.onChange}
@@ -142,8 +132,7 @@ export default class SearchForm extends React.Component {
               />
               <span
                 className="FilterDropdown-trigger u-textDecoration--underlineOnHover"
-                onClick={this.props.toggleDropdown}
-              >
+                onClick={this.props.toggleDropdown}>
                 {this.props.filtersOpen ? "Close" : "Filters"}
               </span>
               {this.props.filtersOpen ? (
@@ -151,8 +140,7 @@ export default class SearchForm extends React.Component {
                   <div className="u-paddingBottom--more">
                     <p
                       id="dateRangeLabel"
-                      className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal"
-                    >
+                      className="u-fontSize--normal u-fontWeight--medium u-color--tuna u-marginBottom--normal">
                       Date range
                     </p>
                     <div className="flex flex1">
@@ -208,8 +196,7 @@ export default class SearchForm extends React.Component {
                         <div
                           className={`flex1 CustomCheckbox no-margin ${
                             this.state.cChecked ? "is-checked" : ""
-                          }`}
-                        >
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
@@ -222,8 +209,7 @@ export default class SearchForm extends React.Component {
                             />
                             <label
                               htmlFor="createEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Create
                             </label>
                           </div>
@@ -233,8 +219,7 @@ export default class SearchForm extends React.Component {
                         <div
                           className={`flex1 CustomCheckbox no-margin ${
                             this.state.rChecked ? "is-checked" : ""
-                          }`}
-                        >
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
@@ -247,8 +232,7 @@ export default class SearchForm extends React.Component {
                             />
                             <label
                               htmlFor="readEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Read
                             </label>
                           </div>
@@ -260,8 +244,7 @@ export default class SearchForm extends React.Component {
                         <div
                           className={`flex1 CustomCheckbox no-margin ${
                             this.state.uChecked ? "is-checked" : ""
-                          }`}
-                        >
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
@@ -274,8 +257,7 @@ export default class SearchForm extends React.Component {
                             />
                             <label
                               htmlFor="updateEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Update
                             </label>
                           </div>
@@ -285,8 +267,7 @@ export default class SearchForm extends React.Component {
                         <div
                           className={`flex1 CustomCheckbox no-margin ${
                             this.state.dChecked ? "is-checked" : ""
-                          }`}
-                        >
+                          }`}>
                           <div className="u-position--relative flex flex1">
                             <input
                               type="checkbox"
@@ -299,8 +280,7 @@ export default class SearchForm extends React.Component {
                             />
                             <label
                               htmlFor="deleteEventType"
-                              className="flex1 u-width--full u-position--relative"
-                            >
+                              className="flex1 u-width--full u-position--relative">
                               Delete
                             </label>
                           </div>
@@ -313,16 +293,14 @@ export default class SearchForm extends React.Component {
                       <button
                         type="button"
                         className="Button secondary gray small u-display--block u-width--full u-marginBottom--normal"
-                        onClick={this.setInitialState}
-                      >
+                        onClick={this.setInitialState}>
                         Reset filters
                       </button>
                     )}
                     <a
                       target="_blank"
                       href={this.props.searchHelpURL}
-                      className="u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink"
-                    >
+                      className="u-fontSize--small u-fontWeight--medium u-textDecoration--underlineOnHover helpLink">
                       Get help with search
                     </a>
                   </div>
@@ -332,16 +310,13 @@ export default class SearchForm extends React.Component {
             <button
               type="submit"
               className="Button primary u-marginLeft--normal searchButton"
-            >
+              data-testid={`search-button`}>
               Search
             </button>
           </div>
         </form>
         {this.props.filtersOpen ? (
-          <div
-            className="hidden-trigger"
-            onClick={this.props.toggleDropdown}
-          ></div>
+          <div className="hidden-trigger" onClick={this.props.toggleDropdown}></div>
         ) : null}
       </div>
     );

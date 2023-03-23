@@ -24,8 +24,7 @@ export default class ModalPortal extends React.Component {
           className={this.generateClassNames()}
           contentLabel={this.props.name}
           onRequestClose={this.props.closeModal}
-          ariaHideApp={false}
-        >
+          ariaHideApp={false}>
           {this.props.content}
           <button className="icon u-closeIcon" onClick={this.props.closeModal}>
             Close

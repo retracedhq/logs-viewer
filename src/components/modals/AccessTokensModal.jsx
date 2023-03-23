@@ -116,10 +116,7 @@ class AccessTokensModal extends React.Component {
                     Update your token
                   </h3>
                   <p className="u-fontWeight--normal">
-                    Update{" "}
-                    <span className="u-fontWeight--bold">
-                      {this.state.tokenToUpdate.display_name}
-                    </span>{" "}
+                    Update <span className="u-fontWeight--bold">{this.state.tokenToUpdate.display_name}</span>{" "}
                     by filling out the field below.
                   </p>
                 </div>
@@ -133,8 +130,7 @@ class AccessTokensModal extends React.Component {
                     <a
                       href={this.props.apiTokenHelpURL}
                       className="u-color--curiousBlue u-fontWeight--bold"
-                      target="_blank"
-                    >
+                      target="_blank">
                       API token
                     </a>{" "}
                     for your team to access and stream your audit logs.
@@ -143,9 +139,7 @@ class AccessTokensModal extends React.Component {
               )}
               <div className="flex flexWrap--wrap justifyContent--flexEnd">
                 <input
-                  className={`Input u-marginBottom--more ${
-                    this.state.showErrorClass ? "has-error" : ""
-                  }`}
+                  className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`}
                   ref={this.tokenName}
                   type="text"
                   placeholder="Token Name"
@@ -157,8 +151,7 @@ class AccessTokensModal extends React.Component {
                   className="Button secondary flex-auto u-marginLeft--normal"
                   onClick={() => {
                     this.reset();
-                  }}
-                >
+                  }}>
                   Back
                 </button>
                 {updatingToken ? (
@@ -166,8 +159,7 @@ class AccessTokensModal extends React.Component {
                     className="Button primary flex-auto u-marginLeft--normal"
                     onClick={() => {
                       this.handleUpdateToken(this.state.tokenToUpdate);
-                    }}
-                  >
+                    }}>
                     Update Token
                   </button>
                 ) : (
@@ -175,8 +167,7 @@ class AccessTokensModal extends React.Component {
                     className="Button primary flex-auto u-marginLeft--normal"
                     onClick={() => {
                       this.handleTokenCreation(this.state.newTokenName);
-                    }}
-                  >
+                    }}>
                     Create Token
                   </button>
                 )}
@@ -191,8 +182,7 @@ class AccessTokensModal extends React.Component {
                 className="Button secondary"
                 onClick={() => {
                   this.setState({ tokenToDelete: {}, deletingToken: false });
-                }}
-              >
+                }}>
                 No
               </button>
               <button
@@ -200,8 +190,7 @@ class AccessTokensModal extends React.Component {
                 onClick={() => {
                   this.props.deleteEitapiToken(this.state.tokenToDelete);
                   this.setState({ deletingToken: false });
-                }}
-              >
+                }}>
                 Yes
               </button>
             </div>
@@ -212,33 +201,27 @@ class AccessTokensModal extends React.Component {
               </div>
               <div className="flex-column flex-1-auto u-overflow--auto">
                 {apiTokens.map((token, i) => (
-                  <div
-                    className="TableRow-wrapper flex-auto"
-                    key={`${token.id}-${i}`}
-                  >
+                  <div className="TableRow-wrapper flex-auto" key={`${token.id}-${i}`}>
                     <div className="TableRow flex">
                       <div className="TableRow-content flex flex1">
                         <div className="flex flex1">
                           <div
                             style={{ minWidth: "300px" }}
-                            className="flex-column flex1 content-section flex-verticalCenter ellipsis-overflow"
-                          >
+                            className="flex-column flex1 content-section flex-verticalCenter ellipsis-overflow">
                             <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                               {token.id}
                             </p>
                           </div>
                           <div
                             style={{ minWidth: "160px" }}
-                            className="flex-column flex1 content-section flex-verticalCenter"
-                          >
+                            className="flex-column flex1 content-section flex-verticalCenter">
                             <p className="u-fontWeight--medium u-color--tundora u-lineHeight--more">
                               {token.display_name}
                             </p>
                           </div>
                           <div
                             style={{ minWidth: "40px" }}
-                            className="flex flex-auto content-section justifyContent--flexEnd"
-                          >
+                            className="flex flex-auto content-section justifyContent--flexEnd">
                             <div className="flex-column flex-verticalCenter">
                               <span
                                 className="icon clickable u-editTokenIcon"
@@ -247,16 +230,14 @@ class AccessTokensModal extends React.Component {
                                     updatingToken: true,
                                     tokenToUpdate: token,
                                   });
-                                }}
-                              ></span>
+                                }}></span>
                             </div>
                             <div className="flex-column flex-verticalCenter">
                               <span
                                 className="icon clickable u-deleteTokenIcon u-marginLeft--normal"
                                 onClick={() => {
                                   this.handleDeleteToken(token);
-                                }}
-                              ></span>
+                                }}></span>
                             </div>
                           </div>
                         </div>
@@ -269,16 +250,14 @@ class AccessTokensModal extends React.Component {
                 <a
                   className="u-padding--normal u-fontSize--normal u-color--curiousBlue"
                   href={this.props.apiTokenHelpURL}
-                  target="_blank"
-                >
+                  target="_blank">
                   How to use Audit Log API Tokens
                 </a>
                 <button
                   className="Button primary u-marginLeft--normal"
                   onClick={() => {
                     this.setState({ creatingToken: true });
-                  }}
-                >
+                  }}>
                   Create Token
                 </button>
               </div>
@@ -291,18 +270,13 @@ class AccessTokensModal extends React.Component {
                 Update your token
               </h3>
               <p className="u-fontWeight--normal">
-                Update{" "}
-                <span className="u-fontWeight--bold">
-                  {this.state.tokenToUpdate.display_name}
-                </span>{" "}
-                by filling out the field below.
+                Update <span className="u-fontWeight--bold">{this.state.tokenToUpdate.display_name}</span> by
+                filling out the field below.
               </p>
             </div>
             <div className="flex flexWrap--wrap justifyContent--flexEnd">
               <input
-                className={`Input u-marginBottom--more ${
-                  this.state.showErrorClass ? "has-error" : ""
-                }`}
+                className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`}
                 ref={this.tokenName}
                 type="text"
                 placeholder="Token Name"
@@ -314,26 +288,21 @@ class AccessTokensModal extends React.Component {
                 className="Button secondary flex-auto u-marginLeft--normal"
                 onClick={() => {
                   this.reset();
-                }}
-              >
+                }}>
                 Back
               </button>
               <button
                 className="Button primary flex-auto u-marginLeft--normal"
                 onClick={() => {
                   this.handleTokenCreation(this.state.newTokenName);
-                }}
-              >
+                }}>
                 Create Token
               </button>
             </div>
           </div>
         ) : tokensLoading ? (
           <div className="flex-column flex1 justifyContent--center alignItems--center u-padding--more">
-            <Loader
-              size="70"
-              color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"}
-            />
+            <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
           </div>
         ) : (
           <div className="modal-content flex flexWrap--wrap justifyContent--center">
@@ -345,15 +314,13 @@ class AccessTokensModal extends React.Component {
               className="Button primary u-margin--small"
               onClick={() => {
                 this.setState({ creatingToken: true });
-              }}
-            >
+              }}>
               Create new token
             </button>
             <a
               className="u-padding--small u-textAlign--center u-display--block u-width--full  u-fontSize--normal u-color--curiousBlue"
               href={this.props.apiTokenHelpURL}
-              target="_blank"
-            >
+              target="_blank">
               How to use Audit Log API Tokens
             </a>
           </div>

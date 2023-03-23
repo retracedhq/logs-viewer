@@ -18,10 +18,10 @@ export const ramStorage = {
     for (var i = 0; i < store.length; i++) {
       keys.push(store.key(i));
     }
-    return keys
+    return keys;
   },
 
   setItem(key, val) {
     store[key] = val;
-  }
-}
+  },
+};

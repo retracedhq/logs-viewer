@@ -6,9 +6,9 @@ const actions = {
 };
 export default actions;
 
-export const receiveSessionId = createAction(actions.RECEIVE_SESSION_INFO,
-  (session, host) => ({ session, host }));
+export const receiveSessionId = createAction(actions.RECEIVE_SESSION_INFO, (session, host) => ({
+  session,
+  host,
+}));
 
-export const clearSession = createAction(actions.CLEAR_SESSION,
-() => ({ }));
-  
+export const clearSession = createAction(actions.CLEAR_SESSION, () => ({}));

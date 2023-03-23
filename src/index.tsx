@@ -7,6 +7,14 @@ import EventsBrowser from "./components/containers/EventsBrowser";
 import "./css/index.scss";
 
 const store = configStore();
+const eventField = PropTypes.shape({
+  label: PropTypes.string,
+  type: PropTypes.string,
+  getValue: PropTypes.oneOfType([PropTypes.func, PropTypes.string]),
+  field: PropTypes.string,
+  className: PropTypes.string,
+  style: PropTypes.object,
+});
 export default class RetracedEventsBrowser extends React.Component {
   static propTypes = {
     auditLogToken: PropTypes.string,
@@ -17,6 +25,8 @@ export default class RetracedEventsBrowser extends React.Component {
     host: PropTypes.string,
     header: PropTypes.string,
     mount: PropTypes.bool,
+    disableShowRawEvent: PropTypes.bool,
+    fields: PropTypes.arrayOf(eventField),
   };
   static defaultProps = {
     header: "Events",
@@ -24,15 +34,15 @@ export default class RetracedEventsBrowser extends React.Component {
     apiTokenHelpURL: "https://boxyhq.com/docs/retraced/apis/enterprise-api",
     searchHelpURL: "https://boxyhq.com/docs/retraced/apis/graphql#search",
     mount: true,
+    fields: [],
   };
   render() {
     return (
       <div
         id="retracedLogsViewerApp"
-        className={`retraced-logs-viewer-app u-minHeight--full ${
-          this.props.customClass || ""
-        } ${this.props.theme || ""}`}
-      >
+        className={`retraced-logs-viewer-app u-minHeight--full ${this.props.customClass || ""} ${
+          this.props.theme || ""
+        }`}>
         <Provider store={store}>
           <EventsBrowser
             auditLogToken={this.props.auditLogToken}
@@ -41,6 +51,8 @@ export default class RetracedEventsBrowser extends React.Component {
             host={this.props.host}
             apiTokenHelpURL={this.props.apiTokenHelpURL}
             searchHelpURL={this.props.searchHelpURL}
+            fields={this.props.fields}
+            disableShowRawEvent={this.props.disableShowRawEvent}
           />
         </Provider>
       </div>

@@ -16,7 +16,6 @@ export function Resizer(config = {}) {
 
   return function decorateClass(DecoratedComponent) {
     return class Resize extends React.Component {
-
       constructor(...args) {
         super(...args);
         this.state = this.getState();
@@ -53,9 +52,7 @@ export function Resizer(config = {}) {
       }
 
       render() {
-        return (
-          <DecoratedComponent {...this.props} {...this.state} />
-        );
+        return <DecoratedComponent {...this.props} {...this.state} />;
       }
     };
   };

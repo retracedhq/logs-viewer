@@ -21,6 +21,10 @@ import "../../css/components/views/EventsBrowser.scss";
 import { Resizer } from "./wrappers/Resize";
 import { BreakpointConfig } from "../../services/breakpoints";
 
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
+
 @Resizer(BreakpointConfig)
 class EventsBrowser extends React.Component {
   constructor(props) {
@@ -87,9 +91,7 @@ class EventsBrowser extends React.Component {
   }
 
   pageCount() {
-    return Math.ceil(
-      this.props.currentResults.totalResultCount / this.state.resultsPerPage
-    );
+    return Math.ceil(this.props.currentResults.totalResultCount / this.state.resultsPerPage);
   }
 
   offset() {
@@ -142,10 +144,7 @@ class EventsBrowser extends React.Component {
   }
 
   nextPage() {
-    this.submitQuery(
-      this.props.currentResults.sourceQuery.search_text,
-      this.props.currentResults.cursor
-    );
+    this.submitQuery(this.props.currentResults.sourceQuery.search_text, this.props.currentResults.cursor);
   }
 
   prevPage() {
@@ -165,12 +164,7 @@ class EventsBrowser extends React.Component {
     if (filters.searchQuery.length > 0 || filters.crudFilters.length > 0) {
       return true;
     }
-    if (
-      filters.cChecked ||
-      filters.rChecked ||
-      filters.uChecked ||
-      filters.dChecked
-    ) {
+    if (filters.cChecked || filters.rChecked || filters.uChecked || filters.dChecked) {
       return true;
     }
     return false;
@@ -208,19 +202,100 @@ class EventsBrowser extends React.Component {
     });
   }
 
+  /**
+   *
+   * @param info field object
+   * @returns processed field object
+   *
+   * Add default style parameters to field object if not provided
+   * In case of well known fields add getValue to get the correct values to display
+   */
+  processField(info) {
+    if (info.type === "markdown") {
+      info = {
+        ...info,
+        style: info.style || { maxWidth: "none" },
+        className: info.className || "flex-1-auto",
+      };
+    } else {
+      info = {
+        ...info,
+        style: info.style || { maxWidth: "180px" },
+        className: info.className || "flex1",
+      };
+    }
+    if (info.getValue) {
+      return info;
+    }
+    switch (info.field) {
+      case "canonical_time":
+        info.getValue = (event) => {
+          return dayjs(event.canonical_time).fromNow();
+        };
+        return info;
+      case "actor":
+      case "actor.id":
+      case "actor.name":
+        info.getValue = (event) => {
+          return event.actor.name || event.actor.id;
+        };
+        return info;
+      case "group":
+      case "group.id":
+      case "group.name":
+        info.getValue = (event) => {
+          return event.group.name || event.group.id;
+        };
+        return info;
+      case "target":
+      case "target.id":
+      case "target.name":
+      case "target.type":
+        info.getValue = (event) => {
+          return event.target.name || event.target.id || event.target.type;
+        };
+        return info;
+      default:
+        return info;
+    }
+  }
+
+  /**
+   *
+   * @param fields Array of field object
+   * @returns cleaned up Array of fields
+   *
+   * Filters invalid fields & add show event field if disableShowRawEvent flag is not set
+   */
+  processFields(fields) {
+    // filter fields which can not be rendered
+    fields = fields.filter((f) =>
+      !Array.isArray(f) && typeof f === "object" ? f.type !== "showEvent" : false
+    );
+    return this.props.disableShowRawEvent
+      ? fields.map((f) => {
+          return this.processField(f);
+        })
+      : [
+          ...fields.map((f) => {
+            return this.processField(f);
+          }),
+          {
+            type: "showEvent",
+            label: "",
+            style: { maxWidth: "20px" },
+            className: "flex1",
+          },
+        ];
+  }
+
   render() {
-    const {
-      events,
-      currentResults,
-      exportResults,
-      tableHeaderItems,
-      breakpoint,
-      apiTokens,
-    } = this.props;
-    const searchText =
-      currentResults &&
-      currentResults.sourceQuery &&
-      currentResults.sourceQuery.search_text;
+    const { events, currentResults, exportResults, breakpoint, apiTokens } = this.props;
+    let { tableHeaderItems } = this.props;
+    tableHeaderItems = this.processFields(
+      this.props.fields.length > 0 ? this.props.fields : tableHeaderItems
+    );
+    const searchText = currentResults && currentResults.sourceQuery && currentResults.sourceQuery.search_text;
     const isMobile = breakpoint === "mobile";
     const isMobileEvents = breakpoint === "mobileEvents";
     const renderers = {
@@ -232,7 +307,7 @@ class EventsBrowser extends React.Component {
           <div className="flex1 flex-column u-minHeight--full">
             <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
-                <h3 className="flex-auto u-lineHeight--more u-fontSize--header3">
+                <h3 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
                   {this.props.headerTitle}
                 </h3>
                 <span className="flex flex-auto u-marginLeft--more">
@@ -250,6 +325,7 @@ class EventsBrowser extends React.Component {
                 <div className="flex-auto flex-column flex-verticalCenter">
                   <span
                     className="icon clickable u-csvExportIcon"
+                    data-testid={`export-events`}
                     onClick={() => {
                       this.renderModal(
                         <ExportEventsModal
@@ -265,8 +341,7 @@ class EventsBrowser extends React.Component {
                     }}
                     onMouseLeave={() => {
                       this.setState({ exportTooltip: false });
-                    }}
-                  >
+                    }}>
                     <Tooltip
                       visible={this.state.exportTooltip}
                       text="Export Events"
@@ -278,6 +353,7 @@ class EventsBrowser extends React.Component {
                 <div className="u-marginLeft--more flex-auto flex-column flex-verticalCenter">
                   <span
                     className="icon clickable u-tokensIcon"
+                    data-testid={`manage-api-tokens`}
                     onClick={() => {
                       this.renderModal(
                         <AccessTokensModal
@@ -292,8 +368,7 @@ class EventsBrowser extends React.Component {
                     }}
                     onMouseLeave={() => {
                       this.setState({ tokenTooltip: false });
-                    }}
-                  >
+                    }}>
                     <Tooltip
                       visible={this.state.tokenTooltip}
                       text="Manage API Tokens"
@@ -311,10 +386,7 @@ class EventsBrowser extends React.Component {
             ) : null}
             {this.props.dataLoading.eventFetchLoading ? (
               <div className="flex-column flex1 justifyContent--center alignItems--center">
-                <Loader
-                  size="70"
-                  color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"}
-                />
+                <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
               </div>
             ) : (
               <div className="EventsWrapper flex-column flex-1-auto u-overflow--auto">
@@ -322,8 +394,10 @@ class EventsBrowser extends React.Component {
                   currentResults.resultIds.map((eid, i) =>
                     !isMobileEvents ? (
                       <EventRow
+                        tableHeaderItems={tableHeaderItems}
                         key={`${eid}-${i}`}
                         event={events[eid]}
+                        fields={this.props.fields && tableHeaderItems}
                         renderers={renderers}
                         isMobile={isMobileEvents}
                         index={i}
@@ -333,7 +407,8 @@ class EventsBrowser extends React.Component {
                         }}
                         openModal={() => {
                           this.renderModal(
-                            <RawEventOutputModal rawOutput={events[eid].raw} />
+                            <RawEventOutputModal rawOutput={events[eid].raw} />,
+                            "RawEventOutputModal"
                           );
                         }}
                       />
@@ -341,6 +416,7 @@ class EventsBrowser extends React.Component {
                       <MobileEventRow
                         key={`${eid}-${i}`}
                         event={events[eid]}
+                        tableHeadersItems={tableHeaderItems}
                         renderers={renderers}
                         isMobile={isMobileEvents}
                         index={i}
@@ -350,7 +426,8 @@ class EventsBrowser extends React.Component {
                         }}
                         openModal={() => {
                           this.renderModal(
-                            <RawEventOutputModal rawOutput={events[eid].raw} />
+                            <RawEventOutputModal rawOutput={events[eid].raw} />,
+                            "RawEventOutputModalMobile"
                           );
                         }}
                       />
@@ -369,8 +446,7 @@ class EventsBrowser extends React.Component {
                       Try{" "}
                       <span
                         className="u-color--curiousBlue u-textDecoration--underlineOnHover"
-                        onClick={this.toggleFitlerDropdown}
-                      >
+                        onClick={this.toggleFitlerDropdown}>
                         adjusting your filters
                       </span>{" "}
                       or changing your keyword terms
@@ -394,34 +470,26 @@ class EventsBrowser extends React.Component {
                 currentResults.resultIds.length < this.state.resultsPerPage
                   ? ""
                   : "has-shadow"
-              }`}
-            >
+              }`}>
               <div
                 className={`flex arrow-wrapper justifyContent--flexEnd ${
                   isMobile ? "flex-auto u-paddingLeft--more" : "flex1"
-                }`}
-              >
+                }`}>
                 {this.currentPage() > 0 ? (
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={
-                      !this.props.dataLoading.eventFetchLoading
-                        ? this.prevPage
-                        : null
-                    }
-                  >
-                    <span className="icon clickable u-dropdownArrowIcon previous"></span>{" "}
-                    Newer
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.prevPage : null}>
+                    <span className="icon clickable u-dropdownArrowIcon previous"></span> Newer
                   </p>
                 ) : null}
               </div>
               <div className="flex1 resultsCount">
                 {currentResults.resultIds.length ? (
                   <p className="u-fontSize--normal u-lineHeight--normal u-textAlign--center">
-                    <span className="u-color--dustyGray">Showing events </span>
-                    <span className="u-color-tuna u-fontWeight--medium">{`${
-                      this.offset() + 1
-                    } - ${
+                    <span data-testid="showing-events" className="u-color--dustyGray">
+                      Showing events{" "}
+                    </span>
+                    <span className="u-color-tuna u-fontWeight--medium">{`${this.offset() + 1} - ${
                       this.offset() + currentResults.resultIds.length
                     }`}</span>
                     <span className="u-color--dustyGray"> of </span>
@@ -436,19 +504,12 @@ class EventsBrowser extends React.Component {
               <div
                 className={`flex arrow-wrapper justifyContent--flexStart ${
                   isMobile ? "flex-auto u-paddingRight--more" : "flex1"
-                }`}
-              >
+                }`}>
                 {this.currentPage() < this.pageCount() - 1 ? (
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={
-                      !this.props.dataLoading.eventFetchLoading
-                        ? this.nextPage
-                        : null
-                    }
-                  >
-                    Older{" "}
-                    <span className="icon clickable u-dropdownArrowIcon next"></span>
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.nextPage : null}>
+                    Older <span className="icon clickable u-dropdownArrowIcon next"></span>
                   </p>
                 ) : null}
               </div>

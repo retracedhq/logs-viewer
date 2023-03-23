@@ -5,5 +5,4 @@ const actions = {
 };
 export default actions;
 
-export const receiveSavedExports = createAction(actions.RECEIVE_SAVED_EXPORTS,
-  (queries) => ({ queries }));
+export const receiveSavedExports = createAction(actions.RECEIVE_SAVED_EXPORTS, (queries) => ({ queries }));
