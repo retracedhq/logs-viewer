@@ -61,9 +61,8 @@ export default class EventRow extends React.Component {
               {this.state.items.map((item, idx) => {
                 if (item.type === "markdown") {
                   return (
-                    <div key={idx} className={`flex flex1 content-section`}>
+                    <div key={idx} className={`flex flex1 content-section`} data-testid="markdown">
                       <ReactMarkdown
-                        data-testid="markdown"
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
                         sourcePos={true}
                         components={this.props.renderers}
