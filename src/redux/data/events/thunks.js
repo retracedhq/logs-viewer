@@ -59,7 +59,6 @@ export function requestEventSearch(query) {
                     country
                     loc_subdiv1
                     loc_subdiv2
-                    raw
                   }
                 }
               }

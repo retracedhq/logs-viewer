@@ -42,7 +42,6 @@ export default (fetchMock) => {
                     country: null,
                     loc_subdiv1: null,
                     loc_subdiv2: null,
-                    raw: '{"action":"audit.log.view","crud":"r","actor":{"id":"dev"},"group":{"id":"dev"},"description":"Viewed the audit log","source_ip":"172.22.0.1"}',
                   },
                 },
               ],
