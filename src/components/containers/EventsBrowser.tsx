@@ -406,10 +406,8 @@ class EventsBrowser extends React.Component {
                           return;
                         }}
                         openModal={() => {
-                          this.renderModal(
-                            <RawEventOutputModal rawOutput={events[eid]} />,
-                            "RawEventOutputModal"
-                          );
+                          const event = JSON.stringify(events[eid]);
+                          this.renderModal(<RawEventOutputModal rawOutput={event} />, "RawEventOutputModal");
                         }}
                       />
                     ) : (
@@ -425,8 +423,9 @@ class EventsBrowser extends React.Component {
                           return;
                         }}
                         openModal={() => {
+                          const event = JSON.stringify(events[eid]);
                           this.renderModal(
-                            <RawEventOutputModal rawOutput={events[eid]} />,
+                            <RawEventOutputModal rawOutput={event} />,
                             "RawEventOutputModalMobile"
                           );
                         }}
