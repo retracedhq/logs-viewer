@@ -1,7 +1,7 @@
 import React from "react";
 import autoBind from "react-autobind";
 
-export default class RawEventOutputModal extends React.Component {
+export default class EventModal extends React.Component {
   constructor() {
     super();
     autoBind(this);
@@ -9,8 +9,8 @@ export default class RawEventOutputModal extends React.Component {
   }
 
   render() {
-    const { rawOutput } = this.props;
-    const raw = JSON.stringify(rawOutput, null, 2);
+    const { event } = this.props;
+    const formattedEvent = JSON.stringify(event, null, 2);
     return (
       <div>
         <h1 className="u-fontWeight--normal">Audit Event Info</h1>
@@ -24,7 +24,7 @@ export default class RawEventOutputModal extends React.Component {
                 resize: "none",
               }}
               readOnly
-              value={raw}></textarea>
+              value={formattedEvent}></textarea>
           </div>
         </div>
       </div>
