@@ -10,8 +10,7 @@ export default class RawEventOutputModal extends React.Component {
 
   render() {
     const { rawOutput } = this.props;
-    const rawObj = JSON.parse(rawOutput);
-    const raw = JSON.stringify(rawObj, null, 2);
+    const raw = JSON.stringify(rawOutput, null, 2);
     return (
       <div>
         <h1 className="u-fontWeight--normal">Audit Event Info</h1>
