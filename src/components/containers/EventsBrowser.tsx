@@ -13,7 +13,7 @@ import SearchForm from "../views/SearchForm";
 import ModalPortal from "../modals/ModalPortal";
 import ExportEventsModal from "../modals/ExportEventsModal";
 import AccessTokensModal from "../modals/AccessTokensModal";
-import RawEventOutputModal from "../modals/RawEventOutputModal";
+import EventModal from "../modals/EventModal";
 import Tooltip from "../shared/Tooltip";
 
 import "../../css/components/views/EventsBrowser.scss";
@@ -406,10 +406,10 @@ class EventsBrowser extends React.Component {
                           return;
                         }}
                         openModal={() => {
-                          this.renderModal(
-                            <RawEventOutputModal rawOutput={events[eid].raw} />,
-                            "RawEventOutputModal"
-                          );
+                          const _event = { ...events[eid] };
+                          delete _event.display;
+                          delete _event.raw;
+                          this.renderModal(<EventModal event={_event} />, "EventModal");
                         }}
                       />
                     ) : (
@@ -425,10 +425,10 @@ class EventsBrowser extends React.Component {
                           return;
                         }}
                         openModal={() => {
-                          this.renderModal(
-                            <RawEventOutputModal rawOutput={events[eid].raw} />,
-                            "RawEventOutputModalMobile"
-                          );
+                          const _event = { ...events[eid] };
+                          delete _event.display;
+                          delete _event.raw;
+                          this.renderModal(<EventModal event={_event} />, "EventModalMobile");
                         }}
                       />
                     )
