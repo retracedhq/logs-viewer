@@ -408,6 +408,7 @@ class EventsBrowser extends React.Component {
                         openModal={() => {
                           const _event = { ...events[eid] };
                           delete _event.display;
+                          delete _event.raw;
                           this.renderModal(<EventModal event={_event} />, "EventModal");
                         }}
                       />
@@ -426,6 +427,7 @@ class EventsBrowser extends React.Component {
                         openModal={() => {
                           const _event = { ...events[eid] };
                           delete _event.display;
+                          delete _event.raw;
                           this.renderModal(<EventModal event={_event} />, "EventModalMobile");
                         }}
                       />
