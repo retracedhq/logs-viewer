@@ -1,8 +1,7 @@
 import { expect, test, vi } from "vitest";
-import { render, screen, waitFor } from "@testing-library/react";
+import { render, screen, waitFor, act } from "@testing-library/react";
 import LogsViewerWrapper from "../dev/LogsViewerWrapper";
 import createFetchMock from "vitest-fetch-mock";
-import { act } from "react-dom/test-utils";
 import MockHelper from "./mock";
 
 const fetchMock = createFetchMock(vi);
