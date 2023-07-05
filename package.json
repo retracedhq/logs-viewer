@@ -41,7 +41,7 @@
     "react-dom": "18.2.0"
   },
   "dependencies": {
-    "dayjs": "1.11.8",
+    "dayjs": "1.11.9",
     "lodash": "4.17.21",
     "prop-types": "15.8.1",
     "react-autobind": "1.0.6",
