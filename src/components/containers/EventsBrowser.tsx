@@ -411,6 +411,13 @@ class EventsBrowser extends React.Component {
                           delete _event.raw;
                           this.renderModal(<EventModal event={_event} />, "EventModal");
                         }}
+                        err0Link={() => {
+                          const _event = { ...events[eid] };
+                          return {
+                            url: `https://retraced-demo.staging.err0.io:8443/-/by-code/${_event.version}/${_event.external_id}`,
+                            disabled: !_event.version || !_event.external_id,
+                          };
+                        }}
                       />
                     ) : (
                       <MobileEventRow
@@ -429,6 +436,13 @@ class EventsBrowser extends React.Component {
                           delete _event.display;
                           delete _event.raw;
                           this.renderModal(<EventModal event={_event} />, "EventModalMobile");
+                        }}
+                        err0Link={() => {
+                          const _event = { ...events[eid] };
+                          return {
+                            url: `https://retraced-demo.staging.err0.io:8443/-/by-code/${_event.version}/${_event.external_id}`,
+                            disabled: !_event.version || !_event.external_id,
+                          };
                         }}
                       />
                     )

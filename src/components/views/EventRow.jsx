@@ -9,6 +9,7 @@ export default class EventRow extends React.Component {
     autobind(this);
     this.state = {
       eventInfoToken: false,
+      err0InfoToken: false,
       items: props.fields,
     };
   }
@@ -53,6 +54,12 @@ export default class EventRow extends React.Component {
   };
 
   render() {
+    const { url, disabled: err0LinkDisabled } = this.props.err0Link();
+    let err0Url = url;
+    if (err0LinkDisabled) {
+      err0Url = "";
+    }
+
     return (
       <div className="TableRow-wrapper flex-auto">
         <div className="TableRow flex">
@@ -94,6 +101,31 @@ export default class EventRow extends React.Component {
                             position="bottom-left"
                           />
                         </span>
+                      </div>
+                      <div className="flex-column flex-auto icon-wrapper flex-verticalCenter">
+                        <a href={err0Url} target="_blank" class={err0LinkDisabled ? "disable-link" : ""}>
+                          <span
+                            className="icon clickable u-infoIcon"
+                            onMouseEnter={() => {
+                              if (err0LinkDisabled) {
+                                return;
+                              }
+                              this.setState({ err0InfoToken: true });
+                            }}
+                            onMouseLeave={() => {
+                              if (err0LinkDisabled) {
+                                return;
+                              }
+                              this.setState({ err0InfoToken: false });
+                            }}>
+                            <Tooltip
+                              visible={this.state.err0InfoToken}
+                              text="Compliance Knowledgebase"
+                              minWidth="80"
+                              position="bottom-left"
+                            />
+                          </span>
+                        </a>
                       </div>
                     </div>
                   );
