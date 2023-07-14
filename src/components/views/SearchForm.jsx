@@ -5,10 +5,30 @@ import searchQueryParser from "search-query-parser";
 import _ from "lodash";
 import DatePicker from "react-datepicker";
 
+function getDateFormatString(lang = "default") {
+  const formatObj = new Intl.DateTimeFormat(lang).formatToParts(new Date());
+
+  return formatObj
+    .map((obj) => {
+      switch (obj.type) {
+        case "day":
+          return "dd";
+        case "month":
+          return "MM";
+        case "year":
+          return "yyyy";
+        default:
+          return obj.value;
+      }
+    })
+    .join("");
+}
+
 export default class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
+    this.dateFormatString = getDateFormatString();
   }
 
   onChange = (e) => {
@@ -150,7 +170,7 @@ export default class SearchForm extends React.Component {
                           selected={this.state.receivedStartDate}
                           className="Input u-width--full"
                           placeholderText="Start"
-                          dateFormat="MM/dd/yyyy"
+                          dateFormat={this.dateFormatString}
                           popperModifiers={[
                             {
                               name: "offset",
@@ -170,7 +190,7 @@ export default class SearchForm extends React.Component {
                           selected={this.state.receivedEndDate}
                           className="Input u-width--full"
                           placeholderText="End"
-                          dateFormat="MM/dd/yyyy"
+                          dateFormat={this.dateFormatString}
                           popoverAttachment="bottom center"
                           popoverTargetAttachment="top center"
                           popoverTargetOffset="10px 40px"
