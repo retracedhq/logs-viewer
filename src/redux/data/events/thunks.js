@@ -6,9 +6,10 @@ export function requestEventSearch(query) {
   return async (dispatch, getState) => {
     dispatch(loadingData("eventFetch", true));
     let data;
+    const skipViewLogEvent = query.skipViewLogEvent ? "?skipViewLogEvent=true" : "";
     const state = getState();
     const host = state.data.sessionData.host;
-    const url = `${host}/graphql`;
+    const url = `${host}/graphql${skipViewLogEvent}`;
     try {
       const response = await fetch(url, {
         method: "POST",
