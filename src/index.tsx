@@ -6,6 +6,8 @@ import EventsBrowser from "./components/containers/EventsBrowser";
 
 import "./css/index.scss";
 
+type RetracedEventsBrowserProps = typeof RetracedEventsBrowser.propTypes;
+
 const store = configStore();
 const eventField = PropTypes.shape({
   label: PropTypes.string,
@@ -15,7 +17,7 @@ const eventField = PropTypes.shape({
   className: PropTypes.string,
   style: PropTypes.object,
 });
-export default class RetracedEventsBrowser extends React.Component {
+export default class RetracedEventsBrowser extends React.Component<RetracedEventsBrowserProps> {
   static propTypes = {
     auditLogToken: PropTypes.string,
     apiTokenHelpURL: PropTypes.string,
@@ -29,6 +31,7 @@ export default class RetracedEventsBrowser extends React.Component {
     fields: PropTypes.arrayOf(eventField),
     skipViewLogEvent: PropTypes.bool,
   };
+
   static defaultProps = {
     header: "Events",
     host: "http://localhost:3000/auditlog/viewer/v1",
@@ -38,6 +41,7 @@ export default class RetracedEventsBrowser extends React.Component {
     fields: [],
     skipViewLogEvent: false,
   };
+
   render() {
     return (
       <div
