@@ -10,14 +10,20 @@ function defferedHandlerCaller() {
   });
 }
 
-export function Resizer(config = {}) {
-  const { onResize } = config;
-  const debounceTime = config.debounce || 500;
+type Config = {
+  onResize: any;
+  debounce: number;
+};
+
+export function Resizer(config: Config) {
+  const { onResize, debounce } = config || {};
+  const debounceTime = debounce || 500;
 
   return function decorateClass(DecoratedComponent) {
     return class Resize extends React.Component {
-      constructor(...args) {
-        super(...args);
+      private _registeredIndex: number;
+      constructor(props) {
+        super(props);
         this.state = this.getState();
         this.onWindowResize = _.debounce(this.onWindowResize.bind(this), debounceTime);
       }
