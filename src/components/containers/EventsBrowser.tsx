@@ -139,6 +139,7 @@ class EventsBrowser extends React.Component {
       search_text: query,
       cursor,
       length: this.state.resultsPerPage,
+      skipViewLogEvent: this.props.skipViewLogEvent,
     };
     this.props.requestEventSearch(queryObj);
   }

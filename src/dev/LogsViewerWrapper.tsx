@@ -69,6 +69,7 @@ const LogsViewerWrapper = (props) => {
       host={`${endpoint}/viewer/v1`}
       fields={props.fields ? (Array.isArray(props.fields) ? props.fields : defaultFields) : defaultFields}
       disableShowRawEvent={props.disableShowRawEvent ? props.disableShowRawEvent : false}
+      skipViewLogEvent={true}
     />
   );
 };

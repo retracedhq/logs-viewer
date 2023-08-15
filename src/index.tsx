@@ -27,6 +27,7 @@ export default class RetracedEventsBrowser extends React.Component {
     mount: PropTypes.bool,
     disableShowRawEvent: PropTypes.bool,
     fields: PropTypes.arrayOf(eventField),
+    skipViewLogEvent: PropTypes.bool,
   };
   static defaultProps = {
     header: "Events",
@@ -35,6 +36,7 @@ export default class RetracedEventsBrowser extends React.Component {
     searchHelpURL: "https://boxyhq.com/docs/retraced/apis/graphql#search",
     mount: true,
     fields: [],
+    skipViewLogEvent: false,
   };
   render() {
     return (
@@ -53,6 +55,7 @@ export default class RetracedEventsBrowser extends React.Component {
             searchHelpURL={this.props.searchHelpURL}
             fields={this.props.fields}
             disableShowRawEvent={this.props.disableShowRawEvent}
+            skipViewLogEvent={this.props.skipViewLogEvent}
           />
         </Provider>
       </div>
