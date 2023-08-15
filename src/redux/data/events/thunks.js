@@ -61,6 +61,10 @@ export function requestEventSearch(query) {
                     loc_subdiv2
                     external_id
                     version
+                    fields {
+                      key
+                      value
+                    }
                   }
                 }
               }
