@@ -59,7 +59,7 @@
     "@babel/plugin-proposal-decorators": "7.23.0",
     "@testing-library/react": "14.0.0",
     "@types/react": "18.2.25",
-    "@types/react-dom": "18.2.8",
+    "@types/react-dom": "18.2.10",
     "@vitejs/plugin-react": "4.1.0",
     "autoprefixer": "10.4.16",
     "jsdom": "22.1.0",
