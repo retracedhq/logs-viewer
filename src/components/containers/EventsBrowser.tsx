@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import autobind from "react-autobind";
+import _ from "lodash";
+
 import { requestEventSearch } from "../../redux/data/events/thunks";
 import { createSession } from "../../redux/data/session/thunks";
 import { clearSession } from "../../redux/data/session/actions";
@@ -129,7 +131,8 @@ class EventsBrowser extends React.Component {
     // If we have a new session, we need to request a new event search
     // @ts-expect-error
     if (this.props.session.token != nextProps.session.token) {
-      this.submitQuery("", "");
+      // use same initial query that the search button would use
+      this.submitQuery("crud:c,u,d", "");
     }
   }
 
@@ -197,7 +200,7 @@ class EventsBrowser extends React.Component {
     });
   }
 
-  toggleFitlerDropdown() {
+  toggleFilterDropdown() {
     this.setState({
       // @ts-expect-error
       filtersOpen: !this.state.filtersOpen,
@@ -314,19 +317,26 @@ class EventsBrowser extends React.Component {
 
   render() {
     // @ts-expect-error
-    const { events, currentResults, exportResults, breakpoint, apiTokens } = this.props;
+    const { events, currentResults, breakpoint } = this.props;
     // @ts-expect-error
     let { tableHeaderItems } = this.props;
     tableHeaderItems = this.processFields(
       // @ts-expect-error
       this.props.fields.length > 0 ? this.props.fields : tableHeaderItems
     );
-    const searchText = currentResults && currentResults.sourceQuery && currentResults.sourceQuery.search_text;
+
+    // regex: strips " crud:*" from search text displayed in search box
+    const searchText =
+      (!_.isEmpty(currentResults.sourceQuery.search_text) &&
+        currentResults.sourceQuery.search_text.replace(/\s?crud:([crud],?)+/g, "")) ||
+      "";
+
     const isMobile = breakpoint === "mobile";
     const isMobileEvents = breakpoint === "mobileEvents";
     const renderers = {
       Link: InlineLink,
     };
+
     // @ts-expect-error
     return this.props.mount ? (
       <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
@@ -334,12 +344,12 @@ class EventsBrowser extends React.Component {
           <div className="flex1 flex-column u-minHeight--full">
             <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
-                <h3 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
+                <h1 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
                   {
                     // @ts-expect-error
                     this.props.headerTitle
                   }
-                </h3>
+                </h1>
                 <span className="flex flex-auto u-marginLeft--more">
                   <SearchForm
                     onSubmit={this.search}
@@ -348,7 +358,7 @@ class EventsBrowser extends React.Component {
                       // @ts-expect-error
                       this.state.filtersOpen
                     }
-                    toggleDropdown={this.toggleFitlerDropdown}
+                    toggleDropdown={this.toggleFilterDropdown}
                     hasFilters={this.hasFilters}
                     searchHelpURL={
                       // @ts-expect-error
@@ -492,18 +502,22 @@ class EventsBrowser extends React.Component {
                     )
                   ) : currentResults.sourceQuery.search_text !== "" ? (
                     <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
-                      <p className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                      <p
+                        className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large flex alignItems--center"
+                        style={{ gap: "4px" }}>
                         The query
-                        <code className="u-marginLeft--small u-marginRight--small">
-                          {currentResults.sourceQuery.search_text}
-                        </code>
+                        {currentResults.sourceQuery.search_text ? (
+                          <code>{currentResults.sourceQuery.search_text || "crud:c,u,d"}</code>
+                        ) : (
+                          ` "" `
+                        )}
                         found no results
                       </p>
                       <p className="u-marginTop--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
                         Try{" "}
                         <span
                           className="u-color--curiousBlue u-textDecoration--underlineOnHover"
-                          onClick={this.toggleFitlerDropdown}>
+                          onClick={this.toggleFilterDropdown}>
                           adjusting your filters
                         </span>{" "}
                         or changing your keyword terms

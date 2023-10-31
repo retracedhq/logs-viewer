@@ -75,6 +75,12 @@ export function requestEventSearch(query) {
       data = await response.json();
     } catch (err) {
       console.log(err);
+      dispatch(loadingData("eventFetch", false));
+      return null;
+    }
+    if (data.errors) {
+      console.log(data.errors.map((e) => e.message).join("\n"));
+      dispatch(loadingData("eventFetch", false));
       return null;
     }
 
