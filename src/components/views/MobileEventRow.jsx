@@ -22,7 +22,6 @@ export default class MobileEventRow extends React.Component {
                 <div className="u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
                   <ReactMarkdown
                     className="EventItem u-fontWeight--medium u-lineHeight--more u-display--inlineBlock"
-                    sourcePos={true}
                     components={this.props.renderers}
                     children={this.props.event.display.markdown}
                   />
