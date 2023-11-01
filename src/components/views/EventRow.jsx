@@ -64,7 +64,6 @@ export default class EventRow extends React.Component {
                     <div key={idx} className={`flex flex1 content-section`} data-testid="markdown">
                       <ReactMarkdown
                         className="EventItem u-fontWeight--medium u-lineHeight--more"
-                        sourcePos={true}
                         components={this.props.renderers}
                         children={this.getCellValue(item)}
                       />
