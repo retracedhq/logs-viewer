@@ -365,7 +365,7 @@ describe("Log Viewer Component with custom fields", () => {
             },
             {
               label: "info",
-              getValue: (event) => {
+              getValue: () => {
                 throw new Error("Testing exceptions");
               },
             },
@@ -419,7 +419,7 @@ describe("Log Viewer Component with custom fields", () => {
             },
             {
               label: "info",
-              getValue: (event) => {
+              getValue: () => {
                 return <div>123</div>;
               },
             },

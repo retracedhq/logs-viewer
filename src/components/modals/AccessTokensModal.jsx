@@ -11,7 +11,7 @@ import {
 } from "../../redux/data/apiTokens/thunks";
 
 class AccessTokensModal extends React.Component {
-  constructor(props, context) {
+  constructor(props) {
     super(props);
     this.tokenName = React.createRef();
     autoBind(this);

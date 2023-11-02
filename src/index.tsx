@@ -5,7 +5,7 @@ import EventsBrowser from "./components/containers/EventsBrowser";
 
 import "./css/index.scss";
 
-type eventField = {
+type EventField = {
   label: string;
   type: string;
   getValue: any;
@@ -22,7 +22,7 @@ type RetracedEventsBrowserProps = {
   header?: string;
   mount?: boolean;
   disableShowRawEvent?: boolean;
-  fields?: eventField;
+  fields?: EventField[];
   skipViewLogEvent?: boolean;
 };
 
@@ -37,7 +37,6 @@ export default class RetracedEventsBrowser extends React.Component<RetracedEvent
         }`}>
         <Provider store={store}>
           <EventsBrowser
-            // @ts-expect-error
             auditLogToken={this.props.auditLogToken}
             mount={this.props.mount === false ? false : true}
             headerTitle={this.props.header || "Events"}

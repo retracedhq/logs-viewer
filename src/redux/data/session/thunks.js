@@ -2,7 +2,7 @@ import { receiveSessionId } from "./actions";
 import { loadingData } from "../../ui/actions";
 
 export function createSession(token, host) {
-  return async (dispatch, getState) => {
+  return async (dispatch) => {
     dispatch(loadingData("eventFetch", true));
     let response;
     const url = `${host}/viewersession`;
