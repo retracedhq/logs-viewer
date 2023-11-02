@@ -89,8 +89,8 @@ class ExportEventsModal extends React.Component {
   }
 
   render() {
-    const { savedExports, exporting, searchInputQuery, crudFilters, dateFilters } = this.props;
-    const { searchBody, newSavedExportName } = this.state;
+    const { savedExports, exporting, searchInputQuery } = this.props;
+    const { newSavedExportName } = this.state;
     return (
       <div>
         <h1 className="u-fontWeight--normal">Export Events</h1>

@@ -27,9 +27,56 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-// @ts-expect-error
+type EventBrowserProps = {
+  auditLogToken: string;
+  mount?: boolean;
+  headerTitle?: string;
+  host?: string;
+  apiTokenHelpURL?: string;
+  searchHelpURL?: string;
+  fields?: any[];
+  disableShowRawEvent?: boolean;
+  skipViewLogEvent?: boolean;
+  currentResults?: any;
+  createSession?: any;
+  session?: any;
+  clearSession?: any;
+  requestEventSearch?: any;
+  events?: any;
+  breakpoint?: string;
+  tableHeaderItems?: any;
+  theme?: string;
+  dataLoading?: any;
+};
+
+interface EventBrowserState {
+  resultsPerPage: number;
+  filtersOpen: boolean;
+  selectedEventOutput: string;
+  hasFilters: boolean;
+  pageCursors: string[];
+  activeModal: {
+    modal: any;
+    name: string;
+  };
+  isModalOpen: boolean;
+  searchQuery: string;
+  crudFilters: {
+    cChecked: boolean;
+    rChecked: boolean;
+    uChecked: boolean;
+    dChecked: boolean;
+  };
+  dateFilters: {
+    receivedStartDate: string;
+    receivedEndDate: string;
+  };
+  tokenTooltip: boolean;
+  exportTooltip: boolean;
+}
+
 @Resizer(BreakpointConfig)
-class EventsBrowser extends React.Component {
+class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState> {
   constructor(props) {
     super(props);
     autobind(this);
@@ -73,17 +120,15 @@ class EventsBrowser extends React.Component {
     // Next page of current query
     if (next.sourceQuery.cursor === current.cursor) {
       this.setState({
-        // @ts-expect-error
         pageCursors: this.state.pageCursors.concat(next.sourceQuery.cursor),
       });
       return;
     }
     // Previous page of current query
-    // @ts-expect-error
+
     const pageIndex = this.state.pageCursors.indexOf(next.sourceQuery.cursor);
     if (pageIndex >= 0) {
       this.setState({
-        // @ts-expect-error
         pageCursors: this.state.pageCursors.slice(0, pageIndex + 1),
       });
       return;
@@ -93,44 +138,38 @@ class EventsBrowser extends React.Component {
   }
 
   currentPage() {
-    // @ts-expect-error
     return this.state.pageCursors.length - 1;
   }
 
   pageCount() {
-    // @ts-expect-error
     return Math.ceil(this.props.currentResults.totalResultCount / this.state.resultsPerPage);
   }
 
   offset() {
-    // @ts-expect-error
     return this.currentPage() * this.state.resultsPerPage;
   }
 
   componentWillMount() {
     // Pass the audit log token and the preferred host (which will be stored in the state)
-    // @ts-expect-error
+
     this.props.createSession(this.props.auditLogToken, this.props.host);
   }
 
   componentWillReceiveProps(nextProps) {
-    // @ts-expect-error
     if (this.props.currentResults !== nextProps.currentResults) {
-      // @ts-expect-error
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
     }
   }
 
   componentWillUpdate(nextProps) {
     // If we have a new token, we need to create a new session
-    // @ts-expect-error
-    if (this.props.auditLogToken != nextProps.auditLogToken) {
-      // @ts-expect-error
+
+    if (this.props.auditLogToken !== nextProps.auditLogToken) {
       this.props.createSession(nextProps.auditLogToken, this.props.host);
     }
     // If we have a new session, we need to request a new event search
-    // @ts-expect-error
-    if (this.props.session.token != nextProps.session.token) {
+
+    if (this.props.session.token !== nextProps.session.token) {
       // use same initial query that the search button would use
       this.submitQuery("crud:c,u,d", "");
     }
@@ -138,7 +177,7 @@ class EventsBrowser extends React.Component {
 
   componentWillUnmount() {
     // Clearing the store
-    // @ts-expect-error
+
     this.props.clearSession();
   }
 
@@ -155,25 +194,23 @@ class EventsBrowser extends React.Component {
     const queryObj = {
       search_text: query,
       cursor,
-      // @ts-expect-error
+
       length: this.state.resultsPerPage,
-      // @ts-expect-error
+
       skipViewLogEvent: this.props.skipViewLogEvent,
     };
-    // @ts-expect-error
+
     this.props.requestEventSearch(queryObj);
   }
 
   nextPage() {
-    // @ts-expect-error
     this.submitQuery(this.props.currentResults.sourceQuery.search_text, this.props.currentResults.cursor);
   }
 
   prevPage() {
     this.submitQuery(
-      // @ts-expect-error
       this.props.currentResults.sourceQuery.search_text,
-      // @ts-expect-error
+
       this.state.pageCursors[this.currentPage() - 1]
     );
   }
@@ -202,7 +239,6 @@ class EventsBrowser extends React.Component {
 
   toggleFilterDropdown() {
     this.setState({
-      // @ts-expect-error
       filtersOpen: !this.state.filtersOpen,
     });
   }
@@ -297,7 +333,7 @@ class EventsBrowser extends React.Component {
     fields = fields.filter((f) =>
       !Array.isArray(f) && typeof f === "object" ? f.type !== "showEvent" : false
     );
-    // @ts-expect-error
+
     return this.props.disableShowRawEvent
       ? fields.map((f) => {
           return this.processField(f);
@@ -316,12 +352,10 @@ class EventsBrowser extends React.Component {
   }
 
   render() {
-    // @ts-expect-error
     const { events, currentResults, breakpoint } = this.props;
-    // @ts-expect-error
+
     let { tableHeaderItems } = this.props;
     tableHeaderItems = this.processFields(
-      // @ts-expect-error
       this.props.fields.length > 0 ? this.props.fields : tableHeaderItems
     );
 
@@ -337,7 +371,6 @@ class EventsBrowser extends React.Component {
       Link: InlineLink,
     };
 
-    // @ts-expect-error
     return this.props.mount ? (
       <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
@@ -345,25 +378,16 @@ class EventsBrowser extends React.Component {
             <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
                 <h1 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
-                  {
-                    // @ts-expect-error
-                    this.props.headerTitle
-                  }
+                  {this.props.headerTitle}
                 </h1>
                 <span className="flex flex-auto u-marginLeft--more">
                   <SearchForm
                     onSubmit={this.search}
                     text={searchText}
-                    filtersOpen={
-                      // @ts-expect-error
-                      this.state.filtersOpen
-                    }
+                    filtersOpen={this.state.filtersOpen}
                     toggleDropdown={this.toggleFilterDropdown}
                     hasFilters={this.hasFilters}
-                    searchHelpURL={
-                      // @ts-expect-error
-                      this.props.searchHelpURL
-                    }
+                    searchHelpURL={this.props.searchHelpURL}
                   />
                 </span>
               </div>
@@ -375,11 +399,8 @@ class EventsBrowser extends React.Component {
                     onClick={() => {
                       this.renderModal(
                         <ExportEventsModal
-                          // @ts-expect-error
                           searchInputQuery={this.state.searchQuery}
-                          // @ts-expect-error
                           crudFilters={this.state.crudFilters}
-                          // @ts-expect-error
                           dateFilters={this.state.dateFilters}
                         />,
                         "ExportEventsModal"
@@ -392,7 +413,6 @@ class EventsBrowser extends React.Component {
                       this.setState({ exportTooltip: false });
                     }}>
                     <Tooltip
-                      // @ts-expect-error
                       visible={this.state.exportTooltip}
                       text="Export Events"
                       minWidth="120"
@@ -407,10 +427,7 @@ class EventsBrowser extends React.Component {
                     onClick={() => {
                       this.renderModal(
                         <AccessTokensModal
-                          apiTokenHelpURL={
-                            // @ts-expect-error
-                            this.props.apiTokenHelpURL
-                          }
+                          apiTokenHelpURL={this.props.apiTokenHelpURL}
                           closeModal={this.closeModal}
                         />,
                         "AccessTokensModal"
@@ -423,10 +440,7 @@ class EventsBrowser extends React.Component {
                       this.setState({ tokenTooltip: false });
                     }}>
                     <Tooltip
-                      visible={
-                        // @ts-expect-error
-                        this.state.tokenTooltip
-                      }
+                      visible={this.state.tokenTooltip}
                       text="Manage API Tokens"
                       minWidth="150"
                       position="bottom-left"
@@ -440,106 +454,93 @@ class EventsBrowser extends React.Component {
                 <FixedTableHeader items={tableHeaderItems} />
               </div>
             ) : null}
-            {
-              // @ts-expect-error
-              this.props.dataLoading.eventFetchLoading ? (
-                <div className="flex-column flex1 justifyContent--center alignItems--center">
-                  <Loader
-                    size="70"
-                    color={
-                      // @ts-expect-error
-                      this.props.theme === "dark" ? "#ffffff" : "#337AB7"
-                    }
-                  />
-                </div>
-              ) : (
-                <div className="EventsWrapper flex-column flex-1-auto u-overflow--auto">
-                  {currentResults.resultIds.length ? (
-                    currentResults.resultIds.map((eid, i) =>
-                      !isMobileEvents ? (
-                        <EventRow
-                          tableHeaderItems={tableHeaderItems}
-                          key={`${eid}-${i}`}
-                          event={events[eid]}
-                          fields={
-                            // @ts-expect-error
-                            this.props.fields && tableHeaderItems
-                          }
-                          renderers={renderers}
-                          isMobile={isMobileEvents}
-                          index={i}
-                          outputHovered={this.state[`output-${eid}Hovered`]}
-                          displayTooltip={() => {
-                            return;
-                          }}
-                          openModal={() => {
-                            const _event = { ...events[eid] };
-                            delete _event.display;
-                            delete _event.raw;
-                            this.renderModal(<EventModal event={_event} />, "EventModal");
-                          }}
-                        />
-                      ) : (
-                        <MobileEventRow
-                          key={`${eid}-${i}`}
-                          event={events[eid]}
-                          tableHeadersItems={tableHeaderItems}
-                          renderers={renderers}
-                          isMobile={isMobileEvents}
-                          index={i}
-                          outputHovered={this.state[`output-${eid}Hovered`]}
-                          displayTooltip={() => {
-                            return;
-                          }}
-                          openModal={() => {
-                            const _event = { ...events[eid] };
-                            delete _event.display;
-                            delete _event.raw;
-                            this.renderModal(<EventModal event={_event} />, "EventModalMobile");
-                          }}
-                        />
-                      )
+            {this.props.dataLoading.eventFetchLoading ? (
+              <div className="flex-column flex1 justifyContent--center alignItems--center">
+                <Loader size="70" color={this.props.theme === "dark" ? "#ffffff" : "#337AB7"} />
+              </div>
+            ) : (
+              <div className="EventsWrapper flex-column flex-1-auto u-overflow--auto">
+                {currentResults.resultIds.length ? (
+                  currentResults.resultIds.map((eid, i) =>
+                    !isMobileEvents ? (
+                      <EventRow
+                        tableHeaderItems={tableHeaderItems}
+                        key={`${eid}-${i}`}
+                        event={events[eid]}
+                        fields={this.props.fields && tableHeaderItems}
+                        renderers={renderers}
+                        isMobile={isMobileEvents}
+                        index={i}
+                        outputHovered={this.state[`output-${eid}Hovered`]}
+                        displayTooltip={() => {
+                          return;
+                        }}
+                        openModal={() => {
+                          const _event = { ...events[eid] };
+                          delete _event.display;
+                          delete _event.raw;
+                          this.renderModal(<EventModal event={_event} />, "EventModal");
+                        }}
+                      />
+                    ) : (
+                      <MobileEventRow
+                        key={`${eid}-${i}`}
+                        event={events[eid]}
+                        tableHeadersItems={tableHeaderItems}
+                        renderers={renderers}
+                        isMobile={isMobileEvents}
+                        index={i}
+                        outputHovered={this.state[`output-${eid}Hovered`]}
+                        displayTooltip={() => {
+                          return;
+                        }}
+                        openModal={() => {
+                          const _event = { ...events[eid] };
+                          delete _event.display;
+                          delete _event.raw;
+                          this.renderModal(<EventModal event={_event} />, "EventModalMobile");
+                        }}
+                      />
                     )
-                  ) : currentResults.sourceQuery.search_text !== "" ? (
-                    <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
-                      <p
-                        className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large flex alignItems--center"
-                        style={{ gap: "4px" }}>
-                        The query
-                        {currentResults.sourceQuery.search_text ? (
-                          <code>{currentResults.sourceQuery.search_text || "crud:c,u,d"}</code>
-                        ) : (
-                          ` "" `
-                        )}
-                        found no results
-                      </p>
-                      <p className="u-marginTop--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
-                        Try{" "}
-                        <span
-                          className="u-color--curiousBlue u-textDecoration--underlineOnHover"
-                          onClick={this.toggleFilterDropdown}>
-                          adjusting your filters
-                        </span>{" "}
-                        or changing your keyword terms
+                  )
+                ) : currentResults.sourceQuery.search_text !== "" ? (
+                  <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
+                    <p
+                      className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large flex alignItems--center"
+                      style={{ gap: "4px" }}>
+                      The query
+                      {currentResults.sourceQuery.search_text ? (
+                        <code>{currentResults.sourceQuery.search_text || "crud:c,u,d"}</code>
+                      ) : (
+                        ` "" `
+                      )}
+                      found no results
+                    </p>
+                    <p className="u-marginTop--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                      Try{" "}
+                      <span
+                        className="u-color--curiousBlue u-textDecoration--underlineOnHover"
+                        onClick={this.toggleFilterDropdown}>
+                        adjusting your filters
+                      </span>{" "}
+                      or changing your keyword terms
+                    </p>
+                  </div>
+                ) : (
+                  <div className="u-marginTop--more u-textAlign--center flex1 flex-column alignItems--center justifyContent--center">
+                    <div className="flex-auto">
+                      <div className="icon u-eventsEmptyIcon u-marginBottom--normal"></div>
+                      <p className="u-margin--none u-paddingTop--normal u-paddingBottom--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                        No events found
                       </p>
                     </div>
-                  ) : (
-                    <div className="u-marginTop--more u-textAlign--center flex1 flex-column alignItems--center justifyContent--center">
-                      <div className="flex-auto">
-                        <div className="icon u-eventsEmptyIcon u-marginBottom--normal"></div>
-                        <p className="u-margin--none u-paddingTop--normal u-paddingBottom--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
-                          No events found
-                        </p>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )
-            }
+                  </div>
+                )}
+              </div>
+            )}
             <div
               className={`flex flex-auto EventPager ${
                 !currentResults.resultIds.length ||
-                // @ts-expect-error
                 currentResults.resultIds.length < this.state.resultsPerPage
                   ? ""
                   : "has-shadow"
@@ -551,10 +552,7 @@ class EventsBrowser extends React.Component {
                 {this.currentPage() > 0 ? (
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={
-                      // @ts-expect-error
-                      !this.props.dataLoading.eventFetchLoading ? this.prevPage : null
-                    }>
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.prevPage : null}>
                     <span className="icon clickable u-dropdownArrowIcon previous"></span> Newer
                   </p>
                 ) : null}
@@ -584,10 +582,7 @@ class EventsBrowser extends React.Component {
                 {this.currentPage() < this.pageCount() - 1 ? (
                   <p
                     className="u-fontSize--normal u-color--dustyGray u-fontWeight--medium u-lineHeight--normal u-cursor--pointer u-display--inlineBlock"
-                    onClick={
-                      // @ts-expect-error
-                      !this.props.dataLoading.eventFetchLoading ? this.nextPage : null
-                    }>
+                    onClick={!this.props.dataLoading.eventFetchLoading ? this.nextPage : null}>
                     Older <span className="icon clickable u-dropdownArrowIcon next"></span>
                   </p>
                 ) : null}
@@ -596,14 +591,11 @@ class EventsBrowser extends React.Component {
           </div>
         </div>
         <ModalPortal
-          // @ts-expect-error
           isOpen={this.state.isModalOpen}
-          // @ts-expect-error
           name={this.state.activeModal.name}
           closeModal={() => {
             this.closeModal();
           }}
-          // @ts-expect-error
           content={this.state.activeModal.modal}
           ariaHideApp={false}
         />
