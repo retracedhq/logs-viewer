@@ -55,7 +55,7 @@
     "search-query-parser": "1.6.0"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "7.18.6",
+    "@babel/plugin-transform-class-properties": "7.22.5",
     "@babel/plugin-proposal-decorators": "7.23.2",
     "@testing-library/react": "14.0.0",
     "@types/react": "18.2.33",
