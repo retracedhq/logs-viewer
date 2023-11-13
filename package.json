@@ -56,7 +56,7 @@
     "search-query-parser": "1.6.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-class-properties": "7.22.5",
+    "@babel/plugin-transform-class-properties": "7.23.3",
     "@babel/plugin-proposal-decorators": "7.23.3",
     "@typescript-eslint/eslint-plugin": "6.10.0",
     "@typescript-eslint/parser": "6.10.0",
