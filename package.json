@@ -57,7 +57,7 @@
   },
   "devDependencies": {
     "@babel/plugin-transform-class-properties": "7.22.5",
-    "@babel/plugin-proposal-decorators": "7.23.2",
+    "@babel/plugin-proposal-decorators": "7.23.3",
     "@typescript-eslint/eslint-plugin": "6.10.0",
     "@typescript-eslint/parser": "6.10.0",
     "eslint": "8.53.0",
