@@ -52,7 +52,7 @@
     "react-redux": "9.0.4",
     "redux": "5.0.0",
     "redux-actions": "3.0.0",
-    "redux-thunk": "3.0.1",
+    "redux-thunk": "3.1.0",
     "search-query-parser": "1.6.0"
   },
   "devDependencies": {
