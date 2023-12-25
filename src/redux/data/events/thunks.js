@@ -2,7 +2,7 @@ import _ from "lodash";
 import { receiveEventList } from "./actions";
 import { loadingData } from "../../ui/actions";
 
-export function requestEventSearch(query) {
+export function requestEventSearch(query, refreshToken) {
   return async (dispatch, getState) => {
     dispatch(loadingData("eventFetch", true));
     let data;
@@ -83,10 +83,16 @@ export function requestEventSearch(query) {
       dispatch(loadingData("eventFetch", false));
       return null;
     }
-
-    const events = data.data.search.edges.map(({ node }) => node);
-    const cursor = data.data.search.pageInfo.hasPreviousPage && _.last(data.data.search.edges).cursor;
-    dispatch(receiveEventList(query, data.data.search.totalCount, events, cursor));
-    dispatch(loadingData("eventFetch", false));
+    if (data?.data?.search?.edges && Array.isArray(data.data.search.edges)) {
+      const events = data.data.search.edges.map(({ node }) => node);
+      const cursor = data.data.search.pageInfo.hasPreviousPage && _.last(data.data.search.edges).cursor;
+      dispatch(receiveEventList(query, data.data.search.totalCount, events, cursor));
+      dispatch(loadingData("eventFetch", false));
+    } else {
+      dispatch(loadingData("eventFetch", false));
+      if (refreshToken && typeof refreshToken === "function") {
+        refreshToken();
+      }
+    }
   };
 }

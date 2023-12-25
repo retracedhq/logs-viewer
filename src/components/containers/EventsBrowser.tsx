@@ -47,6 +47,7 @@ type EventBrowserProps = {
   tableHeaderItems?: any;
   theme?: string;
   dataLoading?: any;
+  refreshToken?: () => void;
 };
 
 interface EventBrowserState {
@@ -80,6 +81,7 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
   constructor(props) {
     super(props);
     autobind(this);
+
     this.state = {
       resultsPerPage: 20,
       filtersOpen: false,
@@ -155,6 +157,12 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
     this.props.createSession(this.props.auditLogToken, this.props.host);
   }
 
+  handleRefreshToken() {
+    if (typeof this.props.refreshToken === "function") {
+      this.props.refreshToken();
+    }
+  }
+
   componentWillReceiveProps(nextProps) {
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
@@ -199,8 +207,7 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
 
       skipViewLogEvent: this.props.skipViewLogEvent,
     };
-
-    this.props.requestEventSearch(queryObj);
+    this.props.requestEventSearch(queryObj, this.handleRefreshToken);
   }
 
   nextPage() {
@@ -613,8 +620,8 @@ export default connect(
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
   (dispatch: any) => ({
-    requestEventSearch(query) {
-      return dispatch(requestEventSearch(query));
+    requestEventSearch(query, handleRefreshToken) {
+      return dispatch(requestEventSearch(query, handleRefreshToken));
     },
     createSession(token, host) {
       return dispatch(createSession(token, host));
