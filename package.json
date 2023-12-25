@@ -35,7 +35,8 @@
     "build": "vite build",
     "watch": "vite build --watch",
     "test": "vitest run",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src"
+    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "release": "git checkout release && git merge origin/main && release-it && git checkout main && git merge origin/release && git push origin main"
   },
   "peerDependencies": {
     "react": "18.2.0",
@@ -53,19 +54,20 @@
     "redux": "5.0.0",
     "redux-actions": "3.0.0",
     "redux-thunk": "3.1.0",
+    "release-it": "17.0.1",
     "search-query-parser": "1.6.0"
   },
   "devDependencies": {
-    "@babel/plugin-transform-class-properties": "7.23.3",
     "@babel/plugin-proposal-decorators": "7.23.6",
-    "@typescript-eslint/eslint-plugin": "6.15.0",
-    "@typescript-eslint/parser": "6.15.0",
-    "eslint": "8.56.0",
+    "@babel/plugin-transform-class-properties": "7.23.3",
     "@testing-library/react": "14.1.2",
     "@types/react": "18.2.45",
     "@types/react-dom": "18.2.18",
+    "@typescript-eslint/eslint-plugin": "6.15.0",
+    "@typescript-eslint/parser": "6.15.0",
     "@vitejs/plugin-react": "4.2.1",
     "autoprefixer": "10.4.16",
+    "eslint": "8.56.0",
     "jsdom": "23.0.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
