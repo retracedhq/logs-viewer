@@ -119,12 +119,12 @@ jobs:
         run: rm -rf sbom*.* || true
       - name: Download artifact for SPDX Report
         if: github.ref == 'refs/heads/release'
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: sbom.spdx
       - name: Download artifact for CycloneDx Report
         if: github.ref == 'refs/heads/release'
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: sbom.cyclonedx
       - name: ORAS Setup
