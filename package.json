@@ -47,7 +47,7 @@
     "lodash": "4.17.21",
     "prop-types": "15.8.1",
     "react-autobind": "1.0.6",
-    "react-datepicker": "5.1.0",
+    "react-datepicker": "6.0.0",
     "react-markdown": "9.0.1",
     "react-modal": "3.16.1",
     "react-redux": "9.1.0",
