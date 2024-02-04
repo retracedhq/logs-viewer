@@ -6,7 +6,7 @@
   display: inline-block;
   border: 0;
   border-radius: 4px;
-  transition: all .2s;
+  transition: all 0.2s;
   outline: none;
   position: relative;
 
@@ -20,28 +20,27 @@
   }
 
   &.primary {
-    background-color: #2A98CB;
+    background-color: #2a98cb;
     border-width: 1px;
     border-style: solid;
-    border-color: #248BBB;
+    border-color: #248bbb;
     color: #ffffff;
   }
   &.primary:not(:disabled):hover {
-    background-color: #248BBB;
+    background-color: #248bbb;
   }
 
   &.secondary {
     background-color: #ffffff;
     border-width: 1px;
     border-style: solid;
-    border-color: #2A98CB;
-    color: #2A98CB;
+    border-color: #2a98cb;
+    color: #2a98cb;
   }
   &.secondary:not(:disabled):hover {
-    background-color: #248BBB;
+    background-color: #248bbb;
     color: #ffffff;
   }
-
 } // End .Button
 
 .Button.primary.is-disabled,
@@ -49,15 +48,15 @@
 .Button.primary:disabled,
 .Button.primary[disabled] {
   cursor: not-allowed;
-  border-color: #A3D3E9;
+  border-color: #a3d3e9;
   color: #ffffff;
-  background-color: #A3D3E9;
+  background-color: #a3d3e9;
 }
 .Button.secondary.is-disabled,
 .Button.secondary.is-disabled:hover,
 .Button.secondary:disabled,
 .Button.secondary[disabled] {
-  cursor: not-allowed;  
-  color: #A3D3E9;
-  border-color: #A3D3E9;
+  cursor: not-allowed;
+  color: #a3d3e9;
+  border-color: #a3d3e9;
 }

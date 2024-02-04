@@ -135,7 +135,7 @@ export function renderSavedExport(id) {
 }
 
 async function downloadFile(exportResponse) {
-  const data = await exportResponse.blob()
+  const data = await exportResponse.blob();
 
   const anchor = document.createElement("a");
   anchor.href = URL.createObjectURL(data);

@@ -2,14 +2,14 @@
   padding: 20px 20px 18px;
 }
 .EventItem {
-  color: #4A4A4A;
+  color: #4a4a4a;
 }
 .EventItem strong {
   color: #323232;
   font-weight: 600;
 }
 .EventItem a strong {
-  color: #2A98CB;
+  color: #2a98cb;
   font-weight: 500;
 }
 .EventItem p {
@@ -25,7 +25,7 @@
   font-weight: 700;
   color: #ffffff;
   line-height: 1;
-  background-color: #EBB55C;
+  background-color: #ebb55c;
   position: relative;
   top: -3px;
   border-radius: 15px;
@@ -50,7 +50,7 @@
   font-size: 12px;
   font-weight: 500;
   line-height: 37px;
-  color: #2A98CB !important;
+  color: #2a98cb !important;
   background-color: #ffffff;
   z-index: 201;
 }
@@ -60,7 +60,7 @@
   z-index: 201;
 }
 .helpLink {
-  color: #2A98CB !important;
+  color: #2a98cb !important;
   margin: 0 auto;
 }
 
@@ -71,7 +71,7 @@
   top: 100%;
   margin-top: 10px;
   background-color: #ffffff;
-  border: 1px solid #C4C8CA;
+  border: 1px solid #c4c8ca;
   border-radius: 4px;
   padding: 20px 15px 12px;
   left: 0;
@@ -86,8 +86,8 @@
   right: 22px;
   top: -5px;
   background: #ffffff;
-  box-shadow: -1px -1px 0 #C4C8CA;
-  transform: rotate(45deg); 
+  box-shadow: -1px -1px 0 #c4c8ca;
+  transform: rotate(45deg);
 }
 
 .mobile-row .EventItem {
@@ -97,17 +97,17 @@
 .EventPager {
   padding: 20px 0;
   &.has-shadow {
-    box-shadow: 0 -5px 5px -5px rgba(0,0,0,.16);
+    box-shadow: 0 -5px 5px -5px rgba(0, 0, 0, 0.16);
   }
 }
 
 .icon.previous {
   transform: rotate(90deg) translate(-1px, 0);
-  transition: transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 .icon.next {
   transform: rotate(-90deg) translate(0, 0);
-  transition: transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 
 .arrow-wrapper p:hover .icon.next {
