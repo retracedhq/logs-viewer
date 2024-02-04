@@ -1,4 +1,5 @@
-html, body {
+html,
+body {
   display: flex;
   flex-direction: column;
   flex: 1;
@@ -25,7 +26,7 @@ html, body {
 }
 
 .ReactModal__Overlay {
-  background-color: rgba(50,50,50,.4) !important;
+  background-color: rgba(50, 50, 50, 0.4) !important;
 }
 
 // Ace Editor fix
@@ -49,14 +50,20 @@ html, body {
   @import "./utilities/icons.scss";
 
   &.light {
-    h1, h2, h3, h4, h5, h6 {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
       color: #323232;
     }
-    p, span {
-      color: #4A4A4A;
+    p,
+    span {
+      color: #4a4a4a;
     }
     a {
-      color: #2A98CB;
+      color: #2a98cb;
       text-decoration: none;
       &:hover {
         text-decoration: underline;
@@ -68,21 +75,32 @@ html, body {
     }
   }
   &.dark {
-    h1, h2, h3, h4, h5, h6, p, span, a, .EventItem strong,
-    .EventItem p, .date p, .location p {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    a,
+    .EventItem strong,
+    .EventItem p,
+    .date p,
+    .location p {
       color: #ffffff;
     }
     a {
-    text-decoration: underline;
+      text-decoration: underline;
     }
     code {
       color: #323232;
-      background-color: rgba(255,255,255,.8);
+      background-color: rgba(255, 255, 255, 0.8);
     }
 
     .FixedTableHeader-wrapper {
-      background-color: rgba(255,255,255,.2);
-      border-color: #F7F7F7;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-color: #f7f7f7;
 
       p.FixedTableHeader-title {
         color: #fff;
@@ -94,12 +112,12 @@ html, body {
       overflow: hidden;
 
       &:hover {
-        background-color:rgba(248, 248, 248, .2);
+        background-color: rgba(248, 248, 248, 0.2);
       }
     }
 
     .TableRow-wrapper {
-      border-color: #F7F7F7;
+      border-color: #f7f7f7;
     }
 
     .FilterDropdown p {
@@ -114,7 +132,7 @@ html, body {
     .Tooltip-wrapper.tooltip-bottom-left::after {
       border-left: 5px solid transparent;
       border-right: 5px solid transparent;
-      border-bottom: 5px solid rgba(255,255,255,1);
+      border-bottom: 5px solid rgba(255, 255, 255, 1);
     }
 
     .icon.u-dropdownArrowIcon {
@@ -182,13 +200,13 @@ html, body {
     margin-right: -50%;
     transform: translate(-50%, -50%);
     border-radius: 6px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .6);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.6);
     outline: 0;
 
     h1 {
       font-size: 26px;
       padding: 20px 25px;
-      border-bottom: 1px solid #C4C8CA;
+      border-bottom: 1px solid #c4c8ca;
       color: #323232;
     }
     p {

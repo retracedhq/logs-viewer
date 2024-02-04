@@ -2,7 +2,7 @@
   display: block;
   box-sizing: border-box;
   width: 100%;
-  border: 1px solid #C4C8CA;
+  border: 1px solid #c4c8ca;
   border-radius: 4px;
   outline: 0;
   font-size: 14px;
@@ -10,14 +10,14 @@
   line-height: 22px;
   color: #323232;
   padding: 10px 11px 11px;
-  transition: border .2s;
+  transition: border 0.2s;
 }
 .Textarea:active,
 .Textarea:focus {
-  border-color: #248BBB;
+  border-color: #248bbb;
 }
 .Textarea.has-error,
 .Textarea.has-error:focus,
 .Textarea.has-error:active {
-  border-color: #EE5042;
+  border-color: #ee5042;
 }
