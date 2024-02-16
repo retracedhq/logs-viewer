@@ -6,17 +6,17 @@
 
 .TableRow-wrapper {
   width: 100%;
-  border-bottom: 1px solid #C4C8CA;
+  border-bottom: 1px solid #c4c8ca;
 }
 .TableRow-wrapper.selected {
-  background-color: #F8F8F8; 
+  background-color: #f8f8f8;
 }
 .TableRow.mobile-row {
   padding: 12px 20px 10px;
   overflow: hidden;
 
   &:hover {
-    background-color: #F8F8F8;
+    background-color: #f8f8f8;
   }
 }
 .TableRow.mobile-row .TableRow-content {
@@ -39,7 +39,7 @@
   height: 30px;
   right: 0;
   top: 16px;
-  background-color: #C4C8CA;
+  background-color: #c4c8ca;
 }
 .TableRow-content .content-section.status-section {
   padding-top: 6px;
@@ -53,10 +53,10 @@
 }
 
 .TableRow-content .dropdownWrapper .u-dropdownArrowIcon {
-  transition: transform .2s ease-in-out;
+  transition: transform 0.2s ease-in-out;
 }
 .TableRow-content .dropdownWrapper.is-active .u-dropdownArrowIcon {
-  transform: rotate(180deg); 
+  transform: rotate(180deg);
 }
 
 .ellipsis-overflow {
@@ -72,10 +72,10 @@
   }
   .TableRow-content .content-section p {
     font-size: 15px;
-    transition: color .2s ease;
+    transition: color 0.2s ease;
   }
   .TableRow-content .content-section.linked:hover p {
-    color: #337AB7;
+    color: #337ab7;
   }
   .TableRow-content .content-section.button-section {
     padding-top: 16px;

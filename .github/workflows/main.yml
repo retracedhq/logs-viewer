@@ -26,17 +26,19 @@ jobs:
       IMAGE_SUFFIX: ${{ steps.version.outputs.IMAGE_SUFFIX }}
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [20]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           check-latest: true
       - run: npm install
+      - run: npm run check-format
+      - run: npm run lint
       - run: npm run build
       - run: npm run test
       - id: version
@@ -66,7 +68,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check Out Repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - run: echo ${{ needs.ci.outputs.NPM_VERSION }}
       - run: echo ${{ needs.ci.outputs.IMAGE_SUFFIX }}
@@ -158,12 +160,12 @@ jobs:
         node-version: [18.x]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: echo ${{ needs.ci.outputs.NPM_VERSION }}
       - run: echo ${{ needs.ci.outputs.PUBLISH_TAG }}
 
       - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           always-auth: true
           node-version: ${{ matrix.node-version }}

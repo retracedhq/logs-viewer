@@ -1,6 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import autobind from "react-autobind";
+import _ from "lodash";
+
 import { requestEventSearch } from "../../redux/data/events/thunks";
 import { createSession } from "../../redux/data/session/thunks";
 import { clearSession } from "../../redux/data/session/actions";
@@ -25,11 +27,61 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
+type EventBrowserProps = {
+  auditLogToken: string;
+  mount?: boolean;
+  headerTitle?: string;
+  host?: string;
+  apiTokenHelpURL?: string;
+  searchHelpURL?: string;
+  fields?: any[];
+  disableShowRawEvent?: boolean;
+  skipViewLogEvent?: boolean;
+  currentResults?: any;
+  createSession?: any;
+  session?: any;
+  clearSession?: any;
+  requestEventSearch?: any;
+  events?: any;
+  breakpoint?: string;
+  tableHeaderItems?: any;
+  theme?: string;
+  dataLoading?: any;
+  refreshToken?: () => void;
+};
+
+interface EventBrowserState {
+  resultsPerPage: number;
+  filtersOpen: boolean;
+  selectedEventOutput: string;
+  hasFilters: boolean;
+  pageCursors: string[];
+  activeModal: {
+    modal: any;
+    name: string;
+  };
+  isModalOpen: boolean;
+  searchQuery: string;
+  crudFilters: {
+    cChecked: boolean;
+    rChecked: boolean;
+    uChecked: boolean;
+    dChecked: boolean;
+  };
+  dateFilters: {
+    receivedStartDate: string;
+    receivedEndDate: string;
+  };
+  tokenTooltip: boolean;
+  exportTooltip: boolean;
+}
+
 @Resizer(BreakpointConfig)
-class EventsBrowser extends React.Component {
+class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState> {
   constructor(props) {
     super(props);
     autobind(this);
+
     this.state = {
       resultsPerPage: 20,
       filtersOpen: false,
@@ -75,6 +127,7 @@ class EventsBrowser extends React.Component {
       return;
     }
     // Previous page of current query
+
     const pageIndex = this.state.pageCursors.indexOf(next.sourceQuery.cursor);
     if (pageIndex >= 0) {
       this.setState({
@@ -100,7 +153,14 @@ class EventsBrowser extends React.Component {
 
   componentWillMount() {
     // Pass the audit log token and the preferred host (which will be stored in the state)
+
     this.props.createSession(this.props.auditLogToken, this.props.host);
+  }
+
+  handleRefreshToken() {
+    if (typeof this.props.refreshToken === "function") {
+      this.props.refreshToken();
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -111,17 +171,21 @@ class EventsBrowser extends React.Component {
 
   componentWillUpdate(nextProps) {
     // If we have a new token, we need to create a new session
-    if (this.props.auditLogToken != nextProps.auditLogToken) {
+
+    if (this.props.auditLogToken !== nextProps.auditLogToken) {
       this.props.createSession(nextProps.auditLogToken, this.props.host);
     }
     // If we have a new session, we need to request a new event search
-    if (this.props.session.token != nextProps.session.token) {
-      this.submitQuery("", "");
+
+    if (this.props.session.token !== nextProps.session.token) {
+      // use same initial query that the search button would use
+      this.submitQuery("crud:c,u,d", "");
     }
   }
 
   componentWillUnmount() {
     // Clearing the store
+
     this.props.clearSession();
   }
 
@@ -138,9 +202,12 @@ class EventsBrowser extends React.Component {
     const queryObj = {
       search_text: query,
       cursor,
+
       length: this.state.resultsPerPage,
+
+      skipViewLogEvent: this.props.skipViewLogEvent,
     };
-    this.props.requestEventSearch(queryObj);
+    this.props.requestEventSearch(queryObj, this.handleRefreshToken);
   }
 
   nextPage() {
@@ -150,6 +217,7 @@ class EventsBrowser extends React.Component {
   prevPage() {
     this.submitQuery(
       this.props.currentResults.sourceQuery.search_text,
+
       this.state.pageCursors[this.currentPage() - 1]
     );
   }
@@ -176,7 +244,7 @@ class EventsBrowser extends React.Component {
     });
   }
 
-  toggleFitlerDropdown() {
+  toggleFilterDropdown() {
     this.setState({
       filtersOpen: !this.state.filtersOpen,
     });
@@ -272,6 +340,7 @@ class EventsBrowser extends React.Component {
     fields = fields.filter((f) =>
       !Array.isArray(f) && typeof f === "object" ? f.type !== "showEvent" : false
     );
+
     return this.props.disableShowRawEvent
       ? fields.map((f) => {
           return this.processField(f);
@@ -290,32 +359,40 @@ class EventsBrowser extends React.Component {
   }
 
   render() {
-    const { events, currentResults, exportResults, breakpoint, apiTokens } = this.props;
+    const { events, currentResults, breakpoint } = this.props;
+
     let { tableHeaderItems } = this.props;
     tableHeaderItems = this.processFields(
       this.props.fields.length > 0 ? this.props.fields : tableHeaderItems
     );
-    const searchText = currentResults && currentResults.sourceQuery && currentResults.sourceQuery.search_text;
+
+    // regex: strips " crud:*" from search text displayed in search box
+    const searchText =
+      (!_.isEmpty(currentResults.sourceQuery.search_text) &&
+        currentResults.sourceQuery.search_text.replace(/\s?crud:([crud],?)+/g, "")) ||
+      "";
+
     const isMobile = breakpoint === "mobile";
     const isMobileEvents = breakpoint === "mobileEvents";
     const renderers = {
       Link: InlineLink,
     };
+
     return this.props.mount ? (
       <div className="LogsViewer-wrapper u-minHeight--full u-width--full flex-column flex1">
         <div className="u-minHeight--full u-width--full u-overflow--hidden flex-column flex1">
           <div className="flex1 flex-column u-minHeight--full">
             <div className="EventsTable-header flex flex-auto flexWrap--wrap">
               <div className="flex-1-auto flex">
-                <h3 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
+                <h1 data-testid="headerTitle" className="flex-auto u-lineHeight--more u-fontSize--header3">
                   {this.props.headerTitle}
-                </h3>
+                </h1>
                 <span className="flex flex-auto u-marginLeft--more">
                   <SearchForm
                     onSubmit={this.search}
                     text={searchText}
                     filtersOpen={this.state.filtersOpen}
-                    toggleDropdown={this.toggleFitlerDropdown}
+                    toggleDropdown={this.toggleFilterDropdown}
                     hasFilters={this.hasFilters}
                     searchHelpURL={this.props.searchHelpURL}
                   />
@@ -449,18 +526,22 @@ class EventsBrowser extends React.Component {
                   )
                 ) : currentResults.sourceQuery.search_text !== "" ? (
                   <div className="flex1 flex-column u-marginTop--more u-textAlign--center justifyContent--center alignItems--center">
-                    <p className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large">
+                    <p
+                      className="u-margin--none u-paddingTop--normal u-paddingBottom--normal u-fontWeight--medium u-color--dustyGray u-fontSize--large flex alignItems--center"
+                      style={{ gap: "4px" }}>
                       The query
-                      <code className="u-marginLeft--small u-marginRight--small">
-                        {currentResults.sourceQuery.search_text}
-                      </code>
+                      {currentResults.sourceQuery.search_text ? (
+                        <code>{currentResults.sourceQuery.search_text || "crud:c,u,d"}</code>
+                      ) : (
+                        ` "" `
+                      )}
                       found no results
                     </p>
                     <p className="u-marginTop--more u-fontWeight--medium u-color--dustyGray u-fontSize--large">
                       Try{" "}
                       <span
                         className="u-color--curiousBlue u-textDecoration--underlineOnHover"
-                        onClick={this.toggleFitlerDropdown}>
+                        onClick={this.toggleFilterDropdown}>
                         adjusting your filters
                       </span>{" "}
                       or changing your keyword terms
@@ -545,16 +626,16 @@ class EventsBrowser extends React.Component {
 }
 
 export default connect(
-  (state) => ({
+  (state: any) => ({
     session: state.data.sessionData.session,
     events: state.data.eventsData.byId,
     currentResults: state.data.eventsData.latestServerResults,
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
-  (dispatch) => ({
-    requestEventSearch(query) {
-      return dispatch(requestEventSearch(query));
+  (dispatch: any) => ({
+    requestEventSearch(query, handleRefreshToken) {
+      return dispatch(requestEventSearch(query, handleRefreshToken));
     },
     createSession(token, host) {
       return dispatch(createSession(token, host));

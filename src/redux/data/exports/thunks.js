@@ -82,12 +82,19 @@ export function createSavedExport(query, filters, dates, name) {
       }
 
       const exportResult = await exportResponse.json();
-      const encodedJwt = encodeURIComponent(jwt);
 
       dispatch(fetchSavedExports());
 
-      const downloadUrl = `${host}/project/${projectId}/export/${exportResult.id}/rendered?jwt=${encodedJwt}`;
-      window.location = downloadUrl;
+      const downloadUrl = `${host}/project/${projectId}/export/${exportResult.id}/rendered`;
+      const renderedResponse = await fetch(downloadUrl, {
+        method: "GET",
+        headers: {
+          Authorization: jwt,
+          Accept: "text/csv",
+        },
+      });
+
+      await downloadFile(renderedResponse);
 
       dispatch(loadingData("exportCSVLoading", false));
 
@@ -110,12 +117,40 @@ export function renderSavedExport(id) {
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
     const host = state.data.sessionData.host;
-    const encodedJwt = encodeURIComponent(jwt);
 
-    const downloadUrl = `${host}/project/${projectId}/export/${id}/rendered?jwt=${encodedJwt}`;
-    window.location = downloadUrl;
+    const downloadUrl = `${host}/project/${projectId}/export/${id}/rendered`;
+    const renderedResponse = await fetch(downloadUrl, {
+      method: "GET",
+      headers: {
+        Authorization: jwt,
+        Accept: "text/csv",
+      },
+    });
+
+    await downloadFile(renderedResponse);
 
     //dispatch(setIsLoading(false));
     //dispatch(addNewSavedExport(result));
   };
+}
+
+async function downloadFile(exportResponse) {
+  const data = await exportResponse.blob();
+
+  const anchor = document.createElement("a");
+  anchor.href = URL.createObjectURL(data);
+
+  const filename = exportResponse.headers.get("Content-Disposition")?.split("filename=")[1] || "export.csv";
+  anchor.download = removeQuotes(filename);
+  anchor.style.display = "none";
+  document.body.appendChild(anchor);
+
+  // Trigger the download and clean up
+  anchor.click();
+  URL.revokeObjectURL(anchor.href);
+  document.body.removeChild(anchor);
+}
+
+function removeQuotes(str) {
+  return str.replace(/^['"]+|['"]+$/g, "");
 }
