@@ -62,7 +62,7 @@
     "@babel/plugin-proposal-decorators": "7.24.0",
     "@babel/plugin-transform-class-properties": "7.23.3",
     "@testing-library/react": "14.2.1",
-    "@types/react": "18.2.61",
+    "@types/react": "18.2.62",
     "@types/react-dom": "18.2.19",
     "@typescript-eslint/eslint-plugin": "7.1.0",
     "@typescript-eslint/parser": "7.1.0",
