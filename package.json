@@ -74,7 +74,7 @@
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "release-it": "17.2.0",
-    "sass": "1.74.1",
+    "sass": "1.75.0",
     "typescript": "5.4.5",
     "vite": "5.2.8",
     "vite-plugin-css-injected-by-js": "3.5.0",
