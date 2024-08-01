@@ -78,7 +78,7 @@
     "typescript": "5.5.4",
     "vite": "5.3.5",
     "vite-plugin-css-injected-by-js": "3.5.1",
-    "vitest": "2.0.4",
+    "vitest": "2.0.5",
     "vitest-fetch-mock": "0.3.0"
   },
   "bugs": {
