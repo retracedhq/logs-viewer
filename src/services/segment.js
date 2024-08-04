@@ -1,7 +1,9 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-expressions
 !(function () {
   var analytics = (window.analytics = window.analytics || []);
   if (!analytics.initialize)
     if (analytics.invoked)
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
       window.console && console.error && console.error("Segment snippet included twice.");
     else {
       analytics.invoked = !0;
