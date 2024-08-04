@@ -6,6 +6,7 @@ export function DB(persist) {
     window.localStorage.setItem("replicated.vendor.test", "test");
     window.localStorage.removeItem("replicated.vendor.test");
     this.store = persist ? window.localStorage : window.sessionStorage;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
   } catch (exc) {
     // private browsing?
     this.store = CookieStore;

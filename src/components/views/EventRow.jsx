@@ -47,6 +47,7 @@ export default class EventRow extends React.Component {
       } else {
         return this.getFieldValue(this.props.event, item.field);
       }
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (ex) {
       return "";
     }
