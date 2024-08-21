@@ -35,7 +35,7 @@
     "build": "vite build",
     "watch": "vite build --watch",
     "test": "vitest run",
-    "lint": "eslint --ext .js,.jsx,.ts,.tsx src",
+    "lint": "eslint -c eslint.config.mjs src",
     "check-format": "prettier --check .",
     "format": "prettier --write .",
     "release": "git checkout main && git pull && git checkout release && git merge origin/main && release-it && git checkout main && git merge origin/release && git push origin main"
@@ -68,7 +68,8 @@
     "@typescript-eslint/parser": "8.2.0",
     "@vitejs/plugin-react": "4.3.1",
     "autoprefixer": "10.4.20",
-    "eslint": "8.57.0",
+    "eslint": "9.9.0",
+    "globals": "15.9.0",
     "jsdom": "24.1.1",
     "prettier": "3.3.3",
     "react": "18.3.1",
