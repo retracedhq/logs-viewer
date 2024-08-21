@@ -8,10 +8,10 @@ updates:
     groups:
       typescript-eslint:
         patterns:
-          - '@typescript-eslint/*'
+          - "@typescript-eslint/*"
       babel:
         patterns:
-          - '@babel/*'
+          - "@babel/*"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
