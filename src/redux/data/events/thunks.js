@@ -54,6 +54,14 @@ export function requestEventSearch(query, refreshToken) {
                     display {
                       markdown
                     }
+                    fields {
+                      key
+                      value
+                    }
+                    metadata {
+                      key
+                      value
+                    }
                     is_failure
                     is_anonymous
                     source_ip
