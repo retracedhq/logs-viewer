@@ -2,7 +2,11 @@ import _ from "lodash";
 import { receiveEventList } from "./actions";
 import { loadingData } from "../../ui/actions";
 
-export function requestEventSearch(query, refreshToken) {
+function getObjFromKeyValArray(arr) {
+  return arr?.reduce((acc, cur) => ({ ...acc, [cur.key]: cur.value }), {});
+}
+
+export function requestEventSearch(query, refreshToken, toggleDisplay) {
   return async (dispatch, getState) => {
     dispatch(loadingData("eventFetch", true));
     let data;
@@ -54,6 +58,22 @@ export function requestEventSearch(query, refreshToken) {
                     display {
                       markdown
                     }
+                    ${
+                      toggleDisplay?.fields
+                        ? `fields{
+                      key
+                      value
+                    }`
+                        : ""
+                    }
+                    ${
+                      toggleDisplay?.metadata
+                        ? `metadata{
+                      key
+                      value
+                    }`
+                        : ""
+                    }
                     is_failure
                     is_anonymous
                     source_ip
@@ -84,7 +104,11 @@ export function requestEventSearch(query, refreshToken) {
       return null;
     }
     if (data?.data?.search?.edges && Array.isArray(data.data.search.edges)) {
-      const events = data.data.search.edges.map(({ node }) => node);
+      const events = data.data.search.edges.map(({ node }) => ({
+        ...node,
+        fields: getObjFromKeyValArray(node.fields),
+        metadata: getObjFromKeyValArray(node.metadata),
+      }));
       const cursor = data.data.search.pageInfo.hasPreviousPage && _.last(data.data.search.edges).cursor;
       dispatch(receiveEventList(query, data.data.search.totalCount, events, cursor));
       dispatch(loadingData("eventFetch", false));

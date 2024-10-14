@@ -27,7 +27,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-type EventBrowserProps = {
+export type EventBrowserProps = {
   auditLogToken: string;
   mount?: boolean;
   headerTitle?: string;
@@ -48,6 +48,10 @@ type EventBrowserProps = {
   theme?: string;
   dataLoading?: any;
   refreshToken?: () => void;
+  toggleDisplay?: {
+    fields?: boolean;
+    metadata?: boolean;
+  };
 };
 
 interface EventBrowserState {
@@ -619,9 +623,9 @@ export default connect(
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
   }),
-  (dispatch: any) => ({
+  (dispatch: any, ownProps: EventBrowserProps) => ({
     requestEventSearch(query, handleRefreshToken) {
-      return dispatch(requestEventSearch(query, handleRefreshToken));
+      return dispatch(requestEventSearch(query, handleRefreshToken, ownProps.toggleDisplay));
     },
     createSession(token, host) {
       return dispatch(createSession(token, host));
