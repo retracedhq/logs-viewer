@@ -28,7 +28,7 @@ type RetracedEventsBrowserProps = {
   toggleDisplay?: {
     fields?: boolean;
     metadata?: boolean;
-  }
+  };
 };
 
 const store = configStore();
