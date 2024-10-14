@@ -25,6 +25,10 @@ type RetracedEventsBrowserProps = {
   fields?: EventField[];
   skipViewLogEvent?: boolean;
   refreshToken?: () => void;
+  toggleDisplay?: {
+    fields?: boolean;
+    metadata?: boolean;
+  }
 };
 
 const store = configStore();
@@ -48,6 +52,7 @@ export default class RetracedEventsBrowser extends React.Component<RetracedEvent
             disableShowRawEvent={this.props.disableShowRawEvent}
             skipViewLogEvent={this.props.skipViewLogEvent}
             refreshToken={this.props.refreshToken}
+            toggleDisplay={this.props.toggleDisplay}
           />
         </Provider>
       </div>

@@ -75,6 +75,7 @@ const LogsViewerWrapper = (props) => {
       disableShowRawEvent={props.disableShowRawEvent ? props.disableShowRawEvent : false}
       skipViewLogEvent={true}
       refreshToken={fetchToken}
+      toggleDisplay={{ fields: true, metadata: true }}
     />
   );
 };
