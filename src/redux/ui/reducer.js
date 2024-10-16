@@ -1,14 +1,5 @@
-import dayjs from "dayjs";
+// import dayjs from "dayjs";
 import { constants } from "./actions";
-
-const modalState = {};
-
-export function modalData(state = modalState, action = {}) {
-  switch (action.type) {
-    default:
-      return state;
-  }
-}
 
 const loadingState = {
   eventFetchLoading: false,
@@ -28,25 +19,25 @@ export function loadingData(state = loadingState, action = {}) {
   }
 }
 
-const filterState = {
-  timerange: {
-    start: dayjs().startOf("day").valueOf(),
-    end: dayjs().endOf("day").valueOf(),
-  },
-  crud: "cud",
-};
+// const filterState = {
+//   timerange: {
+//     start: dayjs().startOf("day").valueOf(),
+//     end: dayjs().endOf("day").valueOf(),
+//   },
+//   crud: "cud",
+// };
 
-export function filterData(state = filterState, action = {}) {
-  switch (action.type) {
-    case constants.TIME_FILTER:
-      return Object.assign({}, state, {
-        timerange: action.payload.timerange,
-      });
-    case constants.CRUD_FILTER:
-      return Object.assign({}, state, {
-        crud: action.payload.crud,
-      });
-    default:
-      return state;
-  }
-}
+// export function filterData(state = filterState, action = {}) {
+//   switch (action.type) {
+//     case constants.TIME_FILTER:
+//       return Object.assign({}, state, {
+//         timerange: action.payload.timerange,
+//       });
+//     case constants.CRUD_FILTER:
+//       return Object.assign({}, state, {
+//         crud: action.payload.crud,
+//       });
+//     default:
+//       return state;
+//   }
+// }
