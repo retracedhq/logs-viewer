@@ -19,8 +19,6 @@ const rootReducer = (state, action) => {
 
 // Global store instance
 export function configStore() {
-  const hasExtension = window.devToolsExtension;
-
   return createStore(
     rootReducer,
     compose(
