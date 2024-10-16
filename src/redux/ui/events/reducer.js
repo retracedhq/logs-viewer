@@ -1,3 +1,5 @@
+import { constants } from "./actions";
+
 const initialState = {
   eventTableHeaderItems: [
     {
@@ -14,10 +16,14 @@ const initialState = {
       field: "source_ip",
     },
   ],
+  // keep cursor in state to refetch the just requested page that failed due to token expiry
+  cursor: "",
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
+    case constants.STORE_CURSOR:
+      return action.payload.cursor;
     default:
       return state;
   }

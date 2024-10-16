@@ -52,6 +52,7 @@ export type EventBrowserProps = {
     fields?: boolean;
     metadata?: boolean;
   };
+  cursor: string;
 };
 
 interface EventBrowserState {
@@ -155,10 +156,18 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
     return this.currentPage() * this.state.resultsPerPage;
   }
 
-  componentWillMount() {
-    // Pass the audit log token and the preferred host (which will be stored in the state)
-
+  componentDidMount() {
     this.props.createSession(this.props.auditLogToken, this.props.host);
+    // this.submitQuery("crud:c,u,d", "");
+  }
+
+  componentDidUpdate(prevProps: Readonly<EventBrowserProps>) {
+    if (this.props.session.token !== prevProps.session.token) {
+      this.submitQuery(
+        this.props.currentResults.sourceQuery.search_text ?? "crud:c,u,d",
+        this.props.cursor ?? ""
+      );
+    }
   }
 
   handleRefreshToken() {
@@ -167,23 +176,17 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.currentResults !== nextProps.currentResults) {
       this.onEventsChange(this.props.currentResults, nextProps.currentResults);
     }
   }
 
-  componentWillUpdate(nextProps) {
+  UNSAFE_componentWillUpdate(nextProps) {
     // If we have a new token, we need to create a new session
 
     if (this.props.auditLogToken !== nextProps.auditLogToken) {
       this.props.createSession(nextProps.auditLogToken, this.props.host);
-    }
-    // If we have a new session, we need to request a new event search
-
-    if (this.props.session.token !== nextProps.session.token) {
-      // use same initial query that the search button would use
-      this.submitQuery("crud:c,u,d", "");
     }
   }
 
@@ -622,6 +625,7 @@ export default connect(
     currentResults: state.data.eventsData.latestServerResults,
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
+    cursor: state.ui.eventsUiData.cursor,
   }),
   (dispatch: any, ownProps: EventBrowserProps) => ({
     requestEventSearch(query, handleRefreshToken) {
