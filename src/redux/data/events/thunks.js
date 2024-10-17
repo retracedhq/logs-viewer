@@ -114,6 +114,7 @@ export function requestEventSearch(query, refreshToken, toggleDisplay) {
       dispatch(receiveEventList(query, data.data.search.totalCount, events, cursor));
       dispatch(loadingData("eventFetch", false));
     } else {
+      // token expired store cursor and query,then refresh token
       dispatch(loadingData("eventFetch", false));
       dispatch(storeCursor(query.cursor));
       if (refreshToken && typeof refreshToken === "function") {
