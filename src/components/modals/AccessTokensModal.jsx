@@ -27,7 +27,7 @@ class AccessTokensModal extends React.Component {
     };
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.fetchEitapiTokensList();
   }
 
