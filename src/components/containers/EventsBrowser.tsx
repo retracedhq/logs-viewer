@@ -52,7 +52,7 @@ export type EventBrowserProps = {
     fields?: boolean;
     metadata?: boolean;
   };
-  cursor: string;
+  cursor?: string;
 };
 
 interface EventBrowserState {
