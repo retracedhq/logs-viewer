@@ -53,7 +53,7 @@ export default class SearchForm extends React.Component {
   };
 
   handleCrudFilterChange(field, e) {
-    let newCrudFilters = this.state.crudFiltersArray;
+    let newCrudFilters = [...this.state.crudFiltersArray];
     if (!newCrudFilters.includes(field)) {
       newCrudFilters.push(field);
     } else {
