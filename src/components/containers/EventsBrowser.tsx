@@ -53,6 +53,7 @@ export type EventBrowserProps = {
     metadata?: boolean;
   };
   cursor?: string;
+  searchText?: string;
 };
 
 interface EventBrowserState {
@@ -162,10 +163,7 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
 
   componentDidUpdate(prevProps: Readonly<EventBrowserProps>) {
     if (this.props.session.token !== prevProps.session.token) {
-      this.submitQuery(
-        this.props.currentResults.sourceQuery.search_text ?? "crud:c,u,d",
-        this.props.cursor ?? ""
-      );
+      this.submitQuery(this.props.searchText ?? "crud:c,u,d", this.props.cursor ?? "");
     }
 
     if (this.props.auditLogToken !== prevProps.auditLogToken) {
@@ -620,6 +618,7 @@ export default connect(
     dataLoading: state.ui.loadingData,
     tableHeaderItems: state.ui.eventsUiData.eventTableHeaderItems,
     cursor: state.ui.eventsUiData.cursor,
+    searchText: state.ui.eventsUiData.searchText,
   }),
   (dispatch: any, ownProps: EventBrowserProps) => ({
     requestEventSearch(query, handleRefreshToken) {

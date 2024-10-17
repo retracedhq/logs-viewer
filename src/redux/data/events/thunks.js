@@ -1,7 +1,7 @@
 import _ from "lodash";
 import { receiveEventList } from "./actions";
 import { loadingData } from "../../ui/actions";
-import { storeCursor } from "../../ui/events/actions";
+import { storeCursor, storeSearchText } from "../../ui/events/actions";
 
 function getObjFromKeyValArray(arr) {
   return arr?.reduce((acc, cur) => ({ ...acc, [cur.key]: cur.value }), {});
@@ -117,6 +117,7 @@ export function requestEventSearch(query, refreshToken, toggleDisplay) {
       // token expired store cursor and query,then refresh token
       dispatch(loadingData("eventFetch", false));
       dispatch(storeCursor(query.cursor));
+      dispatch(storeSearchText(query.search_text));
       if (refreshToken && typeof refreshToken === "function") {
         refreshToken();
       }
