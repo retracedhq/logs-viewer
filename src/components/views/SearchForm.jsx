@@ -24,25 +24,31 @@ function getDateFormatString(lang = "default") {
     .join("");
 }
 
+const initialState = {
+  query: "",
+  receivedStartDate: null,
+  receivedEndDate: null,
+  searchQuery: "",
+  crudFiltersArray: ["c", "u", "d"],
+  crudFilters: {
+    cChecked: true,
+    rChecked: false,
+    uChecked: true,
+    dChecked: true,
+  },
+  isDefault: true,
+};
+
 export default class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
     this.dateFormatString = getDateFormatString();
-    this.state = {
-      query: "",
-      receivedStartDate: null,
-      receivedEndDate: null,
-      searchQuery: "",
-      crudFiltersArray: ["c", "u", "d"],
-      crudFilters: {
-        cChecked: true,
-        rChecked: false,
-        uChecked: true,
-        dChecked: true,
-      },
-      isDefault: true,
-    };
+    this.state = initialState;
+  }
+
+  setInitialState() {
+    this.setState(initialState);
   }
 
   onChange = (e) => {
