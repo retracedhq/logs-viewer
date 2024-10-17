@@ -158,7 +158,6 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
 
   componentDidMount() {
     this.props.createSession(this.props.auditLogToken, this.props.host);
-    // this.submitQuery("crud:c,u,d", "");
   }
 
   componentDidUpdate(prevProps: Readonly<EventBrowserProps>) {
@@ -167,6 +166,10 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
         this.props.currentResults.sourceQuery.search_text ?? "crud:c,u,d",
         this.props.cursor ?? ""
       );
+    }
+
+    if (this.props.auditLogToken !== prevProps.auditLogToken) {
+      this.props.createSession(this.props.auditLogToken, this.props.host);
     }
   }
 
@@ -182,17 +185,8 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
     }
   }
 
-  UNSAFE_componentWillUpdate(nextProps) {
-    // If we have a new token, we need to create a new session
-
-    if (this.props.auditLogToken !== nextProps.auditLogToken) {
-      this.props.createSession(nextProps.auditLogToken, this.props.host);
-    }
-  }
-
   componentWillUnmount() {
     // Clearing the store
-
     this.props.clearSession();
   }
 
