@@ -23,7 +23,7 @@ const initialState = {
 export default (state = initialState, action) => {
   switch (action.type) {
     case constants.STORE_CURSOR:
-      return action.payload.cursor;
+      return { ...state, cursor: action.payload.cursor };
     default:
       return state;
   }
