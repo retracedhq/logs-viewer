@@ -29,6 +29,20 @@ export default class SearchForm extends React.Component {
     super(props);
     autoBind(this);
     this.dateFormatString = getDateFormatString();
+    this.state = {
+      query: "",
+      receivedStartDate: null,
+      receivedEndDate: null,
+      searchQuery: "",
+      crudFiltersArray: ["c", "u", "d"],
+      crudFilters: {
+        cChecked: true,
+        rChecked: false,
+        uChecked: true,
+        dChecked: true,
+      },
+      isDefault: true,
+    };
   }
 
   onChange = (e) => {
@@ -72,25 +86,7 @@ export default class SearchForm extends React.Component {
     });
   }
 
-  setInitialState() {
-    this.setState({
-      query: "",
-      receivedStartDate: null,
-      receivedEndDate: null,
-      searchQuery: "",
-      crudFiltersArray: ["c", "u", "d"],
-      crudFilters: {
-        cChecked: true,
-        rChecked: false,
-        uChecked: true,
-        dChecked: true,
-      },
-      isDefault: true,
-    });
-  }
-
   componentDidMount() {
-    this.setInitialState();
     this.props.hasFilters(this.state);
   }
 
