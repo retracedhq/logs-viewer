@@ -140,7 +140,7 @@ export default class SearchForm extends React.Component {
               <input
                 type="text"
                 data-testid={`search-events`}
-                defaultValue={this.props.text}
+                value={this.state.searchQuery}
                 className="Input SearchEvents"
                 onChange={this.onChange}
                 placeholder="Search events"
