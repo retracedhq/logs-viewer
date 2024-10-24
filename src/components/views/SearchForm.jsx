@@ -24,11 +24,31 @@ function getDateFormatString(lang = "default") {
     .join("");
 }
 
+const initialState = {
+  query: "",
+  receivedStartDate: null,
+  receivedEndDate: null,
+  searchQuery: "",
+  crudFiltersArray: ["c", "u", "d"],
+  crudFilters: {
+    cChecked: true,
+    rChecked: false,
+    uChecked: true,
+    dChecked: true,
+  },
+  isDefault: true,
+};
+
 export default class SearchForm extends React.Component {
   constructor(props) {
     super(props);
     autoBind(this);
     this.dateFormatString = getDateFormatString();
+    this.state = initialState;
+  }
+
+  setInitialState() {
+    this.setState(initialState);
   }
 
   onChange = (e) => {
@@ -39,7 +59,7 @@ export default class SearchForm extends React.Component {
   };
 
   handleCrudFilterChange(field, e) {
-    let newCrudFilters = this.state.crudFiltersArray;
+    let newCrudFilters = [...this.state.crudFiltersArray];
     if (!newCrudFilters.includes(field)) {
       newCrudFilters.push(field);
     } else {
@@ -72,25 +92,7 @@ export default class SearchForm extends React.Component {
     });
   }
 
-  setInitialState() {
-    this.setState({
-      query: "",
-      receivedStartDate: null,
-      receivedEndDate: null,
-      searchQuery: "",
-      crudFiltersArray: ["c", "u", "d"],
-      crudFilters: {
-        cChecked: true,
-        rChecked: false,
-        uChecked: true,
-        dChecked: true,
-      },
-      isDefault: true,
-    });
-  }
-
   componentDidMount() {
-    this.setInitialState();
     this.props.hasFilters(this.state);
   }
 
@@ -144,7 +146,7 @@ export default class SearchForm extends React.Component {
               <input
                 type="text"
                 data-testid={`search-events`}
-                defaultValue={this.props.text}
+                value={this.state.searchQuery}
                 className="Input SearchEvents"
                 onChange={this.onChange}
                 placeholder="Search events"

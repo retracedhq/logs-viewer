@@ -26,7 +26,7 @@ class ExportEventsModal extends React.Component {
     }
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     this.props.fetchSavedExports();
   }
 
