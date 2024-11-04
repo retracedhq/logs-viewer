@@ -19,10 +19,13 @@ const rootReducer = (state, action) => {
 
 // Global store instance
 export function configStore() {
-  const hasExtension = window.devToolsExtension;
+  const middleware = [thunk];
+  let enhancers = [applyMiddleware(...middleware)];
 
-  return createStore(
-    rootReducer,
-    compose(applyMiddleware(thunk), hasExtension ? window.devToolsExtension() : (f) => f)
-  );
+  // Add Redux DevTools extension only if running in a browser environment
+  if (typeof window !== "undefined" && window.__REDUX_DEVTOOLS_EXTENSION__) {
+    enhancers.push(window.__REDUX_DEVTOOLS_EXTENSION__());
+  }
+
+  return createStore(rootReducer, compose(...enhancers));
 }
