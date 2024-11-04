@@ -198,7 +198,6 @@ class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState
   }
 
   submitQuery(query, cursor) {
-    // console.log(`submitQuery called with query:${query}, cursor: ${cursor}`);
     const queryObj = {
       search_text: query,
       cursor,
