@@ -32,30 +32,42 @@ type RetracedEventsBrowserProps = {
 };
 
 const store = configStore();
-export default class RetracedEventsBrowser extends React.Component<RetracedEventsBrowserProps> {
-  render() {
-    return (
-      <div
-        id="retracedLogsViewerApp"
-        className={`retraced-logs-viewer-app u-minHeight--full ${this.props.customClass || ""} ${
-          this.props.theme || ""
-        }`}>
-        <Provider store={store}>
-          <EventsBrowser
-            auditLogToken={this.props.auditLogToken}
-            mount={this.props.mount === false ? false : true}
-            headerTitle={this.props.header || "Events"}
-            host={this.props.host || "http://localhost:3000/auditlog/viewer/v1"}
-            apiTokenHelpURL={"https://boxyhq.com/docs/retraced/apis/enterprise-api"}
-            searchHelpURL={"https://boxyhq.com/docs/retraced/apis/graphql#search"}
-            fields={this.props.fields || []}
-            disableShowRawEvent={this.props.disableShowRawEvent}
-            skipViewLogEvent={this.props.skipViewLogEvent}
-            refreshToken={this.props.refreshToken}
-            toggleDisplay={this.props.toggleDisplay}
-          />
-        </Provider>
-      </div>
-    );
-  }
-}
+
+const RetracedEventsBrowser: React.FC<RetracedEventsBrowserProps> = ({
+  auditLogToken,
+  theme,
+  customClass,
+  host = "http://localhost:3000/auditlog/viewer/v1",
+  header = "Events",
+  mount = true,
+  disableShowRawEvent,
+  fields = [],
+  skipViewLogEvent,
+  refreshToken,
+  toggleDisplay,
+}) => {
+  return (
+    <div
+      id="retracedLogsViewerApp"
+      className={`retraced-logs-viewer-app u-minHeight--full ${customClass || ""} ${theme || ""}`}
+    >
+      <Provider store={store}>
+        <EventsBrowser
+          auditLogToken={auditLogToken}
+          mount={mount}
+          headerTitle={header}
+          host={host}
+          apiTokenHelpURL={"https://boxyhq.com/docs/retraced/apis/enterprise-api"}
+          searchHelpURL={"https://boxyhq.com/docs/retraced/apis/graphql#search"}
+          fields={fields}
+          disableShowRawEvent={disableShowRawEvent}
+          skipViewLogEvent={skipViewLogEvent}
+          refreshToken={refreshToken}
+          toggleDisplay={toggleDisplay}
+        />
+      </Provider>
+    </div>
+  );
+};
+
+export default RetracedEventsBrowser;

@@ -1,36 +1,29 @@
-import React from "react";
-import autoBind from "react-autobind";
 import Modal from "react-modal";
 
-export default class ModalPortal extends React.Component {
-  constructor() {
-    super();
-    autoBind(this);
-  }
+const ModalPortal = ({ isOpen, name, closeModal, content }) => {
+  
+  const generateClassNames = () => ({
+    base: `retraced-logs-viewer-app retracedModal ${name}`,
+    afterOpen: `${name}_after-open`,
+    beforeClose: `${name}_before-close`,
+  });
 
-  generateClassNames() {
-    return {
-      base: "retraced-logs-viewer-app retracedModal " + this.props.name,
-      afterOpen: this.props.name + "_after-open",
-      beforeClose: this.props.name + "_before-close",
-    };
-  }
+  return (
+    <div>
+      <Modal
+        isOpen={isOpen}
+        className={generateClassNames()}
+        contentLabel={name}
+        onRequestClose={closeModal}
+        ariaHideApp={false}
+      >
+        {content}
+        <button className="icon u-closeIcon" onClick={closeModal}>
+          Close
+        </button>
+      </Modal>
+    </div>
+  );
+};
 
-  render() {
-    return (
-      <div>
-        <Modal
-          isOpen={this.props.isOpen}
-          className={this.generateClassNames()}
-          contentLabel={this.props.name}
-          onRequestClose={this.props.closeModal}
-          ariaHideApp={false}>
-          {this.props.content}
-          <button className="icon u-closeIcon" onClick={this.props.closeModal}>
-            Close
-          </button>
-        </Modal>
-      </div>
-    );
-  }
-}
+export default ModalPortal;

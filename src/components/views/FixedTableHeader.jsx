@@ -1,8 +1,5 @@
-import React from "react";
-
-export default class FixedTableHeader extends React.Component {
-  render() {
-    const { className, items } = this.props;
+const FixedTableHeader = (props) => {
+    const { className, items } = props;
 
     const renderItem = (item, i) => {
       const label = typeof item.label === "string" ? item.label : "";
@@ -26,5 +23,6 @@ export default class FixedTableHeader extends React.Component {
         </div>
       </div>
     );
-  }
 }
+
+export default FixedTableHeader;
