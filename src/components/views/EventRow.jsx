@@ -4,7 +4,7 @@ import Tooltip from "../shared/Tooltip";
 
 const EventRow = ({ event, fields, renderers, openModal }) => {
   const [eventInfoToken, setEventInfoToken] = useState(false);
-  
+
   const getFieldValue = (object, selector) => {
     if (!selector || typeof selector !== "string") {
       return "";

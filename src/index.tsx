@@ -49,8 +49,7 @@ const RetracedEventsBrowser: React.FC<RetracedEventsBrowserProps> = ({
   return (
     <div
       id="retracedLogsViewerApp"
-      className={`retraced-logs-viewer-app u-minHeight--full ${customClass || ""} ${theme || ""}`}
-    >
+      className={`retraced-logs-viewer-app u-minHeight--full ${customClass || ""} ${theme || ""}`}>
       <Provider store={store}>
         <EventsBrowser
           auditLogToken={auditLogToken}

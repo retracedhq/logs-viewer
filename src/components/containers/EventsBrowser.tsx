@@ -82,7 +82,6 @@ interface EventBrowserState {
   exportTooltip: boolean;
 }
 
-@Resizer(BreakpointConfig)
 class EventsBrowser extends React.Component<EventBrowserProps, EventBrowserState> {
   constructor(props) {
     super(props);
@@ -631,4 +630,4 @@ export default connect(
       return dispatch(clearSession());
     },
   })
-)(EventsBrowser);
+)(Resizer(BreakpointConfig)(EventsBrowser));

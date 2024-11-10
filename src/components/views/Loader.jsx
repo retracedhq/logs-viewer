@@ -13,8 +13,7 @@ const Loader = ({ className = "", color = "#337AB7", displayBlock = false, size 
         width={`${size}px`}
         height={`${size}px`}
         viewBox="0 0 40 40"
-        enableBackground="new 0 0 40 40"
-      >
+        enableBackground="new 0 0 40 40">
         <path
           opacity="0.2"
           fill={color}
@@ -26,8 +25,7 @@ const Loader = ({ className = "", color = "#337AB7", displayBlock = false, size 
           dangerouslySetInnerHTML={{
             __html:
               '<animateTransform attributeName="transform" type="rotate" from="0 20 20" to="360 20 20" dur="0.5s" repeatCount="indefinite" />',
-          }}
-        ></path>
+          }}></path>
       </svg>
     </div>
   );

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import _ from "lodash";
-const handlers: any[] = [];
+
+const handlers: Array<() => void> = [];
 
 function defferedHandlerCaller() {
   handlers.forEach((handle) => {
@@ -11,7 +12,7 @@ function defferedHandlerCaller() {
 }
 
 type Config = {
-  onResize: any;
+  onResize: (window: Window) => object;
   debounce: number;
 };
 
@@ -19,16 +20,11 @@ export function Resizer(config: Config) {
   const { onResize, debounce } = config || {};
   const debounceTime = debounce || 500;
 
-  return function decorateClass(DecoratedComponent) {
-    return class Resize extends React.Component {
-      private _registeredIndex: number;
-      constructor(props) {
-        super(props);
-        this.state = this.getState();
-        this.onWindowResize = _.debounce(this.onWindowResize.bind(this), debounceTime);
-      }
+  return function decorateClass(DecoratedComponent: React.ComponentType<any>) {
+    const Resize: React.FC<any> = (props) => {
+      const [state, setState] = useState(() => getInitialState());
 
-      getState() {
+      function getInitialState() {
         if (typeof onResize === "function") {
           const determinedWindow = typeof window === "object" ? window : {};
           const newState = onResize(determinedWindow);
@@ -39,27 +35,30 @@ export function Resizer(config: Config) {
         return {};
       }
 
-      onWindowResize() {
-        this.setState(this.getState());
-      }
+      const onWindowResize = _.debounce(() => {
+        setState(getInitialState());
+      }, debounceTime);
 
-      componentDidMount() {
-        this._registeredIndex = handlers.length;
-        handlers.push(this.onWindowResize);
+      useEffect(() => {
+        const registeredIndex = handlers.length;
+        handlers.push(onWindowResize);
 
-        window.addEventListener("resize", () => {
+        const resizeListener = () => {
           setTimeout(defferedHandlerCaller, 0);
-        });
-      }
+        };
 
-      componentWillUnmount() {
-        // just place null in place to not throw off index
-        handlers.splice(this._registeredIndex, 1, null);
-      }
+        window.addEventListener("resize", resizeListener);
 
-      render() {
-        return <DecoratedComponent {...this.props} {...this.state} />;
-      }
+        return () => {
+          // Clean up the handler
+          handlers.splice(registeredIndex, 1, null);
+          window.removeEventListener("resize", resizeListener);
+        };
+      }, [onWindowResize]);
+
+      return <DecoratedComponent {...props} {...state} />;
     };
+
+    return Resize;
   };
 }

@@ -12,8 +12,7 @@ const MobileEventRow = ({ event, index, openModal, renderers }) => {
   return (
     <div
       className={`TableRow-wrapper flex-auto u-cursor--pointer ${index === 0 ? "u-borderTop--gray" : ""}`}
-      onClick={openModal}
-    >
+      onClick={openModal}>
       <div className="TableRow flex mobile-row">
         <div className="TableRow-content flex flex1">
           <div className="flex-column flex1 u-overflow--hidden">

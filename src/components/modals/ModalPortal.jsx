@@ -1,7 +1,6 @@
 import Modal from "react-modal";
 
 const ModalPortal = ({ isOpen, name, closeModal, content }) => {
-  
   const generateClassNames = () => ({
     base: `retraced-logs-viewer-app retracedModal ${name}`,
     afterOpen: `${name}_after-open`,
@@ -15,8 +14,7 @@ const ModalPortal = ({ isOpen, name, closeModal, content }) => {
         className={generateClassNames()}
         contentLabel={name}
         onRequestClose={closeModal}
-        ariaHideApp={false}
-      >
+        ariaHideApp={false}>
         {content}
         <button className="icon u-closeIcon" onClick={closeModal}>
           Close

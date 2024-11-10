@@ -14,8 +14,7 @@ const EventModal = ({ event }) => {
               resize: "none",
             }}
             readOnly
-            value={formattedEvent}
-          ></textarea>
+            value={formattedEvent}></textarea>
         </div>
       </div>
     </div>
