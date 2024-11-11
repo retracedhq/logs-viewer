@@ -1,6 +1,6 @@
-@import "../components/forms/input.scss";
-@import "../components/forms/textarea.scss";
-@import "../components/forms/select.scss";
+@use "../components/forms/input.scss";
+@use "../components/forms/textarea.scss";
+@use "../components/forms/select.scss";
 
 .FormRow-wrapper {
   margin-top: 14px;
