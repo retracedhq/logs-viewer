@@ -1,3 +1,4 @@
+@use "sass:meta";
 html,
 body {
   display: flex;
@@ -35,19 +36,19 @@ body {
 }
 
 .retraced-logs-viewer-app {
-  @import "./utilities/base.scss";
-  @import "./utilities/reset.scss";
-  @import "./utilities/typography.scss";
-  @import "./utilities/buttons.scss";
-  @import "./utilities/utilities.scss";
-  @import "./utilities/flexbox.scss";
-  @import "./utilities/forms.scss";
-  @import "./components/tables/FixedTableHeader.scss";
-  @import "./components/tables/TableRow.scss";
-  @import "./components/views/EventsBrowser.scss";
-  @import "./components/views/DatePicker.scss";
-  @import "./components/shared/Tooltip.scss";
-  @import "./utilities/icons.scss";
+  @include meta.load-css("utilities/base.scss");
+  @include meta.load-css("utilities/reset.scss");
+  @include meta.load-css("utilities/typography.scss");
+  @include meta.load-css("utilities/buttons.scss");
+  @include meta.load-css("utilities/utilities.scss");
+  @include meta.load-css("utilities/flexbox.scss");
+  @include meta.load-css("utilities/forms.scss");
+  @include meta.load-css("components/tables/FixedTableHeader.scss");
+  @include meta.load-css("components/tables/TableRow.scss");
+  @include meta.load-css("components/views/EventsBrowser.scss");
+  @include meta.load-css("components/views/DatePicker.scss");
+  @include meta.load-css("components/shared/Tooltip.scss");
+  @include meta.load-css("utilities/icons.scss");
 
   &.light {
     h1,
