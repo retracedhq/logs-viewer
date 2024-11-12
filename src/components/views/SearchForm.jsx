@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import dayjs from "dayjs";
 import searchQueryParser from "search-query-parser";
 import _ from "lodash";
@@ -118,9 +118,8 @@ const SearchForm = (props) => {
         ? []
         : dateRangeWithDefaults(state.receivedStartDate, state.receivedEndDate);
 
-    let query = `${state.searchQuery.length ? `${state.searchQuery} ` : ""}${crudQuery}${
-      receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
-    }`;
+    let query = `${state.searchQuery.length ? `${state.searchQuery} ` : ""}${crudQuery}${receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
+      }`;
 
     // Assuming rewriteHumanTimes is defined elsewhere
     query = rewriteHumanTimes(query, "received");

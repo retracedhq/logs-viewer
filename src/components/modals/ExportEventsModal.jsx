@@ -12,8 +12,8 @@ const ExportEventsModal = (props) => {
   const [showErrorClass, setShowErrorClass] = useState(false);
 
   useEffect(() => {
-    fetchSavedExports();
-  }, [fetchSavedExports]);
+    props.fetchSavedExports();
+  }, []);
 
   useEffect(() => {
     if (newSavedExport) {

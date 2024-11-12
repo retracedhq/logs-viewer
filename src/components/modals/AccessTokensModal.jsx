@@ -1,6 +1,5 @@
-import React from "react";
+import { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
-import autoBind from "react-autobind";
 import FixedTableHeader from "../views/FixedTableHeader";
 import Loader from "../views/Loader";
 import {
@@ -24,20 +23,22 @@ const AccessTokensModal = (props) => {
   const [showErrorClass, setShowErrorClass] = useState(false);
 
   useEffect(() => {
-    fetchEitapiTokensList();
-  }, [fetchEitapiTokensList]);
+    props.fetchEitapiTokensList();
+  }, []);
 
   useEffect(() => {
     if (creatingToken || updatingToken) {
       setTimeout(() => {
-        tokenName.current.focus();
+        if (tokenName.current) {
+          tokenName.current.focus();
+        }
       }, 10);
     }
   }, [creatingToken, updatingToken]);
 
   const handleTokenCreation = (name) => {
     if (!nameEmptyError) {
-      createEitapiToken(name);
+      props.createEitapiToken(name);
       reset();
     } else {
       setShowErrorClass(true);
@@ -46,7 +47,7 @@ const AccessTokensModal = (props) => {
 
   const handleUpdateToken = (token) => {
     if (!nameEmptyError) {
-      updateEitapiToken(token, newTokenName);
+      props.updateEitapiToken(token, newTokenName);
       reset();
     } else {
       setShowErrorClass(true);
