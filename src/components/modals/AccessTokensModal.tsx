@@ -23,8 +23,8 @@ const AccessTokensModal = (props) => {
   const [showErrorClass, setShowErrorClass] = useState(false);
 
   useEffect(() => {
-    fetchEitapiTokensList();
-  }, [fetchEitapiTokensList]);
+    props.fetchEitapiTokensList();
+  }, []);
 
   useEffect(() => {
     if (creatingToken || updatingToken) {
@@ -36,7 +36,7 @@ const AccessTokensModal = (props) => {
 
   const handleTokenCreation = (name) => {
     if (!nameEmptyError) {
-      createEitapiToken(name);
+      props.createEitapiToken(name);
       reset();
     } else {
       setShowErrorClass(true);
@@ -45,7 +45,7 @@ const AccessTokensModal = (props) => {
 
   const handleUpdateToken = (token) => {
     if (!nameEmptyError) {
-      updateEitapiToken(token, newTokenName);
+      props.updateEitapiToken(token, newTokenName);
       reset();
     } else {
       setShowErrorClass(true);

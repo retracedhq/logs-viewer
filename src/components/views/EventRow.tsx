@@ -40,6 +40,7 @@ const EventRow = ({ event, fields, renderers, openModal }) => {
         return getFieldValue(event, item.field);
       }
     } catch (ex) {
+      console.error(ex);
       return "";
     }
   };

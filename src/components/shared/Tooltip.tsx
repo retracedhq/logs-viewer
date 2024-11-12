@@ -1,10 +1,10 @@
 import React from "react";
 
 type propTypes = {
-  className: string;
+  className?: string;
   visible: boolean;
   text: string;
-  content: Node;
+  content?: Node;
   position: string;
   minWidth: string;
 };

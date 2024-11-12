@@ -1,7 +1,7 @@
 type propTypes = {
-  className: string;
+  className?: string;
   color: string;
-  displayBlock: boolean;
+  displayBlock?: boolean;
   size: string;
 };
 
