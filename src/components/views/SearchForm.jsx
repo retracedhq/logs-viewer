@@ -118,8 +118,9 @@ const SearchForm = (props) => {
         ? []
         : dateRangeWithDefaults(state.receivedStartDate, state.receivedEndDate);
 
-    let query = `${state.searchQuery.length ? `${state.searchQuery} ` : ""}${crudQuery}${receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
-      }`;
+    let query = `${state.searchQuery.length ? `${state.searchQuery} ` : ""}${crudQuery}${
+      receivedQuery.length > 0 ? ` received:${receivedQuery.join()}` : ""
+    }`;
 
     // Assuming rewriteHumanTimes is defined elsewhere
     query = rewriteHumanTimes(query, "received");
