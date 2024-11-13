@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import searchQueryParser from "search-query-parser";
 import _ from "lodash";
@@ -41,14 +41,6 @@ const initialState = {
 const SearchForm: React.FC<any> = (props) => {
   const [state, setState] = useState(initialState);
   const dateFormatString = getDateFormatString();
-
-  useEffect(() => {
-    props.hasFilters(state);
-  }, [state, props.hasFilters]);
-
-  useEffect(() => {
-    props.hasFilters(state);
-  }, [props.text, state, props.hasFilters]);
 
   const setInitialState = () => {
     setState(initialState);
@@ -210,7 +202,8 @@ const SearchForm: React.FC<any> = (props) => {
                   </p>
                   <div className="flex flex1 u-paddingBottom--normal">
                     <div className="flex1 u-paddingRight--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.cChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.cChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -230,7 +223,8 @@ const SearchForm: React.FC<any> = (props) => {
                       </div>
                     </div>
                     <div className="flex1 u-paddingLeft--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.rChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.rChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -250,7 +244,8 @@ const SearchForm: React.FC<any> = (props) => {
                   </div>
                   <div className="flex flex1">
                     <div className="flex1 u-paddingRight--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.uChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.uChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -270,7 +265,8 @@ const SearchForm: React.FC<any> = (props) => {
                       </div>
                     </div>
                     <div className="flex1 u-paddingLeft--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.dChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.dChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"

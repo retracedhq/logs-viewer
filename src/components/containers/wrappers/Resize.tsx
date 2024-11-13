@@ -12,7 +12,7 @@ function defferedHandlerCaller() {
 }
 
 type Config = {
-  onResize: (window: Window) => object;
+  onResize: any;
   debounce: number;
 };
 

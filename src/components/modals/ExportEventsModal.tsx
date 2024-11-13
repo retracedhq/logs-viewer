@@ -2,7 +2,18 @@ import { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import { createSavedExport, fetchSavedExports, renderSavedExport } from "../../redux/data/exports/thunks";
 
-const ExportEventsModal = (props) => {
+type propTypes = {
+  crudFilters: object;
+  dateFilters: any;
+  savedExports?: any;
+  exporting?: any;
+  searchInputQuery?: any;
+  fetchSavedExports?: any;
+  createSavedExport?: any;
+  renderSavedExport?: any;
+};
+
+const ExportEventsModal: React.FC<propTypes> = (props) => {
   const { savedExports, exporting, searchInputQuery } = props;
   const exportName = useRef(null);
   const [searchBody, setSearchBody] = useState("current");

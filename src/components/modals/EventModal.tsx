@@ -1,4 +1,8 @@
-const EventModal = ({ event }) => {
+type propTypes = {
+  event?: any;
+};
+
+const EventModal: React.FC<propTypes> = ({ event }) => {
   const formattedEvent = JSON.stringify(event, null, 2);
 
   return (

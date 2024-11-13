@@ -9,15 +9,31 @@ import {
 } from "../../redux/data/apiTokens/thunks";
 import { useEffect, useRef, useState } from "react";
 
-const AccessTokensModal = (props) => {
+type propTypes = {
+  apiTokens?: any;
+  tokensLoading?: any;
+  fetchEitapiTokensList?: any;
+  createEitapiToken?: any;
+  updateEitapiToken?: any;
+  deleteEitapiToken?: any;
+  apiTokenHelpURL?: string;
+  theme?: string;
+};
+
+interface Token {
+  id?: any;
+  display_name?: string;
+}
+
+const AccessTokensModal: React.FC<propTypes> = (props) => {
   const tokenName = useRef(null);
   const { apiTokens, tokensLoading } = props;
 
   const [creatingToken, setCreatingToken] = useState(false);
   const [updatingToken, setUpdatingToken] = useState(false);
-  const [tokenToUpdate, setTokenToUpdate] = useState({});
+  const [tokenToUpdate, setTokenToUpdate] = useState<Token>({});
   const [newTokenName, setNewTokenName] = useState("");
-  const [tokenToDelete, setTokenToDelete] = useState({});
+  const [tokenToDelete, setTokenToDelete] = useState<Token>({});
   const [deletingToken, setDeletingToken] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(true);
   const [showErrorClass, setShowErrorClass] = useState(false);

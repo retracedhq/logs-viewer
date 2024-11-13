@@ -1,6 +1,11 @@
 import _ from "lodash";
 
-const InlineLink = (props) => {
+type propTypes = {
+  href?: any;
+  children?: any;
+};
+
+const InlineLink: React.FC<propTypes> = (props) => {
   if (_.startsWith(props.href, "http://") || _.startsWith(props.href, "https://")) {
     return <a href={props.href}>{props.children}</a>;
   }

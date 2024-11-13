@@ -1,3 +1,5 @@
+/* eslint-disable max-statements */
+/* eslint-disable complexity */
 import { useState, useEffect, FC, useRef } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
@@ -55,32 +57,27 @@ export type EventBrowserProps = {
   searchText?: string;
 };
 
-const getDefaultState = (props) => ({
-  resultsPerPage: 20,
-  filtersOpen: false,
-  hasFilters: false,
-  pageCursors: props.currentResults.totalResultCount ? [""] : [],
-  activeModal: { modal: null, name: "" },
-  isModalOpen: false,
-  searchQuery: "",
-  crudFilters: {
-    cChecked: true,
-    rChecked: false,
-    uChecked: true,
-    dChecked: true,
-  },
-  dateFilters: null,
-  tokenTooltip: false,
-  exportTooltip: false,
-});
-
 const EventsBrowser: FC<EventBrowserProps> = (props) => {
   const { events, currentResults, breakpoint } = props;
   const previousCurrentResults = useRef(props.currentResults);
 
   let { tableHeaderItems } = props;
 
-  const [state, setState] = useState(getDefaultState(props));
+  const resultsPerPage = 20;
+  const [filtersOpen, setFiltersOpen] = useState(false);
+  const [pageCursors, setPageCursors] = useState(props.currentResults.totalResultCount ? [""] : []);
+  const [activeModal, setActiveModal] = useState({ modal: null, name: "" });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [crudFilters, setCrudFilters] = useState({
+    cChecked: true,
+    rChecked: false,
+    uChecked: true,
+    dChecked: true,
+  });
+  const [dateFilters, setDateFilters] = useState(null);
+  const [tokenTooltip, setTokenTooltip] = useState(false);
+  const [exportTooltip, setExportTooltip] = useState(false);
 
   // Effect to create session on mount
   useEffect(() => {
@@ -108,18 +105,18 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
   const onEventsChange = (current, next) => {
     // Page 1 of a new query
     if (next.sourceQuery.cursor === "") {
-      setState((prev) => ({ ...prev, pageCursors: [""] }));
+      setPageCursors([""]);
       return;
     }
     // Next page of current query
     if (next.sourceQuery.cursor === current.cursor) {
-      setState((prev) => ({ ...prev, pageCursors: [...prev.pageCursors, next.sourceQuery.cursor] }));
+      setPageCursors((prev) => [...prev, next.sourceQuery.cursor]);
       return;
     }
     // Previous page of current query
-    const pageIndex = state.pageCursors.indexOf(next.sourceQuery.cursor);
+    const pageIndex = pageCursors.indexOf(next.sourceQuery.cursor);
     if (pageIndex >= 0) {
-      setState((prev) => ({ ...prev, pageCursors: prev.pageCursors.slice(0, pageIndex + 1) }));
+      setPageCursors((prev) => prev.slice(0, pageIndex + 1));
       return;
     }
     // Recover from unexpected state
@@ -134,15 +131,15 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
   }, [props.currentResults]);
 
   const currentPage = () => {
-    return state.pageCursors.length - 1;
+    return pageCursors.length - 1;
   };
 
   const pageCount = () => {
-    return Math.ceil(props.currentResults.totalResultCount / state.resultsPerPage);
+    return Math.ceil(props.currentResults.totalResultCount / resultsPerPage);
   };
 
   const offset = () => {
-    let op = currentPage() * state.resultsPerPage;
+    let op = currentPage() * resultsPerPage;
     return op;
   };
 
@@ -153,7 +150,9 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
   };
 
   const search = (query, filters, dates) => {
-    setState((prev) => ({ ...prev, searchQuery: query, crudFilters: filters, dateFilters: dates }));
+    setSearchQuery(query);
+    setCrudFilters(filters);
+    setDateFilters(dates);
     submitQuery(query, "");
   };
 
@@ -162,7 +161,7 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
       search_text: query,
       cursor,
 
-      length: state.resultsPerPage,
+      length: resultsPerPage,
 
       skipViewLogEvent: props.skipViewLogEvent,
     };
@@ -174,39 +173,27 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
   };
 
   const prevPage = () => {
-    submitQuery(props.currentResults.sourceQuery.search_text, state.pageCursors[currentPage() - 1]);
-  };
-
-  const determineIfFilters = (filters) => {
-    if (!filters) {
-      return false;
-    }
-    if (filters.receivedStartDate || filters.receivedEndDate) {
-      return true;
-    }
-    if (filters.searchQuery.length > 0 || filters.crudFilters.length > 0) {
-      return true;
-    }
-    if (filters.cChecked || filters.rChecked || filters.uChecked || filters.dChecked) {
-      return true;
-    }
-    return false;
-  };
-
-  const hasFilters = (filters) => {
-    setState((prev) => ({ ...prev, hasFilters: determineIfFilters(filters) }));
+    submitQuery(props.currentResults.sourceQuery.search_text, pageCursors[currentPage() - 1]);
   };
 
   const toggleFilterDropdown = () => {
-    setState((prev) => ({ ...prev, filtersOpen: !state.filtersOpen }));
+    setFiltersOpen(!filtersOpen);
   };
 
   const renderModal = (modal, name) => {
-    setState((prev) => ({ ...prev, isModalOpen: true, activeModal: { modal, name } }));
+    setIsModalOpen(true);
+    setActiveModal({
+      modal,
+      name,
+    });
   };
 
   const closeModal = () => {
-    setState((prev) => ({ ...prev, isModalOpen: false, activeModal: { modal: null, name: "" } }));
+    setIsModalOpen(false);
+    setActiveModal({
+      modal: null,
+      name: "",
+    });
   };
 
   /**
@@ -324,9 +311,8 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                 <SearchForm
                   onSubmit={search}
                   text={searchText}
-                  filtersOpen={state.filtersOpen}
+                  filtersOpen={filtersOpen}
                   toggleDropdown={toggleFilterDropdown}
-                  hasFilters={hasFilters}
                   searchHelpURL={props.searchHelpURL}
                 />
               </span>
@@ -339,21 +325,21 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                   onClick={() => {
                     renderModal(
                       <ExportEventsModal
-                        searchInputQuery={state.searchQuery}
-                        crudFilters={state.crudFilters}
-                        dateFilters={state.dateFilters}
+                        searchInputQuery={searchQuery}
+                        crudFilters={crudFilters}
+                        dateFilters={dateFilters}
                       />,
                       "ExportEventsModal"
                     );
                   }}
                   onMouseEnter={() => {
-                    setState((prev) => ({ ...prev, exportTooltip: true }));
+                    setExportTooltip(true);
                   }}
                   onMouseLeave={() => {
-                    setState((prev) => ({ ...prev, exportTooltip: false }));
+                    setExportTooltip(false);
                   }}>
                   <Tooltip
-                    visible={state.exportTooltip}
+                    visible={exportTooltip}
                     text="Export Events"
                     minWidth="120"
                     position="bottom-left"
@@ -371,13 +357,13 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                     );
                   }}
                   onMouseEnter={() => {
-                    setState((prev) => ({ ...prev, tokenTooltip: true }));
+                    setTokenTooltip(true);
                   }}
                   onMouseLeave={() => {
-                    setState((prev) => ({ ...prev, tokenTooltip: false }));
+                    setTokenTooltip(false);
                   }}>
                   <Tooltip
-                    visible={state.tokenTooltip}
+                    visible={tokenTooltip}
                     text="Manage API Tokens"
                     minWidth="150"
                     position="bottom-left"
@@ -408,7 +394,6 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                       renderers={renderers}
                       isMobile={isMobileEvents}
                       index={i}
-                      outputHovered={[`output-${eid}Hovered`]}
                       displayTooltip={() => {
                         return;
                       }}
@@ -427,7 +412,6 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                       renderers={renderers}
                       isMobile={isMobileEvents}
                       index={i}
-                      outputHovered={[`output-${eid}Hovered`]}
                       displayTooltip={() => {
                         return;
                       }}
@@ -477,7 +461,7 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
           )}
           <div
             className={`flex flex-auto EventPager ${
-              !currentResults.resultIds.length || currentResults.resultIds.length < state.resultsPerPage
+              !currentResults.resultIds.length || currentResults.resultIds.length < resultsPerPage
                 ? ""
                 : "has-shadow"
             }`}>
@@ -527,12 +511,12 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
         </div>
       </div>
       <ModalPortal
-        isOpen={state.isModalOpen}
-        name={state.activeModal.name}
+        isOpen={isModalOpen}
+        name={activeModal.name}
         closeModal={() => {
           closeModal();
         }}
-        content={state.activeModal.modal}
+        content={activeModal.modal}
         ariaHideApp={false}
       />
     </div>
