@@ -352,7 +352,7 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                   data-testid={`manage-api-tokens`}
                   onClick={() => {
                     renderModal(
-                      <AccessTokensModal apiTokenHelpURL={props.apiTokenHelpURL} closeModal={closeModal} />,
+                      <AccessTokensModal apiTokenHelpURL={props.apiTokenHelpURL} />,
                       "AccessTokensModal"
                     );
                   }}
@@ -387,16 +387,10 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                 currentResults.resultIds.map((eid, i) =>
                   !isMobileEvents ? (
                     <EventRow
-                      tableHeaderItems={tableHeaderItems}
                       key={`${eid}-${i}`}
                       event={events[eid]}
                       fields={props.fields && tableHeaderItems}
                       renderers={renderers}
-                      isMobile={isMobileEvents}
-                      index={i}
-                      displayTooltip={() => {
-                        return;
-                      }}
                       openModal={() => {
                         const _event = { ...events[eid] };
                         delete _event.display;
@@ -408,13 +402,8 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
                     <MobileEventRow
                       key={`${eid}-${i}`}
                       event={events[eid]}
-                      tableHeadersItems={tableHeaderItems}
                       renderers={renderers}
-                      isMobile={isMobileEvents}
                       index={i}
-                      displayTooltip={() => {
-                        return;
-                      }}
                       openModal={() => {
                         const _event = { ...events[eid] };
                         delete _event.display;
@@ -517,7 +506,6 @@ const EventsBrowser: FC<EventBrowserProps> = (props) => {
           closeModal();
         }}
         content={activeModal.modal}
-        ariaHideApp={false}
       />
     </div>
   ) : null;

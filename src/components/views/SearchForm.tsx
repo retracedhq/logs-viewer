@@ -160,14 +160,6 @@ const SearchForm: React.FC<any> = (props) => {
                         className="Input u-width--full"
                         placeholderText="Start"
                         dateFormat={dateFormatString}
-                        popperModifiers={[
-                          {
-                            name: "offset",
-                            options: {
-                              offset: [-10, 0],
-                            },
-                          },
-                        ]}
                         onChange={handleReceivedStartDateChange}
                       />
                     </div>
@@ -180,17 +172,6 @@ const SearchForm: React.FC<any> = (props) => {
                         className="Input u-width--full"
                         placeholderText="End"
                         dateFormat={dateFormatString}
-                        popoverAttachment="bottom center"
-                        popoverTargetAttachment="top center"
-                        popoverTargetOffset="10px 40px"
-                        popperModifiers={[
-                          {
-                            name: "offset",
-                            options: {
-                              offset: [-10, 0],
-                            },
-                          },
-                        ]}
                         onChange={handleReceivedEndDateChange}
                       />
                     </div>
@@ -331,41 +312,44 @@ function rewriteHumanTimes(query, keyword) {
   const parsed = searchQueryParser.parse(query, {
     keywords: [keyword],
   });
-  const offset = _.find(parsed.offsets, (o) => o.keyword === keyword);
 
-  if (!offset) {
-    return query;
+  if (typeof parsed !== "string") {
+    const offset = _.find(parsed.offsets, (o) => o.keyword === keyword);
+
+    if (!offset) {
+      return query;
+    }
+
+    let range = `"${offset.value}"`;
+    offset.value = offset.value.toLowerCase();
+
+    if (/yesterday/.test(offset.value)) {
+      range = daysAgoRange(1);
+    }
+
+    if (/^\d+\s*days?\s*ago$/.test(offset.value)) {
+      range = daysAgoRange(parseInt(offset.value, 10));
+    }
+
+    if (/^[a-z]+\s*days?\s*ago$/.test(offset.value)) {
+      const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
+      range = daysAgoRange(count);
+    }
+
+    if (/^\d+\s*hours?\s*ago$/.test(offset.value)) {
+      range = hoursAgoRange(parseInt(offset.value, 10));
+    }
+
+    if (/^[a-z]+\s*hours?\s*ago$/.test(offset.value)) {
+      const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
+      range = hoursAgoRange(count);
+    }
+
+    const prefix = query.substring(0, offset.offsetStart);
+    const suffix = query.substring(offset.offsetEnd);
+
+    return `${prefix} ${keyword}:${range} ${suffix}`;
   }
-
-  let range = `"${offset.value}"`;
-  offset.value = offset.value.toLowerCase();
-
-  if (/yesterday/.test(offset.value)) {
-    range = daysAgoRange(1);
-  }
-
-  if (/^\d+\s*days?\s*ago$/.test(offset.value)) {
-    range = daysAgoRange(parseInt(offset.value, 10));
-  }
-
-  if (/^[a-z]+\s*days?\s*ago$/.test(offset.value)) {
-    const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
-    range = daysAgoRange(count);
-  }
-
-  if (/^\d+\s*hours?\s*ago$/.test(offset.value)) {
-    range = hoursAgoRange(parseInt(offset.value, 10));
-  }
-
-  if (/^[a-z]+\s*hours?\s*ago$/.test(offset.value)) {
-    const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
-    range = hoursAgoRange(count);
-  }
-
-  const prefix = query.substring(0, offset.offsetStart);
-  const suffix = query.substring(offset.offsetEnd);
-
-  return `${prefix} ${keyword}:${range} ${suffix}`;
 }
 
 /*

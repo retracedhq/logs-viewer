@@ -6,7 +6,7 @@ dayjs.extend(relativeTime);
 
 type propTypes = {
   event: any;
-  fields: any;
+  fields?: any;
   renderers: any;
   openModal: any;
   index?: number;

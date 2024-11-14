@@ -1,10 +1,10 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 type propTypes = {
   className?: string;
   visible: boolean;
   text: string;
-  content?: Node;
+  content?: ReactNode;
   position: string;
   minWidth: string;
 };
