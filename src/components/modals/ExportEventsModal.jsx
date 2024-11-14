@@ -1,44 +1,37 @@
-import React from "react";
-import autoBind from "react-autobind";
+import { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import { createSavedExport, fetchSavedExports, renderSavedExport } from "../../redux/data/exports/thunks";
 
-class ExportEventsModal extends React.Component {
-  constructor() {
-    super();
-    this.exportName = React.createRef();
-    autoBind(this);
-    this.state = {
-      searchBody: "current",
-      newSavedExport: false,
-      newSavedExportName: "",
-      nameEmptyError: true,
-      showErrorClass: false,
-    };
-  }
+const ExportEventsModal = (props) => {
+  const { savedExports, exporting, searchInputQuery } = props;
+  const exportName = useRef(null);
+  const [searchBody, setSearchBody] = useState("current");
+  const [newSavedExport, setNewSavedExport] = useState(false);
+  const [newSavedExportName, setNewSavedExportName] = useState("");
+  const [nameEmptyError, setNameEmptyError] = useState(true);
+  const [showErrorClass, setShowErrorClass] = useState(false);
 
-  componentDidUpdate() {
-    const { newSavedExport } = this.state;
+  useEffect(() => {
+    props.fetchSavedExports();
+  }, []);
+
+  useEffect(() => {
     if (newSavedExport) {
       setTimeout(() => {
-        this.exportName.current.focus();
+        exportName.current.focus();
       }, 10);
     }
-  }
+  }, [newSavedExport]);
 
-  UNSAFE_componentWillMount() {
-    this.props.fetchSavedExports();
-  }
-
-  handleExportCSV(query, name) {
-    const filters = this.props.crudFilters;
+  const handleExportCSV = (query, name) => {
+    const filters = props.crudFilters;
     let dates = {};
     let searchQuery = query;
 
     // If we have date filters (TEMP) convert to MS
-    if (this.props.dateFilters) {
-      let startDate = this.props.dateFilters.startDate ? this.props.dateFilters.startDate.valueOf() : null;
-      let endDate = this.props.dateFilters.endDate ? this.props.dateFilters.endDate.valueOf() : null;
+    if (props.dateFilters) {
+      let startDate = props.dateFilters.startDate ? props.dateFilters.startDate.valueOf() : null;
+      let endDate = props.dateFilters.endDate ? props.dateFilters.endDate.valueOf() : null;
 
       dates = {
         startDate,
@@ -46,151 +39,142 @@ class ExportEventsModal extends React.Component {
       };
     }
 
-    if (!this.state.nameEmptyError) {
+    if (!nameEmptyError) {
       // TEMP: Remove all crud and date stuff from string
       if (query.includes("crud:")) {
         const scrubbed = query.split("crud:")[0];
         searchQuery = scrubbed;
       }
 
-      this.props.createSavedExport(searchQuery, filters, dates, name);
-      this.setState({ newSavedExport: false, showErrorClass: false });
+      props.createSavedExport(searchQuery, filters, dates, name);
+      setNewSavedExport(false);
+      setShowErrorClass(false);
     } else {
-      this.setState({ showErrorClass: true });
+      setShowErrorClass(true);
     }
-  }
+  };
 
-  updateSearchBody(e) {
-    this.setState({ searchBody: e.target.value });
-  }
+  const updateSearchBody = (e) => {
+    setSearchBody(e.target.value);
+  };
 
-  checkForNewExport() {
-    if (this.state.searchBody === "current") {
-      this.setState({ newSavedExport: true });
+  const checkForNewExport = () => {
+    if (searchBody === "current") {
+      setNewSavedExport(true);
     } else {
-      this.props.renderSavedExport(this.state.searchBody);
+      props.renderSavedExport(searchBody);
     }
-  }
+  };
 
-  handleNameUpdate(e) {
+  const handleNameUpdate = (e) => {
     if (e.target.value !== "") {
-      this.setState({ newSavedExportName: e.target.value, nameEmptyError: false });
+      setNewSavedExportName(e.target.value);
+      setNameEmptyError(false);
     } else {
-      this.setState({ nameEmptyError: true });
+      setNameEmptyError(true);
     }
-  }
+  };
 
-  reset() {
-    this.setState({
-      newSavedExport: false,
-      showErrorClass: false,
-      nameEmptyError: true,
-    });
-  }
-
-  render() {
-    const { savedExports, exporting, searchInputQuery } = this.props;
-    const { newSavedExportName } = this.state;
-    return (
-      <div>
-        <h1 className="u-fontWeight--normal">Export Events</h1>
-        <div className="modal-content">
-          {this.state.newSavedExport ? (
-            <div>
-              <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">
-                Name your search
-              </h3>
-              <p className="u-fontWeight--normal u-fontSize--normal u-marginBottom--more">
-                Save this search query so that you can easily use these presets to export any new events in
-                the future that match your new query.
-              </p>
-              <div className="flex flexWrap--wrap justifyContent--flexEnd">
-                <input
-                  type="text"
-                  className={`Input u-marginBottom--more ${this.state.showErrorClass ? "has-error" : ""}`}
-                  ref={this.exportName}
-                  placeholder="Release 1.0.0"
+  const reset = () => {
+    setNewSavedExport(false);
+    setShowErrorClass(false);
+    setNameEmptyError(true);
+  };
+  return (
+    <div>
+      <h1 className="u-fontWeight--normal">Export Events</h1>
+      <div className="modal-content">
+        {newSavedExport ? (
+          <div>
+            <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">
+              Name your search
+            </h3>
+            <p className="u-fontWeight--normal u-fontSize--normal u-marginBottom--more">
+              Save this search query so that you can easily use these presets to export any new events in the
+              future that match your new query.
+            </p>
+            <div className="flex flexWrap--wrap justifyContent--flexEnd">
+              <input
+                type="text"
+                className={`Input u-marginBottom--more ${showErrorClass ? "has-error" : ""}`}
+                ref={exportName}
+                placeholder="Release 1.0.0"
+                onChange={(e) => {
+                  handleNameUpdate(e);
+                }}
+              />
+              <button
+                className="Button secondary flex-auto u-marginLeft--normal"
+                disabled={exporting ? true : false}
+                onClick={() => {
+                  reset();
+                }}>
+                Back
+              </button>
+              <button
+                className="Button primary flex-auto u-marginLeft--normal"
+                disabled={exporting ? true : false}
+                onClick={() => {
+                  handleExportCSV(searchInputQuery, newSavedExportName);
+                }}>
+                {exporting ? "Saving..." : "Name & Save"}
+              </button>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">
+              Export your events to CSV
+            </h3>
+            <p className="u-fontWeight--normal u-fontSize--normal u-marginBottom--more">
+              Export your current search query to CSV. You can select presets from previous exports you’ve
+              made or export and save your current query so that you can easily export any new events in the
+              future. This export will only contain the events that have occured since your last export with
+              the same query.
+            </p>
+            <div className="flex flex1">
+              <div className="select-menu flex1">
+                <select
+                  className="Select"
                   onChange={(e) => {
-                    this.handleNameUpdate(e);
-                  }}
-                />
-                <button
-                  className="Button secondary flex-auto u-marginLeft--normal"
-                  disabled={exporting ? true : false}
-                  onClick={() => {
-                    this.reset();
+                    updateSearchBody(e);
                   }}>
-                  Back
-                </button>
-                <button
-                  className="Button primary flex-auto u-marginLeft--normal"
-                  disabled={exporting ? true : false}
-                  onClick={() => {
-                    this.handleExportCSV(searchInputQuery, newSavedExportName);
-                  }}>
-                  {exporting ? "Saving..." : "Name & Save"}
-                </button>
+                  <option value="current">Use current search query</option>
+                  {savedExports.length
+                    ? savedExports.map((ex, i) => (
+                        <option value={ex.id} key={i}>
+                          {ex.name}
+                        </option>
+                      ))
+                    : null}
+                </select>
               </div>
+              <button
+                className="Button primary flex-atuo u-marginLeft--normal"
+                disabled={exporting ? true : false}
+                onClick={() => {
+                  checkForNewExport();
+                }}>
+                {exporting ? "Exporting..." : "Export"}
+              </button>
             </div>
-          ) : (
-            <div>
-              <h3 className="u-fontWeight--medium u-marginBottom--normal u-fontSize--large">
-                Export your events to CSV
-              </h3>
-              <p className="u-fontWeight--normal u-fontSize--normal u-marginBottom--more">
-                Export your current search query to CSV. You can select presets from previous exports you’ve
-                made or export and save your current query so that you can easily export any new events in the
-                future. This export will only contain the events that have occured since your last export with
-                the same query.
-              </p>
-              <div className="flex flex1">
-                <div className="select-menu flex1">
-                  <select
-                    className="Select"
-                    onChange={(e) => {
-                      this.updateSearchBody(e);
-                    }}>
-                    <option value="current">Use current search query</option>
-                    {savedExports.length
-                      ? savedExports.map((ex, i) => (
-                          <option value={ex.id} key={i}>
-                            {ex.name}
-                          </option>
-                        ))
-                      : null}
-                  </select>
-                </div>
-                <button
-                  className="Button primary flex-atuo u-marginLeft--normal"
-                  disabled={exporting ? true : false}
-                  onClick={() => {
-                    this.checkForNewExport();
-                  }}>
-                  {exporting ? "Exporting..." : "Export"}
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-export default connect(
-  (state) => ({
-    savedExports: state.data.exportsData.savedSearchQueries,
-    exporting: state.ui.loadingData.exportCSVLoading,
-  }),
-  (dispatch) => ({
-    createSavedExport(query, filters, dates, name) {
-      return dispatch(createSavedExport(query, filters, dates, name));
-    },
-    fetchSavedExports() {
-      return dispatch(fetchSavedExports());
-    },
-    renderSavedExport(id) {
-      return dispatch(renderSavedExport(id));
-    },
-  })
-)(ExportEventsModal);
+const mapStateToProps = (state) => ({
+  savedExports: state.data.exportsData.savedSearchQueries,
+  exporting: state.ui.loadingData.exportCSVLoading,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  createSavedExport: (query, filters, dates, name) =>
+    dispatch(createSavedExport(query, filters, dates, name)),
+  fetchSavedExports: () => dispatch(fetchSavedExports()),
+  renderSavedExport: (id) => dispatch(renderSavedExport(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExportEventsModal);
