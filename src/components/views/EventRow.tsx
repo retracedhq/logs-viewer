@@ -2,7 +2,14 @@ import { useState } from "react";
 import ReactMarkdown from "react-markdown";
 import Tooltip from "../shared/Tooltip";
 
-const EventRow = ({ event, fields, renderers, openModal }) => {
+type propTypes = {
+  event: any;
+  fields: any;
+  renderers: any;
+  openModal: any;
+};
+
+const EventRow: React.FC<propTypes> = ({ event, fields, renderers, openModal }) => {
   const [eventInfoToken, setEventInfoToken] = useState(false);
 
   const getFieldValue = (object, selector) => {
@@ -40,6 +47,7 @@ const EventRow = ({ event, fields, renderers, openModal }) => {
         return getFieldValue(event, item.field);
       }
     } catch (ex) {
+      console.error(ex);
       return "";
     }
   };

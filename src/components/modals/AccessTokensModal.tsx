@@ -1,4 +1,3 @@
-import { useEffect, useState, useRef } from "react";
 import { connect } from "react-redux";
 import FixedTableHeader from "../views/FixedTableHeader";
 import Loader from "../views/Loader";
@@ -8,16 +7,33 @@ import {
   deleteEitapiToken,
   updateEitapiToken,
 } from "../../redux/data/apiTokens/thunks";
+import { useEffect, useRef, useState } from "react";
 
-const AccessTokensModal = (props) => {
+type propTypes = {
+  apiTokens?: any;
+  tokensLoading?: any;
+  fetchEitapiTokensList?: any;
+  createEitapiToken?: any;
+  updateEitapiToken?: any;
+  deleteEitapiToken?: any;
+  apiTokenHelpURL?: string;
+  theme?: string;
+};
+
+interface Token {
+  id?: any;
+  display_name?: string;
+}
+
+const AccessTokensModal: React.FC<propTypes> = (props) => {
   const tokenName = useRef(null);
   const { apiTokens, tokensLoading } = props;
 
   const [creatingToken, setCreatingToken] = useState(false);
   const [updatingToken, setUpdatingToken] = useState(false);
-  const [tokenToUpdate, setTokenToUpdate] = useState({});
+  const [tokenToUpdate, setTokenToUpdate] = useState<Token>({});
   const [newTokenName, setNewTokenName] = useState("");
-  const [tokenToDelete, setTokenToDelete] = useState({});
+  const [tokenToDelete, setTokenToDelete] = useState<Token>({});
   const [deletingToken, setDeletingToken] = useState(false);
   const [nameEmptyError, setNameEmptyError] = useState(true);
   const [showErrorClass, setShowErrorClass] = useState(false);
@@ -29,9 +45,7 @@ const AccessTokensModal = (props) => {
   useEffect(() => {
     if (creatingToken || updatingToken) {
       setTimeout(() => {
-        if (tokenName.current) {
-          tokenName.current.focus();
-        }
+        tokenName.current.focus();
       }, 10);
     }
   }, [creatingToken, updatingToken]);

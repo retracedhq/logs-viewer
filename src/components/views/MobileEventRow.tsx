@@ -4,7 +4,15 @@ import relativeTime from "dayjs/plugin/relativeTime";
 
 dayjs.extend(relativeTime);
 
-const MobileEventRow = ({ event, index, openModal, renderers }) => {
+type propTypes = {
+  event: any;
+  fields?: any;
+  renderers: any;
+  openModal: any;
+  index?: number;
+};
+
+const MobileEventRow: React.FC<propTypes> = ({ event, index, openModal, renderers }) => {
   const location = event.country || event.source_ip;
   const date = dayjs(event.canonical_time).fromNow();
 

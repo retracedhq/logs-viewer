@@ -1,6 +1,16 @@
-import PropTypes from "prop-types";
+type propTypes = {
+  className?: string;
+  color: string;
+  displayBlock?: boolean;
+  size: string;
+};
 
-const Loader = ({ className = "", color = "#337AB7", displayBlock = false, size = "40" }) => {
+const Loader: React.FC<propTypes> = ({
+  className = "",
+  color = "#337AB7",
+  displayBlock = false,
+  size = "40",
+}) => {
   const displayClassName = displayBlock ? "u-display--block" : "u-display--inlineBlock";
 
   return (
@@ -29,14 +39,6 @@ const Loader = ({ className = "", color = "#337AB7", displayBlock = false, size 
       </svg>
     </div>
   );
-};
-
-// PropTypes for type checking
-Loader.propTypes = {
-  className: PropTypes.string,
-  color: PropTypes.string,
-  displayBlock: PropTypes.bool,
-  size: PropTypes.string,
 };
 
 export default Loader;

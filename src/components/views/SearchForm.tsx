@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useState } from "react";
 import dayjs from "dayjs";
 import searchQueryParser from "search-query-parser";
 import _ from "lodash";
@@ -38,17 +38,9 @@ const initialState = {
   isDefault: true,
 };
 
-const SearchForm = (props) => {
+const SearchForm: React.FC<any> = (props) => {
   const [state, setState] = useState(initialState);
   const dateFormatString = getDateFormatString();
-
-  useEffect(() => {
-    props.hasFilters(state);
-  }, [state, props.hasFilters]);
-
-  useEffect(() => {
-    props.hasFilters(state);
-  }, [props.text, state, props.hasFilters]);
 
   const setInitialState = () => {
     setState(initialState);
@@ -168,14 +160,6 @@ const SearchForm = (props) => {
                         className="Input u-width--full"
                         placeholderText="Start"
                         dateFormat={dateFormatString}
-                        popperModifiers={[
-                          {
-                            name: "offset",
-                            options: {
-                              offset: [-10, 0],
-                            },
-                          },
-                        ]}
                         onChange={handleReceivedStartDateChange}
                       />
                     </div>
@@ -188,17 +172,6 @@ const SearchForm = (props) => {
                         className="Input u-width--full"
                         placeholderText="End"
                         dateFormat={dateFormatString}
-                        popoverAttachment="bottom center"
-                        popoverTargetAttachment="top center"
-                        popoverTargetOffset="10px 40px"
-                        popperModifiers={[
-                          {
-                            name: "offset",
-                            options: {
-                              offset: [-10, 0],
-                            },
-                          },
-                        ]}
                         onChange={handleReceivedEndDateChange}
                       />
                     </div>
@@ -210,7 +183,8 @@ const SearchForm = (props) => {
                   </p>
                   <div className="flex flex1 u-paddingBottom--normal">
                     <div className="flex1 u-paddingRight--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.cChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.cChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -230,7 +204,8 @@ const SearchForm = (props) => {
                       </div>
                     </div>
                     <div className="flex1 u-paddingLeft--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.rChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.rChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -250,7 +225,8 @@ const SearchForm = (props) => {
                   </div>
                   <div className="flex flex1">
                     <div className="flex1 u-paddingRight--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.uChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.uChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -270,7 +246,8 @@ const SearchForm = (props) => {
                       </div>
                     </div>
                     <div className="flex1 u-paddingLeft--small">
-                      <div className={`flex1 CustomCheckbox no-margin ${state.dChecked ? "is-checked" : ""}`}>
+                      <div
+                        className={`flex1 CustomCheckbox no-margin ${state.crudFilters.dChecked ? "is-checked" : ""}`}>
                         <div className="u-position--relative flex flex1">
                           <input
                             type="checkbox"
@@ -335,41 +312,44 @@ function rewriteHumanTimes(query, keyword) {
   const parsed = searchQueryParser.parse(query, {
     keywords: [keyword],
   });
-  const offset = _.find(parsed.offsets, (o) => o.keyword === keyword);
 
-  if (!offset) {
-    return query;
+  if (typeof parsed !== "string") {
+    const offset = _.find(parsed.offsets, (o) => o.keyword === keyword);
+
+    if (!offset) {
+      return query;
+    }
+
+    let range = `"${offset.value}"`;
+    offset.value = offset.value.toLowerCase();
+
+    if (/yesterday/.test(offset.value)) {
+      range = daysAgoRange(1);
+    }
+
+    if (/^\d+\s*days?\s*ago$/.test(offset.value)) {
+      range = daysAgoRange(parseInt(offset.value, 10));
+    }
+
+    if (/^[a-z]+\s*days?\s*ago$/.test(offset.value)) {
+      const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
+      range = daysAgoRange(count);
+    }
+
+    if (/^\d+\s*hours?\s*ago$/.test(offset.value)) {
+      range = hoursAgoRange(parseInt(offset.value, 10));
+    }
+
+    if (/^[a-z]+\s*hours?\s*ago$/.test(offset.value)) {
+      const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
+      range = hoursAgoRange(count);
+    }
+
+    const prefix = query.substring(0, offset.offsetStart);
+    const suffix = query.substring(offset.offsetEnd);
+
+    return `${prefix} ${keyword}:${range} ${suffix}`;
   }
-
-  let range = `"${offset.value}"`;
-  offset.value = offset.value.toLowerCase();
-
-  if (/yesterday/.test(offset.value)) {
-    range = daysAgoRange(1);
-  }
-
-  if (/^\d+\s*days?\s*ago$/.test(offset.value)) {
-    range = daysAgoRange(parseInt(offset.value, 10));
-  }
-
-  if (/^[a-z]+\s*days?\s*ago$/.test(offset.value)) {
-    const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
-    range = daysAgoRange(count);
-  }
-
-  if (/^\d+\s*hours?\s*ago$/.test(offset.value)) {
-    range = hoursAgoRange(parseInt(offset.value, 10));
-  }
-
-  if (/^[a-z]+\s*hours?\s*ago$/.test(offset.value)) {
-    const count = wordToInt(_.first(offset.value.match(/^[a-z]+/)));
-    range = hoursAgoRange(count);
-  }
-
-  const prefix = query.substring(0, offset.offsetStart);
-  const suffix = query.substring(offset.offsetEnd);
-
-  return `${prefix} ${keyword}:${range} ${suffix}`;
 }
 
 /*

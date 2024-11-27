@@ -1,4 +1,9 @@
-const FixedTableHeader = (props) => {
+type propTypes = {
+  className?: string;
+  items?: any;
+};
+
+const FixedTableHeader: React.FC<propTypes> = (props) => {
   const { className, items } = props;
 
   const renderItem = (item, i) => {

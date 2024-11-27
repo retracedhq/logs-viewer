@@ -232,7 +232,7 @@ body {
     &.AccessTokensModal {
       max-width: 650px;
       max-height: 600px;
-      overflow: scroll;
+      overflow: auto;
 
       .token-name {
         min-width: 130px;

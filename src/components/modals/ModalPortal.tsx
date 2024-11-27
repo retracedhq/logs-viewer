@@ -1,6 +1,13 @@
 import Modal from "react-modal";
 
-const ModalPortal = ({ isOpen, name, closeModal, content }) => {
+type propTypes = {
+  isOpen: boolean;
+  name: string;
+  closeModal: any;
+  content: any;
+};
+
+const ModalPortal: React.FC<propTypes> = ({ isOpen, name, closeModal, content }) => {
   const generateClassNames = () => ({
     base: `retraced-logs-viewer-app retracedModal ${name}`,
     afterOpen: `${name}_after-open`,

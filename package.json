@@ -37,6 +37,7 @@
     "test": "vitest run",
     "lint": "eslint -c eslint.config.cjs src",
     "check-format": "prettier --check .",
+    "check-types": "tsc --pretty --noEmit",
     "format": "prettier --write .",
     "release": "git checkout main && git pull && git checkout release && git merge origin/main && release-it && git checkout main && git merge origin/release && git push origin main"
   },
@@ -47,8 +48,6 @@
   "dependencies": {
     "dayjs": "1.11.13",
     "lodash": "4.17.21",
-    "prop-types": "15.8.1",
-    "react-autobind": "1.0.6",
     "react-datepicker": "7.5.0",
     "react-markdown": "9.0.1",
     "react-modal": "3.16.1",
