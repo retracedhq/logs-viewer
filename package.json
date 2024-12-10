@@ -60,6 +60,7 @@
   "devDependencies": {
     "@babel/plugin-proposal-decorators": "7.25.9",
     "@babel/plugin-transform-class-properties": "7.25.9",
+    "@testing-library/dom": "10.4.0",
     "@testing-library/react": "16.1.0",
     "@types/react": "19.0.1",
     "@types/react-dom": "19.0.2",
