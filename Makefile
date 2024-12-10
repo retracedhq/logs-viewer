@@ -5,7 +5,7 @@ clean:
 
 PHONY: deps
 deps:
-	npm install
+	npm install --legacy-peer-deps
 
 PHONY: build
 build:
