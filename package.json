@@ -85,5 +85,8 @@
   "bugs": {
     "url": "https://github.com/retracedhq/logs-viewer/issues"
   },
-  "homepage": "https://github.com/retracedhq/logs-viewer#readme"
+  "homepage": "https://github.com/retracedhq/logs-viewer#readme",
+  "optionalDependencies": {
+    "@rollup/rollup-linux-x64-gnu": "^4.28.1"
+  }
 }
