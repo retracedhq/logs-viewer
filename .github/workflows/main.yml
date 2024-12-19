@@ -36,7 +36,7 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
           check-latest: true
-      - run: npm install
+      - run: npm install --legacy-peer-deps
       - run: npm run check-format
       - run: npm run lint
       - run: npm run check-types
@@ -173,7 +173,7 @@ jobs:
           registry-url: https://registry.npmjs.org
           scope: "@retracedhq"
           cache: "npm"
-      - run: npm install
+      - run: npm install --legacy-peer-deps
       - run: npm run build
         working-directory: ./
 
