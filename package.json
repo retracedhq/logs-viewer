@@ -50,7 +50,7 @@
     "lodash": "4.17.21",
     "react-datepicker": "7.5.0",
     "react-markdown": "9.0.1",
-    "react-modal": "3.16.1",
+    "react-modal": "3.16.3",
     "react-redux": "9.2.0",
     "redux": "5.0.1",
     "redux-actions": "3.0.3",
