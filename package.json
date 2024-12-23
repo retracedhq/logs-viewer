@@ -79,7 +79,7 @@
     "vite": "6.0.4",
     "vite-plugin-css-injected-by-js": "3.5.2",
     "vitest": "2.1.8",
-    "vitest-fetch-mock": "0.4.2"
+    "vitest-fetch-mock": "0.4.3"
   },
   "bugs": {
     "url": "https://github.com/retracedhq/logs-viewer/issues"
