@@ -1,5 +1,5 @@
 @use "sass:meta";
-@include meta.load-css("react-datepicker/src/stylesheets/datepicker.scss");
+@include meta.load-css("react-datepicker/dist/react-datepicker.min.css");
 
 .react-datepicker-popper {
   z-index: 100;
