@@ -60,12 +60,11 @@ const EventRow: React.FC<propTypes> = ({ event, fields, renderers, openModal }) 
             {fields.map((item, idx) => {
               if (item.type === "markdown") {
                 return (
-                  <div key={idx} className={`flex flex1 content-section`} data-testid="markdown">
-                    <ReactMarkdown
-                      className="EventItem u-fontWeight--medium u-lineHeight--more"
-                      components={renderers}
-                      children={getCellValue(item)}
-                    />
+                  <div
+                    key={idx}
+                    className={`flex flex1 content-section EventItem u-fontWeight--medium u-lineHeight--more`}
+                    data-testid="markdown">
+                    <ReactMarkdown components={renderers} children={getCellValue(item)} />
                   </div>
                 );
               } else if (item.type === "showEvent") {

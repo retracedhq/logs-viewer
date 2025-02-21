@@ -24,12 +24,8 @@ const MobileEventRow: React.FC<propTypes> = ({ event, index, openModal, renderer
         <div className="TableRow-content flex flex1">
           <div className="flex-column flex1 u-overflow--hidden">
             <div className="flex flex-auto">
-              <div className="u-color--dustyGray u-fontSize--normal u-lineHeight--normal">
-                <ReactMarkdown
-                  className="EventItem u-fontWeight--medium u-lineHeight--more u-display--inlineBlock"
-                  components={renderers}
-                  children={event.display.markdown}
-                />
+              <div className="u-color--dustyGray u-fontSize--normal u-lineHeight--normal EventItem u-fontWeight--medium u-lineHeight--more u-display--inlineBlock">
+                <ReactMarkdown components={renderers} children={event.display.markdown} />
               </div>
             </div>
             <div className="flex flex1 u-marginTop--normal">
