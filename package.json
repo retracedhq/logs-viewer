@@ -1,6 +1,6 @@
 {
   "name": "@retracedhq/logs-viewer",
-  "version": "2.8.0",
+  "version": "2.9.0",
   "type": "module",
   "description": "Logs viewer widget",
   "files": [
