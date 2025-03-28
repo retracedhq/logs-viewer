@@ -64,7 +64,7 @@ export function createSavedExport(query, filters, dates, name) {
       payload.exportBody.endTime = dates.endDate;
     }
 
-    dispatch(loadingData("exportCSVLoading", true));
+    dispatch(loadingData("exportCSV", true));
 
     try {
       const exportResponse = await fetch(exportUrl, {
@@ -96,7 +96,7 @@ export function createSavedExport(query, filters, dates, name) {
 
       await downloadFile(renderedResponse);
 
-      dispatch(loadingData("exportCSVLoading", false));
+      dispatch(loadingData("exportCSV", false));
 
       //dispatch(setIsLoading(false));
       //dispatch(addNewSavedExport(result));
