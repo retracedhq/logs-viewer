@@ -113,6 +113,8 @@ export function renderSavedExport(id) {
     //dispatch(setIsLoading(true));
     //dispatch(setError(null));
 
+    dispatch(loadingData("exportCSV", true));
+
     const state = getState();
     const projectId = state.data.sessionData.session.project_id;
     const jwt = state.data.sessionData.session.token;
@@ -128,6 +130,8 @@ export function renderSavedExport(id) {
     });
 
     await downloadFile(renderedResponse);
+
+    dispatch(loadingData("exportCSV", false));
 
     //dispatch(setIsLoading(false));
     //dispatch(addNewSavedExport(result));
