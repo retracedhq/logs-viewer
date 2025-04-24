@@ -76,7 +76,7 @@
     "release-it": "18.1.2",
     "sass": "1.87.0",
     "typescript": "5.8.3",
-    "vite": "6.3.2",
+    "vite": "6.3.3",
     "vite-plugin-css-injected-by-js": "3.5.2",
     "vitest": "3.1.2",
     "vitest-fetch-mock": "0.4.5"
